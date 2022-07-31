@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><p><img src="/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-]]></content>
-      <categories>
-        <category>deep learning</category>
-      </categories>
-      <tags>
-        <tag>deep learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blog</title>
-    <url>/2022/07/29/blog/</url>
+    <url>/:year/:month/:day/2022/07/29/blog/</url>
     <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
 <li>标题</li>
 </ul>
@@ -109,6 +97,18 @@
       </categories>
       <tags>
         <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self Attention</title>
+    <url>/:year/:month/:day/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><p><img src="/:year/:month/:day/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+]]></content>
+      <categories>
+        <category>deep learning</category>
+      </categories>
+      <tags>
+        <tag>deep learning</tag>
       </tags>
   </entry>
 </search>
