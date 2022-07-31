@@ -3,7 +3,7 @@
   <entry>
     <title>Multihead Attention</title>
     <url>/2022/07/31/Multihead-Attention/Multihead-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><p><img src="/assets/image-20220731224108967.png" alt="image-20220731224108967"></p>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><p><img src="/.com//image-20220731224108967.png" alt="image-20220731224108967"></p>
 ]]></content>
       <categories>
         <category>deeplearning</category>
@@ -98,7 +98,7 @@
 
 
 <h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><ul>
-<li>在最开头设置<more>标签</li>
+<li>在最开头设置<more>标签</more></li>
 <li>每篇文章下最大的标题为三级标题</li>
 <li>并列关系用 * </li>
 <li>顺序关系用1. 2.</li>
