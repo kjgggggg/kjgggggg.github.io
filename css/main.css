@@ -1196,7 +1196,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #96f105;
+  background: #09ebff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2269,13 +2269,6 @@ ul.breadcrumb li + li:last-child {
   color: #ccc;
   margin: auto;
 }
-@media (min-width: 992px) {
-  .header-inner,
-  .main-inner,
-  .footer-inner {
-    width: 80%;
-  }
-}
 @media (max-width: 767px) {
   .header-inner,
   .main-inner,
@@ -2286,11 +2279,6 @@ ul.breadcrumb li + li:last-child {
 .header-inner {
   padding-top: 100px;
 }
-@media (min-width: 992px) {
-  .header-inner {
-    width: 80%;
-  }
-}
 @media (max-width: 767px) {
   .header-inner {
     padding-top: 50px;
@@ -2299,18 +2287,8 @@ ul.breadcrumb li + li:last-child {
 .main-inner {
   padding-bottom: 60px;
 }
-@media (min-width: 992px) {
-  .main-inner {
-    width: 80%;
-  }
-}
 .content {
   padding-top: 70px;
-}
-@media (min-width: 992px) {
-  .content {
-    width: 80%;
-  }
 }
 @media (max-width: 767px) {
   .content {
