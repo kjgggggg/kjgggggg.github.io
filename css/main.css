@@ -1216,7 +1216,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #2565ff;
+  background: #9cffc2;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1605,7 +1605,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .posts-collapse {
-  margin-left: 35px;
+  margin-left: 20px;
   position: relative;
 }
 @media (max-width: 767px) {
