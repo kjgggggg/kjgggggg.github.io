@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Transformer pytorch</title>
+    <url>/2022/08/01/Transformer-pytorch/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>deeplearning pytorch</category>
+      </categories>
+      <tags>
+        <tag>Transformer</tag>
+        <tag>deeplearning</tag>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>blog</title>
     <url>/2022/07/29/blog/</url>
     <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
@@ -86,7 +99,6 @@
 
 
 <h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><ul>
-<li>在最开头设置<more>标签</more></li>
 <li>每篇文章下最大的标题为三级标题</li>
 <li>并列关系用 * </li>
 <li>顺序关系用1. 2.</li>
@@ -97,19 +109,6 @@
       </categories>
       <tags>
         <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Transformer pytorch</title>
-    <url>/2022/08/01/Transformer-pytorch/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>deeplearning pytorch</category>
-      </categories>
-      <tags>
-        <tag>Transformer</tag>
-        <tag>deeplearning</tag>
-        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
