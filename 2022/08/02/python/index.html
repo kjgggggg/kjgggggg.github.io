@@ -28,7 +28,7 @@
 <meta property="og:description" content="python语法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-02T08:17:11.000Z">
-<meta property="article:modified_time" content="2022-08-02T09:35:38.498Z">
+<meta property="article:modified_time" content="2022-08-02T09:44:29.800Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-08-02 16:17:11 / 修改时间：17:35:38" itemprop="dateCreated datePublished" datetime="2022-08-02T16:17:11+08:00">2022-08-02</time>
+              <time title="创建时间：2022-08-02 16:17:11 / 修改时间：17:44:29" itemprop="dateCreated datePublished" datetime="2022-08-02T16:17:11+08:00">2022-08-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,11 +259,13 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第三个元素为 :  <span class="number">1997</span></span><br><span class="line">更新后的第三个元素为 :  <span class="number">2001</span></span><br><span class="line">更新后的列表 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>, <span class="string">&#x27;Baidu&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
 <h4 id="append与extend的区别"><a href="#append与extend的区别" class="headerlink" title="append与extend的区别"></a>append与extend的区别</h4><ul>
-<li><p>ist.append(object) 向列表中添加一个对象object</p>
-</li>
-<li><p>list.extend(sequence) 把一个序列seq的内容添加到列表中</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista = [<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>listb = [<span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista.extend(listb)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista</span><br><span class="line">[<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>, <span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+<li>ist.append(object) 向列表中添加一个对象object</li>
+<li>list.extend(sequence) 把一个序列seq的内容添加到列表中</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista = [<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>listb = [<span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista.extend(listb)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista</span><br><span class="line">[<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>, <span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
 <h4 id="删除列表元素"><a href="#删除列表元素" class="headerlink" title="删除列表元素"></a>删除列表元素</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;原始列表 : &quot;</span>, <span class="built_in">list</span>)</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">list</span>[<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;删除第三个元素 : &quot;</span>, <span class="built_in">list</span>)</span><br></pre></td></tr></table></figure>
 
 <p>result:</p>
