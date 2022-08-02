@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="python语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/08/02/python/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="python语法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-02T08:17:11.000Z">
+<meta property="article:modified_time" content="2022-08-02T09:35:38.498Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2022/08/02/python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/08/02/python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-02 16:17:11 / 修改时间：17:35:38" itemprop="dateCreated datePublished" datetime="2022-08-02T16:17:11+08:00">2022-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">python语法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><h4 id="创建列表"><a href="#创建列表" class="headerlink" title="创建列表"></a>创建列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list1 = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ]</span><br><span class="line">list3 = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>]</span><br><span class="line">list4 = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;yellow&#x27;</span>, <span class="string">&#x27;white&#x27;</span>, <span class="string">&#x27;black&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问列表中的值"><a href="#访问列表中的值" class="headerlink" title="访问列表中的值"></a>访问列表中的值</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&quot;Zhihu&quot;</span>, <span class="string">&quot;Taobao&quot;</span>, <span class="string">&quot;Wiki&quot;</span>]</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 读取第二位</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;list[1]: &quot;</span>, <span class="built_in">list</span>[<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 从第二位开始（包含）截取到倒数第二位（不包含）</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;list[1:-2]: &quot;</span>, <span class="built_in">list</span>[<span class="number">1</span>:-<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p>result：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>[<span class="number">1</span>]:  Runoob</span><br><span class="line"><span class="built_in">list</span>[<span class="number">1</span>:-<span class="number">2</span>]:  [<span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Zhihu&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="更新列表"><a href="#更新列表" class="headerlink" title="更新列表"></a>更新列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span> (<span class="string">&quot;第三个元素为 : &quot;</span>, <span class="built_in">list</span>[<span class="number">2</span>])</span><br><span class="line"><span class="built_in">list</span>[<span class="number">2</span>] = <span class="number">2001</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;更新后的第三个元素为 : &quot;</span>, <span class="built_in">list</span>[<span class="number">2</span>])</span><br><span class="line"> </span><br><span class="line">list1 = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>]</span><br><span class="line">list1.append(<span class="string">&#x27;Baidu&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;更新后的列表 : &quot;</span>, list1)</span><br></pre></td></tr></table></figure>
+
+<p>result:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第三个元素为 :  <span class="number">1997</span></span><br><span class="line">更新后的第三个元素为 :  <span class="number">2001</span></span><br><span class="line">更新后的列表 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>, <span class="string">&#x27;Baidu&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="append与extend的区别"><a href="#append与extend的区别" class="headerlink" title="append与extend的区别"></a>append与extend的区别</h4><ul>
+<li><p>ist.append(object) 向列表中添加一个对象object</p>
+</li>
+<li><p>list.extend(sequence) 把一个序列seq的内容添加到列表中</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista = [<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>listb = [<span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista.extend(listb)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista</span><br><span class="line">[<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>, <span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除列表元素"><a href="#删除列表元素" class="headerlink" title="删除列表元素"></a>删除列表元素</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;原始列表 : &quot;</span>, <span class="built_in">list</span>)</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">list</span>[<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;删除第三个元素 : &quot;</span>, <span class="built_in">list</span>)</span><br></pre></td></tr></table></figure>
+
+<p>result:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">原始列表 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line">删除第三个元素 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">2000</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="列表脚本操作符"><a href="#列表脚本操作符" class="headerlink" title="列表脚本操作符"></a>列表脚本操作符</h4><table>
+<thead>
+<tr>
+<th align="left">Python 表达式</th>
+<th align="left">结果</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">len([1, 2, 3])</td>
+<td align="left">3</td>
+<td align="left">长度</td>
+</tr>
+<tr>
+<td align="left">[1, 2, 3] + [4, 5, 6]</td>
+<td align="left">[1, 2, 3, 4, 5, 6]</td>
+<td align="left">组合</td>
+</tr>
+<tr>
+<td align="left">[‘Hi!’] * 4</td>
+<td align="left">[‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]</td>
+<td align="left">重复</td>
+</tr>
+<tr>
+<td align="left">3 in [1, 2, 3]</td>
+<td align="left">True</td>
+<td align="left">元素是否存在于列表中</td>
+</tr>
+<tr>
+<td align="left">for x in [1, 2, 3]: print(x, end&#x3D;” “)</td>
+<td align="left">1 2 3</td>
+<td align="left">迭代</td>
+</tr>
+</tbody></table>
+<h4 id="列表截取与拼接"><a href="#列表截取与拼接" class="headerlink" title="列表截取与拼接"></a>列表截取与拼接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">L=[<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">Python 表达式</th>
+<th align="left">结果</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">L[2]</td>
+<td align="left">‘Taobao’</td>
+<td align="left">读取第三个元素</td>
+</tr>
+<tr>
+<td align="left">L[-2]</td>
+<td align="left">‘Runoob’</td>
+<td align="left">从右侧开始读取倒数第二个元素: count from the right</td>
+</tr>
+<tr>
+<td align="left">L[1:]</td>
+<td align="left">[‘Runoob’, ‘Taobao’]</td>
+<td align="left">输出从第二个元素开始后的所有元素</td>
+</tr>
+</tbody></table>
+<h4 id="嵌套列表"><a href="#嵌套列表" class="headerlink" title="嵌套列表"></a>嵌套列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;a = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>n = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = [a, n]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>]</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"><span class="string">&#x27;b&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="列表比较"><a href="#列表比较" class="headerlink" title="列表比较"></a>列表比较</h4><p>列表比较需要引入 <strong>operator</strong> 模块的 <strong>eq</strong> 方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 导入 operator 模块</span></span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">b = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">c = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;operator.eq(a,b): &quot;</span>, operator.eq(a,b))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;operator.eq(c,b): &quot;</span>, operator.eq(c,b))</span><br></pre></td></tr></table></figure>
+
+<p>result:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">operator.eq(a,b):  <span class="literal">False</span></span><br><span class="line">operator.eq(c,b):  <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="函数与方法"><a href="#函数与方法" class="headerlink" title="函数与方法"></a>函数与方法</h4><p>Python包含以下函数:</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-len.html">len(list)</a> 列表元素个数</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-max.html">max(list)</a> 返回列表元素最大值</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-min.html">min(list)</a> 返回列表元素最小值</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-list.html">list(seq)</a> 将元组转换为列表</td>
+</tr>
+</tbody></table>
+<p>Python包含以下方法:</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-append.html">list.append(obj)</a> 在列表末尾添加新的对象</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-count.html">list.count(obj)</a> 统计某个元素在列表中出现的次数</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-extend.html">list.extend(seq)</a> 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-index.html">list.index(obj)</a> 从列表中找出某个值第一个匹配项的索引位置</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-insert.html">list.insert(index, obj)</a> 将对象插入列表</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-pop.html">list.pop([index&#x3D;-1])</a> 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-remove.html">list.remove(obj)</a> 移除列表中某个值的第一个匹配项</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-reverse.html">list.reverse()</a> 反向列表中元素</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-sort.html">list.sort( key&#x3D;None, reverse&#x3D;False)</a> 对原列表进行排序</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-clear.html">list.clear()</a> 清空列表</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-copy.html">list.copy()</a> 复制列表</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/01/Transformer-pytorch/" rel="prev" title="Transformer pytorch">
+      <i class="fa fa-chevron-left"></i> Transformer pytorch
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%88%97%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">创建列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">1.2.</span> <span class="nav-text">访问列表中的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">更新列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#append%E4%B8%8Eextend%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.</span> <span class="nav-text">append与extend的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="nav-number">1.5.</span> <span class="nav-text">删除列表元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.6.</span> <span class="nav-text">列表脚本操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%88%AA%E5%8F%96%E4%B8%8E%E6%8B%BC%E6%8E%A5"><span class="nav-number">1.7.</span> <span class="nav-text">列表截取与拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8"><span class="nav-number">1.8.</span> <span class="nav-text">嵌套列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%AF%94%E8%BE%83"><span class="nav-number">1.9.</span> <span class="nav-text">列表比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8E%E6%96%B9%E6%B3%95"><span class="nav-number">1.10.</span> <span class="nav-text">函数与方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>

@@ -1,34 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+    <title>python</title>
+    <url>/2022/08/02/python/</url>
+    <content><![CDATA[<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><h4 id="创建列表"><a href="#创建列表" class="headerlink" title="创建列表"></a>创建列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list1 = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ]</span><br><span class="line">list3 = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>]</span><br><span class="line">list4 = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;yellow&#x27;</span>, <span class="string">&#x27;white&#x27;</span>, <span class="string">&#x27;black&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问列表中的值"><a href="#访问列表中的值" class="headerlink" title="访问列表中的值"></a>访问列表中的值</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&quot;Zhihu&quot;</span>, <span class="string">&quot;Taobao&quot;</span>, <span class="string">&quot;Wiki&quot;</span>]</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 读取第二位</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;list[1]: &quot;</span>, <span class="built_in">list</span>[<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 从第二位开始（包含）截取到倒数第二位（不包含）</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;list[1:-2]: &quot;</span>, <span class="built_in">list</span>[<span class="number">1</span>:-<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p>result：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>[<span class="number">1</span>]:  Runoob</span><br><span class="line"><span class="built_in">list</span>[<span class="number">1</span>:-<span class="number">2</span>]:  [<span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Zhihu&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="更新列表"><a href="#更新列表" class="headerlink" title="更新列表"></a>更新列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span> (<span class="string">&quot;第三个元素为 : &quot;</span>, <span class="built_in">list</span>[<span class="number">2</span>])</span><br><span class="line"><span class="built_in">list</span>[<span class="number">2</span>] = <span class="number">2001</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;更新后的第三个元素为 : &quot;</span>, <span class="built_in">list</span>[<span class="number">2</span>])</span><br><span class="line"> </span><br><span class="line">list1 = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>]</span><br><span class="line">list1.append(<span class="string">&#x27;Baidu&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;更新后的列表 : &quot;</span>, list1)</span><br></pre></td></tr></table></figure>
+
+<p>result:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第三个元素为 :  <span class="number">1997</span></span><br><span class="line">更新后的第三个元素为 :  <span class="number">2001</span></span><br><span class="line">更新后的列表 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>, <span class="string">&#x27;Baidu&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="append与extend的区别"><a href="#append与extend的区别" class="headerlink" title="append与extend的区别"></a>append与extend的区别</h4><ul>
+<li><p>ist.append(object) 向列表中添加一个对象object</p>
+</li>
+<li><p>list.extend(sequence) 把一个序列seq的内容添加到列表中</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista = [<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>listb = [<span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista.extend(listb)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista</span><br><span class="line">[<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>, <span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
+<h4 id="删除列表元素"><a href="#删除列表元素" class="headerlink" title="删除列表元素"></a>删除列表元素</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;原始列表 : &quot;</span>, <span class="built_in">list</span>)</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">list</span>[<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;删除第三个元素 : &quot;</span>, <span class="built_in">list</span>)</span><br></pre></td></tr></table></figure>
+
+<p>result:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">原始列表 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line">删除第三个元素 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">2000</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="列表脚本操作符"><a href="#列表脚本操作符" class="headerlink" title="列表脚本操作符"></a>列表脚本操作符</h4><table>
+<thead>
+<tr>
+<th align="left">Python 表达式</th>
+<th align="left">结果</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">len([1, 2, 3])</td>
+<td align="left">3</td>
+<td align="left">长度</td>
+</tr>
+<tr>
+<td align="left">[1, 2, 3] + [4, 5, 6]</td>
+<td align="left">[1, 2, 3, 4, 5, 6]</td>
+<td align="left">组合</td>
+</tr>
+<tr>
+<td align="left">[‘Hi!’] * 4</td>
+<td align="left">[‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]</td>
+<td align="left">重复</td>
+</tr>
+<tr>
+<td align="left">3 in [1, 2, 3]</td>
+<td align="left">True</td>
+<td align="left">元素是否存在于列表中</td>
+</tr>
+<tr>
+<td align="left">for x in [1, 2, 3]: print(x, end&#x3D;” “)</td>
+<td align="left">1 2 3</td>
+<td align="left">迭代</td>
+</tr>
+</tbody></table>
+<h4 id="列表截取与拼接"><a href="#列表截取与拼接" class="headerlink" title="列表截取与拼接"></a>列表截取与拼接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">L=[<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">Python 表达式</th>
+<th align="left">结果</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">L[2]</td>
+<td align="left">‘Taobao’</td>
+<td align="left">读取第三个元素</td>
+</tr>
+<tr>
+<td align="left">L[-2]</td>
+<td align="left">‘Runoob’</td>
+<td align="left">从右侧开始读取倒数第二个元素: count from the right</td>
+</tr>
+<tr>
+<td align="left">L[1:]</td>
+<td align="left">[‘Runoob’, ‘Taobao’]</td>
+<td align="left">输出从第二个元素开始后的所有元素</td>
+</tr>
+</tbody></table>
+<h4 id="嵌套列表"><a href="#嵌套列表" class="headerlink" title="嵌套列表"></a>嵌套列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;a = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>n = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = [a, n]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>]</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"><span class="string">&#x27;b&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="列表比较"><a href="#列表比较" class="headerlink" title="列表比较"></a>列表比较</h4><p>列表比较需要引入 <strong>operator</strong> 模块的 <strong>eq</strong> 方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 导入 operator 模块</span></span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">b = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">c = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;operator.eq(a,b): &quot;</span>, operator.eq(a,b))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;operator.eq(c,b): &quot;</span>, operator.eq(c,b))</span><br></pre></td></tr></table></figure>
+
+<p>result:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">operator.eq(a,b):  <span class="literal">False</span></span><br><span class="line">operator.eq(c,b):  <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="函数与方法"><a href="#函数与方法" class="headerlink" title="函数与方法"></a>函数与方法</h4><p>Python包含以下函数:</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-len.html">len(list)</a> 列表元素个数</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-max.html">max(list)</a> 返回列表元素最大值</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-min.html">min(list)</a> 返回列表元素最小值</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-list.html">list(seq)</a> 将元组转换为列表</td>
+</tr>
+</tbody></table>
+<p>Python包含以下方法:</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-append.html">list.append(obj)</a> 在列表末尾添加新的对象</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-count.html">list.count(obj)</a> 统计某个元素在列表中出现的次数</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-extend.html">list.extend(seq)</a> 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-index.html">list.index(obj)</a> 从列表中找出某个值第一个匹配项的索引位置</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-insert.html">list.insert(index, obj)</a> 将对象插入列表</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-pop.html">list.pop([index&#x3D;-1])</a> 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-remove.html">list.remove(obj)</a> 移除列表中某个值的第一个匹配项</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-reverse.html">list.reverse()</a> 反向列表中元素</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-sort.html">list.sort( key&#x3D;None, reverse&#x3D;False)</a> 对原列表进行排序</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-clear.html">list.clear()</a> 清空列表</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left"><a href="https://www.runoob.com/python3/python3-att-list-copy.html">list.copy()</a> 复制列表</td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
-        <category>deeplearning</category>
+        <category>python</category>
       </categories>
       <tags>
-        <tag>deeplearning</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -71,9 +228,40 @@
         <category>deeplearning pytorch</category>
       </categories>
       <tags>
-        <tag>deeplearning</tag>
         <tag>Transformer</tag>
+        <tag>deeplearning</tag>
         <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
