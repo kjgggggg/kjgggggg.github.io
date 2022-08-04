@@ -66,135 +66,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>blog</title>
-    <url>/2022/07/29/blog/</url>
-    <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
-<li>标题</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># A (一级标题)</span></span><br><span class="line"><span class="section">## A</span></span><br><span class="line"><span class="section">### A</span></span><br><span class="line"><span class="section">#### A</span></span><br><span class="line"><span class="section">##### A</span></span><br><span class="line"><span class="section">###### A （六级标题）</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>字体</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="emphasis">*斜体*</span></span><br><span class="line"><span class="strong">**粗体**</span></span><br><span class="line"><span class="strong">**<span class="emphasis">*斜粗体*</span>**</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>分割线、下划线</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="strong">**<span class="emphasis">*</span></span></span><br><span class="line"><span class="emphasis"><span class="strong"></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-xml"><span class="tag">&lt;<span class="name">u</span>&gt;</span></span>带下划线文本<span class="language-xml"><span class="tag">&lt;/<span class="name">u</span>&gt;</span></span></span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>脚注</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[^鼠标移到我身上]：会弹出我！</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>列表</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> 第一项		</span><br><span class="line"><span class="bullet">*</span> 第二项		</span><br><span class="line"><span class="bullet">*</span> 第三项   </span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 第一项		</span><br><span class="line"><span class="bullet">-</span> 第二项		</span><br><span class="line"><span class="bullet">-</span> 第三项  </span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>最左边的竖线</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; </span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>代码</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="code">`print()`</span> </span><br><span class="line"></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>链接</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接名称</span>](<span class="link">链接地址</span>)</span><br><span class="line"></span><br><span class="line">&lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>图片</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址</span>)</span><br><span class="line"></span><br><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址 &quot;可选标题&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;http://static.runoob.com/images/runoob-logo.png&quot;</span> <span class="attr">width</span>=<span class="string">&quot;50%&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>表格</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">|  表头   | 表头  |</span><br><span class="line">|  ----  | ----  |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line"></span><br><span class="line">我们可以设置表格的对齐方式：</span><br><span class="line">-: 设置内容和标题栏居右对齐。</span><br><span class="line">:- 设置内容和标题栏居左对齐。</span><br><span class="line">:-: 设置内容和标题栏居中对齐。</span><br><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Hexo基本操作"><a href="#Hexo基本操作" class="headerlink" title="Hexo基本操作"></a>Hexo基本操作</h3><ul>
-<li>发布文章</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;文章名&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>去&#x2F;Users&#x2F;jiangangkong&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;文章名.md 下写文章</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><ul>
-<li>每篇文章下最大的标题为三级标题</li>
-<li>并列关系用 * </li>
-<li>顺序关系用1. 2.</li>
-</ul>
-]]></content>
-      <categories>
-        <category>blog</category>
-      </categories>
-      <tags>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Transformer pytorch</title>
     <url>/2022/08/01/Transformer-pytorch/</url>
     <content><![CDATA[<h3 id="Transformer概览"><a href="#Transformer概览" class="headerlink" title="Transformer概览"></a>Transformer概览</h3><p><img src="/2022/08/01/Transformer-pytorch/901659325530_.pic_%E5%89%AF%E6%9C%AC.png" alt="901659325530_.pic"></p>
@@ -234,9 +105,40 @@
         <category>deeplearning pytorch</category>
       </categories>
       <tags>
-        <tag>deeplearning</tag>
         <tag>Transformer</tag>
+        <tag>deeplearning</tag>
         <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
@@ -756,6 +658,104 @@
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>blog</title>
+    <url>/2022/07/29/blog/</url>
+    <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
+<li>标题</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># A (一级标题)</span></span><br><span class="line"><span class="section">## A</span></span><br><span class="line"><span class="section">### A</span></span><br><span class="line"><span class="section">#### A</span></span><br><span class="line"><span class="section">##### A</span></span><br><span class="line"><span class="section">###### A （六级标题）</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>字体</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="emphasis">*斜体*</span></span><br><span class="line"><span class="strong">**粗体**</span></span><br><span class="line"><span class="strong">**<span class="emphasis">*斜粗体*</span>**</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>分割线、下划线</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="strong">**<span class="emphasis">*</span></span></span><br><span class="line"><span class="emphasis"><span class="strong"></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-xml"><span class="tag">&lt;<span class="name">u</span>&gt;</span></span>带下划线文本<span class="language-xml"><span class="tag">&lt;/<span class="name">u</span>&gt;</span></span></span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>脚注</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[^鼠标移到我身上]：会弹出我！</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>列表</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> 第一项		</span><br><span class="line"><span class="bullet">*</span> 第二项		</span><br><span class="line"><span class="bullet">*</span> 第三项   </span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 第一项		</span><br><span class="line"><span class="bullet">-</span> 第二项		</span><br><span class="line"><span class="bullet">-</span> 第三项  </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>最左边的竖线</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; </span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="code">`print()`</span> </span><br><span class="line"></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>链接</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接名称</span>](<span class="link">链接地址</span>)</span><br><span class="line"></span><br><span class="line">&lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>图片</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址</span>)</span><br><span class="line"></span><br><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址 &quot;可选标题&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;http://static.runoob.com/images/runoob-logo.png&quot;</span> <span class="attr">width</span>=<span class="string">&quot;50%&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>表格</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">|  表头   | 表头  |</span><br><span class="line">|  ----  | ----  |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line"></span><br><span class="line">我们可以设置表格的对齐方式：</span><br><span class="line">-: 设置内容和标题栏居右对齐。</span><br><span class="line">:- 设置内容和标题栏居左对齐。</span><br><span class="line">:-: 设置内容和标题栏居中对齐。</span><br><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Hexo基本操作"><a href="#Hexo基本操作" class="headerlink" title="Hexo基本操作"></a>Hexo基本操作</h3><ul>
+<li>发布文章</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;文章名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>去&#x2F;Users&#x2F;jiangangkong&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;文章名.md 下写文章</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><ul>
+<li>每篇文章下最大的标题为三级标题</li>
+<li>并列关系用 * </li>
+<li>顺序关系用1. 2.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
       </tags>
   </entry>
 </search>
