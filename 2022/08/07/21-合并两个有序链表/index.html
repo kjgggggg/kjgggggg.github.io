@@ -20,15 +20,22 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="kjg&#39;s blog">
-<meta property="og:url" content="https://kjgggggg.github.io/tags/blog/index.html">
+  <meta name="description" content="21.合并两个有序链表(Easy)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21.合并两个有序链表">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/08/07/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="21.合并两个有序链表(Easy)">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-07T04:13:17.000Z">
+<meta property="article:modified_time" content="2022-08-07T04:26:06.877Z">
 <meta property="article:author" content="kjg">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="递归">
+<meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://kjgggggg.github.io/tags/blog/">
+<link rel="canonical" href="https://kjgggggg.github.io/2022/08/07/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">
 
 
 <script id="page-configurations">
@@ -36,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: blog | kjg's blog</title>
+  <title>21.合并两个有序链表 | kjg's blog</title>
   
 
 
@@ -177,51 +184,104 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">blog
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/08/07/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          21.合并两个有序链表
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-07 12:13:17 / 修改时间：12:26:06" itemprop="dateCreated datePublished" datetime="2022-08-07T12:13:17+08:00">2022-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">21.合并两个有序链表(Easy)</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <h3 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* list1, ListNode* list2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(list1 == <span class="literal">nullptr</span> &amp;&amp; list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(list1 &amp;&amp; list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list1;</span><br><span class="line">        <span class="keyword">if</span>(list2 &amp;&amp; list1 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list2;</span><br><span class="line">      	</span><br><span class="line">      	<span class="comment">//上面三行等价于 if(!list1 || !list2) return l1?l1:l2;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(list1-&gt;val&lt;=list2-&gt;val)&#123;</span><br><span class="line">            list1-&gt;next = <span class="built_in">mergeTwoLists</span>(list1-&gt;next,list2);</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            list2-&gt;next = <span class="built_in">mergeTwoLists</span>(list1,list2-&gt;next);</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mergeTwoLists</span>(<span class="params">self, list1: <span class="type">Optional</span>[ListNode], list2: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> list1 <span class="keyword">or</span> <span class="keyword">not</span> list2: <span class="keyword">return</span> list1 <span class="keyword">if</span> list1 <span class="keyword">else</span> list2</span><br><span class="line">        <span class="keyword">if</span> list1.val&lt;=list2.val:</span><br><span class="line">            list1.<span class="built_in">next</span> = self.mergeTwoLists(list1.<span class="built_in">next</span>,list2)</span><br><span class="line">            <span class="keyword">return</span> list1</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            list2.<span class="built_in">next</span> = self.mergeTwoLists(list1,list2.<span class="built_in">next</span>)</span><br><span class="line">            <span class="keyword">return</span> list2</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-07-29T16:33:13+08:00"
-              content="2022-07-29">
-          07-29
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"># 递归</a>
+              <a href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag"># 链表</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/07/29/blog/" itemprop="url">
-            <span itemprop="name">blog</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" rel="prev" title="3. 无重复字符的最长子串">
+      <i class="fa fa-chevron-left"></i> 3. 无重复字符的最长子串
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -274,6 +334,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#C"><span class="nav-number">1.</span> <span class="nav-text">C++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">2.</span> <span class="nav-text">Python</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
