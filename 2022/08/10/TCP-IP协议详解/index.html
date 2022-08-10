@@ -20,22 +20,27 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="2.两数之和(Mid)">
+  <meta name="description" content="《Linux高性能服务器编程》第一篇 TCP&#x2F;IP协议详解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2.两数相加">
-<meta property="og:url" content="https://kjgggggg.github.io/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/index.html">
+<meta property="og:title" content="TCP&#x2F;IP协议详解">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="2.两数之和(Mid)">
+<meta property="og:description" content="《Linux高性能服务器编程》第一篇 TCP&#x2F;IP协议详解">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-05T06:04:11.000Z">
-<meta property="article:modified_time" content="2022-08-09T13:42:22.047Z">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810163355071.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810165616398.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810220933496.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810222545190.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810223345081.png">
+<meta property="article:published_time" content="2022-08-10T07:54:39.000Z">
+<meta property="article:modified_time" content="2022-08-10T15:00:49.056Z">
 <meta property="article:author" content="kjg">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="递归">
-<meta property="article:tag" content="链表">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810163355071.png">
 
-<link rel="canonical" href="https://kjgggggg.github.io/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">
+<link rel="canonical" href="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -48,7 +53,7 @@
   };
 </script>
 
-  <title>2.两数相加 | kjg's blog</title>
+  <title>TCP/IP协议详解 | kjg's blog</title>
   
 
 
@@ -191,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/WechatIMG84.jpeg">
@@ -204,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2.两数相加
+          TCP/IP协议详解
         </h1>
 
         <div class="post-meta">
@@ -213,23 +218,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-08-05 14:04:11" itemprop="dateCreated datePublished" datetime="2022-08-05T14:04:11+08:00">2022-08-05</time>
+              <time title="创建时间：2022-08-10 15:54:39 / 修改时间：23:00:49" itemprop="dateCreated datePublished" datetime="2022-08-10T15:54:39+08:00">2022-08-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-09 21:42:22" itemprop="dateModified" datetime="2022-08-09T21:42:22+08:00">2022-08-09</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                  <a href="/categories/%E3%80%8ALinux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《Linux高性能服务器编程》</span></a>
                 </span>
             </span>
 
@@ -241,7 +240,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">2.两数之和(Mid)</div>
+            <div class="post-description">《Linux高性能服务器编程》第一篇 TCP/IP协议详解</div>
 
         </div>
       </header>
@@ -252,21 +251,61 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例 1：</p>
-<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
-<p>示例 2：</p>
-<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
-<p>示例 3：</p>
-<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <h3 id="TCP-x2F-IP协议族"><a href="#TCP-x2F-IP协议族" class="headerlink" title="TCP&#x2F;IP协议族"></a>TCP&#x2F;IP协议族</h3><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810163355071.png" alt="image-20220810163355071"></p>
+<ol>
+<li>数据链路层实现了网卡接口的网络驱动程序，以处理数据在物理媒介（比如以太网、令牌环等）上的传输。不同的物理网络具有不同的电气特性，网络驱动程序隐藏了这些细节，为上层协议提供一个统一的接口。</li>
+</ol>
+<ul>
+<li>数据链路层两个常用的协议是ARP协议（Address Resolve Protocol，地址解析协议）和RARP协议（Reverse Address Resolve Protocol，逆地址解析协议）。它们实现了IP地址和机器物理地址（通常是MAC地址，以太网、令牌环和802.11无线网络都使用MAC地址）之间的相互转换。 <strong>ARP：IP-&gt;MAC</strong></li>
+</ul>
+<ol start="2">
+<li>网络层实现数据包的选路和转发。WAN（Wide Area Network，广域网）通常使用众多分级的路由器来连接分散的主机或LAN（Local Area Network，局域网）,因此，通信的两台主机一般不是直接相连的，而是通过多个中间节点（路由器）连接的。网络层的任务就是选择这些中间节点，以确定两台主机之间的通信路径。同时，网络层对上层协议隐藏了网络拓扑连接的细节，使得在传输层和网络应用程序看来，通信的双方是直接相连的。</li>
+</ol>
+<ul>
+<li><p>网络层最核心的协议是IP协议（Internet Protocol，因特网协议）。IP协议根据数据包的目的IP来决定如何投递它。如果数据包		  不能直接发送给目标主机，那么IP协议就为它寻找一个合适的下一跳（next hop）路由器，并将数据包交付给该路由器来转发。多次重复该过程，数据包最终到达目标主机，或者由于发送失败而被丢弃。IP协议使用逐跳（hop by hop）的方式确定通信路径。</p>
+</li>
+<li><p>网络层另外一个重要的协议是ICMP协议（Internet Control Message Protocol，因特网控制报文协议）。它是IP协议的重要补充，    主要用于检测网络连接。ICMP协议使用的报文格式如图所示。</p>
+</li>
+</ul>
+<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810165616398.png" alt="image-20220810165616398" style="zoom: 50%;">
 
+<ul>
+<li>8位类型字段用于区分报文类型。它将ICMP报文分为两大类：一类是差错报文，这类报文主要用来回应网络错误，比如目标不可到达（类型值为3）和重定向（类型值为5）；另一类是查询报文，这类报文用来查询网络信息，比如ping程序就是使用ICMP报文查看目标是否可到达（类型值为8）的。ICMP报文使用16位校验和字段对整个报文（包括头部和内容部分）进行循环冗余校验（CyclicRedundancy Check，CRC），以检验报文在传输过程中是否损坏。</li>
+</ul>
+<ol start="3">
+<li>传输层为两台主机上的应用程序提供端到端（end to end）的通信。与网络层使用的逐跳通信方式不同，传输层只关心通信的起始端和目的端，而不在乎数据包的中转过程。它负责数据的收发、链路的超时重连等。传输层协议主要有三个：TCP协议、UDP协议和SCTP协议。</li>
+</ol>
+<ul>
+<li>SCTP协议（Stream Control Transmission Protocol，流控制传输协议）是一种相对较新的传输层协议，它是为了在因特网上传输电话信号而设计的。这里不讨论SCTP协议。</li>
+</ul>
+<ol start="4">
+<li>应用层负责处理应用程序的逻辑，在用户空间实现，负责处理众多逻辑，比如文件传输、名称查询和网络管理等，如果在内核中实现，会使内核变得庞大。数据链路层、网络层和传输层负责处理网络通信细节，这部分必须既稳定又高效，因此它们都在内核空间中实现。应用层协议：</li>
+</ol>
+<ul>
+<li><p>ping是应用程序，而不是协议，前面说过它利用ICMP报文检测网络连接，是调试网络环境的必备工具。</p>
+</li>
+<li><p>telnet协议是一种远程登录协议，它使我们能在本地完成远程任务，后续章节将会多次使用telnet客户端登录到其他服务上。</p>
+</li>
+<li><p>OSPF（Open Shortest Path First，开放最短路径优先）协议是一种动态路由更新协议，用于路由器之间的通信，以告知对方各自的路由信息。</p>
+</li>
+<li><p>DNS（Domain Name Service，域名服务）协议提供机器域名到IP地址的转换，我们将在后面简要介绍DNS协议。</p>
+</li>
+</ul>
+<p>应用层协议（或程序）可能跳过传输层直接使用网络层提供的服务，比如ping程序和OSPF协议。应用层协议（或程序）通常既可以使</p>
+<p>用TCP服务，又可以使用UDP服务，比如DNS协议。我们可以通过&#x2F;etc&#x2F;services文件查看所有知名的应用层协议，以及它们都能使用哪</p>
+<p>些传输层服务。</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810220933496.png" alt="image-20220810220933496"></p>
+<ul>
+<li>经过TCP&#x2F;UDP封装后的数据称为TCP报文段（TCP message segment），或者简称TCP段&#x2F;UDP段。</li>
+<li>经过IP封装后的数据称为IP数据报（IP datagram）</li>
+<li>经过数据链路层封装的数据称为帧（frame）</li>
+</ul>
+<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810222545190.png" alt="image-20220810222545190" style="zoom:50%;">
 
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
+<p>​		帧的最大传输单元（Max Transmit Unit，MTU），即帧最多能携带多少上层协议数据（比如IP数据报），通常受到网络类型的限		制。图所示的以太网帧的MTU是1500字节。正因为如此，过长的IP数报可能需要被分片（fragment）传输。</p>
+<h3 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h3><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810223345081.png" alt="image-20220810223345081"></p>
+<p>因为IP协议、ARP协议和RARP协议都使用帧传输数据，所以帧的头部需要提供某个字段（具体情况取决于帧的类型）来区分它们。以以太网帧为例，它使用2字节的类型字段来标识上层协议。如果主机接收到的以太网帧类型字段的值为0x800，则帧的数据部分为IP数据报，以太网驱动程序就将帧交付给IP模块；若类型字段的值为0x806，则帧的数据部分为ARP请求或应答报文，以太网驱动程序就将帧交付给ARP模块；若类型字段的值为0x835，则帧的数据部分为RARP请求或应答报文，以太网驱动程序就将帧交付给RARP模块。</p>
+<p>同样，因为ICMP协议、TCP协议和UDP协议都使用IP协议，所以IP数据报的头部采用16位的协议（protocol）字段来区分它们。TCP报文段和UDP数据报则通过其头部中的16位的端口号（portnumber）字段来区分上层应用程序。比如DNS协议对应的端口号是53，HTTP协议（Hyper-Text Transfer Protocol，超文本传送协议）对应的端口号是80。所有知名应用层协议使用的端口号都可在&#x2F;etc&#x2F;services文件中找到。帧通过上述分用步骤后，最终将封装前的原始数据送至目标服务。这样，在顶层目标服务看来，封装和分用似乎没有发生过。</p>
 
     </div>
 
@@ -276,9 +315,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
-              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"># 递归</a>
-              <a href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag"># 链表</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
           </div>
 
         
@@ -287,13 +325,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" rel="prev" title="1.两数之和">
-      <i class="fa fa-chevron-left"></i> 1.两数之和
+    <a href="/2022/08/09/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" rel="prev" title="53.最大子数组和">
+      <i class="fa fa-chevron-left"></i> 53.最大子数组和
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" rel="next" title="3. 无重复字符的最长子串">
-      3. 无重复字符的最长子串 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -352,7 +387,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.</span> <span class="nav-text">2. 两数相加</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python"><span class="nav-number">1.2.</span> <span class="nav-text">Python</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-x2F-IP%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">1.</span> <span class="nav-text">TCP&#x2F;IP协议族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">分用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
