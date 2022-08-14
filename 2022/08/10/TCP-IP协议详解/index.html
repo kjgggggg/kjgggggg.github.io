@@ -65,8 +65,21 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814210544054.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814211228844.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814212149555.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230237715.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230309640.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814231012789.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815010321281.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815011420728.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815012008336.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013606620.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013707035.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013913471.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014154516.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014432759.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015716834.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015905012.png">
 <meta property="article:published_time" content="2022-08-10T07:54:39.000Z">
-<meta property="article:modified_time" content="2022-08-14T13:29:07.412Z">
+<meta property="article:modified_time" content="2022-08-14T18:00:29.871Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="服务器">
@@ -259,7 +272,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-14 21:29:07" itemprop="dateModified" datetime="2022-08-14T21:29:07+08:00">2022-08-14</time>
+                <time title="修改时间：2022-08-15 02:00:29" itemprop="dateModified" datetime="2022-08-15T02:00:29+08:00">2022-08-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -295,6 +308,44 @@
 <center>图 1-8 测试网络</center>
 
 <p>该测试网络主要用于分析ARP协议、IP协议、ICMP协议、TCP协议和DNS协议。我们通过抓取该网络上的以太网帧，查看其中的以太网帧头部、IP数据报头部、TCP报文段头部信息，以获取网络通信的细节。这样，以理论结合实践，我们就清楚TCP&#x2F;IP通信具体是如何进行的了。作者编写的多个客户端、服务器程序都是使用该网络来调试和测试的。对于路由器，我们仅列出了其LAN网络IP地址(192.168.1.1)，而忽略了ISP（Internet Service Provider，因特网服务提供商）给它分配的WAN网络IP地址，因为全书的讨论都不涉及它。</p>
+<h3 id="tcpdump抓包命令"><a href="#tcpdump抓包命令" class="headerlink" title="tcpdump抓包命令"></a>tcpdump抓包命令</h3><blockquote>
+<p> 常用的命令选项有：</p>
+</blockquote>
+<p>-c：设定抓取的数量	</p>
+<p>-i：指定监听的网口</p>
+<p>-w：将抓取的数据包保存到文件</p>
+<p>-s：截取报文的内容，默认截取96字节，-s0表示截取全部</p>
+<p>-r：读取数据包内容</p>
+<p>-C 10：每10M保存一个包</p>
+<p>-G 600：每10分钟保存一个包</p>
+<p>-n：不把ip转化成域名，直接显示 ip，避免执行 DNS lookups 的过程，速度会快很多</p>
+<p>-nn：不把协议和端口号转化成名字，速度也会快很多。</p>
+<p>-N：不打印出host 的域名部分.。比如,，如果设置了此选现，tcpdump 将会打印’nic’ 而不是 ‘nic.ddn.mil’.</p>
+<blockquote>
+<p>过滤的参数规则：</p>
+</blockquote>
+<p>host：指定主机名</p>
+<p>net：指定网段</p>
+<p>port：指定端口</p>
+<p>portrange：指定端口范围</p>
+<blockquote>
+<p>连接运算符</p>
+</blockquote>
+<p>and：所有的条件都满足</p>
+<p>or：只要满足一个条件</p>
+<p>not：取反，也可以用！</p>
+<blockquote>
+<p>例子：</p>
+</blockquote>
+<ol>
+<li><p>抓取主机172.0.0.1的eth0网口的8080、8081端口传输的数据包并保存文件</p>
+<p>tcpdump -i eth0 -s0 port 8080 or port 8081 host 172.0.0.1 -w 1.pcap</p>
+</li>
+<li><p>按 crtl+c 停止抓包，当前目录会生成一个1.pcap文件</p>
+</li>
+<li><p>简单查看数据包内容 	tcpdump -r 1..pcap</p>
+</li>
+</ol>
 <h3 id="TCP-x2F-IP协议族"><a href="#TCP-x2F-IP协议族" class="headerlink" title="TCP&#x2F;IP协议族"></a>TCP&#x2F;IP协议族</h3><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810163355071.png" alt="image-20220810163355071"></p>
 <center>图 1-1 TCP/IP协议族体系结构及主要协议</center>
 
@@ -592,6 +643,109 @@
 <p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814212149555.png" alt="image-20220814212149555"></p>
 <center>图 2-6 IPv6固定头部结构</center>
 
+
+
+<h3 id="TCP-x2F-IP协议详解"><a href="#TCP-x2F-IP协议详解" class="headerlink" title="TCP&#x2F;IP协议详解"></a>TCP&#x2F;IP协议详解</h3><h4 id="TCP服务特点"><a href="#TCP服务特点" class="headerlink" title="TCP服务特点"></a>TCP服务特点</h4><p>传输层协议主要有两个：TCP协议和UDP协议。TCP协议相对于UDP协议的特点是：面向连接、字节流和可靠传输。</p>
+<p>TCP协议的这种连接是一对一的，所以基于广播和多播（目标是多个主机地址）的应用程序不能使用TCP服务。而无连接协议UDP则非常适合于广播和多播。</p>
+<p>发送端执行的写操作次数和接收端执行的读操作次数之间没有任何数量关系，这就是字节流的概念：应用程序对数据的发送和接收是没有边界限制的。UDP则不然。发送端应用程序每执行一次写操作，UDP模块就将其封装成一个UDP数据报并发送之。接收端必须及时针对每一个UDP数据报执行读操作（通过recvfrom系统调用），否则就会丢包（这经常发生在较慢的服务器上）。并且，如果用户没有指定足够的应用程序缓冲区来读取UDP数据，则UDP数据将被截断。</p>
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230237715.png" alt="image-20220814230237715"></p>
+<center>图 3-1 TCP字节流服务</center>
+
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230309640.png" alt="image-20220814230309640"></p>
+<center>图 3-2 UDP数据报服务</center>
+
+<ul>
+<li><p>TCP传输是可靠的。首先，TCP协议采用发送应答机制，即发送端发送的每个TCP报文段都必须得到接收方的应答，才认为这个TCP报文段传输成功。</p>
+</li>
+<li><p>其次，TCP协议采用超时重传机制，发送端在发送出一个TCP报文段之后启动定时器，如果在定时时间内未收到应答，它将重发该报文段。</p>
+</li>
+<li><p>最后，因为TCP报文段最终是以IP数据报发送的，而IP数据报到达接收端可能乱序、重复，所以TCP协议还会对接收到的TCP报文段重排、整理，再交付给应用层。UDP协议则和IP协议一样，提供不可靠服务。它们都需要上层协议来处理数据确认和超时重传。</p>
+</li>
+</ul>
+<h4 id="TCP头部结构"><a href="#TCP头部结构" class="headerlink" title="TCP头部结构"></a>TCP头部结构</h4><p>TCP头部信息出现在每个TCP报文段中，用于指定通信的源端端口，目的端端口，管理TCP连接等，本节详细介绍TCP的头部结构，包括固定头部结构和头部选项。（20B-60B）</p>
+<h5 id="TCP固定头部结构"><a href="#TCP固定头部结构" class="headerlink" title="TCP固定头部结构"></a>TCP固定头部结构</h5><p>TCP头部结构如图3-3所示，其中的诸多字段为管理TCP连接和控制数据流提供了足够的信息。</p>
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814231012789.png" alt="image-20220814231012789"></p>
+<center>图 3-3 TCP头部结构</center>
+
+<ul>
+<li><p>16位端口号（port number）：告知主机该报文段是来自哪里（源端口）以及传给哪个上层协议或应用程序（目的端口）的。进行TCP通信时，客户端通常使用系统自动选择的临时端口号，而服务器则使用知名服务端口号。1.3节中提到过，所有知名服务使用的端口号都定义在&#x2F;etc&#x2F;services文件中</p>
+</li>
+<li><p>32位序号（sequence number）：一次TCP通信（从TCP连接建立到断开）过程中某一个传输方向上的字节流的每个字节的编号。</p>
+</li>
+<li><p>32位确认号（acknowledgement number）：用作对另一方发送来的TCP报文段的响应。其值是收到的TCP报文段的序号值加1。</p>
+</li>
+<li><p>4位头部长度（header length）：标识该TCP头部有多少个32bit字 （4字节）。因为4位最大能表示15，所以TCP头部最长是60字节。</p>
+</li>
+<li><p>6位标志位包含如下几项：</p>
+<p>❑URG标志，表示紧急指针（urgent pointer）是否有效。</p>
+<p>❑ACK标志，表示确认号是否有效。我们称携带ACK标志的TCP报文段为确认报文段。</p>
+<p>❑PSH标志，提示接收端应用程序应该立即从TCP接收缓冲区中读走数据，为接收后续数据腾出空间（如果应用程序不将接收到的数据读走，它们就会一直停留在TCP接收缓冲区中）。</p>
+<p>❑RST标志，表示要求对方重新建立连接。我们称携带RST标志的TCP报文段为复位报文段。</p>
+<p>❑SYN标志，表示请求建立一个连接。我们称携带SYN标志的TCP报文段为同步报文段。</p>
+<p>❑FIN标志，表示通知对方本端要关闭连接了。我们称携带FIN标志的TCP报文段为结束报文段</p>
+</li>
+<li><p>16位窗口大小（window size）：是TCP流量控制的一个手段。这里说的窗口，指的是接收通告窗口（Receiver Window，RWND）。它告诉对方本端的TCP接收缓冲区还能容纳多少字节的数据，这样对方就可以控制发送数据的速度。</p>
+</li>
+<li><p>16位校验和（TCP checksum）：由发送端填充，接收端对TCP报文段执行CRC算法以检验TCP报文段在传输过程中是否损坏。注意，这个校验不仅包括TCP头部，也包括数据部分。这也是TCP可靠传输的一个重要保障。</p>
+</li>
+<li><p>16位紧急指针（urgent pointer）：是一个正的偏移量。它和序号字段的值相加表示最后一个紧急数据的下一字节的序号。因此，确切地说，这个字段是紧急指针相对当前序号的偏移，不妨称之为紧急偏移。TCP的紧急指针是发送端向接收端发送紧急数据的方法。我们将在后面讨论TCP紧急数据。</p>
+</li>
+<li><p>TCP头部的最后一个选项字段（options）是可变长的可选信息。这部分最多包含40字节，因为TCP头部最长是60字节（其中还包含前面讨论的20字节的固定部分）。典型的TCP头部选项结构如图3-4所示。</p>
+</li>
+</ul>
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815010321281.png" alt="image-20220815010321281"></p>
+<center>图 3-4 TCP头部选项的一般结构</center>
+
+<h5 id="使用tcpdump观察TCP头部信息"><a href="#使用tcpdump观察TCP头部信息" class="headerlink" title="使用tcpdump观察TCP头部信息"></a>使用tcpdump观察TCP头部信息</h5><center>代码清单3-1 用tcpdump抓取数据包</center>
+
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815011420728.png" alt="image-20220815011420728"></p>
+<ul>
+<li>tcpdump输出Flags[S]，表示该TCP报文段包含SYN标志，因此它是一个同步报文段。如果TCP报文段包含其他标志，则tcpdump也会将该标志的首字母显示在“Flags”后的方括号中。</li>
+<li>seq是序号值。因为该同步报文段是从127.0.0.1.41621（客户端IP地址和端口号）到127.0.0.1.23（服务器IP地址和端口号）这个传输方向上的第一个TCP报文段，所以这个序号值也就是此次通信过程中该传输方向的ISN值。并且，因为这是整个通信过程中的第一个TCP报文段，所以它没有针对对方发送来的TCP报文段的确认值（尚未收到任何对方发送来的TCP报文段）。</li>
+<li>win是接收通告窗口的大小。因为这是一个同步报文段，所以win值反映的是实际的接收通告窗口大小。</li>
+<li>options是TCP选项，其具体内容列在方括号中。</li>
+<li>mss是发送端（客户端）通告的最大报文段长度。通过ifconfig命令查看回路接口的MTU为16436字节，因此可以预想到TCP报文段的MSS为16396（16436-40）字节。</li>
+<li>sackOK表示发送端支持并同意使用SACK选项。TS val是发送端的时间戳。ecr是时间戳回显应答。因为这是一次TCP通信的第一个TCP报文段，所以它针对对方的时间戳的应答为0（尚未收到对方的时间戳）。</li>
+<li>紧接着的nop是一个空操作选项。</li>
+<li>wscale指出发送端使用的窗口扩大因子为6</li>
+</ul>
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815012008336.png" alt="image-20220815012008336"></p>
+<h4 id="TCP连接的建立和关闭"><a href="#TCP连接的建立和关闭" class="headerlink" title="TCP连接的建立和关闭"></a>TCP连接的建立和关闭</h4><h5 id="使用tcpdump观察TCP连接的建立和关闭"><a href="#使用tcpdump观察TCP连接的建立和关闭" class="headerlink" title="使用tcpdump观察TCP连接的建立和关闭"></a>使用tcpdump观察TCP连接的建立和关闭</h5><p>首先从ernest-laptop上执行telnet命令登录Kongming20的80端口，然后抓取这一过程中客户端和服务器交换的TCP报文段。</p>
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013606620.png" alt="image-20220815013606620"></p>
+<blockquote>
+<p><em>nt</em>: 指<em>tcpdump</em> 可抓取的数据包, 包括ip 数据包, tcp数据包</p>
+</blockquote>
+<p>当执行telnet命令并在两台通信主机之间建立TCP连接后（telnet输 出“Connected to 192.168.1.109”），输入Ctrl+]以调出telnet程序的命令提示符，然后在telnet命令提示符后输入quit以退出telnet客户端程序，从而结束TCP连接。整个过程中（从连接建立到结束），tcpdump输出的内容如代码清单3-2所示:</p>
+<center>代码清单3-2 建立和关闭TCP连接的过程</center>
+
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013707035.png" alt="image-20220815013707035"></p>
+<p>因为整个过程并没有发生应用层数据的交换，所以TCP报文段的数据部分的长度（length）总是0。为了更清楚地表示建立和关闭TCP连接的整个过程，我们将tcpdump输出的内容绘制成图3-6所示的时序图:</p>
+<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013913471.png" alt="image-20220815013913471" style="zoom:67%;">
+
+<h5 id="半关闭状态"><a href="#半关闭状态" class="headerlink" title="半关闭状态"></a>半关闭状态</h5><p>TCP连接是全双工的，所以它允许两个方向的数据传输被独立关闭。换言之，通信的一端可以发送结束报文段给对方，告诉它本端已经完成了数据的发送，但允许继续接收来自对方的数据，直到对方也发送结束报文段以关闭连接。TCP连接的这种状态称为半关闭（half close）状态，如图3-7所示。</p>
+<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014154516.png" alt="image-20220815014154516" style="zoom:67%;">
+
+<center>图 3-7 半关闭状态</center>
+
+<p>请注意，在图3-7中，服务器和客户端应用程序判断对方是否已经关闭连接的方法是：read系统调用返回0（收到结束报文段）。当然，Linux还提供其他检测连接是否被对方关闭的方法，这将在后续章节讨论。</p>
+<p>socket网络编程接口通过shutdown函数提供了对半关闭的支持，我们将在后续章节讨论它。这里强调一下，虽然我们介绍了半关闭状态，但是使用半关闭的应用程序很少见。</p>
+<h5 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h5><p>前面我们讨论的是很快建立连接的情况。如果客户端访问一个距离它很远的服务器，或者由于网络繁忙，导致服务器对于客户端发送出的同步报文段没有应答，此时客户端程序将产生什么样的行为呢？显然，对于提供可靠服务的TCP来说，它必然是先进行重连（可能执行多次），如果重连仍然无效，则通知应用程序连接超时</p>
+<p>为了观察连接超时，我们模拟一个繁忙的服务器环境，在ernestlaptop上执行下面的操作：</p>
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014432759.png" alt="image-20220815014432759"></p>
+<p>iptable命令用于过滤数据包，这里我们利用它来丢弃所有接收到的连接请求（丢弃所有同步报文段，这样客户端就无法得到任何确认报文段）</p>
+<p>接下来从Kongming20上执行telnet命令登录到ernest-laptop，并用tcpdump抓取这个过程中双方交换的TCP报文段。具体操作如下：</p>
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015716834.png" alt="image-20220815015716834"></p>
+<p>从两次date命令的输出来看，Kongming20建立TCP连接的超时时间是63s。本次tcpdump的输出如代码清单3-3所示。</p>
+<center>代码清单3-3 TCP超时重连</center>
+
+<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015905012.png" alt="image-20220815015905012"></p>
+<blockquote>
+<p>这次抓包我们保留了tcpdump输出的时间戳（不使用其-t选项），以便推理Linux的超时重连策略。</p>
+<p>我们一共抓取到6个TCP报文段，它们都是同步报文段，并且具有相同的序号值，这说明后面5个同步报文段都是超时重连报文段。</p>
+<p>观察这些TCP报文段被发送的时间间隔，它们分别为1s、2s、4s、8s和16s（由于定时器精度的问题，这些时间间隔都有一定偏差），可以推断最后一个TCP报文段的超时时间是32s（63s-16s-8s-4s-2s-1s）。因此，TCP模块一共执行了5次重连操作，这是由&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_syn_retries内核变量所定义的。每次重连的超时时间都增加一倍。</p>
+<p>在5次重连均失败的情况下，TCP模块放弃接并通知应用程序。在应用程序中，我们可以修改连接超时时间，具体方法将在本书后续章节中进行介绍。</p>
+</blockquote>
+
     </div>
 
     
@@ -675,7 +829,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E4%B9%A6%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">全书测试网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-x2F-IP%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">2.</span> <span class="nav-text">TCP&#x2F;IP协议族</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">分用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">ARP协议工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ARP%E8%AF%B7%E6%B1%82-x2F-%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.3.1.</span> <span class="nav-text">ARP请求&#x2F;应答报文详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ARP%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98%E7%9A%84%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="nav-number">2.3.2.</span> <span class="nav-text">ARP高速缓存的查看与修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FARP%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.3.</span> <span class="nav-text">使用tcpdump观察ARP通信过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E5%8D%8F%E8%AE%AE%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">DNS协议工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DNS%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.4.1.</span> <span class="nav-text">DNS查询和应答报文详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux%E4%B8%8B%E8%AE%BF%E9%97%AEDNS%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.4.2.</span> <span class="nav-text">Linux下访问DNS服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FDNS%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">2.4.3.</span> <span class="nav-text">使用tcpdump观察DNS通信过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket%E5%92%8CTCP-x2F-IP%E5%8D%8F%E8%AE%AE%E6%97%8F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.5.</span> <span class="nav-text">socket和TCP&#x2F;IP协议族的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">IP协议详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.</span> <span class="nav-text">IP服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IPv4%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84-1%E6%80%BB8%E7%89%87%E9%A6%964"><span class="nav-number">3.2.</span> <span class="nav-text">IPv4头部结构(1总8片首4)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FIPv4%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.2.1.</span> <span class="nav-text">使用tcpdump观察IPv4头部结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E5%88%86%E7%89%87"><span class="nav-number">3.3.</span> <span class="nav-text">IP分片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E8%B7%AF%E7%94%B1"><span class="nav-number">3.4.</span> <span class="nav-text">IP路由</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#IP%E6%A8%A1%E5%9D%97%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.4.1.</span> <span class="nav-text">IP模块工作流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6"><span class="nav-number">3.4.2.</span> <span class="nav-text">路由机制</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A1%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">路由表更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E8%BD%AC%E5%8F%91"><span class="nav-number">3.5.</span> <span class="nav-text">IP转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">3.6.</span> <span class="nav-text">重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ICMP%E9%87%8D%E5%AE%9A%E5%90%91%E6%8A%A5%E6%96%87"><span class="nav-number">3.6.1.</span> <span class="nav-text">ICMP重定向报文</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IPv6%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.7.</span> <span class="nav-text">IPv6头部结构</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E4%B9%A6%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">全书测试网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcpdump%E6%8A%93%E5%8C%85%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">tcpdump抓包命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-x2F-IP%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">3.</span> <span class="nav-text">TCP&#x2F;IP协议族</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">分用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">ARP协议工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ARP%E8%AF%B7%E6%B1%82-x2F-%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.3.1.</span> <span class="nav-text">ARP请求&#x2F;应答报文详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ARP%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98%E7%9A%84%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="nav-number">3.3.2.</span> <span class="nav-text">ARP高速缓存的查看与修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FARP%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">3.3.3.</span> <span class="nav-text">使用tcpdump观察ARP通信过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E5%8D%8F%E8%AE%AE%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.4.</span> <span class="nav-text">DNS协议工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DNS%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%BA%94%E7%AD%94%E6%8A%A5%E6%96%87%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.4.1.</span> <span class="nav-text">DNS查询和应答报文详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux%E4%B8%8B%E8%AE%BF%E9%97%AEDNS%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.4.2.</span> <span class="nav-text">Linux下访问DNS服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FDNS%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">3.4.3.</span> <span class="nav-text">使用tcpdump观察DNS通信过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket%E5%92%8CTCP-x2F-IP%E5%8D%8F%E8%AE%AE%E6%97%8F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.5.</span> <span class="nav-text">socket和TCP&#x2F;IP协议族的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">IP协议详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.1.</span> <span class="nav-text">IP服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IPv4%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84-1%E6%80%BB8%E7%89%87%E9%A6%964"><span class="nav-number">4.2.</span> <span class="nav-text">IPv4头部结构(1总8片首4)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FIPv4%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用tcpdump观察IPv4头部结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E5%88%86%E7%89%87"><span class="nav-number">4.3.</span> <span class="nav-text">IP分片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E8%B7%AF%E7%94%B1"><span class="nav-number">4.4.</span> <span class="nav-text">IP路由</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#IP%E6%A8%A1%E5%9D%97%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">4.4.1.</span> <span class="nav-text">IP模块工作流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6"><span class="nav-number">4.4.2.</span> <span class="nav-text">路由机制</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A1%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">路由表更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E8%BD%AC%E5%8F%91"><span class="nav-number">4.5.</span> <span class="nav-text">IP转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">4.6.</span> <span class="nav-text">重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ICMP%E9%87%8D%E5%AE%9A%E5%90%91%E6%8A%A5%E6%96%87"><span class="nav-number">4.6.1.</span> <span class="nav-text">ICMP重定向报文</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IPv6%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">4.7.</span> <span class="nav-text">IPv6头部结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-x2F-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">TCP&#x2F;IP协议详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E6%9C%8D%E5%8A%A1%E7%89%B9%E7%82%B9"><span class="nav-number">5.1.</span> <span class="nav-text">TCP服务特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">5.2.</span> <span class="nav-text">TCP头部结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP%E5%9B%BA%E5%AE%9A%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">5.2.1.</span> <span class="nav-text">TCP固定头部结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FTCP%E5%A4%B4%E9%83%A8%E4%BF%A1%E6%81%AF"><span class="nav-number">5.2.2.</span> <span class="nav-text">使用tcpdump观察TCP头部信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E5%85%B3%E9%97%AD"><span class="nav-number">5.3.</span> <span class="nav-text">TCP连接的建立和关闭</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8tcpdump%E8%A7%82%E5%AF%9FTCP%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E5%85%B3%E9%97%AD"><span class="nav-number">5.3.1.</span> <span class="nav-text">使用tcpdump观察TCP连接的建立和关闭</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%8A%E5%85%B3%E9%97%AD%E7%8A%B6%E6%80%81"><span class="nav-number">5.3.2.</span> <span class="nav-text">半关闭状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6"><span class="nav-number">5.3.3.</span> <span class="nav-text">连接超时</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
