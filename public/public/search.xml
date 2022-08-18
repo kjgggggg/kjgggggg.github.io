@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1.两数之和</title>
-    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
-    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
-<p>示例 1：</p>
-<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
-<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
-<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>哈希表</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>14.最长公共前缀</title>
     <url>/2022/08/09/14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</url>
     <content><![CDATA[<h3 id="14-最长公共前缀"><a href="#14-最长公共前缀" class="headerlink" title="14. 最长公共前缀"></a><a href="https://leetcode.cn/problems/longest-common-prefix/">14. 最长公共前缀</a></h3><p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
@@ -82,6 +57,31 @@
         <tag>leetcode</tag>
         <tag>map</tag>
         <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.两数之和</title>
+    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
+<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
+<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>哈希表</tag>
       </tags>
   </entry>
   <entry>
@@ -280,6 +280,37 @@
       </tags>
   </entry>
   <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Flask快速建站</title>
     <url>/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/</url>
     <content><![CDATA[<h3 id="Flask为何物"><a href="#Flask为何物" class="headerlink" title="Flask为何物"></a>Flask为何物</h3><p>Falsk是由python开发的轻量的web框架，小巧，灵活，一个脚本就可以启动一个web项目， 开发的难度比较大，flask好多的模块是按照django的思路开发的。和flask类似的框架还有web.py</p>
@@ -362,37 +393,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Transformer pytorch</title>
     <url>/2022/08/01/Transformer-pytorch/</url>
     <content><![CDATA[<h3 id="Transformer概览"><a href="#Transformer概览" class="headerlink" title="Transformer概览"></a>Transformer概览</h3><p><img src="/2022/08/01/Transformer-pytorch/901659325530_.pic_%E5%89%AF%E6%9C%AC.png" alt="901659325530_.pic"></p>
@@ -434,6 +434,105 @@
         <tag>deeplearning</tag>
         <tag>Transformer</tag>
         <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>blog</title>
+    <url>/2022/07/29/blog/</url>
+    <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
+<li>标题</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># A (一级标题)</span></span><br><span class="line"><span class="section">## A</span></span><br><span class="line"><span class="section">### A</span></span><br><span class="line"><span class="section">#### A</span></span><br><span class="line"><span class="section">##### A</span></span><br><span class="line"><span class="section">###### A （六级标题）</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>字体</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="emphasis">*斜体*</span></span><br><span class="line"><span class="strong">**粗体**</span></span><br><span class="line"><span class="strong">**<span class="emphasis">*斜粗体*</span>**</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>分割线、下划线</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="strong">**<span class="emphasis">*</span></span></span><br><span class="line"><span class="emphasis"><span class="strong"></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-xml"><span class="tag">&lt;<span class="name">u</span>&gt;</span></span>带下划线文本<span class="language-xml"><span class="tag">&lt;/<span class="name">u</span>&gt;</span></span></span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>脚注</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[^鼠标移到我身上]：会弹出我！</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>列表</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> 第一项		</span><br><span class="line"><span class="bullet">*</span> 第二项		</span><br><span class="line"><span class="bullet">*</span> 第三项   </span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 第一项		</span><br><span class="line"><span class="bullet">-</span> 第二项		</span><br><span class="line"><span class="bullet">-</span> 第三项  </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>最左边的竖线</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; </span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="code">`print()`</span> </span><br><span class="line"></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>链接</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接名称</span>](<span class="link">链接地址</span>)</span><br><span class="line"></span><br><span class="line">&lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>图片</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址</span>)</span><br><span class="line"></span><br><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址 &quot;可选标题&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;http://static.runoob.com/images/runoob-logo.png&quot;</span> <span class="attr">width</span>=<span class="string">&quot;50%&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>表格</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">|  表头   | 表头  |</span><br><span class="line">|  ----  | ----  |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line"></span><br><span class="line">我们可以设置表格的对齐方式：</span><br><span class="line">-: 设置内容和标题栏居右对齐。</span><br><span class="line">:- 设置内容和标题栏居左对齐。</span><br><span class="line">:-: 设置内容和标题栏居中对齐。</span><br><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Hexo基本操作"><a href="#Hexo基本操作" class="headerlink" title="Hexo基本操作"></a>Hexo基本操作</h3><ul>
+<li>发布文章</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;文章名&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>去&#x2F;Users&#x2F;jiangangkong&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;文章名.md 下写文章</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><ul>
+<li>每篇文章下最大的标题为三级标题</li>
+<li>并列关系用 * </li>
+<li>顺序关系用1. 2. </li>
+<li>文章开头的信息里（tags，categories，descriptions后面要加‘空格）否则会报错</li>
+</ul>
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
       </tags>
   </entry>
   <entry>
@@ -1039,105 +1138,6 @@
       <tags>
         <tag>linux</tag>
         <tag>服务器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>blog</title>
-    <url>/2022/07/29/blog/</url>
-    <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
-<li>标题</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># A (一级标题)</span></span><br><span class="line"><span class="section">## A</span></span><br><span class="line"><span class="section">### A</span></span><br><span class="line"><span class="section">#### A</span></span><br><span class="line"><span class="section">##### A</span></span><br><span class="line"><span class="section">###### A （六级标题）</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>字体</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="emphasis">*斜体*</span></span><br><span class="line"><span class="strong">**粗体**</span></span><br><span class="line"><span class="strong">**<span class="emphasis">*斜粗体*</span>**</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>分割线、下划线</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="strong">**<span class="emphasis">*</span></span></span><br><span class="line"><span class="emphasis"><span class="strong"></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-xml"><span class="tag">&lt;<span class="name">u</span>&gt;</span></span>带下划线文本<span class="language-xml"><span class="tag">&lt;/<span class="name">u</span>&gt;</span></span></span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>脚注</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[^鼠标移到我身上]：会弹出我！</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>列表</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> 第一项		</span><br><span class="line"><span class="bullet">*</span> 第二项		</span><br><span class="line"><span class="bullet">*</span> 第三项   </span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 第一项		</span><br><span class="line"><span class="bullet">-</span> 第二项		</span><br><span class="line"><span class="bullet">-</span> 第三项  </span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>最左边的竖线</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; </span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>代码</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="code">`print()`</span> </span><br><span class="line"></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>链接</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接名称</span>](<span class="link">链接地址</span>)</span><br><span class="line"></span><br><span class="line">&lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>图片</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址</span>)</span><br><span class="line"></span><br><span class="line">![<span class="string">alt 代替文本</span>](<span class="link">图片地址 &quot;可选标题&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;http://static.runoob.com/images/runoob-logo.png&quot;</span> <span class="attr">width</span>=<span class="string">&quot;50%&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>表格</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">|  表头   | 表头  |</span><br><span class="line">|  ----  | ----  |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line"></span><br><span class="line">我们可以设置表格的对齐方式：</span><br><span class="line">-: 设置内容和标题栏居右对齐。</span><br><span class="line">:- 设置内容和标题栏居左对齐。</span><br><span class="line">:-: 设置内容和标题栏居中对齐。</span><br><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Hexo基本操作"><a href="#Hexo基本操作" class="headerlink" title="Hexo基本操作"></a>Hexo基本操作</h3><ul>
-<li>发布文章</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;文章名&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>去&#x2F;Users&#x2F;jiangangkong&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;文章名.md 下写文章</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><ul>
-<li>每篇文章下最大的标题为三级标题</li>
-<li>并列关系用 * </li>
-<li>顺序关系用1. 2. </li>
-<li>文章开头的信息里（tags，categories，descriptions后面要加‘空格）否则会报错</li>
-</ul>
-]]></content>
-      <categories>
-        <category>blog</category>
-      </categories>
-      <tags>
-        <tag>blog</tag>
       </tags>
   </entry>
   <entry>
@@ -1794,6 +1794,90 @@
       </tags>
   </entry>
   <entry>
+    <title>欧拉系统软件包配置迁移测试</title>
+    <url>/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h3 id="第一轮测试"><a href="#第一轮测试" class="headerlink" title="第一轮测试"></a>第一轮测试</h3><h4 id="1-mac进入root状态"><a href="#1-mac进入root状态" class="headerlink" title="1.mac进入root状态"></a>1.mac进入root状态</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开终端</span></span><br><span class="line">sudo -i</span><br><span class="line"><span class="comment"># 然后输入本机账号的密码0000</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-mac连接远程服务器"><a href="#2-mac连接远程服务器" class="headerlink" title="2.mac连接远程服务器"></a>2.mac连接远程服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 先进入root状态</span></span><br><span class="line">ssh 服务器用户名@ip <span class="comment"># ssh rpmtest@172.29.7.204</span></span><br><span class="line"><span class="comment"># 输入服务器连接密码</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看已安装rpm包-若没有-则安装"><a href="#查看已安装rpm包-若没有-则安装" class="headerlink" title="*查看已安装rpm包 若没有 则安装"></a>*查看已安装rpm包 若没有 则安装</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qi 包名</span><br><span class="line">yum list installed|grep dbus <span class="comment">#模糊查询</span></span><br><span class="line">sudo yum install dconf-editor-3.28.0-1.el7 <span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-在centos服务器上的test文件夹下运行test-py生成迁移脚本"><a href="#3-在centos服务器上的test文件夹下运行test-py生成迁移脚本" class="headerlink" title="3.在centos服务器上的test文件夹下运行test.py生成迁移脚本"></a>3.在centos服务器上的test文件夹下运行test.py生成迁移脚本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">test</span></span><br><span class="line"><span class="built_in">ls</span> <span class="comment">#查看文件列表</span></span><br><span class="line">python3 test.py dbus-1.10.24-12.el7.x86_64.rpm x86_64</span><br><span class="line"><span class="comment"># 生成对应的.sh和.json文件</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-将-sh发送到欧拉服务器上的test文件夹下"><a href="#4-将-sh发送到欧拉服务器上的test文件夹下" class="headerlink" title="4.将.sh发送到欧拉服务器上的test文件夹下"></a>4.将.sh发送到欧拉服务器上的test文件夹下</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp dbus-1.10.24-12.el7.x86_64.rpm.sh 172.29.7.209:~/test</span><br><span class="line"><span class="comment"># 输入ls 查看有无backup 和 configfile 文件夹</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-在centos服务器上查看对应的-json文件"><a href="#5-在centos服务器上查看对应的-json文件" class="headerlink" title="5.在centos服务器上查看对应的.json文件"></a>5.在centos服务器上查看对应的.json文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim dbus-1.10.24-12.el7.x86_64.rpm x86_64.json</span><br><span class="line"><span class="comment"># 输入：</span></span><br><span class="line"><span class="comment"># %! python3 -m json.tool 后输入该条指令将该json文件夹格式化方便查看</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-比对"><a href="#6-比对" class="headerlink" title="6.比对"></a>6.比对</h4><p>查看configfile文件夹中修改后的系统配置文件并与backup文件夹中的原文件进行比较，查看修改部分是否同之前的json文件中的内容保持一致(修改后配置项的值应为src_current_value)，也可以与对应sh脚本中echo和sed内容进行对比是否一致，若不一致，需记录。</p>
+<h3 id="第二轮测试"><a href="#第二轮测试" class="headerlink" title="第二轮测试"></a>第二轮测试</h3><h4 id="1-mac进入root状态-1"><a href="#1-mac进入root状态-1" class="headerlink" title="1.mac进入root状态"></a>1.mac进入root状态</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开终端</span></span><br><span class="line">sudo -i</span><br><span class="line"><span class="comment"># 然后输入本机账号的密码0000</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-mac连接远程服务器-1"><a href="#2-mac连接远程服务器-1" class="headerlink" title="2.mac连接远程服务器"></a>2.mac连接远程服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 先进入root状态</span></span><br><span class="line">ssh 服务器用户名@ip <span class="comment"># ssh rpmtest@172.29.7.221</span></span><br><span class="line"><span class="comment"># 输入服务器连接密码</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-进入linux的-etc-x2F-yum-repos-d-目录"><a href="#3-进入linux的-etc-x2F-yum-repos-d-目录" class="headerlink" title="3.进入linux的 etc&#x2F;yum.repos.d 目录"></a>3.进入linux的 etc&#x2F;yum.repos.d 目录</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cd ~    回到根目录</span></span><br><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-查看所有可用软件包"><a href="#4-查看所有可用软件包" class="headerlink" title="4.查看所有可用软件包"></a>4.查看所有可用软件包</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 要测试 clamav-milter-0.103.5-1.el7.x86_64.rpm 包</span></span><br><span class="line">yum --disablerepo=<span class="string">&#x27;*&#x27;</span> --enablerepo=<span class="string">&#x27;huawei-*&#x27;</span> list clamav-milter --showduplicate</span><br><span class="line"><span class="comment"># 结果如下图 说明要降级软件包</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811163753844.png" alt="image-20220811163753844" style="zoom:67%;">
+
+<h4 id="5-升级-x2F-降级软件包"><a href="#5-升级-x2F-降级软件包" class="headerlink" title="5.升级&#x2F;降级软件包"></a>5.升级&#x2F;降级软件包</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 升级</span></span><br><span class="line">sudo yum upgrade clamav-milter-0.103.5-1.el7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 降级</span></span><br><span class="line">sudo yum downgrade clamav-milter-0.103.5-1.el7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据提示信息同时升级/降级软件包依赖(大文件放最后)</span></span><br><span class="line">sudo yum downgrade python-firewall-0.5.3-5.el7 firewalld-filesystem-0.5.3-5.el7 firewalld-0.5.3-5.el7</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811174709752.png" alt="image-20220811174709752" style="zoom:50%;">
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 有其他的包依赖需要降级的这个包，因此两个需要一起downgrade就可以了</span></span><br><span class="line">sudo yum downgrade cronie-anacron-1.4.11-19.el7 cronie-1.4.11-19.el7</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-备份配置文件"><a href="#6-备份配置文件" class="headerlink" title="6.备份配置文件"></a>6.备份配置文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/test</span><br><span class="line">python3 test.py cronie-1.4.11-19.el7.x86_64.rpm x86_64</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811181850807.png" alt="image-20220811181850807"></p>
+<ul>
+<li>第一个是CentOS当前配置文件路径</li>
+<li>第二个是CentOS默认配置文件路径</li>
+<li>第三个是OpenEuler默认配置文件路径</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 首先以root权限备份CentOS当前配置文件和OpenEuler默认配置文件到backup文件夹对应的子文件夹下。backup文件夹分别有两个子文件夹centos_default\openeuler。backup文件夹分别有两个子文件夹centos_current 、openeuler。</span></span><br><span class="line"><span class="built_in">cp</span> -p /usr/lib/systemd/system/crond.service backup/centos_current/</span><br><span class="line"><span class="built_in">cp</span> -p database/service_and_socket_data/openEuler20.03-SP1/x86_64/everything/service/crond.service backup/openeuler/</span><br><span class="line"><span class="comment"># 此时~/test/backup/centos_current/crond.service 和~/test/backup/openeuler/crond.service已经建立</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="7-修改配置项"><a href="#7-修改配置项" class="headerlink" title="7.修改配置项"></a>7.修改配置项</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /usr/lib/systemd/system/crond.service</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811184451341.png" alt="image-20220811184451341" style="zoom:50%;">
+
+<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811193700367.png" alt="image-20220811193700367" style="zoom:50%;">
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim  database/service_and_socket_data/openEuler20.03-SP1/x86_64/everything/service/crond.service</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811193525150.png" alt="image-20220811193525150" style="zoom:50%;">
+
+<h4 id="8-在centos服务器上的test文件夹下运行test-py生成迁移脚本"><a href="#8-在centos服务器上的test文件夹下运行test-py生成迁移脚本" class="headerlink" title="8.在centos服务器上的test文件夹下运行test.py生成迁移脚本"></a>8.在centos服务器上的test文件夹下运行test.py生成迁移脚本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">test</span></span><br><span class="line"><span class="built_in">ls</span> <span class="comment">#查看文件列表</span></span><br><span class="line">python3 test.py cronie-1.4.11-19.el7.x86_64.rpm x86_64</span><br><span class="line"><span class="comment"># 生成对应的.sh和.json文件</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="9-将-sh发送到欧拉服务器上的test文件夹下"><a href="#9-将-sh发送到欧拉服务器上的test文件夹下" class="headerlink" title="9.将.sh发送到欧拉服务器上的test文件夹下"></a>9.将.sh发送到欧拉服务器上的test文件夹下</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp cronie-1.4.11-19.el7.x86_64.rpm.sh 172.29.7.209:~/test</span><br><span class="line"><span class="comment"># 输入ls 查看有无backup 和 configfile 文件夹</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-在centos服务器上查看对应的-json文件"><a href="#10-在centos服务器上查看对应的-json文件" class="headerlink" title="10.在centos服务器上查看对应的.json文件"></a>10.在centos服务器上查看对应的.json文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim dbus-1.10.24-12.el7.x86_64.rpm x86_64.json</span><br><span class="line"><span class="comment"># 输入：</span></span><br><span class="line"><span class="comment"># %! python3 -m json.tool 后输入该条指令将该json文件夹格式化方便查看</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="11-比对"><a href="#11-比对" class="headerlink" title="11.比对"></a>11.比对</h4><p>检查OpenEuler服务器上是否有对应版本的rpm包，若没有，则安装。若存在，则复制脚本到OpenEuler服务器，以root权限运行该脚本。脚本会备份要修改的配置文件到同目录下backup文件夹，修改后的配置文件到同目录下configfile文件夹。若有错误日志输出，需记录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum list clamav-milter --showduplicate</span></span><br><span class="line"><span class="comment"># sudo yum install XXX</span></span><br><span class="line"></span><br><span class="line">sudo ./cronie-1.4.11-19.el7.x86_64.rpm.sh</span><br><span class="line"></span><br><span class="line">vim backup/crond.service</span><br></pre></td></tr></table></figure>
+
+<p>对比openeuler服务器上backup和configfile目录下配置项的值，是否符合json文件中is_sync为true的配置项</p>
+<p>backup为修改前默认配置文件，值是json文件中的openeuler_default_value</p>
+<p>configfile为后修改后的配置文件，值是json文件中src_current_value</p>
+<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811205126703.png" alt="image-20220811205126703" style="zoom:50%;">
+
+<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811205336588.png" alt="image-20220811205336588" style="zoom:50%;">
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src_current_value的值为当前centos环境的配置项值,从环境中查询</span></span><br><span class="line"><span class="comment">// src_default_value的值为centos的rpm包的配置项默认值，从数据库中查询</span></span><br><span class="line"><span class="comment">// openEuler_default_value的值为对应openEuler上rpm包的配置项默认值，从数据库中查询</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;crond.service&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">       <span class="attr">&quot;rpm_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cronie-1.4.11-19.el7.x86_64.rpm&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;filename&quot;</span><span class="punctuation">:</span> <span class="string">&quot;crond.service&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;src_os&quot;</span><span class="punctuation">:</span> <span class="string">&quot;centos&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;target_os &quot;</span><span class="punctuation">:</span> <span class="string">&quot;openeuler&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;arch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;x86_64&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">           <span class="attr">&quot;Description&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Command Scheduler&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Command Scheduler&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Unit&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;After&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auditd.service systemd-user-sessions.service time-sync.target&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auditd.service nss-user-lookup.target systemd-user-sessions.service time-sync.target ypbind.service autofs.service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Unit&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;insert &quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;insert1&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span><span class="punctuation">,</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span></span><br><span class="line">               <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;alter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot; /etc/sysconfig/crond &quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;add&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;alter1&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS item1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS item2&quot;</span></span><br><span class="line">               <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                   <span class="string">&quot; /etc/sysconfig/crond item1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                   <span class="string">&quot; /etc/sysconfig/crond item2&quot;</span></span><br><span class="line">               <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;add&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="12-在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径"><a href="#12-在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径" class="headerlink" title="12.在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径"></a>12.在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> -p backup/centos_current/crond.service /usr/lib/systemd/system/</span><br><span class="line">sudo <span class="built_in">cp</span> -p backup/openeuler/crond.service  database/service_and_socket_data/openEuler20.03-SP1/x86_64/everything/service/</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端</title>
     <url>/2022/08/15/%E5%89%8D%E7%AB%AF/</url>
     <content><![CDATA[<h3 id><a href="#" class="headerlink" title="*"></a>*</h3><h4 id="HTML和CSS之间的区别"><a href="#HTML和CSS之间的区别" class="headerlink" title="HTML和CSS之间的区别"></a>HTML和CSS之间的区别</h4><ol>
@@ -2218,60 +2302,44 @@
 
 
 
-<h4 id="jQuery选择器"><a href="#jQuery选择器" class="headerlink" title="jQuery选择器"></a>jQuery选择器</h4><h5 id="直接寻找"><a href="#直接寻找" class="headerlink" title="直接寻找"></a>直接寻找</h5><ul>
-<li>ID选择器</li>
-</ul>
+<h4 id="jQuery选择器"><a href="#jQuery选择器" class="headerlink" title="jQuery选择器"></a>jQuery选择器</h4><h5 id="直接寻找"><a href="#直接寻找" class="headerlink" title="直接寻找"></a>直接寻找</h5><p>ID选择器</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">&quot;txt&quot;</span>&gt;</span>中国联通<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>中国联通<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>中国联通<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;#txt&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>样式选择器</li>
-</ul>
+<p>样式选择器</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span>中国联通1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span>中国联通2<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span>中国联通3<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;.c1&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>标签选择器</li>
-</ul>
+<p>标签选择器</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span>中国联通1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span>中国联通2<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span>中国联通3<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;h1&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>层级选择器</li>
-</ul>
+<p>层级选择器</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span>中国联通1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span>中国联通3<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;.c1 .c2 a&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>多选择器</li>
-</ul>
+<p>多选择器</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span>中国联通1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;c3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span>中国联通3<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>xx<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>xx<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;#c3,#c2,li&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>属性选择器</li>
-</ul>
+<p>属性选择器</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">name</span>=<span class="string">&quot;n1&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">name</span>=<span class="string">&quot;n1&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">name</span>=<span class="string">&quot;n2&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;input[name=&#x27;n1&#x27;]&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 
 
-<h5 id="间接寻找"><a href="#间接寻找" class="headerlink" title="间接寻找"></a>间接寻找</h5><ul>
-<li>找到兄弟</li>
-</ul>
+<h5 id="间接寻找"><a href="#间接寻找" class="headerlink" title="间接寻找"></a>间接寻找</h5><p>找兄弟</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;c1&#x27;</span>&gt;</span>上海<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>深圳<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>广州<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">prev</span>()        <span class="comment">// 上一个</span></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">next</span>()        <span class="comment">// 下一个</span></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">next</span>().<span class="title function_">next</span>() <span class="comment">// 下一个、下一个</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">siblings</span>()    <span class="comment">// 所有的系统</span></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>找父子</li>
-</ul>
+<p>找父子</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;c1&#x27;</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">div</span>&gt;</span>青浦区<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;p10&quot;</span>&gt;</span>宝山区<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">div</span>&gt;</span>浦东新区<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>深圳<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>广州<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>陕西<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>山西<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>河北<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>河南<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">parent</span>()            <span class="comment">// 父亲</span></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">parent</span>().<span class="title function_">parent</span>()   <span class="comment">// 父亲、父亲</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">children</span>()                <span class="comment">// 所有的儿子</span></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">children</span>(<span class="string">&quot;.p10&quot;</span>)          <span class="comment">// 所有的儿子中寻找class=p10</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">find</span>(<span class="string">&quot;.p10&quot;</span>)              <span class="comment">// 去所有子孙中寻找class=p10</span></span><br><span class="line">$(<span class="string">&quot;#c1&quot;</span>).<span class="title function_">find</span>(<span class="string">&quot;div&quot;</span>)              <span class="comment">// 去所有子孙中寻找div标签</span></span><br></pre></td></tr></table></figure>
@@ -2358,90 +2426,6 @@
       </categories>
       <tags>
         <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>欧拉系统软件包配置迁移测试</title>
-    <url>/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h3 id="第一轮测试"><a href="#第一轮测试" class="headerlink" title="第一轮测试"></a>第一轮测试</h3><h4 id="1-mac进入root状态"><a href="#1-mac进入root状态" class="headerlink" title="1.mac进入root状态"></a>1.mac进入root状态</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开终端</span></span><br><span class="line">sudo -i</span><br><span class="line"><span class="comment"># 然后输入本机账号的密码0000</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-mac连接远程服务器"><a href="#2-mac连接远程服务器" class="headerlink" title="2.mac连接远程服务器"></a>2.mac连接远程服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 先进入root状态</span></span><br><span class="line">ssh 服务器用户名@ip <span class="comment"># ssh rpmtest@172.29.7.204</span></span><br><span class="line"><span class="comment"># 输入服务器连接密码</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="查看已安装rpm包-若没有-则安装"><a href="#查看已安装rpm包-若没有-则安装" class="headerlink" title="*查看已安装rpm包 若没有 则安装"></a>*查看已安装rpm包 若没有 则安装</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qi 包名</span><br><span class="line">yum list installed|grep dbus <span class="comment">#模糊查询</span></span><br><span class="line">sudo yum install dconf-editor-3.28.0-1.el7 <span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-在centos服务器上的test文件夹下运行test-py生成迁移脚本"><a href="#3-在centos服务器上的test文件夹下运行test-py生成迁移脚本" class="headerlink" title="3.在centos服务器上的test文件夹下运行test.py生成迁移脚本"></a>3.在centos服务器上的test文件夹下运行test.py生成迁移脚本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">test</span></span><br><span class="line"><span class="built_in">ls</span> <span class="comment">#查看文件列表</span></span><br><span class="line">python3 test.py dbus-1.10.24-12.el7.x86_64.rpm x86_64</span><br><span class="line"><span class="comment"># 生成对应的.sh和.json文件</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-将-sh发送到欧拉服务器上的test文件夹下"><a href="#4-将-sh发送到欧拉服务器上的test文件夹下" class="headerlink" title="4.将.sh发送到欧拉服务器上的test文件夹下"></a>4.将.sh发送到欧拉服务器上的test文件夹下</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp dbus-1.10.24-12.el7.x86_64.rpm.sh 172.29.7.209:~/test</span><br><span class="line"><span class="comment"># 输入ls 查看有无backup 和 configfile 文件夹</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="5-在centos服务器上查看对应的-json文件"><a href="#5-在centos服务器上查看对应的-json文件" class="headerlink" title="5.在centos服务器上查看对应的.json文件"></a>5.在centos服务器上查看对应的.json文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim dbus-1.10.24-12.el7.x86_64.rpm x86_64.json</span><br><span class="line"><span class="comment"># 输入：</span></span><br><span class="line"><span class="comment"># %! python3 -m json.tool 后输入该条指令将该json文件夹格式化方便查看</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="6-比对"><a href="#6-比对" class="headerlink" title="6.比对"></a>6.比对</h4><p>查看configfile文件夹中修改后的系统配置文件并与backup文件夹中的原文件进行比较，查看修改部分是否同之前的json文件中的内容保持一致(修改后配置项的值应为src_current_value)，也可以与对应sh脚本中echo和sed内容进行对比是否一致，若不一致，需记录。</p>
-<h3 id="第二轮测试"><a href="#第二轮测试" class="headerlink" title="第二轮测试"></a>第二轮测试</h3><h4 id="1-mac进入root状态-1"><a href="#1-mac进入root状态-1" class="headerlink" title="1.mac进入root状态"></a>1.mac进入root状态</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开终端</span></span><br><span class="line">sudo -i</span><br><span class="line"><span class="comment"># 然后输入本机账号的密码0000</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-mac连接远程服务器-1"><a href="#2-mac连接远程服务器-1" class="headerlink" title="2.mac连接远程服务器"></a>2.mac连接远程服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 先进入root状态</span></span><br><span class="line">ssh 服务器用户名@ip <span class="comment"># ssh rpmtest@172.29.7.221</span></span><br><span class="line"><span class="comment"># 输入服务器连接密码</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-进入linux的-etc-x2F-yum-repos-d-目录"><a href="#3-进入linux的-etc-x2F-yum-repos-d-目录" class="headerlink" title="3.进入linux的 etc&#x2F;yum.repos.d 目录"></a>3.进入linux的 etc&#x2F;yum.repos.d 目录</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cd ~    回到根目录</span></span><br><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-查看所有可用软件包"><a href="#4-查看所有可用软件包" class="headerlink" title="4.查看所有可用软件包"></a>4.查看所有可用软件包</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 要测试 clamav-milter-0.103.5-1.el7.x86_64.rpm 包</span></span><br><span class="line">yum --disablerepo=<span class="string">&#x27;*&#x27;</span> --enablerepo=<span class="string">&#x27;huawei-*&#x27;</span> list clamav-milter --showduplicate</span><br><span class="line"><span class="comment"># 结果如下图 说明要降级软件包</span></span><br></pre></td></tr></table></figure>
-
-<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811163753844.png" alt="image-20220811163753844" style="zoom:67%;">
-
-<h4 id="5-升级-x2F-降级软件包"><a href="#5-升级-x2F-降级软件包" class="headerlink" title="5.升级&#x2F;降级软件包"></a>5.升级&#x2F;降级软件包</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 升级</span></span><br><span class="line">sudo yum upgrade clamav-milter-0.103.5-1.el7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 降级</span></span><br><span class="line">sudo yum downgrade clamav-milter-0.103.5-1.el7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据提示信息同时升级/降级软件包依赖(大文件放最后)</span></span><br><span class="line">sudo yum downgrade python-firewall-0.5.3-5.el7 firewalld-filesystem-0.5.3-5.el7 firewalld-0.5.3-5.el7</span><br></pre></td></tr></table></figure>
-
-<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811174709752.png" alt="image-20220811174709752" style="zoom:50%;">
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 有其他的包依赖需要降级的这个包，因此两个需要一起downgrade就可以了</span></span><br><span class="line">sudo yum downgrade cronie-anacron-1.4.11-19.el7 cronie-1.4.11-19.el7</span><br></pre></td></tr></table></figure>
-
-<h4 id="6-备份配置文件"><a href="#6-备份配置文件" class="headerlink" title="6.备份配置文件"></a>6.备份配置文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/test</span><br><span class="line">python3 test.py cronie-1.4.11-19.el7.x86_64.rpm x86_64</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811181850807.png" alt="image-20220811181850807"></p>
-<ul>
-<li>第一个是CentOS当前配置文件路径</li>
-<li>第二个是CentOS默认配置文件路径</li>
-<li>第三个是OpenEuler默认配置文件路径</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 首先以root权限备份CentOS当前配置文件和OpenEuler默认配置文件到backup文件夹对应的子文件夹下。backup文件夹分别有两个子文件夹centos_default\openeuler。backup文件夹分别有两个子文件夹centos_current 、openeuler。</span></span><br><span class="line"><span class="built_in">cp</span> -p /usr/lib/systemd/system/crond.service backup/centos_current/</span><br><span class="line"><span class="built_in">cp</span> -p database/service_and_socket_data/openEuler20.03-SP1/x86_64/everything/service/crond.service backup/openeuler/</span><br><span class="line"><span class="comment"># 此时~/test/backup/centos_current/crond.service 和~/test/backup/openeuler/crond.service已经建立</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="7-修改配置项"><a href="#7-修改配置项" class="headerlink" title="7.修改配置项"></a>7.修改配置项</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /usr/lib/systemd/system/crond.service</span><br></pre></td></tr></table></figure>
-
-<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811184451341.png" alt="image-20220811184451341" style="zoom:50%;">
-
-<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811193700367.png" alt="image-20220811193700367" style="zoom:50%;">
-
-
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim  database/service_and_socket_data/openEuler20.03-SP1/x86_64/everything/service/crond.service</span><br></pre></td></tr></table></figure>
-
-<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811193525150.png" alt="image-20220811193525150" style="zoom:50%;">
-
-<h4 id="8-在centos服务器上的test文件夹下运行test-py生成迁移脚本"><a href="#8-在centos服务器上的test文件夹下运行test-py生成迁移脚本" class="headerlink" title="8.在centos服务器上的test文件夹下运行test.py生成迁移脚本"></a>8.在centos服务器上的test文件夹下运行test.py生成迁移脚本</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">test</span></span><br><span class="line"><span class="built_in">ls</span> <span class="comment">#查看文件列表</span></span><br><span class="line">python3 test.py cronie-1.4.11-19.el7.x86_64.rpm x86_64</span><br><span class="line"><span class="comment"># 生成对应的.sh和.json文件</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="9-将-sh发送到欧拉服务器上的test文件夹下"><a href="#9-将-sh发送到欧拉服务器上的test文件夹下" class="headerlink" title="9.将.sh发送到欧拉服务器上的test文件夹下"></a>9.将.sh发送到欧拉服务器上的test文件夹下</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp cronie-1.4.11-19.el7.x86_64.rpm.sh 172.29.7.209:~/test</span><br><span class="line"><span class="comment"># 输入ls 查看有无backup 和 configfile 文件夹</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="10-在centos服务器上查看对应的-json文件"><a href="#10-在centos服务器上查看对应的-json文件" class="headerlink" title="10.在centos服务器上查看对应的.json文件"></a>10.在centos服务器上查看对应的.json文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim dbus-1.10.24-12.el7.x86_64.rpm x86_64.json</span><br><span class="line"><span class="comment"># 输入：</span></span><br><span class="line"><span class="comment"># %! python3 -m json.tool 后输入该条指令将该json文件夹格式化方便查看</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="11-比对"><a href="#11-比对" class="headerlink" title="11.比对"></a>11.比对</h4><p>检查OpenEuler服务器上是否有对应版本的rpm包，若没有，则安装。若存在，则复制脚本到OpenEuler服务器，以root权限运行该脚本。脚本会备份要修改的配置文件到同目录下backup文件夹，修改后的配置文件到同目录下configfile文件夹。若有错误日志输出，需记录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum list clamav-milter --showduplicate</span></span><br><span class="line"><span class="comment"># sudo yum install XXX</span></span><br><span class="line"></span><br><span class="line">sudo ./cronie-1.4.11-19.el7.x86_64.rpm.sh</span><br><span class="line"></span><br><span class="line">vim backup/crond.service</span><br></pre></td></tr></table></figure>
-
-<p>对比openeuler服务器上backup和configfile目录下配置项的值，是否符合json文件中is_sync为true的配置项</p>
-<p>backup为修改前默认配置文件，值是json文件中的openeuler_default_value</p>
-<p>configfile为后修改后的配置文件，值是json文件中src_current_value</p>
-<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811205126703.png" alt="image-20220811205126703" style="zoom:50%;">
-
-<img src="/2022/08/08/%E6%AC%A7%E6%8B%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%85%8D%E7%BD%AE%E8%BF%81%E7%A7%BB%E6%B5%8B%E8%AF%95/image-20220811205336588.png" alt="image-20220811205336588" style="zoom:50%;">
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src_current_value的值为当前centos环境的配置项值,从环境中查询</span></span><br><span class="line"><span class="comment">// src_default_value的值为centos的rpm包的配置项默认值，从数据库中查询</span></span><br><span class="line"><span class="comment">// openEuler_default_value的值为对应openEuler上rpm包的配置项默认值，从数据库中查询</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;crond.service&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">       <span class="attr">&quot;rpm_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cronie-1.4.11-19.el7.x86_64.rpm&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;filename&quot;</span><span class="punctuation">:</span> <span class="string">&quot;crond.service&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;src_os&quot;</span><span class="punctuation">:</span> <span class="string">&quot;centos&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;target_os &quot;</span><span class="punctuation">:</span> <span class="string">&quot;openeuler&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;arch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;x86_64&quot;</span><span class="punctuation">,</span></span><br><span class="line">       <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">           <span class="attr">&quot;Description&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Command Scheduler&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Command Scheduler&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Unit&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;After&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auditd.service systemd-user-sessions.service time-sync.target&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auditd.service nss-user-lookup.target systemd-user-sessions.service time-sync.target ypbind.service autofs.service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Unit&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;insert &quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;insert1&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span><span class="punctuation">,</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span></span><br><span class="line">               <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;changed&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;alter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="string">&quot; /etc/sysconfig/crond &quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;add&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">           <span class="attr">&quot;alter1&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">               <span class="attr">&quot;src_current_value&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS item1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                   <span class="string">&quot; /usr/sbin/crond -n $CRONDARGS item2&quot;</span></span><br><span class="line">               <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;src_default_value&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;openEuler_default_value&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                   <span class="string">&quot; /etc/sysconfig/crond item1&quot;</span><span class="punctuation">,</span></span><br><span class="line">                   <span class="string">&quot; /etc/sysconfig/crond item2&quot;</span></span><br><span class="line">               <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_default_diff&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_customer_change&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;section&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Service&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;add&quot;</span><span class="punctuation">,</span></span><br><span class="line">               <span class="attr">&quot;is_sync&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">           <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="12-在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径"><a href="#12-在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径" class="headerlink" title="12.在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径"></a>12.在完成脚本迁移后，将所有cento中备份的文件恢复到原文件路径</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> -p backup/centos_current/crond.service /usr/lib/systemd/system/</span><br><span class="line">sudo <span class="built_in">cp</span> -p backup/openeuler/crond.service  database/service_and_socket_data/openEuler20.03-SP1/x86_64/everything/service/</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
       </tags>
   </entry>
 </search>
