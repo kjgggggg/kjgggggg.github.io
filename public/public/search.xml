@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1.两数之和</title>
-    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
-    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
-<p>示例 1：</p>
-<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
-<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
-<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>哈希表</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>14.最长公共前缀</title>
     <url>/2022/08/09/14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</url>
     <content><![CDATA[<h3 id="14-最长公共前缀"><a href="#14-最长公共前缀" class="headerlink" title="14. 最长公共前缀"></a><a href="https://leetcode.cn/problems/longest-common-prefix/">14. 最长公共前缀</a></h3><p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
@@ -56,6 +31,59 @@
       </tags>
   </entry>
   <entry>
+    <title>2.两数相加</title>
+    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例 1：</p>
+<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
+<p>示例 2：</p>
+<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
+<p>示例 3：</p>
+<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>递归</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.两数之和</title>
+    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
+<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
+<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>17.电话号码的字母组合</title>
     <url>/2022/08/12/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/</url>
     <content><![CDATA[<h3 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17. 电话号码的字母组合"></a><a href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">17. 电话号码的字母组合</a></h3><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。答案可以按 <strong>任意顺序</strong> 返回。</p>
@@ -82,34 +110,6 @@
         <tag>leetcode</tag>
         <tag>map</tag>
         <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2.两数相加</title>
-    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
-    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例 1：</p>
-<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
-<p>示例 2：</p>
-<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
-<p>示例 3：</p>
-<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>递归</tag>
-        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -184,37 +184,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>53.最大子数组和</title>
     <url>/2022/08/09/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</url>
     <content><![CDATA[<h3 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
@@ -243,6 +212,119 @@
       <tags>
         <tag>leetcode</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flask快速建站</title>
+    <url>/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/</url>
+    <content><![CDATA[<h3 id="Flask为何物"><a href="#Flask为何物" class="headerlink" title="Flask为何物"></a>Flask为何物</h3><p>Falsk是由python开发的轻量的web框架，小巧，灵活，一个脚本就可以启动一个web项目， 开发的难度比较大，flask好多的模块是按照django的思路开发的。和flask类似的框架还有web.py</p>
+<h4 id="flask和django的区别"><a href="#flask和django的区别" class="headerlink" title="flask和django的区别"></a>flask和django的区别</h4><ul>
+<li>Django: 大而全，有一套完整的框架，但是耦合性高。Auth，Permission，admin基本没用开发快，符合MVC模式</li>
+<li>Flask： 微框架，很小巧。一个脚本就可以启动一个web项目，需要哪些功能，自己装。需要熟悉MVC模式</li>
+</ul>
+<h3 id="Flask建站"><a href="#Flask建站" class="headerlink" title="Flask建站"></a>Flask建站</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install flask</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20220816001615926.png" alt="image-20220816001615926" style="zoom: 50%;">
+
+<p>在web1项目根目录中新建web001.py文件,其中⬇️</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__) <span class="comment">#Flask是一个类 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建了网址 /show/info 和 函数index 的对应关系</span></span><br><span class="line"><span class="comment"># 以后用户在浏览器上访问 /show/info，网站自动执行 index</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/show/info&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;中国联通&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20220816003732254.png" alt="image-20220816003732254"></p>
+<p>此时访问 <a href="http://127.0.0.1:5000/show/info">http://127.0.0.1:5000/show/info</a> 即出现 中国联通</p>
+<p>咱们网站与别人的不一样：</p>
+<ul>
+<li>Flask框架为了让咱们写标签方便，支持将字符串写入到文件里。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/show/info&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="comment"># Flask内部会自动打开这个文件，并读取内容，将内容给用户返回。</span></span><br><span class="line">    <span class="comment"># 默认：去当前项目目录的templates文件夹中找。</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&quot;index.html&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+<p>此时的目录结构：</p>
+<img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20220816205452931.png" alt="image-20220816205452931" style="zoom: 67%;">
+
+
+
+<h3 id="知识点回顾和补充"><a href="#知识点回顾和补充" class="headerlink" title="知识点回顾和补充"></a>知识点回顾和补充</h3><ol>
+<li><p>网站请求的流程<br><img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20211119140524753.png" alt="image-20211119140524753"></p>
+</li>
+<li><p>一大堆的标签</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">h<span class="regexp">/div/</span>span<span class="regexp">/a/img</span><span class="regexp">/ul/</span>li<span class="regexp">/table/i</span>nput<span class="regexp">/textarea/</span>select</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>网络请求</p>
+<ul>
+<li><p>在浏览器的URL中写入地址，点击回车，访问。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">浏览器会发送数据过去，本质上发送的是字符串：</span><br><span class="line"><span class="string">&quot;GET /explore http1.1<span class="subst">\r</span><span class="subst">\n</span>host:...<span class="subst">\r</span><span class="subst">\n</span>user-agent<span class="subst">\r</span><span class="subst">\n</span>..<span class="subst">\r</span><span class="subst">\n</span><span class="subst">\r</span><span class="subst">\n</span>&quot;</span></span><br><span class="line"></span><br><span class="line">浏览器会发送数据过去，本质上发送的是字符串：</span><br><span class="line"><span class="string">&quot;POST /explore http1.1<span class="subst">\r</span><span class="subst">\n</span>host:...<span class="subst">\r</span><span class="subst">\n</span>user-agent<span class="subst">\r</span><span class="subst">\n</span>..<span class="subst">\r</span><span class="subst">\n</span><span class="subst">\r</span><span class="subst">\n</span>数据库&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浏览器向后端发送请求时</p>
+<ul>
+<li><p>GET请求【URL方法 &#x2F; 表单提交】</p>
+<ul>
+<li><p>现象：GET请求、跳转、向后台传入数据数据会拼接在URL上。</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">https:<span class="regexp">//</span>www.sogou.com/web?query=安卓&amp;age=<span class="number">19</span>&amp;name=xx</span><br></pre></td></tr></table></figure>
+
+<p>注意：GET请求数据会在URL中体现。</p>
+</li>
+</ul>
+</li>
+<li><p>POST请求【表单提交】</p>
+<ul>
+<li>现象：提交数据不在URL中而是在请求体中。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>创建&#x2F;Users&#x2F;jiangangkong&#x2F;workSpace&#x2F;pycharmWorkSpace&#x2F;example1</p>
+<p>在其根目录中创建app.py、templates目录&#x2F;register.html、static目录</p>
+<ul>
+<li><p>app.py中代码</p>
+<ol>
+<li>后台接受用户通过GET形式发送过来的数据 <code>request.args</code></li>
+<li>后台接受用户通过POST形式发送过来的数据<code>request.form</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&quot;POST&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&quot;GET&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        user = request.form.get(<span class="string">&quot;user&quot;</span>)</span><br><span class="line">        pwd = request.form.get(<span class="string">&quot;pwd&quot;</span>)</span><br><span class="line">        gender = request.form.get(<span class="string">&quot;gender&quot;</span>)</span><br><span class="line">        hobby_list = request.form.getlist(<span class="string">&quot;hobby&quot;</span>)</span><br><span class="line">        city = request.form.get(<span class="string">&quot;city&quot;</span>)</span><br><span class="line">        skill_list = request.form.getlist(<span class="string">&quot;skill&quot;</span>)</span><br><span class="line">        more = request.form.get(<span class="string">&quot;more&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(user, pwd, gender, hobby_list, city, skill_list, more)</span><br><span class="line">        <span class="comment"># 将用户信息写入文件中实现注册、写入到excel中实现注册、写入数据库中实现注册</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2.给用户再返回结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;注册成功&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>register.html中代码</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>用户注册<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">action</span>=<span class="string">&quot;/register&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;pwd&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        性别：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span>男</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>&gt;</span>女</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        爱好：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;10&quot;</span>&gt;</span>篮球</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span>足球</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;30&quot;</span>&gt;</span>乒乓球</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;40&quot;</span>&gt;</span>棒球</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        城市：</span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;city&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;bj&quot;</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;sh&quot;</span>&gt;</span>上海<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;sz&quot;</span>&gt;</span>深圳<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        擅长领域：</span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;skill&quot;</span> <span class="attr">multiple</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>&gt;</span>吃饭<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;101&quot;</span>&gt;</span>睡觉<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;102&quot;</span>&gt;</span>打球<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        备注：<span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;more&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;submit按钮&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>Flask</tag>
+        <tag>建站</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
@@ -345,88 +427,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Flask快速建站</title>
-    <url>/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/</url>
-    <content><![CDATA[<h3 id="Flask为何物"><a href="#Flask为何物" class="headerlink" title="Flask为何物"></a>Flask为何物</h3><p>Falsk是由python开发的轻量的web框架，小巧，灵活，一个脚本就可以启动一个web项目， 开发的难度比较大，flask好多的模块是按照django的思路开发的。和flask类似的框架还有web.py</p>
-<h4 id="flask和django的区别"><a href="#flask和django的区别" class="headerlink" title="flask和django的区别"></a>flask和django的区别</h4><ul>
-<li>Django: 大而全，有一套完整的框架，但是耦合性高。Auth，Permission，admin基本没用开发快，符合MVC模式</li>
-<li>Flask： 微框架，很小巧。一个脚本就可以启动一个web项目，需要哪些功能，自己装。需要熟悉MVC模式</li>
-</ul>
-<h3 id="Flask建站"><a href="#Flask建站" class="headerlink" title="Flask建站"></a>Flask建站</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install flask</span><br></pre></td></tr></table></figure>
-
-<img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20220816001615926.png" alt="image-20220816001615926" style="zoom: 50%;">
-
-<p>在web1项目根目录中新建web001.py文件,其中⬇️</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__) <span class="comment">#Flask是一个类 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建了网址 /show/info 和 函数index 的对应关系</span></span><br><span class="line"><span class="comment"># 以后用户在浏览器上访问 /show/info，网站自动执行 index</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/show/info&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;中国联通&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20220816003732254.png" alt="image-20220816003732254"></p>
-<p>此时访问 <a href="http://127.0.0.1:5000/show/info">http://127.0.0.1:5000/show/info</a> 即出现 中国联通</p>
-<p>咱们网站与别人的不一样：</p>
-<ul>
-<li>Flask框架为了让咱们写标签方便，支持将字符串写入到文件里。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/show/info&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="comment"># Flask内部会自动打开这个文件，并读取内容，将内容给用户返回。</span></span><br><span class="line">    <span class="comment"># 默认：去当前项目目录的templates文件夹中找。</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&quot;index.html&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
-
-<p>此时的目录结构：</p>
-<img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20220816205452931.png" alt="image-20220816205452931" style="zoom: 67%;">
-
-
-
-<h3 id="知识点回顾和补充"><a href="#知识点回顾和补充" class="headerlink" title="知识点回顾和补充"></a>知识点回顾和补充</h3><ol>
-<li><p>网站请求的流程<br><img src="/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/image-20211119140524753.png" alt="image-20211119140524753"></p>
-</li>
-<li><p>一大堆的标签</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">h<span class="regexp">/div/</span>span<span class="regexp">/a/img</span><span class="regexp">/ul/</span>li<span class="regexp">/table/i</span>nput<span class="regexp">/textarea/</span>select</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>网络请求</p>
-<ul>
-<li><p>在浏览器的URL中写入地址，点击回车，访问。</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">浏览器会发送数据过去，本质上发送的是字符串：</span><br><span class="line"><span class="string">&quot;GET /explore http1.1<span class="subst">\r</span><span class="subst">\n</span>host:...<span class="subst">\r</span><span class="subst">\n</span>user-agent<span class="subst">\r</span><span class="subst">\n</span>..<span class="subst">\r</span><span class="subst">\n</span><span class="subst">\r</span><span class="subst">\n</span>&quot;</span></span><br><span class="line"></span><br><span class="line">浏览器会发送数据过去，本质上发送的是字符串：</span><br><span class="line"><span class="string">&quot;POST /explore http1.1<span class="subst">\r</span><span class="subst">\n</span>host:...<span class="subst">\r</span><span class="subst">\n</span>user-agent<span class="subst">\r</span><span class="subst">\n</span>..<span class="subst">\r</span><span class="subst">\n</span><span class="subst">\r</span><span class="subst">\n</span>数据库&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>浏览器向后端发送请求时</p>
-<ul>
-<li><p>GET请求【URL方法 &#x2F; 表单提交】</p>
-<ul>
-<li><p>现象：GET请求、跳转、向后台传入数据数据会拼接在URL上。</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">https:<span class="regexp">//</span>www.sogou.com/web?query=安卓&amp;age=<span class="number">19</span>&amp;name=xx</span><br></pre></td></tr></table></figure>
-
-<p>注意：GET请求数据会在URL中体现。</p>
-</li>
-</ul>
-</li>
-<li><p>POST请求【表单提交】</p>
-<ul>
-<li>现象：提交数据不在URL中而是在请求体中。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>创建&#x2F;Users&#x2F;jiangangkong&#x2F;workSpace&#x2F;pycharmWorkSpace&#x2F;example1</p>
-<p>在其根目录中创建app.py、templates目录&#x2F;register.html、static目录</p>
-<ul>
-<li><p>app.py中代码</p>
-<ol>
-<li>后台接受用户通过GET形式发送过来的数据 <code>request.args</code></li>
-<li>后台接受用户通过POST形式发送过来的数据<code>request.form</code></li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&quot;POST&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&quot;GET&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        user = request.form.get(<span class="string">&quot;user&quot;</span>)</span><br><span class="line">        pwd = request.form.get(<span class="string">&quot;pwd&quot;</span>)</span><br><span class="line">        gender = request.form.get(<span class="string">&quot;gender&quot;</span>)</span><br><span class="line">        hobby_list = request.form.getlist(<span class="string">&quot;hobby&quot;</span>)</span><br><span class="line">        city = request.form.get(<span class="string">&quot;city&quot;</span>)</span><br><span class="line">        skill_list = request.form.getlist(<span class="string">&quot;skill&quot;</span>)</span><br><span class="line">        more = request.form.get(<span class="string">&quot;more&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(user, pwd, gender, hobby_list, city, skill_list, more)</span><br><span class="line">        <span class="comment"># 将用户信息写入文件中实现注册、写入到excel中实现注册、写入数据库中实现注册</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2.给用户再返回结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;注册成功&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>register.html中代码</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>用户注册<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">action</span>=<span class="string">&quot;/register&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;pwd&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        性别：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span>男</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>&gt;</span>女</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        爱好：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;10&quot;</span>&gt;</span>篮球</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>&gt;</span>足球</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;30&quot;</span>&gt;</span>乒乓球</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;40&quot;</span>&gt;</span>棒球</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        城市：</span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;city&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;bj&quot;</span>&gt;</span>北京<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;sh&quot;</span>&gt;</span>上海<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;sz&quot;</span>&gt;</span>深圳<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        擅长领域：</span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;skill&quot;</span> <span class="attr">multiple</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>&gt;</span>吃饭<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;101&quot;</span>&gt;</span>睡觉<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;102&quot;</span>&gt;</span>打球<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        备注：<span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;more&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;submit按钮&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>Flask</tag>
-        <tag>建站</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux</title>
     <url>/2022/08/08/linux/</url>
     <content><![CDATA[<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><ul>
@@ -472,17 +472,133 @@
   <entry>
     <title>数据库</title>
     <url>/2022/08/18/%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 单行注释</span><br><span class="line">-- 单行注释</span><br><span class="line">/*多行注释*/</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"># 单行注释</span><br><span class="line"><span class="comment">-- 单行注释</span></span><br><span class="line"><span class="comment">/*多行注释*/</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h4><ul>
+<h4 id="数据库管理"><a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h4><ul>
+<li><p>查看已有的数据库（文件夹）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建数据库（文件夹）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database gx_day14 <span class="keyword">DEFAULT</span> CHARSET utf8 <span class="keyword">COLLATE</span> utf8_general_ci;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除数据库（文件夹）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database gx_day14;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入数据库（进入文件夹）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use gx_day14;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看文件夹下所有的数据表（文件）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> tables;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="数据表的管理"><a href="#数据表的管理" class="headerlink" title="数据表的管理"></a>数据表的管理</h4><ul>
+<li><p>进入数据库（进入文件夹）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">use gx_day14;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前数据库下的所有 表（文件）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> tables;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建表（文件文件）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名称(</span><br><span class="line">	列名称 类型,</span><br><span class="line">    列名称 类型,</span><br><span class="line">    列名称 类型</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/18/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20211123140828409.png"></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb1(</span><br><span class="line">    id <span class="type">int</span>, </span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb1(</span><br><span class="line">    id <span class="type">int</span>, </span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">16</span>) <span class="keyword">not</span> <span class="keyword">null</span>,   <span class="comment">-- 不允许为空</span></span><br><span class="line">    age <span class="type">int</span> <span class="keyword">null</span>                 <span class="comment">-- 允许为空（默认）</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb1(</span><br><span class="line">    id <span class="type">int</span>, </span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">    age <span class="type">int</span> <span class="keyword">default</span> <span class="number">3</span>        <span class="comment">-- 插入数据时，age列的值默认3</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb1(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">primary</span> key,     <span class="comment">-- 主键（不允许为空，不允许重复）</span></span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<p>主键一般用于表示当前行的数据的编号（类似于人的身份证）。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb1(</span><br><span class="line">    id <span class="type">int</span> auto_increment <span class="keyword">primary</span> key, <span class="comment">-- 内部维护，自增</span></span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下，我们再创建表时都会这样来写：【标准】</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb1(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">desc</span> tb1;</span><br><span class="line"># <span class="keyword">desc</span> <span class="operator">+</span>表名用来显示表的状态，包括列名（<span class="keyword">column</span> name），</span><br><span class="line"># 各个列的类型（Type），各个列的值类型，主外键（Key），默认值，其他；示例如下：</span><br><span class="line"><span class="operator">+</span><span class="comment">-------+-------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="operator">|</span> Field <span class="operator">|</span> Type        <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+-------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="operator">|</span> id    <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)     <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span> PRI <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span> auto_increment <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name  <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">16</span>) <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> age   <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)     <span class="operator">|</span> YES  <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------+-------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> 表名称;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="常用数据类型"><a href="#常用数据类型" class="headerlink" title="常用数据类型"></a>常用数据类型</h5><ul>
+<li><p>tinyint</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">有符号，取值范围：<span class="number">-128</span> ～ <span class="number">127</span> (有正有负)【默认】</span><br><span class="line">无符号，取值范围：<span class="number">0</span> ～ <span class="number">255</span>（只有正）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb2(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    age tinyint   <span class="comment">-- 有符号：取值范围：-128 ～ 127</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb3(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    age tinyint unsigned <span class="comment">-- 无符号：取值范围：0 ～ 255</span></span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>int</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>				表示有符号，取值范围：<span class="number">-2147483648</span> ～ <span class="number">2147483647</span></span><br><span class="line"><span class="type">int</span> unsigned	表示无符号，取值范围：<span class="number">0</span> ～ <span class="number">4294967295</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bigint</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">有符号，取值范围：<span class="number">-9223372036854775808</span> ～ <span class="number">9223372036854775807</span></span><br><span class="line">无符号，取值范围：<span class="number">0</span>  ～  <span class="number">18446744073709551615</span></span><br></pre></td></tr></table></figure>
+
+<p>练习题：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"># 创建表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb2(</span><br><span class="line">    id <span class="type">bigint</span> <span class="keyword">not</span> <span class="keyword">null</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    salary <span class="type">int</span>,</span><br><span class="line">    age tinyint</span><br><span class="line">) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"># 插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb2(salary,age) <span class="keyword">values</span>(<span class="number">10000</span>,<span class="number">18</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb2(salary,age) <span class="keyword">values</span>(<span class="number">20000</span>,<span class="number">28</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb2(salary,age) <span class="keyword">values</span>(<span class="number">30000</span>,<span class="number">38</span>),(<span class="number">40000</span>,<span class="number">40</span>);</span><br><span class="line"></span><br><span class="line"># 查看表中的数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb2;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> tables;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> Tables_in_gx_day14 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> tb1                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">create</span> <span class="keyword">table</span> tb2(</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     id <span class="type">bigint</span> <span class="keyword">not</span> <span class="keyword">null</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     salary <span class="type">int</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     age tinyint</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> ) <span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.03</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> tables;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> Tables_in_gx_day14 <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> tb1                <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> tb2                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">insert</span> <span class="keyword">into</span> tb2(salary,age) <span class="keyword">values</span>(<span class="number">10000</span>,<span class="number">18</span>);</span><br><span class="line">Query OK, <span class="number">1</span> <span class="type">row</span> affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">insert</span> <span class="keyword">into</span> tb2(salary,age) <span class="keyword">values</span>(<span class="number">20000</span>,<span class="number">28</span>);</span><br><span class="line">Query OK, <span class="number">1</span> <span class="type">row</span> affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">insert</span> <span class="keyword">into</span> tb2(salary,age) <span class="keyword">values</span>(<span class="number">30000</span>,<span class="number">38</span>),(<span class="number">40000</span>,<span class="number">40</span>);</span><br><span class="line">Query OK, <span class="number">2</span> <span class="keyword">rows</span> affected (<span class="number">0.01</span> sec)</span><br><span class="line">Records: <span class="number">2</span>  Duplicates: <span class="number">0</span>  Warnings: <span class="number">0</span></span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb2;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> salary <span class="operator">|</span> age  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span>  <span class="number">10000</span> <span class="operator">|</span>   <span class="number">18</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span>  <span class="number">20000</span> <span class="operator">|</span>   <span class="number">28</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">3</span> <span class="operator">|</span>  <span class="number">30000</span> <span class="operator">|</span>   <span class="number">38</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">4</span> <span class="operator">|</span>  <span class="number">40000</span> <span class="operator">|</span>   <span class="number">40</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>float</p>
+</li>
+<li><p>double</p>
+</li>
+<li><p>decimal</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">准确的小数值，m是数字总个数（负号不算），d是小数点后个数。 m最大值为<span class="number">65</span>，d最大值为<span class="number">30</span>。</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb3(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">	salary <span class="type">decimal</span>(<span class="number">8</span>,<span class="number">2</span>)</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb3(salary) <span class="keyword">values</span>(<span class="number">1.28</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb3(salary) <span class="keyword">values</span>(<span class="number">5.289</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb3(salary) <span class="keyword">values</span>(<span class="number">5.282</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb3(salary) <span class="keyword">values</span>(<span class="number">122115.11</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb3;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>char(m)，速度快。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">定长字符串，m代表字符串的长度，最多可容纳<span class="number">255</span>个字符。</span><br><span class="line"></span><br><span class="line"><span class="type">char</span>(<span class="number">11</span>)，固定用<span class="number">11</span>个字符串进行存储，哪怕真是没有<span class="number">11</span>个字符，也会按照<span class="number">11</span>存储。</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb4(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">	mobile <span class="type">char</span>(<span class="number">11</span>)</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb4(mobile) <span class="keyword">values</span>(&quot;151&quot;);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb4(mobile) <span class="keyword">values</span>(&quot;15131255555&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>varchar(m)，节省空间。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">变长字符串，m代表字符的长度。   最大<span class="number">65535</span>字节<span class="operator">/</span><span class="number">3</span> <span class="operator">=</span> 最大的m</span><br><span class="line"></span><br><span class="line"><span class="type">varchar</span>(<span class="number">11</span>)，真实数据有多少长久按照多长存储。</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb5(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">	mobile <span class="type">varchar</span>(<span class="number">11</span>)</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb5(mobile) <span class="keyword">values</span>(&quot;151&quot;);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb5(mobile) <span class="keyword">values</span>(&quot;15131255555&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>text</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">text数据类型用于保存变长的大字符串，可以组多到<span class="number">65535</span> (<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">16</span> − <span class="number">1</span>)个字符。</span><br><span class="line"></span><br><span class="line">一般情况下，长文本会用text类型。例如：文章、新闻等。</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb6(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">    title <span class="type">varchar</span>(<span class="number">128</span>),</span><br><span class="line">	content text</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mediumtext</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">A TEXT <span class="keyword">column</span> <span class="keyword">with</span> a maximum length <span class="keyword">of</span> <span class="number">16</span>,<span class="number">777</span>,<span class="number">215</span> (<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">24</span> − <span class="number">1</span>) characters.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>longtext</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">A TEXT <span class="keyword">column</span> <span class="keyword">with</span> a maximum length <span class="keyword">of</span> <span class="number">4</span>,<span class="number">294</span>,<span class="number">967</span>,<span class="number">295</span> <span class="keyword">or</span> <span class="number">4</span>GB (<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">32</span> − <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>datetime</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">YYYY<span class="operator">-</span>MM<span class="operator">-</span>DD HH:MM:SS（<span class="number">1000</span><span class="number">-01</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span><span class="operator">/</span><span class="number">9999</span><span class="number">-12</span><span class="number">-31</span> <span class="number">23</span>:<span class="number">59</span>:<span class="number">59</span>）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>date</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">YYYY<span class="operator">-</span>MM<span class="operator">-</span>DD（<span class="number">1000</span><span class="number">-01</span><span class="number">-01</span><span class="operator">/</span><span class="number">9999</span><span class="number">-12</span><span class="number">-31</span>）</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>MySQL还有很多其他的数据类型，例如：<em>set、enum、TinyBlob、Blob、MediumBlob、LongBlob 等</em>，详细见官方文档：<a href="https://dev.mysql.com/doc/refman/5.7/en/data-types.html">https://dev.mysql.com/doc/refman/5.7/en/data-types.html</a></p>
+<h4 id="数据行操作"><a href="#数据行操作" class="headerlink" title="数据行操作"></a>数据行操作</h4><h5 id="新增数据"><a href="#新增数据" class="headerlink" title="新增数据"></a>新增数据</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名(列名,列名) <span class="keyword">values</span>(值,值);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名(列名,列名) <span class="keyword">values</span>(值,值),(值,值),(值,值),(值,值);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> 表名;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> 表名 <span class="keyword">where</span> 条件;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">4</span> <span class="keyword">and</span> name<span class="operator">=</span>&quot;谢涛&quot;;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">4</span> <span class="keyword">or</span> name<span class="operator">=</span>&quot;谢涛&quot;;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">4</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="operator">&gt;=</span> <span class="number">4</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="operator">!=</span> <span class="number">4</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> 表名 <span class="keyword">set</span> 列<span class="operator">=</span>值;</span><br><span class="line"><span class="keyword">update</span> 表名 <span class="keyword">set</span> 列<span class="operator">=</span>值,列<span class="operator">=</span>值;</span><br><span class="line"><span class="keyword">update</span> 表名 <span class="keyword">set</span> 列<span class="operator">=</span>值 <span class="keyword">where</span> 条件;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> tb7 <span class="keyword">set</span> password<span class="operator">=</span>&quot;哈哈哈&quot;;</span><br><span class="line"><span class="keyword">update</span> tb7 <span class="keyword">set</span> email<span class="operator">=</span>&quot;哈哈哈&quot; <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> tb7 <span class="keyword">set</span> age<span class="operator">=</span>age<span class="operator">+</span><span class="number">10</span> <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 表名称;</span><br><span class="line"><span class="keyword">select</span> 列名称,列名称 <span class="keyword">from</span> 表名称;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> 列名称,列名称 <span class="keyword">from</span> 表名称 <span class="keyword">where</span> 条件;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb7;</span><br><span class="line"><span class="keyword">select</span> id,name <span class="keyword">from</span> tb7;</span><br><span class="line"><span class="keyword">select</span> id,name <span class="keyword">from</span> tb7 <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">10</span>;</span><br><span class="line"><span class="keyword">select</span> id,name <span class="keyword">from</span> tb7 <span class="keyword">where</span> name<span class="operator">=</span>&quot;xx&quot; <span class="keyword">and</span> password<span class="operator">=</span>&quot;xx&quot;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><ul>
 <li>内连接</li>
 </ul>
 <blockquote>
 <p> 与等值连接在效果上完全一致。但是开发中建议使用内连接，因为等值连接在查询的时候会将2个表会先进行笛卡尔乘积运算，生成一个新表格，占据在电脑内存里，当表的数据量很大时，很耗内存，这种方法效率比较低；内连接查询时会将2个表根据共同ID进行逐条匹配，不会出现笛卡尔乘积的现象，效率比较高。</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A inner join B on A.c3 = B.c3;</span><br><span class="line">select A.c1,B.c2 from A join B on A.c3 = B.c3; # join 是 inner join 的简写，效果一样 </span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> A.c1,B.c2 <span class="keyword">from</span> A <span class="keyword">inner</span> <span class="keyword">join</span> B <span class="keyword">on</span> A.c3 <span class="operator">=</span> B.c3;</span><br><span class="line"><span class="keyword">select</span> A.c1,B.c2 <span class="keyword">from</span> A <span class="keyword">join</span> B <span class="keyword">on</span> A.c3 <span class="operator">=</span> B.c3; # <span class="keyword">join</span> 是 <span class="keyword">inner</span> <span class="keyword">join</span> 的简写，效果一样 </span><br></pre></td></tr></table></figure>
 
 
 
@@ -498,7 +614,7 @@
 <blockquote>
 <p> 包含左边表的全部行（不管右边的表中是否存在与它们匹配的行）以及右边表中全部匹配的行</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A left join B on A.c3 = B.c3;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> A.c1,B.c2 <span class="keyword">from</span> A <span class="keyword">left</span> <span class="keyword">join</span> B <span class="keyword">on</span> A.c3 <span class="operator">=</span> B.c3;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -508,7 +624,7 @@
 <blockquote>
 <p>包含右边表的全部行（不管左边的表中是否存在与它们匹配的行）以及左边表中全部匹配的行</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A right join B on A.c3 = B.c3;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> A.c1,B.c2 <span class="keyword">from</span> A <span class="keyword">right</span> <span class="keyword">join</span> B <span class="keyword">on</span> A.c3 <span class="operator">=</span> B.c3;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -518,7 +634,7 @@
 <blockquote>
 <p> 包含左、右两个表的全部行，不管在另一边的表中是否存在与它们匹配的行</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A full join B on A.c3 = B.c3;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> A.c1,B.c2 <span class="keyword">from</span> A <span class="keyword">full</span> <span class="keyword">join</span> B <span class="keyword">on</span> A.c3 <span class="operator">=</span> B.c3;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -528,7 +644,7 @@
 <blockquote>
 <p> 使用等值以外的条件来匹配左、右两个表中的行</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A join B on A.c3 != B.c3;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> A.c1,B.c2 <span class="keyword">from</span> A <span class="keyword">join</span> B <span class="keyword">on</span> A.c3 <span class="operator">!=</span> B.c3;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -540,7 +656,7 @@
 <p> 生成笛卡尔积——它不使用任何匹配或者选取条件，而是直接将一个数据源中的每个行与另一个数据源的每个行一一匹配</p>
 <p>通俗的说就是查询所得的结果行数是两张表行数的乘积。</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A,B;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> A.c1,B.c2 <span class="keyword">from</span> A,B;</span><br></pre></td></tr></table></figure>
 
 
 
