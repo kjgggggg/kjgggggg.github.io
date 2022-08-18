@@ -297,37 +297,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blog</title>
     <url>/2022/07/29/blog/</url>
     <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
@@ -427,6 +396,37 @@
       </tags>
   </entry>
   <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux</title>
     <url>/2022/08/08/linux/</url>
     <content><![CDATA[<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><ul>
@@ -467,6 +467,103 @@
       </categories>
       <tags>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库</title>
+    <url>/2022/08/18/%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 单行注释</span><br><span class="line">-- 单行注释</span><br><span class="line">/*多行注释*/</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h4><ul>
+<li>内连接</li>
+</ul>
+<blockquote>
+<p> 与等值连接在效果上完全一致。但是开发中建议使用内连接，因为等值连接在查询的时候会将2个表会先进行笛卡尔乘积运算，生成一个新表格，占据在电脑内存里，当表的数据量很大时，很耗内存，这种方法效率比较低；内连接查询时会将2个表根据共同ID进行逐条匹配，不会出现笛卡尔乘积的现象，效率比较高。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A inner join B on A.c3 = B.c3;</span><br><span class="line">select A.c1,B.c2 from A join B on A.c3 = B.c3; # join 是 inner join 的简写，效果一样 </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>自然连接</li>
+</ul>
+<blockquote>
+<p>是一种特殊的等值连接，它要求两个关系中进行比较的分量必须是相同的属性组，并且在结果中把重复的属性列去掉。而等值连接并不去掉重复的属性列。</p>
+</blockquote>
+<ul>
+<li>左外连接</li>
+</ul>
+<blockquote>
+<p> 包含左边表的全部行（不管右边的表中是否存在与它们匹配的行）以及右边表中全部匹配的行</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A left join B on A.c3 = B.c3;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>右外连接</li>
+</ul>
+<blockquote>
+<p>包含右边表的全部行（不管左边的表中是否存在与它们匹配的行）以及左边表中全部匹配的行</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A right join B on A.c3 = B.c3;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>全外连接</li>
+</ul>
+<blockquote>
+<p> 包含左、右两个表的全部行，不管在另一边的表中是否存在与它们匹配的行</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A full join B on A.c3 = B.c3;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>（theta）连接</li>
+</ul>
+<blockquote>
+<p> 使用等值以外的条件来匹配左、右两个表中的行</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A join B on A.c3 != B.c3;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>交叉连接</li>
+<li>自连接（自己和自己做笛卡尔积）</li>
+</ul>
+<blockquote>
+<p> 生成笛卡尔积——它不使用任何匹配或者选取条件，而是直接将一个数据源中的每个行与另一个数据源的每个行一一匹配</p>
+<p>通俗的说就是查询所得的结果行数是两张表行数的乘积。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select A.c1,B.c2 from A,B;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="关键字顺序-SD-FJ-OW-GWHOL"><a href="#关键字顺序-SD-FJ-OW-GWHOL" class="headerlink" title="关键字顺序 SD FJ OW GWHOL"></a>关键字顺序 SD FJ OW GWHOL</h4><ul>
+<li><strong>SELECT</strong> </li>
+<li><strong>DISTINCT</strong><code>&lt;select_list&gt;</code></li>
+<li><strong>FROM</strong> <code>&lt;left_table&gt;</code></li>
+<li><code>&lt;join_type&gt;</code> <strong>JOIN</strong> <code>&lt;right_table&gt;</code></li>
+<li><strong>ON</strong> <code>&lt;join_condition&gt;</code></li>
+<li><strong>WHERE</strong> <code>&lt;where_condition&gt;</code></li>
+<li><strong>GROUP BY</strong> <code>&lt;group_by_list&gt;</code></li>
+<li><strong>WITH</strong> <code>&#123;CUBE|ROLLUP&#125;</code></li>
+<li><strong>HAVING</strong> <code>&lt;having_condition&gt;</code></li>
+<li><strong>ORDER BY</strong> <code>&lt;order_by_condition&gt;</code></li>
+<li><strong>LIMIT</strong> <code>&lt;limit_number&gt;</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>redis</tag>
       </tags>
   </entry>
   <entry>
