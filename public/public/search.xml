@@ -155,6 +155,35 @@
       </tags>
   </entry>
   <entry>
+    <title>3. 无重复字符的最长子串</title>
+    <url>/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
+    <content><![CDATA[<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;abcabcbb&quot;</span></span><br><span class="line">输出: <span class="number">3</span> </span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;abc&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;bbbbb&quot;</span></span><br><span class="line">输出: <span class="number">1</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;b&quot;</span>，所以其长度为 <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;pwwkew&quot;</span></span><br><span class="line">输出: <span class="number">3</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;wke&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，<span class="string">&quot;pwke&quot;</span> 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 我写的</span></span><br><span class="line"><span class="comment">class Solution &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int lengthOfLongestSubstring(string s) &#123;</span></span><br><span class="line"><span class="comment">        if(s.size()==0) return 0;</span></span><br><span class="line"><span class="comment">        if(s.size()==1) return 1;</span></span><br><span class="line"><span class="comment">        set&lt;char&gt; s1;</span></span><br><span class="line"><span class="comment">        int ret=0;</span></span><br><span class="line"><span class="comment">        for( int i = 0 ; i &lt; s.size(); i++ )&#123;</span></span><br><span class="line"><span class="comment">            s1.clear();</span></span><br><span class="line"><span class="comment">            for( int j = i; j &lt; s.size(); j++ )&#123;</span></span><br><span class="line"><span class="comment">                if(s1.find(s.at(j))!=s1.end())&#123; //能在集合中找到</span></span><br><span class="line"><span class="comment">                    ret = max(j-i,ret);</span></span><br><span class="line"><span class="comment">                    break;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">                s1.insert(s.at(j)); //找不到就将该字符放入集合</span></span><br><span class="line"><span class="comment">                ret = max(j-i+1,ret);</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        return ret;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="comment">// 滑动窗口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 哈希集合，记录每个字符是否出现过</span></span><br><span class="line">        unordered_set&lt;<span class="type">char</span>&gt; occ;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动</span></span><br><span class="line">        <span class="type">int</span> rk = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 枚举左指针的位置，初始值隐性地表示为 -1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 左指针向右移动一格，移除一个字符</span></span><br><span class="line">                occ.<span class="built_in">erase</span>(s[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (rk  &lt; n &amp;&amp; !occ.<span class="built_in">count</span>(s[rk])) &#123;  <span class="comment">// count(key);    //统计值为key的元素个数</span></span><br><span class="line">                <span class="comment">// 不断地移动右指针</span></span><br><span class="line">                occ.<span class="built_in">insert</span>(s[rk]);</span><br><span class="line">                ++rk;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 第 i 到 rk 个字符是一个极长的无重复字符子串</span></span><br><span class="line">            ans = <span class="built_in">max</span>(ans, rk - i );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lengthOfLongestSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        occ = <span class="built_in">set</span>()</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        rk,ans = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i!=<span class="number">0</span>:</span><br><span class="line">                occ.remove(s[i-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">while</span> rk &lt; n <span class="keyword">and</span> s[rk] <span class="keyword">not</span> <span class="keyword">in</span>  occ:</span><br><span class="line">                occ.add(s[rk])</span><br><span class="line">                rk+=<span class="number">1</span></span><br><span class="line">            ans = <span class="built_in">max</span>( ans, rk-i )</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>set</tag>
+        <tag>滑动窗口</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>53.最大子数组和</title>
     <url>/2022/08/09/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</url>
     <content><![CDATA[<h3 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
@@ -186,32 +215,54 @@
       </tags>
   </entry>
   <entry>
-    <title>3. 无重复字符的最长子串</title>
-    <url>/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
-    <content><![CDATA[<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;abcabcbb&quot;</span></span><br><span class="line">输出: <span class="number">3</span> </span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;abc&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br></pre></td></tr></table></figure>
+    <title>Django项目-管理系统</title>
+    <url>/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li><p>新建项目 <code>/django01</code></p>
+</li>
+<li><p>删除templates以及<code>settings.py</code>中<code>DIRS</code>字段的值</p>
+</li>
+<li><p><code>python3.9 manage.py startapp app01  </code></p>
+</li>
+<li><p>去<code>settings.py</code>中注册<code>app01</code></p>
+</li>
+<li><p>在<code>app01</code>目录中新建<code>templates</code>目录以及<code>static</code>目录（<code>static</code>包含<code>css、img、js、plugins</code>目录）</p>
+</li>
+<li><p>在<code>settings.py</code>中进行数据库连接</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;数据库名&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;00000000&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: 3306,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># python manage.py makemigrations</span></span><br><span class="line"><span class="comment"># python manage.py migrate</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>示例 2:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;bbbbb&quot;</span></span><br><span class="line">输出: <span class="number">1</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;b&quot;</span>，所以其长度为 <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;pwwkew&quot;</span></span><br><span class="line">输出: <span class="number">3</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;wke&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，<span class="string">&quot;pwke&quot;</span> 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
-
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 我写的</span></span><br><span class="line"><span class="comment">class Solution &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int lengthOfLongestSubstring(string s) &#123;</span></span><br><span class="line"><span class="comment">        if(s.size()==0) return 0;</span></span><br><span class="line"><span class="comment">        if(s.size()==1) return 1;</span></span><br><span class="line"><span class="comment">        set&lt;char&gt; s1;</span></span><br><span class="line"><span class="comment">        int ret=0;</span></span><br><span class="line"><span class="comment">        for( int i = 0 ; i &lt; s.size(); i++ )&#123;</span></span><br><span class="line"><span class="comment">            s1.clear();</span></span><br><span class="line"><span class="comment">            for( int j = i; j &lt; s.size(); j++ )&#123;</span></span><br><span class="line"><span class="comment">                if(s1.find(s.at(j))!=s1.end())&#123; //能在集合中找到</span></span><br><span class="line"><span class="comment">                    ret = max(j-i,ret);</span></span><br><span class="line"><span class="comment">                    break;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">                s1.insert(s.at(j)); //找不到就将该字符放入集合</span></span><br><span class="line"><span class="comment">                ret = max(j-i+1,ret);</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        return ret;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="comment">// 滑动窗口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 哈希集合，记录每个字符是否出现过</span></span><br><span class="line">        unordered_set&lt;<span class="type">char</span>&gt; occ;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动</span></span><br><span class="line">        <span class="type">int</span> rk = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 枚举左指针的位置，初始值隐性地表示为 -1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 左指针向右移动一格，移除一个字符</span></span><br><span class="line">                occ.<span class="built_in">erase</span>(s[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (rk  &lt; n &amp;&amp; !occ.<span class="built_in">count</span>(s[rk])) &#123;  <span class="comment">// count(key);    //统计值为key的元素个数</span></span><br><span class="line">                <span class="comment">// 不断地移动右指针</span></span><br><span class="line">                occ.<span class="built_in">insert</span>(s[rk]);</span><br><span class="line">                ++rk;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 第 i 到 rk 个字符是一个极长的无重复字符子串</span></span><br><span class="line">            ans = <span class="built_in">max</span>(ans, rk - i );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
+<h3 id="设计数据库表结构"><a href="#设计数据库表结构" class="headerlink" title="设计数据库表结构"></a>设计数据库表结构</h3><h3 id="写页面"><a href="#写页面" class="headerlink" title="写页面"></a>写页面</h3><ul>
+<li>注意点1</li>
+</ul>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820151146120.png" alt="image-20220820151146120"></p>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820152335461.png" alt="image-20220820152335461"></p>
+<p>如图中那样引用静态文件预览正常，项目运行后不正常，需如下操作:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;% load <span class="keyword">static</span> %&#125;</span><br><span class="line">&#123;% csrf_token %&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lengthOfLongestSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        occ = <span class="built_in">set</span>()</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        rk,ans = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i!=<span class="number">0</span>:</span><br><span class="line">                occ.remove(s[i-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">while</span> rk &lt; n <span class="keyword">and</span> s[rk] <span class="keyword">not</span> <span class="keyword">in</span>  occ:</span><br><span class="line">                occ.add(s[rk])</span><br><span class="line">                rk+=<span class="number">1</span></span><br><span class="line">            ans = <span class="built_in">max</span>( ans, rk-i )</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/css/bootstrap.css&#x27; %&#125; &quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.0.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/js/bootstrap.js&#x27;%&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+
+
+<ul>
+<li>注意点2</li>
+</ul>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820173233427.png" alt="image-20220820173233427"></p>
+<ul>
+<li>注意点3</li>
+</ul>
+<p>若请求形式为<code>post</code>，则不能再出现<code>request.GET</code></p>
+<p>解决方法： <code>path(&#39;department/&lt;int:nid&gt;/edit/&#39;,views.depart_edit),</code></p>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220821015541847.png" alt="image-20220821015541847"></p>
 ]]></content>
       <categories>
-        <category>leetcode</category>
+        <category>项目</category>
       </categories>
       <tags>
-        <tag>leetcode</tag>
-        <tag>set</tag>
-        <tag>滑动窗口</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -460,32 +511,34 @@
       </tags>
   </entry>
   <entry>
-    <title>Django项目-管理系统</title>
-    <url>/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
-<li><p>新建项目 <code>/django01</code></p>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
 </li>
-<li><p>删除templates以及<code>settings.py</code>中<code>DIRS</code>字段的值</p>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
 </li>
-<li><p><code>python3.9 manage.py startapp app01  </code></p>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
 </li>
-<li><p>去<code>settings.py</code>中注册<code>app01</code></p>
-</li>
-<li><p>在<code>app01</code>目录中新建<code>templates</code>目录以及<code>static</code>目录（<code>static</code>包含<code>css、img、js、plugins</code>目录）</p>
-</li>
-<li><p>在<code>settings.py</code>中进行数据库连接</p>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;数据库名&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;00000000&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: 3306,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># python manage.py makemigrations</span></span><br><span class="line"><span class="comment"># python manage.py migrate</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="设计数据库表结构"><a href="#设计数据库表结构" class="headerlink" title="设计数据库表结构"></a>设计数据库表结构</h3>]]></content>
+]]></content>
       <categories>
-        <category>项目</category>
+        <category>deeplearning</category>
       </categories>
       <tags>
-        <tag>Django</tag>
+        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
@@ -568,37 +621,6 @@
       <tags>
         <tag>Flask</tag>
         <tag>建站</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
