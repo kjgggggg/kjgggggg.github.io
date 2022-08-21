@@ -155,35 +155,6 @@
       </tags>
   </entry>
   <entry>
-    <title>3. 无重复字符的最长子串</title>
-    <url>/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
-    <content><![CDATA[<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;abcabcbb&quot;</span></span><br><span class="line">输出: <span class="number">3</span> </span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;abc&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;bbbbb&quot;</span></span><br><span class="line">输出: <span class="number">1</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;b&quot;</span>，所以其长度为 <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;pwwkew&quot;</span></span><br><span class="line">输出: <span class="number">3</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;wke&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，<span class="string">&quot;pwke&quot;</span> 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
-
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 我写的</span></span><br><span class="line"><span class="comment">class Solution &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int lengthOfLongestSubstring(string s) &#123;</span></span><br><span class="line"><span class="comment">        if(s.size()==0) return 0;</span></span><br><span class="line"><span class="comment">        if(s.size()==1) return 1;</span></span><br><span class="line"><span class="comment">        set&lt;char&gt; s1;</span></span><br><span class="line"><span class="comment">        int ret=0;</span></span><br><span class="line"><span class="comment">        for( int i = 0 ; i &lt; s.size(); i++ )&#123;</span></span><br><span class="line"><span class="comment">            s1.clear();</span></span><br><span class="line"><span class="comment">            for( int j = i; j &lt; s.size(); j++ )&#123;</span></span><br><span class="line"><span class="comment">                if(s1.find(s.at(j))!=s1.end())&#123; //能在集合中找到</span></span><br><span class="line"><span class="comment">                    ret = max(j-i,ret);</span></span><br><span class="line"><span class="comment">                    break;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">                s1.insert(s.at(j)); //找不到就将该字符放入集合</span></span><br><span class="line"><span class="comment">                ret = max(j-i+1,ret);</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        return ret;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="comment">// 滑动窗口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 哈希集合，记录每个字符是否出现过</span></span><br><span class="line">        unordered_set&lt;<span class="type">char</span>&gt; occ;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动</span></span><br><span class="line">        <span class="type">int</span> rk = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 枚举左指针的位置，初始值隐性地表示为 -1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 左指针向右移动一格，移除一个字符</span></span><br><span class="line">                occ.<span class="built_in">erase</span>(s[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (rk  &lt; n &amp;&amp; !occ.<span class="built_in">count</span>(s[rk])) &#123;  <span class="comment">// count(key);    //统计值为key的元素个数</span></span><br><span class="line">                <span class="comment">// 不断地移动右指针</span></span><br><span class="line">                occ.<span class="built_in">insert</span>(s[rk]);</span><br><span class="line">                ++rk;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 第 i 到 rk 个字符是一个极长的无重复字符子串</span></span><br><span class="line">            ans = <span class="built_in">max</span>(ans, rk - i );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lengthOfLongestSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        occ = <span class="built_in">set</span>()</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        rk,ans = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i!=<span class="number">0</span>:</span><br><span class="line">                occ.remove(s[i-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">while</span> rk &lt; n <span class="keyword">and</span> s[rk] <span class="keyword">not</span> <span class="keyword">in</span>  occ:</span><br><span class="line">                occ.add(s[rk])</span><br><span class="line">                rk+=<span class="number">1</span></span><br><span class="line">            ans = <span class="built_in">max</span>( ans, rk-i )</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>set</tag>
-        <tag>滑动窗口</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>53.最大子数组和</title>
     <url>/2022/08/09/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</url>
     <content><![CDATA[<h3 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
@@ -212,6 +183,35 @@
       <tags>
         <tag>leetcode</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3. 无重复字符的最长子串</title>
+    <url>/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
+    <content><![CDATA[<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;abcabcbb&quot;</span></span><br><span class="line">输出: <span class="number">3</span> </span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;abc&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;bbbbb&quot;</span></span><br><span class="line">输出: <span class="number">1</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;b&quot;</span>，所以其长度为 <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;pwwkew&quot;</span></span><br><span class="line">输出: <span class="number">3</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="string">&quot;wke&quot;</span>，所以其长度为 <span class="number">3</span>。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，<span class="string">&quot;pwke&quot;</span> 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 我写的</span></span><br><span class="line"><span class="comment">class Solution &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int lengthOfLongestSubstring(string s) &#123;</span></span><br><span class="line"><span class="comment">        if(s.size()==0) return 0;</span></span><br><span class="line"><span class="comment">        if(s.size()==1) return 1;</span></span><br><span class="line"><span class="comment">        set&lt;char&gt; s1;</span></span><br><span class="line"><span class="comment">        int ret=0;</span></span><br><span class="line"><span class="comment">        for( int i = 0 ; i &lt; s.size(); i++ )&#123;</span></span><br><span class="line"><span class="comment">            s1.clear();</span></span><br><span class="line"><span class="comment">            for( int j = i; j &lt; s.size(); j++ )&#123;</span></span><br><span class="line"><span class="comment">                if(s1.find(s.at(j))!=s1.end())&#123; //能在集合中找到</span></span><br><span class="line"><span class="comment">                    ret = max(j-i,ret);</span></span><br><span class="line"><span class="comment">                    break;</span></span><br><span class="line"><span class="comment">                &#125;</span></span><br><span class="line"><span class="comment">                s1.insert(s.at(j)); //找不到就将该字符放入集合</span></span><br><span class="line"><span class="comment">                ret = max(j-i+1,ret);</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        return ret;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="comment">// 滑动窗口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 哈希集合，记录每个字符是否出现过</span></span><br><span class="line">        unordered_set&lt;<span class="type">char</span>&gt; occ;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动</span></span><br><span class="line">        <span class="type">int</span> rk = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 枚举左指针的位置，初始值隐性地表示为 -1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 左指针向右移动一格，移除一个字符</span></span><br><span class="line">                occ.<span class="built_in">erase</span>(s[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (rk  &lt; n &amp;&amp; !occ.<span class="built_in">count</span>(s[rk])) &#123;  <span class="comment">// count(key);    //统计值为key的元素个数</span></span><br><span class="line">                <span class="comment">// 不断地移动右指针</span></span><br><span class="line">                occ.<span class="built_in">insert</span>(s[rk]);</span><br><span class="line">                ++rk;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 第 i 到 rk 个字符是一个极长的无重复字符子串</span></span><br><span class="line">            ans = <span class="built_in">max</span>(ans, rk - i );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lengthOfLongestSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        occ = <span class="built_in">set</span>()</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        rk,ans = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i!=<span class="number">0</span>:</span><br><span class="line">                occ.remove(s[i-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">while</span> rk &lt; n <span class="keyword">and</span> s[rk] <span class="keyword">not</span> <span class="keyword">in</span>  occ:</span><br><span class="line">                occ.add(s[rk])</span><br><span class="line">                rk+=<span class="number">1</span></span><br><span class="line">            ans = <span class="built_in">max</span>( ans, rk-i )</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>set</tag>
+        <tag>滑动窗口</tag>
       </tags>
   </entry>
   <entry>
@@ -263,282 +263,6 @@
       </categories>
       <tags>
         <tag>Django</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Django</title>
-    <url>/2022/08/19/Django/</url>
-    <content><![CDATA[<h3 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h3><ul>
-<li>Python知识点：函数、面向对象。</li>
-<li>前端开发：HTML、CSS、JavaScript、jQuery、BootStrap。</li>
-<li>MySQL数据库。</li>
-<li>Python的Web框架：<ul>
-<li>Flask，自身短小精悍 + 第三方组件。</li>
-<li>Django，内部已集成了很多组件 +  第三方组件。【主要】</li>
-</ul>
-</li>
-</ul>
-<h4 id="安装django"><a href="#安装django" class="headerlink" title="安装django"></a>安装django</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install django</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用清华大学的镜像</span></span><br><span class="line">pip install some_package --index https://pypi.mirrors.ustc.edu.cn/simple/</span><br><span class="line">pip install django --index https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查django版本</span></span><br><span class="line">python -m django --version</span><br><span class="line"><span class="comment"># 4.1</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">c:\python39</span><br><span class="line">	- python.exe</span><br><span class="line">	- Scripts</span><br><span class="line">		- pip.exe</span><br><span class="line">		- django-admin.exe   【工具，创建django项目中的文件和文件夹】</span><br><span class="line">	- Lib</span><br><span class="line">		- 内置模块</span><br><span class="line">		- site-packages</span><br><span class="line">			- openpyxl</span><br><span class="line">			- python-docx</span><br><span class="line">			- flask</span><br><span class="line">			- django         【框架的源码】</span><br><span class="line">			</span><br><span class="line"><span class="comment"># /Users/jiangangkong/miniconda3/lib/python3.9</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><blockquote>
-<p>django中项目会有一些默认的文件和默认的文件夹。</p>
-</blockquote>
-<h5 id="在终端"><a href="#在终端" class="headerlink" title="在终端"></a>在终端</h5><ul>
-<li><p>打开终端</p>
-</li>
-<li><p>进入某个目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行命令创建项目</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/Users/jiangangkong/miniconda3/bin/django-admin startproject 项目名</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 如果 /Users/jiangangkong/miniconda3/bin/ 已加入环境系统环境变量。</span></span><br><span class="line"></span><br><span class="line">django-admin startproject 项目名称</span><br></pre></td></tr></table></figure></li>
-</ul>
-<img src="/2022/08/19/Django/image-20220819015241441.png" alt="image-20220819015241441" style="zoom:50%;">
-
-<img src="/2022/08/19/Django/image-20220819015324722.png" alt="image-20220819015324722" style="zoom: 33%;">
-
-<h5 id="在Pycharm"><a href="#在Pycharm" class="headerlink" title="在Pycharm"></a>在Pycharm</h5><img src="/2022/08/19/Django/image-20220819131906745.png" alt="image-20220819131906745" style="zoom:50%;">
-
-<p>特殊说明：</p>
-<ul>
-<li><p>命令行，创建的项目是标准的。</p>
-</li>
-<li><p>pycharm，在标准的基础上默认给咱们加了点东西。【现在删除，以后不一定要删。是关于模版的设置】</p>
-<ul>
-<li>创建了一个templates目录【删除】</li>
-<li>settings.py中【删除划线处】<br><img src="/2022/08/19/Django/image-20211124091443354.png" alt="image-20211124091443354"></li>
-</ul>
-</li>
-</ul>
-<h4 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h4><p><img src="/2022/08/19/Django/image-20220819133037783.png" alt="image-20220819133037783"></p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">mysite2</span><br><span class="line">├── manage<span class="selector-class">.py</span>         【项目的管理，启动项目、创建app、数据管理】【不要动】【***常常引用***】</span><br><span class="line">└── mysite2</span><br><span class="line">    ├── __init__<span class="selector-class">.py</span></span><br><span class="line">    ├── settings<span class="selector-class">.py</span>    【项目配置】          【***常常修改***】</span><br><span class="line">    ├── urls<span class="selector-class">.py</span>        【URL和处理函数的对应关系】【***常常修改***】</span><br><span class="line">    ├── asgi<span class="selector-class">.py</span>        【接收网络请求（django3异步式）】【不要动】</span><br><span class="line">    └── wsgi<span class="selector-class">.py</span>        【接收网络请求（同步式的）】【不要动】</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>要写的只有<code>settings.py</code>和<code>urls.py </code> 加之引用<code>manage.py </code></li>
-</ul>
-<h4 id="APP"><a href="#APP" class="headerlink" title="APP"></a>APP</h4><ul>
-<li>此APP非彼APP，主要实现功能的划分</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">- 项目</span><br><span class="line">	- app，用户管理【独立的数据库表结构、函数、前端模板】</span><br><span class="line">	- app，订单管理【表结构、函数、HTML模板、CSS】</span><br><span class="line">	- app，后台管理【表结构、函数、HTML模板、CSS】</span><br><span class="line">	- app，网站   【表结构、函数、HTML模板、CSS】</span><br><span class="line">	- app，API    【表结构、函数、HTML模板、CSS】</span><br><span class="line">	..</span><br><span class="line">	</span><br><span class="line">注意：我们开发比较简洁，用不到多app，一般情况下，项目下创建1个app即可。</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="创建app"><a href="#创建app" class="headerlink" title="创建app"></a>创建app</h5><ul>
-<li>点击项目根目录，调出终端，输入：</li>
-</ul>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span>.<span class="number">9</span> manage.<span class="keyword">py</span> startapp app01</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><img src="/2022/08/19/Django/image-20220819140621114.png" alt="image-20220819140621114"></li>
-</ul>
-<h5 id="app目录结构"><a href="#app目录结构" class="headerlink" title="app目录结构"></a>app目录结构</h5><p><img src="/2022/08/19/Django/image-20220819141005961.png" alt="image-20220819141005961"></p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">├── app01</span><br><span class="line">│   ├── __init__<span class="selector-class">.py</span></span><br><span class="line">│   ├── admin<span class="selector-class">.py</span>         【不用动】django默认提供了admin后台管理。</span><br><span class="line">│   ├── apps<span class="selector-class">.py</span>          【不用动】app启动类</span><br><span class="line">│   ├── migrations       【不用动】数据库变更记录</span><br><span class="line">│   │   └── __init__<span class="selector-class">.py</span></span><br><span class="line">│   ├── models<span class="selector-class">.py</span>        【**重要**】，对数据库操作。</span><br><span class="line">│   ├── tests<span class="selector-class">.py</span>         【前期不用动】单元测试</span><br><span class="line">│   └── views<span class="selector-class">.py</span>         【**重要**】，就是urls中指定的函数。</span><br><span class="line">├── manage<span class="selector-class">.py</span></span><br><span class="line">└── mysite2</span><br><span class="line">    ├── __init__<span class="selector-class">.py</span></span><br><span class="line">    ├── asgi<span class="selector-class">.py</span></span><br><span class="line">    ├── settings<span class="selector-class">.py</span></span><br><span class="line">    ├── urls<span class="selector-class">.py</span>          【URL-&gt;函数】</span><br><span class="line">    └── wsgi.py</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>所以对app的操作只在<code>models.py</code>和<code>views.py</code>中进行</li>
-</ul>
-<h4 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h4><ul>
-<li>在项目settings.py中注册创建的app【settings.py】</li>
-</ul>
-<img src="/2022/08/19/Django/image-20220819143640297.png" alt="image-20220819143640297" style="zoom:50%;">
-
-<ul>
-<li>编写url与视图函数的对应关系【urls.py中】</li>
-</ul>
-<img src="/2022/08/19/Django/image-20220819143456426.png" alt="image-20220819143456426" style="zoom:50%;">
-
-<ul>
-<li>编写视图函数【在对应app的 views.py中编写】</li>
-</ul>
-<img src="/2022/08/19/Django/image-20220819144404087.png" alt="image-20220819144404087" style="zoom:67%;">
-
-<ul>
-<li><p>启动django项目</p>
-<ul>
-<li><p>命令行启动 <code>python manage.py runserver </code></p>
-</li>
-<li><p>pycharm启动</p>
-</li>
-</ul>
-<img src="/2022/08/19/Django/image-20220819144820134.png" alt="image-20220819144820134" style="zoom:50%;">
-
-<ul>
-<li>访问 <a href="http://127.0.0.1:8000/index">http://127.0.0.1:8000/index</a></li>
-</ul>
-<img src="/2022/08/19/Django/image-20220819144941981.png" alt="image-20220819144941981" style="zoom:50%;">
-
-<img src="/2022/08/19/Django/image-20220819145109541.png" alt="image-20220819145109541" style="zoom:50%;"></li>
-</ul>
-<h4 id="开发流程【补】"><a href="#开发流程【补】" class="headerlink" title="开发流程【补】"></a>开发流程【补】</h4><p>在app根目录中添加<code> templates</code>文件夹以及<code>static</code>文件夹</p>
-<p><img src="/2022/08/19/Django/image-20220819151701802.png"></p>
-<p>引用静态文件【用之前的写法也可以】</p>
-<p><img src="/2022/08/19/Django/image-20220819153922108.png" alt="image-20220819153922108"></p>
-<h4 id="模版语法【重要】"><a href="#模版语法【重要】" class="headerlink" title="模版语法【重要】"></a>模版语法【重要】</h4><ul>
-<li>本质上：在HTML中写一些占位符，由数据对这些占位符进行替换和处理。</li>
-</ul>
-<p><img src="/2022/08/19/Django/image-20220819155958331.png" alt="image-20220819155958331"></p>
-<ul>
-<li><code>views.py</code>中要传键值对，<code>html</code>中要用两对花括号接收</li>
-<li>获取列表元素不用<code>[]</code>，而用<code>.</code></li>
-</ul>
-<p><img src="/2022/08/19/Django/image-20220819160733066.png" alt="image-20220819160733066"></p>
-<p>也可以这么写</p>
-<p><img src="/2022/08/19/Django/image-20220819161001747.png" alt="image-20220819161001747"></p>
-<p>通过<code>.</code>获取属性</p>
-<p><img src="/2022/08/19/Django/image-20220819161153749.png" alt="image-20220819161153749"></p>
-<h4 id="案例：伪联通新闻中心"><a href="#案例：伪联通新闻中心" class="headerlink" title="案例：伪联通新闻中心"></a>案例：伪联通新闻中心</h4><ul>
-<li>这里的<code>requests</code>是第三方模块，是python专门用来发送请求的</li>
-<li>而<code>views.py</code>中的<code>request</code>是django的参数。为了不混淆可以写为<code>req</code></li>
-</ul>
-<p><img src="/2022/08/19/Django/image-20211124115145293.png" alt="image-20211124115145293"></p>
-<p><img src="/2022/08/19/Django/image-20211124115155394.png" alt="image-20211124115155394"></p>
-<p><img src="/2022/08/19/Django/image-20211124115209067.png" alt="image-20211124115209067"></p>
-<p><img src="/2022/08/19/Django/image-20211124115218937.png" alt="image-20211124115218937"></p>
-<h4 id="请求和响应【重要】"><a href="#请求和响应【重要】" class="headerlink" title="请求和响应【重要】"></a>请求和响应【重要】</h4><ul>
-<li>request是浏览器向后台发的【请求】</li>
-<li>使用redirect需要导入redirect包</li>
-</ul>
-<p><img src="/2022/08/19/Django/image-20220819163251655.png" alt="image-20220819163251655"></p>
-<ul>
-<li>关于重定向【是2号路线】<ul>
-<li>后台让浏览器自己去重定向的网站寻找资源</li>
-</ul>
-</li>
-</ul>
-<p><img src="/2022/08/19/Django/image-20211124142033257.png" alt="image-20211124142033257"></p>
-<h4 id="案例：用户登录-无数据库版"><a href="#案例：用户登录-无数据库版" class="headerlink" title="案例：用户登录(无数据库版)"></a>案例：用户登录(无数据库版)</h4><ul>
-<li>流程梳理</li>
-</ul>
-<ol>
-<li>首先明确所有发送到&#x2F;login的页面都会被送到后台views.login处理</li>
-<li>用户第一次请求访问login页面时，是GET请求，所以后台要返回login.html</li>
-<li>若用户在login.html中提交form表单则向后台发送POST请求，则验证用户名与密码</li>
-<li><code>&#123;% csrf_token %&#125;</code>是django用来保证访问的合法性的，若不带，则浏览器会阻止该次请求。（也可以加在html最头部）</li>
-</ol>
-<p><img src="/2022/08/19/Django/image-20211124151119553.png" alt="image-20211124151119553"></p>
-<p><img src="/2022/08/19/Django/image-20211124151127364.png" alt="image-20211124151127364"></p>
-<p><img src="/2022/08/19/Django/image-20211124151135563.png" alt="image-20211124151135563"></p>
-<h4 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h4><ul>
-<li><p>原始版采用：MySQL数据库 + pymysql</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.连接MySQL</span></span><br><span class="line">conn = pymysql.connect(host=<span class="string">&quot;127.0.0.1&quot;</span>, port=<span class="number">3306</span>, user=<span class="string">&#x27;root&#x27;</span>, passwd=<span class="string">&quot;00000000&quot;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>, db=<span class="string">&#x27;库名&#x27;</span>)</span><br><span class="line">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.发送指令</span></span><br><span class="line">cursor.execute(<span class="string">&quot;insert into 表名(属性1,属性2,属性3) values(&#x27;值1&#x27;,&#x27;值2&#x27;,&#x27;值3&#x27;)&quot;</span>)</span><br><span class="line">conn.commit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.关闭</span></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
-
-
-
-<p>Django开发操作数据库更简单，内部提供了ORM框架。（将django简洁的代码翻译成sql语句）<br><img src="/2022/08/19/Django/image-20211124151748712.png" alt="image-20211124151748712"></p>
-</li>
-</ul>
-<h5 id="安装第三方模块"><a href="#安装第三方模块" class="headerlink" title="安装第三方模块"></a>安装第三方模块</h5><ul>
-<li>在pycharm项目终端输入<code>pip3.9 install mysqlclient</code></li>
-</ul>
-<h5 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h5><p>ORM可以：</p>
-<ul>
-<li><p>创建、修改、删除数据库中的表（不用写SQL语句）。 <strong>【无法创建数据库】</strong></p>
-</li>
-<li><p>操作表中的数据（不用写SQL语句）。</p>
-</li>
-</ul>
-<h6 id="1-自己建库"><a href="#1-自己建库" class="headerlink" title="1. 自己建库"></a>1. 自己建库</h6><p><img src="/2022/08/19/Django/image-20220819173816571.png" alt="image-20220819173816571"></p>
-<h6 id="2-django连接数据库"><a href="#2-django连接数据库" class="headerlink" title="2. django连接数据库"></a>2. django连接数据库</h6><ul>
-<li>在<code>settings.py</code>中修改<code>DATABASE</code>字段</li>
-</ul>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    &#x27;default&#x27;: &#123;</span><br><span class="line">        &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,</span><br><span class="line">        &#x27;NAME&#x27;: &#x27;djangomysql&#x27;,  <span class="meta"># 数据库名字</span></span><br><span class="line">        &#x27;USER&#x27;: &#x27;root&#x27;,</span><br><span class="line">        &#x27;PASSWORD&#x27;: &#x27;<span class="number">00000000</span>&#x27;,</span><br><span class="line">        &#x27;HOST&#x27;: &#x27;127.0.0.1&#x27;,  <span class="meta"># 那台机器安装了MySQL</span></span><br><span class="line">        &#x27;PORT&#x27;: <span class="number">3306</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="3-django操作表"><a href="#3-django操作表" class="headerlink" title="3. django操作表"></a>3. django操作表</h6><ul>
-<li>创建表</li>
-</ul>
-<ol>
-<li>创建表：在models.py文件中</li>
-</ol>
-<p><img src="/2022/08/19/Django/image-20211124154658774.png" alt="image-20211124154658774"></p>
-<ol start="2">
-<li>打开pycharm项目终端执行命令：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 这里我出了bug，原因是找不到libmysqlclient.21.dylib</span></span><br><span class="line"><span class="comment"># 解决方法 找到系统里的libmysqlclient.21.dylib，将它与报错找不到的地方软链接起来</span></span><br><span class="line">sudo <span class="built_in">ln</span> -s /usr/local/mysql-8.0.28-macos11-arm64/lib/libmysqlclient.21.dylib /Users/jiangangkong/miniconda3/lib/libmysqlclient.21.dylib</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python manage.py makemigrations</span><br><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"># ORM相当于执行了以下代码 表名为 app名_类名小写</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> app01_userinfo(</span><br><span class="line">    id <span class="type">bigint</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">    password <span class="type">varchar</span>(<span class="number">64</span>),</span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>其余的表是django内置的app生成的表【暂时不用管它们】</p>
-<p><img src="/2022/08/19/Django/image-20220819203327273.png" alt="image-20220819203327273"></p>
-<ul>
-<li>删除表</li>
-</ul>
-<p>删掉<code>models.py</code>中的代码并且执行以下命令</p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> makemigrations</span><br><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> migrate</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>修改表</li>
-</ul>
-<p>在表中新增列时，由于已存在列中可能已有数据，所以新增列必须要指定新增列对应的数据：</p>
-<p>终端会提醒你两个解决方法</p>
-<ol>
-<li>设置默认值</li>
-</ol>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">age</span> <span class="operator">=</span> models.IntegerField(default<span class="operator">=</span><span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>允许为空</li>
-</ol>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">data = models.IntegerField(<span class="attribute">null</span>=<span class="literal">True</span>, <span class="attribute">blank</span>=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="4-增删改查-views-py中"><a href="#4-增删改查-views-py中" class="headerlink" title="4. 增删改查-views.py中"></a>4. 增删改查-views.py中</h6><ul>
-<li><code>create</code> 增</li>
-<li><code>delete</code> 删</li>
-<li><code>update(xx = xx)</code> 改</li>
-<li><code>all</code> 查</li>
-<li><code>filter(xx = xx)</code>  查</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># #### 1.新增表项 ####</span></span><br><span class="line"><span class="comment"># Department.objects.create(title=&quot;销售部&quot;)</span></span><br><span class="line"><span class="comment"># Department.objects.create(title=&quot;IT部&quot;)</span></span><br><span class="line"><span class="comment"># Department.objects.create(title=&quot;运营部&quot;)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.create(name=&quot;武沛齐&quot;, password=&quot;123&quot;, age=19)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.create(name=&quot;朱虎飞&quot;, password=&quot;666&quot;, age=29)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.create(name=&quot;吴阳军&quot;, password=&quot;666&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #### 2.删除 ####</span></span><br><span class="line"><span class="comment"># UserInfo.objects.filter(id=3).delete()</span></span><br><span class="line"><span class="comment"># Department.objects.all().delete()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #### 3.获取数据 ####</span></span><br><span class="line"><span class="comment"># 3.1 获取符合条件的所有数据</span></span><br><span class="line"><span class="comment"># data_list = [对象,对象,对象,...]  QuerySet类型</span></span><br><span class="line"><span class="comment"># data_list = UserInfo.objects.all()</span></span><br><span class="line"><span class="comment"># for obj in data_list:</span></span><br><span class="line"><span class="comment">#     print(obj.id, obj.name, obj.password, obj.age)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># data_list = UserInfo.objects.filter(id=1)</span></span><br><span class="line"><span class="comment"># print(data_list)</span></span><br><span class="line"><span class="comment"># 3.1 获取第一条数据【对象】</span></span><br><span class="line"><span class="comment"># row_obj = UserInfo.objects.filter(id=1).first()</span></span><br><span class="line"><span class="comment"># print(row_obj.id, row_obj.name, row_obj.password, row_obj.age)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># #### 4.更新数据 ####</span></span><br><span class="line"><span class="comment"># UserInfo.objects.all().update(password=999)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.filter(id=2).update(age=999)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.filter(name=&quot;朱虎飞&quot;).update(age=999)</span></span><br></pre></td></tr></table></figure>
-
-<h6 id="5-表之间的关联关系"><a href="#5-表之间的关联关系" class="headerlink" title="5.表之间的关联关系"></a>5.表之间的关联关系</h6><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Department</span>(models.Model):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; 部门表 &quot;&quot;&quot;</span></span><br><span class="line">    title = models.CharField(verbose_name=<span class="string">&#x27;标题&#x27;</span>, max_length=<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserInfo</span>(models.Model):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; 员工表 &quot;&quot;&quot;</span></span><br><span class="line">    name = models.CharField(verbose_name=<span class="string">&quot;姓名&quot;</span>, max_length=<span class="number">16</span>)</span><br><span class="line">    password = models.CharField(verbose_name=<span class="string">&quot;密码&quot;</span>, max_length=<span class="number">64</span>)</span><br><span class="line">    age = models.IntegerField(verbose_name=<span class="string">&quot;年龄&quot;</span>)</span><br><span class="line">    account = models.DecimalField(verbose_name=<span class="string">&quot;账户余额&quot;</span>, max_digits=<span class="number">10</span>, decimal_places=<span class="number">2</span>, default=<span class="number">0</span>)</span><br><span class="line">    create_time = models.DateTimeField(verbose_name=<span class="string">&quot;入职时间&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 无约束</span></span><br><span class="line">    <span class="comment"># depart_id = models.BigIntegerField(verbose_name=&quot;部门ID&quot;)</span></span><br><span class="line">    <span class="comment"># 1.有约束</span></span><br><span class="line">    <span class="comment">#   - to，与那张表关联</span></span><br><span class="line">    <span class="comment">#   - to_field，表中的那一列关联</span></span><br><span class="line">    <span class="comment"># 2.django自动</span></span><br><span class="line">    <span class="comment">#   - 写的depart</span></span><br><span class="line">    <span class="comment">#   - django内部自动生成数据列 depart_id</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3.当部门表被删除时，两种选择</span></span><br><span class="line">    <span class="comment"># ### 1 级联删除</span></span><br><span class="line">    depart = models.ForeignKey(to=<span class="string">&quot;Department&quot;</span>, to_field=<span class="string">&quot;id&quot;</span>, on_delete=models.CASCADE)</span><br><span class="line">    <span class="comment"># ### 2 置空</span></span><br><span class="line">    <span class="comment"># depart = models.ForeignKey(to=&quot;Department&quot;, to_field=&quot;id&quot;, null=True, blank=True, on_delete=models.SET_NULL)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在django中做的约束(数据库里这列存的是1，2。然后再去django中查找对应的值)</span></span><br><span class="line">    gender_choices = (</span><br><span class="line">        (<span class="number">1</span>, <span class="string">&quot;男&quot;</span>),</span><br><span class="line">        (<span class="number">2</span>, <span class="string">&quot;女&quot;</span>),</span><br><span class="line">    )</span><br><span class="line">    gender = models.SmallIntegerField(verbose_name=<span class="string">&quot;性别&quot;</span>, choices=gender_choices)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>Django</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
@@ -621,6 +345,37 @@
       <tags>
         <tag>Flask</tag>
         <tag>建站</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
@@ -1125,6 +880,289 @@
       </categories>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Django</title>
+    <url>/2022/08/19/Django/</url>
+    <content><![CDATA[<h3 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h3><ul>
+<li>Python知识点：函数、面向对象。</li>
+<li>前端开发：HTML、CSS、JavaScript、jQuery、BootStrap。</li>
+<li>MySQL数据库。</li>
+<li>Python的Web框架：<ul>
+<li>Flask，自身短小精悍 + 第三方组件。</li>
+<li>Django，内部已集成了很多组件 +  第三方组件。【主要】</li>
+</ul>
+</li>
+</ul>
+<h4 id="安装django"><a href="#安装django" class="headerlink" title="安装django"></a>安装django</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install django</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用清华大学的镜像</span></span><br><span class="line">pip install some_package --index https://pypi.mirrors.ustc.edu.cn/simple/</span><br><span class="line">pip install django --index https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查django版本</span></span><br><span class="line">python -m django --version</span><br><span class="line"><span class="comment"># 4.1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">c:\python39</span><br><span class="line">	- python.exe</span><br><span class="line">	- Scripts</span><br><span class="line">		- pip.exe</span><br><span class="line">		- django-admin.exe   【工具，创建django项目中的文件和文件夹】</span><br><span class="line">	- Lib</span><br><span class="line">		- 内置模块</span><br><span class="line">		- site-packages</span><br><span class="line">			- openpyxl</span><br><span class="line">			- python-docx</span><br><span class="line">			- flask</span><br><span class="line">			- django         【框架的源码】</span><br><span class="line">			</span><br><span class="line"><span class="comment"># /Users/jiangangkong/miniconda3/lib/python3.9</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><blockquote>
+<p>django中项目会有一些默认的文件和默认的文件夹。</p>
+</blockquote>
+<h5 id="在终端"><a href="#在终端" class="headerlink" title="在终端"></a>在终端</h5><ul>
+<li><p>打开终端</p>
+</li>
+<li><p>进入某个目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行命令创建项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/Users/jiangangkong/miniconda3/bin/django-admin startproject 项目名</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 如果 /Users/jiangangkong/miniconda3/bin/ 已加入环境系统环境变量。</span></span><br><span class="line"></span><br><span class="line">django-admin startproject 项目名称</span><br></pre></td></tr></table></figure></li>
+</ul>
+<img src="/2022/08/19/Django/image-20220819015241441.png" alt="image-20220819015241441" style="zoom:50%;">
+
+<img src="/2022/08/19/Django/image-20220819015324722.png" alt="image-20220819015324722" style="zoom: 33%;">
+
+<h5 id="在Pycharm"><a href="#在Pycharm" class="headerlink" title="在Pycharm"></a>在Pycharm</h5><img src="/2022/08/19/Django/image-20220819131906745.png" alt="image-20220819131906745" style="zoom:50%;">
+
+<p>特殊说明：</p>
+<ul>
+<li><p>命令行，创建的项目是标准的。</p>
+</li>
+<li><p>pycharm，在标准的基础上默认给咱们加了点东西。【现在删除，以后不一定要删。是关于模版的设置】</p>
+<ul>
+<li>创建了一个templates目录【删除】</li>
+<li>settings.py中【删除划线处】<br><img src="/2022/08/19/Django/image-20211124091443354.png" alt="image-20211124091443354"></li>
+</ul>
+</li>
+</ul>
+<h4 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h4><p><img src="/2022/08/19/Django/image-20220819133037783.png" alt="image-20220819133037783"></p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">mysite2</span><br><span class="line">├── manage<span class="selector-class">.py</span>         【项目的管理，启动项目、创建app、数据管理】【不要动】【***常常引用***】</span><br><span class="line">└── mysite2</span><br><span class="line">    ├── __init__<span class="selector-class">.py</span></span><br><span class="line">    ├── settings<span class="selector-class">.py</span>    【项目配置】          【***常常修改***】</span><br><span class="line">    ├── urls<span class="selector-class">.py</span>        【URL和处理函数的对应关系】【***常常修改***】</span><br><span class="line">    ├── asgi<span class="selector-class">.py</span>        【接收网络请求（django3异步式）】【不要动】</span><br><span class="line">    └── wsgi<span class="selector-class">.py</span>        【接收网络请求（同步式的）】【不要动】</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>要写的只有<code>settings.py</code>和<code>urls.py </code> 加之引用<code>manage.py </code></li>
+</ul>
+<h4 id="APP"><a href="#APP" class="headerlink" title="APP"></a>APP</h4><ul>
+<li>此APP非彼APP，主要实现功能的划分</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">- 项目</span><br><span class="line">	- app，用户管理【独立的数据库表结构、函数、前端模板】</span><br><span class="line">	- app，订单管理【表结构、函数、HTML模板、CSS】</span><br><span class="line">	- app，后台管理【表结构、函数、HTML模板、CSS】</span><br><span class="line">	- app，网站   【表结构、函数、HTML模板、CSS】</span><br><span class="line">	- app，API    【表结构、函数、HTML模板、CSS】</span><br><span class="line">	..</span><br><span class="line">	</span><br><span class="line">注意：我们开发比较简洁，用不到多app，一般情况下，项目下创建1个app即可。</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="创建app"><a href="#创建app" class="headerlink" title="创建app"></a>创建app</h5><ul>
+<li>点击项目根目录，调出终端，输入：</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span>.<span class="number">9</span> manage.<span class="keyword">py</span> startapp app01</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><img src="/2022/08/19/Django/image-20220819140621114.png" alt="image-20220819140621114"></li>
+</ul>
+<h5 id="app目录结构"><a href="#app目录结构" class="headerlink" title="app目录结构"></a>app目录结构</h5><p><img src="/2022/08/19/Django/image-20220819141005961.png" alt="image-20220819141005961"></p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">├── app01</span><br><span class="line">│   ├── __init__<span class="selector-class">.py</span></span><br><span class="line">│   ├── admin<span class="selector-class">.py</span>         【不用动】django默认提供了admin后台管理。</span><br><span class="line">│   ├── apps<span class="selector-class">.py</span>          【不用动】app启动类</span><br><span class="line">│   ├── migrations       【不用动】数据库变更记录</span><br><span class="line">│   │   └── __init__<span class="selector-class">.py</span></span><br><span class="line">│   ├── models<span class="selector-class">.py</span>        【**重要**】，对数据库操作。</span><br><span class="line">│   ├── tests<span class="selector-class">.py</span>         【前期不用动】单元测试</span><br><span class="line">│   └── views<span class="selector-class">.py</span>         【**重要**】，就是urls中指定的函数。</span><br><span class="line">├── manage<span class="selector-class">.py</span></span><br><span class="line">└── mysite2</span><br><span class="line">    ├── __init__<span class="selector-class">.py</span></span><br><span class="line">    ├── asgi<span class="selector-class">.py</span></span><br><span class="line">    ├── settings<span class="selector-class">.py</span></span><br><span class="line">    ├── urls<span class="selector-class">.py</span>          【URL-&gt;函数】</span><br><span class="line">    └── wsgi.py</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>所以对app的操作只在<code>models.py</code>和<code>views.py</code>中进行</li>
+</ul>
+<h4 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h4><ul>
+<li>在项目settings.py中注册创建的app【settings.py】</li>
+</ul>
+<img src="/2022/08/19/Django/image-20220819143640297.png" alt="image-20220819143640297" style="zoom:50%;">
+
+<ul>
+<li>编写url与视图函数的对应关系【urls.py中】</li>
+</ul>
+<img src="/2022/08/19/Django/image-20220819143456426.png" alt="image-20220819143456426" style="zoom:50%;">
+
+<ul>
+<li>编写视图函数【在对应app的 views.py中编写】</li>
+</ul>
+<img src="/2022/08/19/Django/image-20220819144404087.png" alt="image-20220819144404087" style="zoom:67%;">
+
+<ul>
+<li><p>启动django项目</p>
+<ul>
+<li><p>命令行启动 <code>python manage.py runserver </code></p>
+</li>
+<li><p>pycharm启动</p>
+</li>
+</ul>
+<img src="/2022/08/19/Django/image-20220819144820134.png" alt="image-20220819144820134" style="zoom:50%;">
+
+<ul>
+<li>访问 <a href="http://127.0.0.1:8000/index">http://127.0.0.1:8000/index</a></li>
+</ul>
+<img src="/2022/08/19/Django/image-20220819144941981.png" alt="image-20220819144941981" style="zoom:50%;">
+
+<img src="/2022/08/19/Django/image-20220819145109541.png" alt="image-20220819145109541" style="zoom:50%;"></li>
+</ul>
+<h4 id="开发流程【补】"><a href="#开发流程【补】" class="headerlink" title="开发流程【补】"></a>开发流程【补】</h4><p>在app根目录中添加<code> templates</code>文件夹以及<code>static</code>文件夹</p>
+<p><img src="/2022/08/19/Django/image-20220819151701802.png"></p>
+<p>引用静态文件【用之前的写法也可以】</p>
+<p><img src="/2022/08/19/Django/image-20220819153922108.png" alt="image-20220819153922108"></p>
+<h4 id="模版语法【重要】"><a href="#模版语法【重要】" class="headerlink" title="模版语法【重要】"></a>模版语法【重要】</h4><ul>
+<li>本质上：在HTML中写一些占位符，由数据对这些占位符进行替换和处理。</li>
+</ul>
+<p><img src="/2022/08/19/Django/image-20220819155958331.png" alt="image-20220819155958331"></p>
+<ul>
+<li><code>views.py</code>中要传键值对，<code>html</code>中要用两对花括号接收</li>
+<li>获取列表元素不用<code>[]</code>，而用<code>.</code></li>
+</ul>
+<p><img src="/2022/08/19/Django/image-20220819160733066.png" alt="image-20220819160733066"></p>
+<p>也可以这么写</p>
+<p><img src="/2022/08/19/Django/image-20220819161001747.png" alt="image-20220819161001747"></p>
+<p>通过<code>.</code>获取属性</p>
+<p><img src="/2022/08/19/Django/image-20220819161153749.png" alt="image-20220819161153749"></p>
+<h4 id="案例：伪联通新闻中心"><a href="#案例：伪联通新闻中心" class="headerlink" title="案例：伪联通新闻中心"></a>案例：伪联通新闻中心</h4><ul>
+<li>这里的<code>requests</code>是第三方模块，是python专门用来发送请求的</li>
+<li>而<code>views.py</code>中的<code>request</code>是django的参数。为了不混淆可以写为<code>req</code></li>
+</ul>
+<p><img src="/2022/08/19/Django/image-20211124115145293.png" alt="image-20211124115145293"></p>
+<p><img src="/2022/08/19/Django/image-20211124115155394.png" alt="image-20211124115155394"></p>
+<p><img src="/2022/08/19/Django/image-20211124115209067.png" alt="image-20211124115209067"></p>
+<p><img src="/2022/08/19/Django/image-20211124115218937.png" alt="image-20211124115218937"></p>
+<h4 id="请求和响应【重要】"><a href="#请求和响应【重要】" class="headerlink" title="请求和响应【重要】"></a>请求和响应【重要】</h4><ul>
+<li>request是浏览器向后台发的【请求】</li>
+<li>使用redirect需要导入redirect包</li>
+</ul>
+<p><img src="/2022/08/19/Django/image-20220819163251655.png" alt="image-20220819163251655"></p>
+<ul>
+<li>关于重定向【是2号路线】<ul>
+<li>后台让浏览器自己去重定向的网站寻找资源</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/08/19/Django/image-20211124142033257.png" alt="image-20211124142033257"></p>
+<h4 id="案例：用户登录-无数据库版"><a href="#案例：用户登录-无数据库版" class="headerlink" title="案例：用户登录(无数据库版)"></a>案例：用户登录(无数据库版)</h4><ul>
+<li>流程梳理</li>
+</ul>
+<ol>
+<li>首先明确所有发送到&#x2F;login的页面都会被送到后台views.login处理</li>
+<li>用户第一次请求访问login页面时，是GET请求，所以后台要返回login.html</li>
+<li>若用户在login.html中提交form表单则向后台发送POST请求，则验证用户名与密码</li>
+<li><code>&#123;% csrf_token %&#125;</code>是django用来保证访问的合法性的，若不带，则浏览器会阻止该次请求。（也可以加在html最头部）</li>
+</ol>
+<p><img src="/2022/08/19/Django/image-20211124151119553.png" alt="image-20211124151119553"></p>
+<p><img src="/2022/08/19/Django/image-20211124151127364.png" alt="image-20211124151127364"></p>
+<p><img src="/2022/08/19/Django/image-20211124151135563.png" alt="image-20211124151135563"></p>
+<h4 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h4><ul>
+<li><p>原始版采用：MySQL数据库 + pymysql</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.连接MySQL</span></span><br><span class="line">conn = pymysql.connect(host=<span class="string">&quot;127.0.0.1&quot;</span>, port=<span class="number">3306</span>, user=<span class="string">&#x27;root&#x27;</span>, passwd=<span class="string">&quot;00000000&quot;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>, db=<span class="string">&#x27;库名&#x27;</span>)</span><br><span class="line">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.发送指令</span></span><br><span class="line">cursor.execute(<span class="string">&quot;insert into 表名(属性1,属性2,属性3) values(&#x27;值1&#x27;,&#x27;值2&#x27;,&#x27;值3&#x27;)&quot;</span>)</span><br><span class="line">conn.commit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.关闭</span></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Django开发操作数据库更简单，内部提供了ORM框架。（将django简洁的代码翻译成sql语句）<br><img src="/2022/08/19/Django/image-20211124151748712.png" alt="image-20211124151748712"></p>
+</li>
+</ul>
+<h5 id="安装第三方模块"><a href="#安装第三方模块" class="headerlink" title="安装第三方模块"></a>安装第三方模块</h5><ul>
+<li>在pycharm项目终端输入<code>pip3.9 install mysqlclient</code></li>
+</ul>
+<h5 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h5><p>ORM可以：</p>
+<ul>
+<li><p>创建、修改、删除数据库中的表（不用写SQL语句）。 <strong>【无法创建数据库】</strong></p>
+</li>
+<li><p>操作表中的数据（不用写SQL语句）。</p>
+</li>
+</ul>
+<h6 id="1-自己建库"><a href="#1-自己建库" class="headerlink" title="1. 自己建库"></a>1. 自己建库</h6><p><img src="/2022/08/19/Django/image-20220819173816571.png" alt="image-20220819173816571"></p>
+<h6 id="2-django连接数据库"><a href="#2-django连接数据库" class="headerlink" title="2. django连接数据库"></a>2. django连接数据库</h6><ul>
+<li>在<code>settings.py</code>中修改<code>DATABASE</code>字段</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    &#x27;default&#x27;: &#123;</span><br><span class="line">        &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,</span><br><span class="line">        &#x27;NAME&#x27;: &#x27;djangomysql&#x27;,  <span class="meta"># 数据库名字</span></span><br><span class="line">        &#x27;USER&#x27;: &#x27;root&#x27;,</span><br><span class="line">        &#x27;PASSWORD&#x27;: &#x27;<span class="number">00000000</span>&#x27;,</span><br><span class="line">        &#x27;HOST&#x27;: &#x27;127.0.0.1&#x27;,  <span class="meta"># 那台机器安装了MySQL</span></span><br><span class="line">        &#x27;PORT&#x27;: <span class="number">3306</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-django操作表"><a href="#3-django操作表" class="headerlink" title="3. django操作表"></a>3. django操作表</h6><ul>
+<li>创建表</li>
+</ul>
+<ol>
+<li>创建表：在models.py文件中</li>
+</ol>
+<p><img src="/2022/08/19/Django/image-20211124154658774.png" alt="image-20211124154658774"></p>
+<ol start="2">
+<li>打开pycharm项目终端执行命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 这里我出了bug，原因是找不到libmysqlclient.21.dylib</span></span><br><span class="line"><span class="comment"># 解决方法 找到系统里的libmysqlclient.21.dylib，将它与报错找不到的地方软链接起来</span></span><br><span class="line">sudo <span class="built_in">ln</span> -s /usr/local/mysql-8.0.28-macos11-arm64/lib/libmysqlclient.21.dylib /Users/jiangangkong/miniconda3/lib/libmysqlclient.21.dylib</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python manage.py makemigrations</span><br><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"># ORM相当于执行了以下代码 表名为 app名_类名小写</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> app01_userinfo(</span><br><span class="line">    id <span class="type">bigint</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">    password <span class="type">varchar</span>(<span class="number">64</span>),</span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>其余的表是django内置的app生成的表【暂时不用管它们】</p>
+<p><img src="/2022/08/19/Django/image-20220819203327273.png" alt="image-20220819203327273"></p>
+<ul>
+<li>删除表</li>
+</ul>
+<p>删掉<code>models.py</code>中的代码并且执行以下命令</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> makemigrations</span><br><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> migrate</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>修改表</li>
+</ul>
+<p>在表中新增列时，由于已存在列中可能已有数据，所以新增列必须要指定新增列对应的数据：</p>
+<p>终端会提醒你两个解决方法</p>
+<ol>
+<li>设置默认值</li>
+</ol>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">age</span> <span class="operator">=</span> models.IntegerField(default<span class="operator">=</span><span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>允许为空</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">data = models.IntegerField(<span class="attribute">null</span>=<span class="literal">True</span>, <span class="attribute">blank</span>=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="4-增删改查-views-py中"><a href="#4-增删改查-views-py中" class="headerlink" title="4. 增删改查-views.py中"></a>4. 增删改查-views.py中</h6><ul>
+<li><code>create</code> 增</li>
+<li><code>delete</code> 删</li>
+<li><code>update(xx = xx)</code> 改</li>
+<li><code>all</code> 查</li>
+<li><code>filter(xx = xx)</code>  查</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># #### 1.新增表项 ####</span></span><br><span class="line"><span class="comment"># Department.objects.create(title=&quot;销售部&quot;)</span></span><br><span class="line"><span class="comment"># Department.objects.create(title=&quot;IT部&quot;)</span></span><br><span class="line"><span class="comment"># Department.objects.create(title=&quot;运营部&quot;)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.create(name=&quot;武沛齐&quot;, password=&quot;123&quot;, age=19)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.create(name=&quot;朱虎飞&quot;, password=&quot;666&quot;, age=29)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.create(name=&quot;吴阳军&quot;, password=&quot;666&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #### 2.删除 ####</span></span><br><span class="line"><span class="comment"># UserInfo.objects.filter(id=3).delete()</span></span><br><span class="line"><span class="comment"># Department.objects.all().delete()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #### 3.获取数据 ####</span></span><br><span class="line"><span class="comment"># 3.1 获取符合条件的所有数据</span></span><br><span class="line"><span class="comment"># data_list = [对象,对象,对象,...]  QuerySet类型</span></span><br><span class="line"><span class="comment"># data_list = UserInfo.objects.all()</span></span><br><span class="line"><span class="comment"># for obj in data_list:</span></span><br><span class="line"><span class="comment">#     print(obj.id, obj.name, obj.password, obj.age)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># data_list = UserInfo.objects.filter(id=1)</span></span><br><span class="line"><span class="comment"># print(data_list)</span></span><br><span class="line"><span class="comment"># 3.1 获取第一条数据【对象】</span></span><br><span class="line"><span class="comment"># row_obj = UserInfo.objects.filter(id=1).first()</span></span><br><span class="line"><span class="comment"># print(row_obj.id, row_obj.name, row_obj.password, row_obj.age)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># #### 4.更新数据 ####</span></span><br><span class="line"><span class="comment"># UserInfo.objects.all().update(password=999)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.filter(id=2).update(age=999)</span></span><br><span class="line"><span class="comment"># UserInfo.objects.filter(name=&quot;朱虎飞&quot;).update(age=999)</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="5-表之间的关联关系"><a href="#5-表之间的关联关系" class="headerlink" title="5.表之间的关联关系"></a>5.表之间的关联关系</h6><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Department</span>(models.Model):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; 部门表 &quot;&quot;&quot;</span></span><br><span class="line">    title = models.CharField(verbose_name=<span class="string">&#x27;标题&#x27;</span>, max_length=<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserInfo</span>(models.Model):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; 员工表 &quot;&quot;&quot;</span></span><br><span class="line">    name = models.CharField(verbose_name=<span class="string">&quot;姓名&quot;</span>, max_length=<span class="number">16</span>)</span><br><span class="line">    password = models.CharField(verbose_name=<span class="string">&quot;密码&quot;</span>, max_length=<span class="number">64</span>)</span><br><span class="line">    age = models.IntegerField(verbose_name=<span class="string">&quot;年龄&quot;</span>)</span><br><span class="line">    account = models.DecimalField(verbose_name=<span class="string">&quot;账户余额&quot;</span>, max_digits=<span class="number">10</span>, decimal_places=<span class="number">2</span>, default=<span class="number">0</span>)</span><br><span class="line">    create_time = models.DateTimeField(verbose_name=<span class="string">&quot;入职时间&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 无约束</span></span><br><span class="line">    <span class="comment"># depart_id = models.BigIntegerField(verbose_name=&quot;部门ID&quot;)</span></span><br><span class="line">    <span class="comment"># 1.有约束</span></span><br><span class="line">    <span class="comment">#   - to，与那张表关联</span></span><br><span class="line">    <span class="comment">#   - to_field，表中的那一列关联</span></span><br><span class="line">    <span class="comment"># 2.django自动</span></span><br><span class="line">    <span class="comment">#   - 写的depart</span></span><br><span class="line">    <span class="comment">#   - django内部自动生成数据列 depart_id</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3.当部门表被删除时，两种选择</span></span><br><span class="line">    <span class="comment"># ### 1 级联删除</span></span><br><span class="line">    depart = models.ForeignKey(to=<span class="string">&quot;Department&quot;</span>, to_field=<span class="string">&quot;id&quot;</span>, on_delete=models.CASCADE)</span><br><span class="line">    <span class="comment"># ### 2 置空</span></span><br><span class="line">    <span class="comment"># depart = models.ForeignKey(to=&quot;Department&quot;, to_field=&quot;id&quot;, null=True, blank=True, on_delete=models.SET_NULL)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在django中做的约束(数据库里这列存的是1，2。然后再去django中查找对应的值)</span></span><br><span class="line">    gender_choices = (</span><br><span class="line">        (<span class="number">1</span>, <span class="string">&quot;男&quot;</span>),</span><br><span class="line">        (<span class="number">2</span>, <span class="string">&quot;女&quot;</span>),</span><br><span class="line">    )</span><br><span class="line">    gender = models.SmallIntegerField(verbose_name=<span class="string">&quot;性别&quot;</span>, choices=gender_choices)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="模板的继承"><a href="#模板的继承" class="headerlink" title="模板的继承"></a>模板的继承</h4><p>定义模板：<code>layout.html</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;plugin...min.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">    &#123;% block css %&#125;&#123;% endblock %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>底部<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.0.min.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    &#123;% block js %&#125;&#123;% endblock %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>继承模板：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% extends &#x27;layout.html&#x27; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block css %&#125;</span><br><span class="line">	<span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;pluxxx.css&#x27; %&#125;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">		...</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;% block js %&#125;</span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jqxxxin.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="取关联或特殊数据"><a href="#取关联或特殊数据" class="headerlink" title="取关联或特殊数据"></a>取关联或特殊数据</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.create_time|date:&quot;Y-m-d&quot; &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span> <span class="comment">&lt;!-- 2022-8-21 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.get_gender_display&#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span> <span class="comment">&lt;!-- “男”，“女” --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; item.depart.title &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span>	<span class="comment">&lt;!-- “采购部”，“研发部” --&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="ModelForm【牛逼】"><a href="#ModelForm【牛逼】" class="headerlink" title="ModelForm【牛逼】"></a>ModelForm【牛逼】</h4><ul>
+<li>解决数据校验和错误提示</li>
+<li>避免views.py和html页面中有太多冗余代码</li>
+</ul>
+<ol>
+<li>models.py</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Department</span>(models.Model):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;部门表&quot;&quot;&quot;</span></span><br><span class="line">    title = models.CharField(verbose_name=<span class="string">&#x27;部门名&#x27;</span>,max_length=<span class="number">32</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.title</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserInfo</span>(models.Model):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; 员工表 &quot;&quot;&quot;</span></span><br><span class="line">    name = models.CharField(verbose_name=<span class="string">&quot;姓名&quot;</span>, max_length=<span class="number">16</span>)</span><br><span class="line">    password = models.CharField(verbose_name=<span class="string">&quot;密码&quot;</span>, max_length=<span class="number">64</span>)</span><br><span class="line">    age = models.IntegerField(verbose_name=<span class="string">&quot;年龄&quot;</span>)</span><br><span class="line">    account = models.DecimalField(verbose_name=<span class="string">&quot;账户余额&quot;</span>, max_digits=<span class="number">10</span>, decimal_places=<span class="number">2</span>, default=<span class="number">0</span>)</span><br><span class="line">    create_time = models.DateTimeField(verbose_name=<span class="string">&quot;入职时间&quot;</span>)</span><br><span class="line">    depart = models.ForeignKey(to=<span class="string">&quot;Department&quot;</span>, to_field=<span class="string">&quot;id&quot;</span>, on_delete=models.CASCADE)</span><br><span class="line">    gender_choices = (</span><br><span class="line">        (<span class="number">1</span>, <span class="string">&quot;男&quot;</span>),</span><br><span class="line">        (<span class="number">2</span>, <span class="string">&quot;女&quot;</span>),</span><br><span class="line">    )</span><br><span class="line">    gender = models.SmallIntegerField(verbose_name=<span class="string">&quot;性别&quot;</span>, choices=gender_choices)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>views.py</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyForm</span>(forms.ModelForm):</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        model = models.UserInfo</span><br><span class="line">        fields = [<span class="string">&quot;name&quot;</span>,<span class="string">&quot;password&quot;</span>,<span class="string">&quot;age&quot;</span>,<span class="string">&quot;gender&quot;</span>,<span class="string">&quot;depart&quot;</span>,<span class="string">&quot;create_time&quot;</span>]</span><br><span class="line">        <span class="comment"># widgets = &#123;</span></span><br><span class="line">        <span class="comment">#     &quot;name&quot;: forms.TextInput(attrs=&#123;&quot;class&quot;:&quot;form-control&quot;&#125;),</span></span><br><span class="line">        <span class="comment">#     &quot;password&quot;: forms.PasswordInput(attrs=&#123;&quot;class&quot;: &quot;form-control&quot;&#125;),</span></span><br><span class="line">        <span class="comment">#     &quot;age&quot;: forms.TextInput(attrs=&#123;&quot;class&quot;: &quot;form-control&quot;&#125;),</span></span><br><span class="line">        <span class="comment">#     &quot;gender&quot;: forms.TextInput(attrs=&#123;&quot;class&quot;: &quot;form-control&quot;&#125;),</span></span><br><span class="line">        <span class="comment">#     &quot;depart&quot;: forms.TextInput(attrs=&#123;&quot;class&quot;: &quot;form-control&quot;&#125;)</span></span><br><span class="line">        <span class="comment"># &#125;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,*args,**kwargs</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(*args,**kwargs)</span><br><span class="line">        <span class="keyword">for</span> name,field <span class="keyword">in</span> self.fields.items():</span><br><span class="line">            field.widget.attrs=&#123;<span class="string">&quot;class&quot;</span>: <span class="string">&quot;form-control&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user_add</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">if</span> request.method==<span class="string">&quot;GET&quot;</span>:</span><br><span class="line">        form = MyForm()</span><br><span class="line">        <span class="keyword">return</span> render(request,<span class="string">&#x27;useradd.html&#x27;</span>,&#123;<span class="string">&quot;form&quot;</span>: form&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># POST方式提交数据，需要数据校验</span></span><br><span class="line">    form = MyForm(data=request.POST)</span><br><span class="line">    <span class="keyword">if</span> form.is_valid():</span><br><span class="line">        form.save()</span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">&#x27;/user/list/&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">&#x27;useradd.html&#x27;</span>, &#123;<span class="string">&quot;form&quot;</span>: form&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>html</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% extends &#x27;layout.html&#x27; %&#125;</span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/user/add/&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">novalidate</span>&gt;</span></span><br><span class="line">            &#123;% csrf_token %&#125;</span><br><span class="line">            &#123;% for field in form %&#125;</span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">                    &#123;&#123; field.label &#125;&#125;:&#123;&#123; field &#125;&#125;</span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;color:red&quot;</span>&gt;</span>&#123;&#123; field.errors.0 &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> &gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
