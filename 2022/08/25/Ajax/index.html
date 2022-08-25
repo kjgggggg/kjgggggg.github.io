@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="前后端交互 - Ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/08/25/Ajax/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="前后端交互 - Ajax">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-25T12:50:48.000Z">
+<meta property="article:modified_time" content="2022-08-25T14:50:43.662Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="Ajax">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2022/08/25/Ajax/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Ajax | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/08/25/Ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ajax
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-25 20:50:48 / 修改时间：22:50:43" itemprop="dateCreated datePublished" datetime="2022-08-25T20:50:48+08:00">2022-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ajax/" itemprop="url" rel="index"><span itemprop="name">Ajax</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">前后端交互 - Ajax</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Ajax简介"><a href="#Ajax简介" class="headerlink" title="Ajax简介"></a>Ajax简介</h3><h4 id="前后端如何交互"><a href="#前后端如何交互" class="headerlink" title="前后端如何交互"></a>前后端如何交互</h4><p>前后端交互一般就是两种:</p>
+<ol>
+<li>是通过表单的提交，表单提交：通过前端设计表单而后端通过get或post获取信息，这是前端传数据给后端。</li>
+<li>Ajax技术。所以Ajax是用于前后端交互的一门技术。Ajax是异步的JavaScript和XML，前端通过ajax给服务器发送请求，并获取服务器的响应数据。</li>
+</ol>
+<blockquote>
+<p>后端可以通过表单获取前端数据，但是后端却没办法将数据返回给html，所以有了jsp，但是jsp复杂而且无法实现前后端分离，前端不清楚后端代码，所以jsp代码也要交给后端，那不就向全栈靠拢了。而Ajax的出现则实现了前后端的分离。</p>
+</blockquote>
+<h4 id="Ajax与Json"><a href="#Ajax与Json" class="headerlink" title="Ajax与Json"></a>Ajax与Json</h4><ul>
+<li><p>Ajax的异步可以在不重新加载页面的情况下与服务器实现交互并更新部分网页，比如在百度的输入框输入“老坛酸菜”，下面立马能够联想出“老坛酸菜怎么了”“315”等等，这就是异步。<br>有了Ajax，那么就可以实现 html + Ajax + 后端的结构，一般Ajax交由前端工程师，后端只需简单获取数据并返回数据就可以了。</p>
+</li>
+<li><p>那么json是什么呢？json是JavaScript的对象表示法，是一种数据的载体。比如前端通过Ajax发送数据，或者后端返回数据给前端，那双方各玩各的怎么行呢（也不是各玩各的，人家是使用xml为载体传输，但是json比较优秀，语法简单，可读性强，能减少传输时占用的宽带，现在json几乎已经成了主流），所以统一数据的格式，一起使用json，前端用json的规范来写JavaScript，后端也将返回的数据转化成json的格式，那不就皆大欢喜了。</p>
+</li>
+<li><p>总之ajax和json两者不是同一个层面的东西，没法比较，只能说清二者是不同的技术。json跟xml才有可比性。最后，要是有哪里讲错了也希望大家能在评论区指出。</p>
+</li>
+</ul>
+<h3 id="Ajax请求"><a href="#Ajax请求" class="headerlink" title="Ajax请求"></a>Ajax请求</h3><p>浏览器向网站发送请求时：URL 和 表单的形式提交。</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+</ul>
+<p>特点：页面刷新。</p>
+<p>除此之外，也可以基于Ajax向后台发送请求（偷偷的发送请求）。</p>
+<ul>
+<li><p>依赖<code>jQuery</code> 【不依赖也行,但依赖了操作就非常简单】</p>
+</li>
+<li><p>编写ajax代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>:<span class="string">&quot;发送的地址&quot;</span>,</span><br><span class="line">    <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>, </span><br><span class="line">    <span class="attr">data</span>:&#123;  <span class="comment">//要传递的数据</span></span><br><span class="line">        <span class="attr">n1</span>:<span class="number">123</span>,</span><br><span class="line">        <span class="attr">n2</span>:<span class="number">456</span></span><br><span class="line">    &#125;,<span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">res</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Ajax发送GET请求"><a href="#Ajax发送GET请求" class="headerlink" title="Ajax发送GET请求"></a>Ajax发送GET请求</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;% block js %&#125;</span><br><span class="line"></span><br><span class="line">$.<span class="title function_">ajax</span>(<span class="params">&#123;</span></span><br><span class="line"><span class="params">    url: <span class="string">&#x27;/task/ajax/&#x27;</span>,</span></span><br><span class="line"><span class="params">    type: <span class="string">&quot;get&quot;</span>,</span></span><br><span class="line"><span class="params">    data: &#123;</span></span><br><span class="line"><span class="params">        n1: <span class="number">123</span>,</span></span><br><span class="line"><span class="params">        n2: <span class="number">456</span></span></span><br><span class="line"><span class="params">    &#125;,</span></span><br><span class="line"><span class="params">    success: <span class="keyword">function</span> (res) &#123;</span></span><br><span class="line"><span class="params">        <span class="variable language_">console</span>.log(res);</span></span><br><span class="line"><span class="params">    &#125;</span></span><br><span class="line"><span class="params">&#125;</span>)</span><br><span class="line"> </span><br><span class="line">&#123;% end block %&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render, HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">task_ajax</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="built_in">print</span>(request.GET)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;成功了&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Ajax发送POST请求"><a href="#Ajax发送POST请求" class="headerlink" title="Ajax发送POST请求"></a>Ajax发送POST请求</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;% block js %&#125;</span><br><span class="line"></span><br><span class="line">$.<span class="title function_">ajax</span>(<span class="params">&#123;</span></span><br><span class="line"><span class="params">    url: <span class="string">&#x27;/task/ajax/&#x27;</span>,</span></span><br><span class="line"><span class="params">    type: <span class="string">&quot;post&quot;</span>,</span></span><br><span class="line"><span class="params">    data: &#123;</span></span><br><span class="line"><span class="params">        n1: <span class="number">123</span>,</span></span><br><span class="line"><span class="params">        n2: <span class="number">456</span></span></span><br><span class="line"><span class="params">    &#125;,</span></span><br><span class="line"><span class="params">    success: <span class="keyword">function</span> (res) &#123;</span></span><br><span class="line"><span class="params">        <span class="variable language_">console</span>.log(res);</span></span><br><span class="line"><span class="params">    &#125;</span></span><br><span class="line"><span class="params">&#125;</span>)</span><br><span class="line"> </span><br><span class="line">&#123;% end block %&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render, HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.views.decorators.csrf <span class="keyword">import</span> csrf_exempt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@csrf_exempt</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">task_ajax</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="built_in">print</span>(request.POST)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;成功了&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Ajax绑定事件"><a href="#Ajax绑定事件" class="headerlink" title="Ajax绑定事件"></a>Ajax绑定事件</h4><ul>
+<li>基于J Q u e r y</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% extends &#x27;layout.html&#x27; %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>任务管理<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>示例1<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;btn1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> <span class="attr">value</span>=<span class="string">&quot;点击&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block js %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        $(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 页面框架加载完成之后代码自动执行</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">bindBtn1Event</span>();</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">bindBtn1Event</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            $(<span class="string">&quot;#btn1&quot;</span>).<span class="title function_">click</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                $.<span class="title function_">ajax</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">url</span>: <span class="string">&#x27;/task/ajax/&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">type</span>: <span class="string">&quot;post&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="attr">n1</span>: <span class="number">123</span>,</span></span><br><span class="line"><span class="language-javascript">                        <span class="attr">n2</span>: <span class="number">456</span></span></span><br><span class="line"><span class="language-javascript">                    &#125;,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">res</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;)</span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id><a href="#" class="headerlink" title></a></h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ajax/" rel="tag"># Ajax</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/22/git/" rel="prev" title="git">
+      <i class="fa fa-chevron-left"></i> git
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ajax%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Ajax简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E5%A6%82%E4%BD%95%E4%BA%A4%E4%BA%92"><span class="nav-number">1.1.</span> <span class="nav-text">前后端如何交互</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax%E4%B8%8EJson"><span class="nav-number">1.2.</span> <span class="nav-text">Ajax与Json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ajax%E8%AF%B7%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">Ajax请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax%E5%8F%91%E9%80%81GET%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">Ajax发送GET请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax%E5%8F%91%E9%80%81POST%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.</span> <span class="nav-text">Ajax发送POST请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">Ajax绑定事件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
