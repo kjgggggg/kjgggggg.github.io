@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/26/flutter/image-20220901215621643.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/26/flutter/91f29e7b7b8b4587acb025ee1504583e.png">
 <meta property="article:published_time" content="2022-08-25T17:01:45.000Z">
-<meta property="article:modified_time" content="2022-09-10T09:08:38.262Z">
+<meta property="article:modified_time" content="2022-09-10T10:48:32.880Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="flutter">
 <meta name="twitter:card" content="summary">
@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-09-10 17:08:38" itemprop="dateModified" datetime="2022-09-10T17:08:38+08:00">2022-09-10</time>
+                <time title="修改时间：2022-09-10 18:48:32" itemprop="dateModified" datetime="2022-09-10T18:48:32+08:00">2022-09-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -466,7 +466,7 @@
 <figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">await</span> database.transaction((txn) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> batch = txn.batch();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// commit but the actual commit will happen when the transaction is committed</span></span><br><span class="line">  <span class="comment">// however the data is available in this transaction</span></span><br><span class="line">  <span class="keyword">await</span> batch.commit();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//  ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>默认情况下，批处理一旦遇到错误就会停止(通常会恢复未提交的更改)。你可以忽略错误，这样即使有一个操作失败，每个成功的操作都会运行并提交:</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">await</span> batch.commit(continueOnError: <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line"><span class="function">await batch.<span class="title">commit</span><span class="params">(continueOnError: <span class="keyword">true</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 
 
 
