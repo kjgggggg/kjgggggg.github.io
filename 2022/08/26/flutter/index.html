@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/26/flutter/image-20220901215621643.png">
 <meta property="article:published_time" content="2022-08-25T17:01:45.000Z">
-<meta property="article:modified_time" content="2022-09-09T18:07:10.823Z">
+<meta property="article:modified_time" content="2022-09-10T06:09:24.460Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="flutter">
 <meta name="twitter:card" content="summary">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-09-10 02:07:10" itemprop="dateModified" datetime="2022-09-10T02:07:10+08:00">2022-09-10</time>
+                <time title="修改时间：2022-09-10 14:09:24" itemprop="dateModified" datetime="2022-09-10T14:09:24+08:00">2022-09-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -469,14 +469,10 @@
 
 
 
-
-
 <h3 id="实际开发注意点"><a href="#实际开发注意点" class="headerlink" title="实际开发注意点"></a>实际开发注意点</h3><ul>
 <li>拆分appbar进components一定要实现<code>PreferredSizeWidget</code>借口</li>
 </ul>
 <figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAppBar</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> <span class="keyword">implements</span> <span class="title">PreferredSizeWidget</span></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MyAppBar(&#123;Key? key&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Size <span class="keyword">get</span> preferredSize =&gt; <span class="keyword">const</span> Size.fromHeight(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  State&lt;MyAppBar&gt; createState() =&gt; _MyAppBarState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyAppBarState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyAppBar</span>&gt; </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> AppBar(</span><br><span class="line">      title: <span class="keyword">const</span> Text(<span class="string">&quot;UFC&quot;</span>),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 
 <ul>
 <li>appBar中的actions组件设置高度要用UnconstrainedBox包裹去除父样式</li>
