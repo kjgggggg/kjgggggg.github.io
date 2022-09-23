@@ -347,7 +347,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/08/08/linux/" class="post-title-link" itemprop="url">linux</a>
+            <a href="/2022/08/08/linux/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -356,19 +356,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-08-08 19:29:27 / 修改时间：20:08:50" itemprop="dateCreated datePublished" datetime="2022-08-08T19:29:27+08:00">2022-08-08</time>
+              <time title="创建时间：2022-08-08 19:29:27" itemprop="dateCreated datePublished" datetime="2022-08-08T19:29:27+08:00">2022-08-08</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
                 </span>
-            </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-19 10:31:30" itemprop="dateModified" datetime="2022-09-19T10:31:30+08:00">2022-09-19</time>
+              </span>
 
           
 
@@ -381,15 +378,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>linux、mac终端、homebrew、bash、zsh、yum、rpm......</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/08/linux/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <hr>
+<p>title: linux<br>date: 2022-08-08 19:29:27<br>categories: </p>
+<ul>
+<li>linux<br>tags:</li>
+<li>linux<br>description: linux、mac终端、homebrew、bash、zsh、yum、rpm……</li>
+</ul>
+<p>	</p>
+<h3 id="unix和linux的区别"><a href="#unix和linux的区别" class="headerlink" title="unix和linux的区别"></a>unix和linux的区别</h3><ul>
+<li><p>UNIX是商业化的，而Linux是开源的，是免费、公开源代码的；</p>
+</li>
+<li><p>UNIX系统大多是与硬件配套的，也就是说无法安装在x86服务器和个人计算机上的，而Linux则可以运行在多种硬件平台上。</p>
+</li>
+</ul>
+<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><ul>
+<li><p>Shell 是一个应用程序，它连接了用户和 Linux 内核，让用户能够更加高效、安全、低成本地使用 Linux 内核，这就是 Shell 的本质。<br>Shell 本身并不是内核的一部分，它只是在内核的基础上编写的一个应用程序，它和 QQ、迅雷、Firefox 等其它软件没有什么区别。<br>然而 Shell 也有着它的特殊性，就是开机立马启动，并呈现在用户面前；用户通过 Shell 来使用 Linux，不启动 Shell 的话，用户就没办法使用 Linux。</p>
+<h3 id="bash与zsh的区别"><a href="#bash与zsh的区别" class="headerlink" title="bash与zsh的区别"></a>bash与zsh的区别</h3></li>
+<li><p>一句话，二者均是shell的一种，zsh能基本完美兼容bash的命令，并且使用起来更加优雅。由于bash或zsh本质上都是解释器，他们所共同服务的是shell语言，因此在命令语法上基本相同，部分兼容性差异可参考：zsh和bash的兼容性差异。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chsh -s /bin/bash <span class="comment"># 切换bash</span></span><br><span class="line">chsh -s /bin/zsh <span class="comment"># 切换zsh</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bash读取的配置文件：<del>&#x2F;.bash_profile文件<br>zsh读取的配置文件：</del>&#x2F;.zshrc文件<br>当从bash切换为zsh时，如果不想重新配置一遍.zshrc文件，可以__在.zshrc文件中加上source ~&#x2F;.bash_profile，从而直接从.bash_profile文件读取配置。</p>
+</li>
+</ul>
+<h3 id="yum和rpm"><a href="#yum和rpm" class="headerlink" title="yum和rpm"></a>yum和rpm</h3><ul>
+<li>rpm命令和yum命令都可以用来安装软件</li>
+<li>但与yum命令最大的区别为yum命令在安装软件时如果碰到了依赖性的问题，yum会去主动尝试解决依赖性，如果解决不了才会反馈给用户。而rpm命令一旦遇到了依赖性的问题不会去解决依赖性，而是直接反馈给用户，让用户自行解决</li>
+</ul>
+<h4 id="repo源"><a href="#repo源" class="headerlink" title="repo源"></a>repo源</h4><ul>
+<li>repo文件是linux中yum源（软件仓库）的配置文件，通常一个repo文件定义了一个或者多个软件仓库的细节内容，例如我们将从哪里下载需要安装或者升级的软件包，repo文件中的设置内容将被yum读取和应用！</li>
+</ul>
+<h3 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h3><ul>
+<li>homebrew是MacOS系统里面包的管理工具，类似于CentOS系统里面的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=yum&spm=1001.2101.3001.7020">yum</a>，主要解决软件或者包下载时的各种依赖包。</li>
+<li>拥有安装、卸载、更新、查看、搜索等很多实用的功能。简单的一条指令，就可以实现包管理，而不用你关心各种依赖和文件路径的情况，十分方便快捷。</li>
+</ul>
+<h3 id="mac终端和linux"><a href="#mac终端和linux" class="headerlink" title="mac终端和linux"></a>mac终端和linux</h3><ul>
+<li><p>Mac和Linux基于都是基于Unix，命令也很多都是仿照Unix的，所以常用命令基本没有区别，如查看文件(ls)，查找文件(find)，复制文件(cp)，创建目录(mkdir)，打包文件(tar)等等，以及他们的软件包安装都是基于相同的理念(.&#x2F;configure，install)。</p>
+</li>
+<li><p>但是一些细节是不同的，比如Linux因为是用C语言写的，所以命令需要区分大小写，而Mac是不存在的。</p>
+<p>使用mac的终端时候，需要递归复制目录，在Linux系统中一般是-r参数，请注意在mac中是-Rp，如果复制的路径是在&#x2F;usr&#x2F;local等级别的路径下，还需要sudo权限</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> -Rp <span class="built_in">source</span> /usr/local/source_copy</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>linux中的yum工具在mac中用homebrew替代</li>
+</ul>
+
       
     </div>
 
@@ -836,10 +870,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-08-03 13:43:42 / 修改时间：14:33:36" itemprop="dateCreated datePublished" datetime="2022-08-03T13:43:42+08:00">2022-08-03</time>
+              <time title="创建时间：2022-08-03 13:43:42" itemprop="dateCreated datePublished" datetime="2022-08-03T13:43:42+08:00">2022-08-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-23 14:50:57" itemprop="dateModified" datetime="2022-09-23T14:50:57+08:00">2022-09-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1043,7 +1083,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
