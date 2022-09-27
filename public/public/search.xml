@@ -85,6 +85,34 @@
       </tags>
   </entry>
   <entry>
+    <title>2.两数相加</title>
+    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例 1：</p>
+<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
+<p>示例 2：</p>
+<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
+<p>示例 3：</p>
+<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>递归</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>21.合并两个有序链表</title>
     <url>/2022/08/07/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<h3 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21. 合并两个有序链表"></a><a href="https://leetcode.cn/problems/merge-two-sorted-lists/">21. 合并两个有序链表</a></h3><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* list1, ListNode* list2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(list1 == <span class="literal">nullptr</span> &amp;&amp; list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(list1 &amp;&amp; list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list1;</span><br><span class="line">        <span class="keyword">if</span>(list2 &amp;&amp; list1 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list2;</span><br><span class="line">      	</span><br><span class="line">      	<span class="comment">//上面三行等价于 if(!list1 || !list2) return l1?l1:l2;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(list1-&gt;val&lt;=list2-&gt;val)&#123;</span><br><span class="line">            list1-&gt;next = <span class="built_in">mergeTwoLists</span>(list1-&gt;next,list2);</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            list2-&gt;next = <span class="built_in">mergeTwoLists</span>(list1,list2-&gt;next);</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -122,8 +150,8 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-        <tag>链表</tag>
         <tag>递归</tag>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -156,34 +184,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2.两数相加</title>
-    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
-    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例 1：</p>
-<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
-<p>示例 2：</p>
-<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
-<p>示例 3：</p>
-<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>链表</tag>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>46.全排列</title>
     <url>/2022/09/27/46-%E5%85%A8%E6%8E%92%E5%88%97/</url>
     <content><![CDATA[<h3 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46. 全排列"></a><a href="https://leetcode.cn/problems/permutations/">46. 全排列</a></h3><p>给定一个不含重复数字的数组 <code>nums</code> ，返回其 <em>所有可能的全排列</em> 。你可以 <strong>按任意顺序</strong> 返回答案。</p>
@@ -198,7 +198,7 @@
 
 
 
-<h3 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">permute</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">used</span><span class="params">(nums.size(),<span class="literal">false</span>)</span></span>;</span><br><span class="line">        <span class="built_in">dfs</span>(res,path,used,nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; res, vector&lt;<span class="type">int</span>&gt;&amp; path, vector&lt;<span class="type">bool</span>&gt;&amp; used, vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(path.<span class="built_in">size</span>() == nums.<span class="built_in">size</span>())&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(path);  <span class="comment">//path 是引用变量,所以可以传参数地址,区别于Python的解</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(used[i]==<span class="literal">true</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">                used[i] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">dfs</span>(res,path,used,nums);</span><br><span class="line"></span><br><span class="line">                path.<span class="built_in">pop_back</span>();</span><br><span class="line">                used[i] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">permute</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">used</span><span class="params">(nums.size(),<span class="literal">false</span>)</span></span>;</span><br><span class="line">        <span class="built_in">dfs</span>(res,path,used,nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; res, vector&lt;<span class="type">int</span>&gt;&amp; path, vector&lt;<span class="type">bool</span>&gt;&amp; used, vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(path.<span class="built_in">size</span>() == nums.<span class="built_in">size</span>())&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(path);  <span class="comment">//res 一定要加&amp; 不然不会改变主函数中实参res的值,输出为[]</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(used[i]==<span class="literal">true</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">                used[i] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">dfs</span>(res,path,used,nums);</span><br><span class="line"></span><br><span class="line">                path.<span class="built_in">pop_back</span>();</span><br><span class="line">                used[i] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -518,6 +518,35 @@
       </tags>
   </entry>
   <entry>
+    <title>git</title>
+    <url>/2022/08/22/git/</url>
+    <content><![CDATA[<h3 id="将项目上传至github"><a href="#将项目上传至github" class="headerlink" title="将项目上传至github"></a>将项目上传至github</h3><h4 id="查看本地是否存在SSH密钥"><a href="#查看本地是否存在SSH密钥" class="headerlink" title="查看本地是否存在SSH密钥"></a>查看本地是否存在SSH密钥</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -al ~/.ssh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>私钥 <code>id_rsa</code> 		公钥 <code>id_rsa.pub</code>即是github中配置的SSH</p>
+</blockquote>
+<h4 id="测试是否成功配置github"><a href="#测试是否成功配置github" class="headerlink" title="测试是否成功配置github"></a>测试是否成功配置github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822132233415.png" alt="image-20220822132233415"></p>
+<h4 id="在github上新建repository"><a href="#在github上新建repository" class="headerlink" title="在github上新建repository"></a>在github上新建repository</h4><p><img src="/2022/08/22/git/image-20220822133050067.png" alt="image-20220822133050067"></p>
+<h4 id="进入到项目目录，输入init命令"><a href="#进入到项目目录，输入init命令" class="headerlink" title="进入到项目目录，输入init命令"></a>进入到项目目录，输入init命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/django01</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822133634551.png" alt="image-20220822133634551"></p>
+<h4 id="在该项目根目录中add并且commit"><a href="#在该项目根目录中add并且commit" class="headerlink" title="在该项目根目录中add并且commit"></a>在该项目根目录中add并且commit</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822134151019.png" alt="image-20220822134151019"></p>
+<h4 id="上传github"><a href="#上传github" class="headerlink" title="上传github"></a>上传github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:kjgggggg/django01.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822134347195.png" alt="image-20220822134347195"></p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>blog</title>
     <url>/2022/07/29/blog/</url>
     <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
@@ -614,35 +643,6 @@
       </categories>
       <tags>
         <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git</title>
-    <url>/2022/08/22/git/</url>
-    <content><![CDATA[<h3 id="将项目上传至github"><a href="#将项目上传至github" class="headerlink" title="将项目上传至github"></a>将项目上传至github</h3><h4 id="查看本地是否存在SSH密钥"><a href="#查看本地是否存在SSH密钥" class="headerlink" title="查看本地是否存在SSH密钥"></a>查看本地是否存在SSH密钥</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -al ~/.ssh</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>私钥 <code>id_rsa</code> 		公钥 <code>id_rsa.pub</code>即是github中配置的SSH</p>
-</blockquote>
-<h4 id="测试是否成功配置github"><a href="#测试是否成功配置github" class="headerlink" title="测试是否成功配置github"></a>测试是否成功配置github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822132233415.png" alt="image-20220822132233415"></p>
-<h4 id="在github上新建repository"><a href="#在github上新建repository" class="headerlink" title="在github上新建repository"></a>在github上新建repository</h4><p><img src="/2022/08/22/git/image-20220822133050067.png" alt="image-20220822133050067"></p>
-<h4 id="进入到项目目录，输入init命令"><a href="#进入到项目目录，输入init命令" class="headerlink" title="进入到项目目录，输入init命令"></a>进入到项目目录，输入init命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/django01</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822133634551.png" alt="image-20220822133634551"></p>
-<h4 id="在该项目根目录中add并且commit"><a href="#在该项目根目录中add并且commit" class="headerlink" title="在该项目根目录中add并且commit"></a>在该项目根目录中add并且commit</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822134151019.png" alt="image-20220822134151019"></p>
-<h4 id="上传github"><a href="#上传github" class="headerlink" title="上传github"></a>上传github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:kjgggggg/django01.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822134347195.png" alt="image-20220822134347195"></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
