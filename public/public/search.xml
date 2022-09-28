@@ -204,6 +204,31 @@
 
 <h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">permute</span>(<span class="params">self, nums</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line"></span><br><span class="line">        res = []</span><br><span class="line">        used = [<span class="literal">False</span>] * n</span><br><span class="line">        path = []</span><br><span class="line">        self.dfs(res,path,used,nums)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">self,res,path,used,nums</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(path)==<span class="built_in">len</span>(nums):</span><br><span class="line">            temp = [] <span class="comment"># 不能直接 res.append(path) , 会输出[[],[],[],[],[],[]]</span></span><br><span class="line">            temp[:] = path[:] <span class="comment"># 使用temp数组来保存解，因为直接将path加入，会在回溯时候，path改变导致res中的解也跟着变</span></span><br><span class="line">            res.append(temp)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> used[i] == <span class="literal">True</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                path.append(nums[i])</span><br><span class="line">                used[i] = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">                self.dfs(res,path,used,nums)</span><br><span class="line"></span><br><span class="line">                path.pop()</span><br><span class="line">                used[i] = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
+
+
+<h3 id="47-全排列-II"><a href="#47-全排列-II" class="headerlink" title="47. 全排列 II"></a><a href="https://leetcode.cn/problems/permutations-ii/">47. 全排列 II</a></h3><p>难度中等1203</p>
+<p>给定一个可包含重复数字的序列 <code>nums</code> ，<em><strong>按任意顺序</strong></em> 返回所有不重复的全排列。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="comment">[1,1,2]</span></span><br><span class="line">输出：</span><br><span class="line"><span class="comment">[<span class="comment">[1,1,2]</span>,</span></span><br><span class="line"><span class="comment"> <span class="comment">[1,2,1]</span>,</span></span><br><span class="line"><span class="comment"> <span class="comment">[2,1,1]</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[<span class="comment">[1,2,3]</span>,<span class="comment">[1,3,2]</span>,<span class="comment">[2,1,3]</span>,<span class="comment">[2,3,1]</span>,<span class="comment">[3,1,2]</span>,<span class="comment">[3,2,1]</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 8</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+</ul>
+<h3 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">permuteUnique</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">used</span><span class="params">(nums.size(),<span class="literal">false</span>)</span></span>;</span><br><span class="line">        set&lt;vector&lt;<span class="type">int</span>&gt;&gt; st;</span><br><span class="line">        <span class="built_in">dfs</span>(res,path,used,nums,st);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; res, vector&lt;<span class="type">int</span>&gt;&amp; path, vector&lt;<span class="type">bool</span>&gt;&amp; used, vector&lt;<span class="type">int</span>&gt;&amp; nums, set&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; st)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(path.<span class="built_in">size</span>() == nums.<span class="built_in">size</span>())&#123;</span><br><span class="line">            <span class="keyword">if</span> (st.<span class="built_in">insert</span>(path).second)&#123;</span><br><span class="line">                res.<span class="built_in">push_back</span>(path);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(used[i]==<span class="literal">true</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                path.<span class="built_in">push_back</span>(nums[i]);</span><br><span class="line">                used[i] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">dfs</span>(res,path,used,nums,st);</span><br><span class="line"></span><br><span class="line">                path.<span class="built_in">pop_back</span>();</span><br><span class="line">                used[i] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Python-1"><a href="#Python-1" class="headerlink" title="Python"></a>Python</h3><p>set不能添加list，dict, set的原因<br>python 的集合set中的元素是唯一的，即哈希表（hashable）类型，因此集合中的元素必须是不可变类型</p>
+<p>而list，dict， set是可变类型， number，string，tuple是不可变类型</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr_set = <span class="built_in">set</span>()</span><br><span class="line">arr_set.add([<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span>(arr_set)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">编译提示：</span><br><span class="line"></span><br><span class="line">arr_set.add([<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">TypeError: unhashable <span class="keyword">type</span>: <span class="symbol">&#x27;list</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>leetcode</category>
@@ -518,35 +543,6 @@
       </tags>
   </entry>
   <entry>
-    <title>git</title>
-    <url>/2022/08/22/git/</url>
-    <content><![CDATA[<h3 id="将项目上传至github"><a href="#将项目上传至github" class="headerlink" title="将项目上传至github"></a>将项目上传至github</h3><h4 id="查看本地是否存在SSH密钥"><a href="#查看本地是否存在SSH密钥" class="headerlink" title="查看本地是否存在SSH密钥"></a>查看本地是否存在SSH密钥</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -al ~/.ssh</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>私钥 <code>id_rsa</code> 		公钥 <code>id_rsa.pub</code>即是github中配置的SSH</p>
-</blockquote>
-<h4 id="测试是否成功配置github"><a href="#测试是否成功配置github" class="headerlink" title="测试是否成功配置github"></a>测试是否成功配置github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822132233415.png" alt="image-20220822132233415"></p>
-<h4 id="在github上新建repository"><a href="#在github上新建repository" class="headerlink" title="在github上新建repository"></a>在github上新建repository</h4><p><img src="/2022/08/22/git/image-20220822133050067.png" alt="image-20220822133050067"></p>
-<h4 id="进入到项目目录，输入init命令"><a href="#进入到项目目录，输入init命令" class="headerlink" title="进入到项目目录，输入init命令"></a>进入到项目目录，输入init命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/django01</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822133634551.png" alt="image-20220822133634551"></p>
-<h4 id="在该项目根目录中add并且commit"><a href="#在该项目根目录中add并且commit" class="headerlink" title="在该项目根目录中add并且commit"></a>在该项目根目录中add并且commit</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822134151019.png" alt="image-20220822134151019"></p>
-<h4 id="上传github"><a href="#上传github" class="headerlink" title="上传github"></a>上传github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:kjgggggg/django01.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822134347195.png" alt="image-20220822134347195"></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blog</title>
     <url>/2022/07/29/blog/</url>
     <content><![CDATA[<h3 id="Markdown基本操作"><a href="#Markdown基本操作" class="headerlink" title="Markdown基本操作"></a>Markdown基本操作</h3><ul>
@@ -643,6 +639,35 @@
       </categories>
       <tags>
         <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git</title>
+    <url>/2022/08/22/git/</url>
+    <content><![CDATA[<h3 id="将项目上传至github"><a href="#将项目上传至github" class="headerlink" title="将项目上传至github"></a>将项目上传至github</h3><h4 id="查看本地是否存在SSH密钥"><a href="#查看本地是否存在SSH密钥" class="headerlink" title="查看本地是否存在SSH密钥"></a>查看本地是否存在SSH密钥</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -al ~/.ssh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>私钥 <code>id_rsa</code> 		公钥 <code>id_rsa.pub</code>即是github中配置的SSH</p>
+</blockquote>
+<h4 id="测试是否成功配置github"><a href="#测试是否成功配置github" class="headerlink" title="测试是否成功配置github"></a>测试是否成功配置github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822132233415.png" alt="image-20220822132233415"></p>
+<h4 id="在github上新建repository"><a href="#在github上新建repository" class="headerlink" title="在github上新建repository"></a>在github上新建repository</h4><p><img src="/2022/08/22/git/image-20220822133050067.png" alt="image-20220822133050067"></p>
+<h4 id="进入到项目目录，输入init命令"><a href="#进入到项目目录，输入init命令" class="headerlink" title="进入到项目目录，输入init命令"></a>进入到项目目录，输入init命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/django01</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822133634551.png" alt="image-20220822133634551"></p>
+<h4 id="在该项目根目录中add并且commit"><a href="#在该项目根目录中add并且commit" class="headerlink" title="在该项目根目录中add并且commit"></a>在该项目根目录中add并且commit</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822134151019.png" alt="image-20220822134151019"></p>
+<h4 id="上传github"><a href="#上传github" class="headerlink" title="上传github"></a>上传github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:kjgggggg/django01.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822134347195.png" alt="image-20220822134347195"></p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
