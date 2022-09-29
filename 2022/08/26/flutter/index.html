@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/26/flutter/image-20220911014713905.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/26/flutter/image-20220923201358714.png">
 <meta property="article:published_time" content="2022-08-25T17:01:45.000Z">
-<meta property="article:modified_time" content="2022-09-23T12:15:06.120Z">
+<meta property="article:modified_time" content="2022-09-29T08:42:30.864Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="flutter">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-09-23 20:15:06" itemprop="dateModified" datetime="2022-09-23T20:15:06+08:00">2022-09-23</time>
+                <time title="修改时间：2022-09-29 16:42:30" itemprop="dateModified" datetime="2022-09-29T16:42:30+08:00">2022-09-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -336,35 +336,27 @@
 <figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:provider/provider.dart&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 <h4 id="三个概念"><a href="#三个概念" class="headerlink" title="三个概念"></a>三个概念</h4><ul>
-<li>ChangeNotifier</li>
+<li>ChangeNotifier【发送通知的人】</li>
 </ul>
 <blockquote>
 <p><code>ChangeNotifier</code> 是 Flutter SDK 中的一个简单的类。它用于向监听器发送通知。换言之，如果被定义为 <code>ChangeNotifier</code>，你可以订阅它的状态变化。（这和大家所熟悉的观察者模式相类似）。</p>
 </blockquote>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CartModel</span> <span class="keyword">extends</span> <span class="title">ChangeNotifier</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// <span class="language-markdown">Internal, private state of the cart.</span></span></span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">List</span>&lt;Item&gt; _items = [];</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">An unmodifiable view of the items in the cart.</span></span></span><br><span class="line">  UnmodifiableListView&lt;Item&gt; <span class="keyword">get</span> items =&gt; UnmodifiableListView(_items);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">The current total price of all items (assuming all items cost $42).</span></span></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> totalPrice =&gt; _items.length * <span class="number">42</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">Adds [item] to cart. This and [removeAll] are the only ways to modify the</span></span></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">cart from the outside.</span></span></span><br><span class="line">  <span class="keyword">void</span> add(Item item) &#123;</span><br><span class="line">    _items.add(item);</span><br><span class="line">    <span class="comment">// This call tells the widgets that are listening to this model to rebuild.</span></span><br><span class="line">    notifyListeners();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">Removes all items from the cart.</span></span></span><br><span class="line">  <span class="keyword">void</span> removeAll() &#123;</span><br><span class="line">    _items.clear();</span><br><span class="line">    <span class="comment">// This call tells the widgets that are listening to this model to rebuild.</span></span><br><span class="line">    notifyListeners();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShowAthletes</span> <span class="keyword">extends</span> <span class="title">ChangeNotifier</span> </span>&#123;</span><br><span class="line">  <span class="keyword">void</span> showAthletesService() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> options = BaseOptions(</span><br><span class="line">      <span class="comment">// method: &quot;POST&quot;,</span></span><br><span class="line">      baseUrl: <span class="string">&quot;http://127.0.0.1:8000/api&quot;</span>,</span><br><span class="line">      connectTimeout: <span class="number">5000</span>,</span><br><span class="line">      receiveTimeout: <span class="number">3000</span>,</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    Dio dio = Dio(options);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> formData = FormData.fromMap(&#123;<span class="string">&#x27;level&#x27;</span>: currentIndex&#125;);</span><br><span class="line"></span><br><span class="line">    Response response = <span class="keyword">await</span> dio.post(<span class="string">&quot;/showAthletes&quot;</span>, data: formData);</span><br><span class="line">    currentLen = response.data[<span class="string">&quot;len&quot;</span>];</span><br><span class="line">    notifyListeners();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>ChangeNotifierProvider</li>
+<li>ChangeNotifierProvider 【在mian中注册该ChangeNotifier】</li>
 </ul>
 <blockquote>
 <p><code>ChangeNotifierProvider</code> widget 可以向其子孙节点暴露一个 <code>ChangeNotifier</code> 实例。它属于 <code>provider</code> package。</p>
 <p>我们已经知道了该把 <code>ChangeNotifierProvider</code> 放在什么位置：在需要访问它的 widget 之上。在 <code>CartModel</code> 里，也就意味着将它置于 <code>MyCart</code> 和 <code>MyCatalog</code> 之上。</p>
 <p>你肯定不愿意把 <code>ChangeNotifierProvider</code> 放的级别太高（因为你不希望破坏整个结构）。但是在我们这里的例子中，<code>MyCart</code> 和 <code>MyCatalog</code> 之上只有 <code>MyApp</code>。</p>
 </blockquote>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(</span><br><span class="line">    ChangeNotifierProvider(</span><br><span class="line">      create: (context) =&gt; CartModel(),</span><br><span class="line">      child: <span class="keyword">const</span> MyApp(),</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p> 如果你想提供更多状态，可以使用 <code>MultiProvider</code>：</p>
-</blockquote>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">void</span> <span class="selector-tag">main</span>() &#123;</span><br><span class="line">  <span class="selector-tag">runApp</span>(</span><br><span class="line">    <span class="built_in">MultiProvider</span>(</span><br><span class="line">      <span class="attribute">providers</span>: [</span><br><span class="line">        <span class="built_in">ChangeNotifierProvider</span>(<span class="attribute">create</span>: (context) =&gt; <span class="built_in">CartModel</span>()),</span><br><span class="line">        <span class="built_in">Provider</span>(<span class="attribute">create</span>: (context) =&gt; <span class="built_in">SomeOtherClass</span>()),</span><br><span class="line">      ],</span><br><span class="line">      <span class="attribute">child</span>: const <span class="built_in">MyApp</span>(),</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  FluroRouter  router = FluroRouter();</span><br><span class="line">  Application.router = router; <span class="comment">//一定要先写这行</span></span><br><span class="line">  Routes.configureRoutes(router);</span><br><span class="line">  Provider.debugCheckInvalidValueType = <span class="keyword">null</span>;</span><br><span class="line">  runApp(</span><br><span class="line">      MultiProvider(</span><br><span class="line">        providers: [</span><br><span class="line">          ChangeNotifierProvider(create: (_) =&gt; ShowAthletes()),</span><br><span class="line">        ],</span><br><span class="line">        child: MyApp(),</span><br><span class="line">      )</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>Consumer</li>
+<li>Consumer【变化的主体】</li>
 </ul>
-<blockquote>
-<p> 现在 <code>CartModel</code> 已经通过 <code>ChangeNotifierProvider</code> 在应用中与 widget 相关联。我们可以开始调用它了。完成这一步需要通过 <code>Consumer</code> widget。</p>
-</blockquote>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> Consumer&lt;CartModel&gt;(</span><br><span class="line">  builder: (context, cart, child) &#123;</span><br><span class="line">    <span class="keyword">return</span> Text(<span class="string">&#x27;Total price: <span class="subst">$&#123;cart.totalPrice&#125;</span>&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">Widget buildAthleteList()&#123;</span><br><span class="line">  <span class="keyword">return</span> Consumer&lt;ShowAthletes&gt;(</span><br><span class="line">    builder: (context,sa,child)&#123;</span><br><span class="line">      <span class="keyword">return</span> Expanded(</span><br><span class="line">        child: ListView.builder(</span><br><span class="line">          itemBuilder: (BuildContext context, <span class="built_in">int</span> index) &#123;</span><br><span class="line">            <span class="keyword">return</span>  ListTile(</span><br><span class="line">              leading: Icon(Icons.settings,color: Colors.blue,),</span><br><span class="line">              title: Text(<span class="string">&quot;师傅麻烦你把我送到解放碑&quot;</span>,style: TextStyle(color: Colors.white24),),</span><br><span class="line">              subtitle: Text(<span class="string">&quot;和他挥手拜拜有缘再会&quot;</span>,style: TextStyle(color: Colors.white24),),</span><br><span class="line">            );</span><br><span class="line">          &#125;,</span><br><span class="line">          itemCount: currentLen,</span><br><span class="line">        ) ,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>我们必须指定要访问的模型类型。在这个示例中，我们要访问 <code>CartModel</code> 那么就写上 <code>Consumer&lt;CartModel&gt;</code>。</p>
@@ -373,16 +365,14 @@
 <p>builder 函数的第二个参数是 <code>ChangeNotifier</code> 的实例。它是我们最开始就能得到的实例。你可以通过该实例定义 UI 的内容。</p>
 <p>第三个参数是 <code>child</code>，用于优化目的。如果 <code>Consumer</code> 下面有一个庞大的子树，当模型发生改变的时候，该子树 <strong>并不会</strong> 改变，那么你就可以仅仅创建它一次，然后通过 builder 获得该实例。</p>
 </blockquote>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> Consumer&lt;CartModel&gt;(</span><br><span class="line">  builder: (context, cart, child) =&gt; Stack(</span><br><span class="line">    children: [</span><br><span class="line">      <span class="comment">// Use SomeExpensiveWidget here, without rebuilding every time.</span></span><br><span class="line">      <span class="keyword">if</span> (child != <span class="keyword">null</span>) child,</span><br><span class="line">      Text(<span class="string">&#x27;Total price: <span class="subst">$&#123;cart.totalPrice&#125;</span>&#x27;</span>),</span><br><span class="line">    ],</span><br><span class="line">  ),</span><br><span class="line">  <span class="comment">// Build the expensive widget here.</span></span><br><span class="line">  child: <span class="keyword">const</span> SomeExpensiveWidget(),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>最好能把 <code>Consumer</code> 放在 widget 树尽量低的位置上。你总不希望 UI 上任何一点小变化就全盘重新构建 widget 吧。</p>
 </blockquote>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="comment">// DO THIS</span></span><br><span class="line"><span class="keyword">return</span> HumongousWidget(</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  child: AnotherMonstrousWidget(</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    child: Consumer&lt;CartModel&gt;(</span><br><span class="line">      builder: (context, cart, child) &#123;</span><br><span class="line">        <span class="keyword">return</span> Text(<span class="string">&#x27;Total price: <span class="subst">$&#123;cart.totalPrice&#125;</span>&#x27;</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">    ),</span><br><span class="line">  ),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>[ 补充 ] Provider.of</li>
+<li>Provider.of 【点击时触发的方法】</li>
 </ul>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">onPressed: () <span class="keyword">async</span> &#123;</span><br><span class="line">  setState(() &#123;</span><br><span class="line">    _swt = !_swt;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">int?</span> selectedIndex =</span><br><span class="line">    <span class="keyword">await</span> _showCustomModalBottomSheet(</span><br><span class="line">    context, _options);</span><br><span class="line">  <span class="keyword">if</span> (selectedIndex == <span class="keyword">null</span>) &#123;</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      _swt = !_swt;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">final</span> sa = ShowAthletes();</span><br><span class="line">  Provider.of&lt;ShowAthletes&gt;(context,listen:<span class="keyword">false</span>).showAthletesService();</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;自定义底部弹层：选中了第<span class="subst">$selectedIndex</span>个选项&quot;</span>);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>有的时候你不需要模型中的 <strong>数据</strong> 来改变 UI，但是你可能还是需要访问该数据。比如，<code>ClearCart</code> 按钮能够清空购物车的所有商品。它不需要显示购物车里的内容，只需要调用 <code>clear()</code> 方法。</p>
 <p>我们可以使用 <code>Consumer&lt;CartModel&gt;</code> 来实现这个效果，不过这么实现有点浪费。因为我们让整体框架重构了一个无需重构的 widget。</p>
