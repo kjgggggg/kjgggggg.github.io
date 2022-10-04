@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>14.最长公共前缀</title>
-    <url>/2022/08/09/14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</url>
-    <content><![CDATA[<h3 id="14-最长公共前缀"><a href="#14-最长公共前缀" class="headerlink" title="14. 最长公共前缀"></a><a href="https://leetcode.cn/problems/longest-common-prefix/">14. 最长公共前缀</a></h3><p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
-<p>如果不存在公共前缀，返回空字符串 <code>&quot;&quot;</code>。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入：strs = [<span class="string">&quot;flower&quot;</span>,<span class="string">&quot;flow&quot;</span>,<span class="string">&quot;flight&quot;</span>]</span><br><span class="line">输出：<span class="string">&quot;fl&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入：strs = [<span class="string">&quot;dog&quot;</span>,<span class="string">&quot;racecar&quot;</span>,<span class="string">&quot;car&quot;</span>]</span><br><span class="line">输出：<span class="string">&quot;&quot;</span></span><br><span class="line">解释：输入不存在公共前缀。</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">longestCommonPrefix</span><span class="params">(vector&lt;string&gt;&amp; strs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> cnt = <span class="number">0</span>; cnt&lt;strs[<span class="number">0</span>].<span class="built_in">length</span>(); cnt++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;strs.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(strs[i].<span class="built_in">length</span>()&lt;=cnt || strs[i].<span class="built_in">at</span>(cnt)!=strs[<span class="number">0</span>].<span class="built_in">at</span>(cnt))&#123;</span><br><span class="line">                    <span class="keyword">return</span> strs[<span class="number">0</span>].<span class="built_in">substr</span>(<span class="number">0</span>,cnt);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    <title>1.两数之和</title>
+    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
+<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
+<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestCommonPrefix</span>(<span class="params">self, strs</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type strs: List[str]</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> cnt <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(strs[<span class="number">0</span>])):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(strs)):</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(strs[i])&lt;=cnt <span class="keyword">or</span> strs[i][cnt]!=strs[<span class="number">0</span>][cnt]:</span><br><span class="line">                    <span class="keyword">return</span> strs[<span class="number">0</span>][:cnt]</span><br><span class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-
-
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -27,7 +22,7 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-        <tag>字符串</tag>
+        <tag>哈希表</tag>
       </tags>
   </entry>
   <entry>
@@ -323,6 +318,36 @@
       </tags>
   </entry>
   <entry>
+    <title>14.最长公共前缀</title>
+    <url>/2022/08/09/14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</url>
+    <content><![CDATA[<h3 id="14-最长公共前缀"><a href="#14-最长公共前缀" class="headerlink" title="14. 最长公共前缀"></a><a href="https://leetcode.cn/problems/longest-common-prefix/">14. 最长公共前缀</a></h3><p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+<p>如果不存在公共前缀，返回空字符串 <code>&quot;&quot;</code>。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入：strs = [<span class="string">&quot;flower&quot;</span>,<span class="string">&quot;flow&quot;</span>,<span class="string">&quot;flight&quot;</span>]</span><br><span class="line">输出：<span class="string">&quot;fl&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">输入：strs = [<span class="string">&quot;dog&quot;</span>,<span class="string">&quot;racecar&quot;</span>,<span class="string">&quot;car&quot;</span>]</span><br><span class="line">输出：<span class="string">&quot;&quot;</span></span><br><span class="line">解释：输入不存在公共前缀。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">longestCommonPrefix</span><span class="params">(vector&lt;string&gt;&amp; strs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> cnt = <span class="number">0</span>; cnt&lt;strs[<span class="number">0</span>].<span class="built_in">length</span>(); cnt++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;strs.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(strs[i].<span class="built_in">length</span>()&lt;=cnt || strs[i].<span class="built_in">at</span>(cnt)!=strs[<span class="number">0</span>].<span class="built_in">at</span>(cnt))&#123;</span><br><span class="line">                    <span class="keyword">return</span> strs[<span class="number">0</span>].<span class="built_in">substr</span>(<span class="number">0</span>,cnt);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestCommonPrefix</span>(<span class="params">self, strs</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type strs: List[str]</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> cnt <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(strs[<span class="number">0</span>])):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(strs)):</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(strs[i])&lt;=cnt <span class="keyword">or</span> strs[i][cnt]!=strs[<span class="number">0</span>][cnt]:</span><br><span class="line">                    <span class="keyword">return</span> strs[<span class="number">0</span>][:cnt]</span><br><span class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>53.最大子数组和</title>
     <url>/2022/08/09/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/</url>
     <content><![CDATA[<h3 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
@@ -354,9 +379,15 @@
       </tags>
   </entry>
   <entry>
-    <title>98.验证BST 99.恢复二叉树</title>
+    <title>中序遍历模板 98.验证BST 99.恢复二叉树</title>
     <url>/2022/09/30/98-%E9%AA%8C%E8%AF%81BST/</url>
-    <content><![CDATA[<h3 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98. 验证二叉搜索树"></a><a href="https://leetcode.cn/problems/validate-binary-search-tree/">98. 验证二叉搜索树</a></h3><p>给你一个二叉树的根节点 <code>root</code> ，判断其是否是一个有效的二叉搜索树。</p>
+    <content><![CDATA[<h3 id="中序遍历模板"><a href="#中序遍历模板" class="headerlink" title="中序遍历模板"></a>中序遍历模板</h3><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">inorder</span>(root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;left);</span><br><span class="line">        res.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inorderTraversal</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.res = [] <span class="comment"># 函数内部的函数一律不加self,函数内部的变量一律加self</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">inorder</span>(<span class="params">root</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span></span><br><span class="line">            inorder(root.left)</span><br><span class="line">            self.res.append(root.val)</span><br><span class="line">            inorder(root.right)</span><br><span class="line">        inorder(root)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98. 验证二叉搜索树"></a><a href="https://leetcode.cn/problems/validate-binary-search-tree/">98. 验证二叉搜索树</a></h3><p>给你一个二叉树的根节点 <code>root</code> ，判断其是否是一个有效的二叉搜索树。</p>
 <p><strong>有效</strong> 二叉搜索树定义如下：</p>
 <ul>
 <li>节点的左子树只包含 <strong>小于</strong> 当前节点的数。</li>
@@ -376,11 +407,11 @@
 <li>树中节点数目范围在<code>[1, 104]</code> 内</li>
 <li><code>-231 &lt;= Node.val &lt;= 231 - 1</code></li>
 </ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">long</span> pre = LONG_MIN;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="built_in">isValidBST</span>(root-&gt;left)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span>( root-&gt;val &lt;=pre ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            pre = root-&gt;val;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="built_in">isValidBST</span>(root-&gt;right)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">long</span> pre = LONG_MIN;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidBST</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="built_in">isValidBST</span>(root-&gt;left)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span>( root-&gt;val &lt;=pre ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            pre = root-&gt;val;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="built_in">isValidBST</span>(root-&gt;right)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidBST</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.pre = <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>) <span class="comment"># 最小浮点值</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">root</span>):</span><br><span class="line">            <span class="keyword">if</span> root:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> check(root.left): <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">if</span> root.val &lt;= self.pre : <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                self.pre = root.val</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> check(root.right): <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> check(root)</span><br></pre></td></tr></table></figure>
+<h4 id="Python-1"><a href="#Python-1" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidBST</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.pre = <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>) <span class="comment"># 最小浮点值</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">root</span>):</span><br><span class="line">            <span class="keyword">if</span> root:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> check(root.left): <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                <span class="keyword">if</span> root.val &lt;= self.pre : <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                self.pre = root.val</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> check(root.right): <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> check(root)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -400,11 +431,11 @@
 <li>树上节点的数目在范围 <code>[2, 1000]</code> 内</li>
 <li><code>-231 &lt;= Node.val &lt;= 231 - 1</code></li>
 </ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* left,* right, * pre;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">recoverTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">inorder</span>(root);</span><br><span class="line">        <span class="type">int</span> temp = left-&gt;val;</span><br><span class="line">        left-&gt;val = right-&gt;val;</span><br><span class="line">        right-&gt;val = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(pre!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(pre-&gt;val&gt;root-&gt;val)&#123;</span><br><span class="line">                <span class="keyword">if</span>(left == <span class="literal">nullptr</span>) left = pre;</span><br><span class="line">                right = root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = root;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="C-2"><a href="#C-2" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* left,* right, * pre;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">recoverTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">inorder</span>(root);</span><br><span class="line">        <span class="type">int</span> temp = left-&gt;val;</span><br><span class="line">        left-&gt;val = right-&gt;val;</span><br><span class="line">        right-&gt;val = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(pre!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(pre-&gt;val&gt;root-&gt;val)&#123;</span><br><span class="line">                <span class="keyword">if</span>(left == <span class="literal">nullptr</span>) left = pre;</span><br><span class="line">                right = root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = root;</span><br><span class="line">        <span class="built_in">inorder</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="Python-1"><a href="#Python-1" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">recoverTree</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br><span class="line">        self.pre = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">inorder</span>(<span class="params">root</span>): <span class="comment"># 函数内部的函数一律不加self,函数内部的变量一律加self</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span>;</span><br><span class="line">            inorder(root.left)</span><br><span class="line">            <span class="keyword">if</span> self.pre:</span><br><span class="line">                <span class="keyword">if</span> self.pre.val &gt; root.val:</span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> self.left: self.left = self.pre</span><br><span class="line">                    self.right = root</span><br><span class="line">            self.pre = root</span><br><span class="line">            inorder(root.right)</span><br><span class="line"></span><br><span class="line">        inorder(root)</span><br><span class="line">        temp = self.left.val</span><br><span class="line">        self.left.val = self.right.val</span><br><span class="line">        self.right.val = temp</span><br></pre></td></tr></table></figure>
+<h4 id="Python-2"><a href="#Python-2" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">recoverTree</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br><span class="line">        self.pre = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">inorder</span>(<span class="params">root</span>): <span class="comment"># 函数内部的函数一律不加self,函数内部的变量一律加self</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span>;</span><br><span class="line">            inorder(root.left)</span><br><span class="line">            <span class="keyword">if</span> self.pre:</span><br><span class="line">                <span class="keyword">if</span> self.pre.val &gt; root.val:</span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> self.left: self.left = self.pre</span><br><span class="line">                    self.right = root</span><br><span class="line">            self.pre = root</span><br><span class="line">            inorder(root.right)</span><br><span class="line"></span><br><span class="line">        inorder(root)</span><br><span class="line">        temp = self.left.val</span><br><span class="line">        self.left.val = self.right.val</span><br><span class="line">        self.right.val = temp</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -548,6 +579,37 @@
       </tags>
   </entry>
   <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Flask快速建站</title>
     <url>/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/</url>
     <content><![CDATA[<h3 id="Flask为何物"><a href="#Flask为何物" class="headerlink" title="Flask为何物"></a>Flask为何物</h3><p>Falsk是由python开发的轻量的web框架，小巧，灵活，一个脚本就可以启动一个web项目， 开发的难度比较大，flask好多的模块是按照django的思路开发的。和flask类似的框架还有web.py</p>
@@ -627,91 +689,6 @@
       <tags>
         <tag>Flask</tag>
         <tag>建站</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.两数之和</title>
-    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
-    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
-<p>示例 1：</p>
-<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
-<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
-<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>哈希表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git</title>
-    <url>/2022/08/22/git/</url>
-    <content><![CDATA[<h3 id="将项目上传至github"><a href="#将项目上传至github" class="headerlink" title="将项目上传至github"></a>将项目上传至github</h3><h4 id="查看本地是否存在SSH密钥"><a href="#查看本地是否存在SSH密钥" class="headerlink" title="查看本地是否存在SSH密钥"></a>查看本地是否存在SSH密钥</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -al ~/.ssh</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>私钥 <code>id_rsa</code> 		公钥 <code>id_rsa.pub</code>即是github中配置的SSH</p>
-</blockquote>
-<h4 id="测试是否成功配置github"><a href="#测试是否成功配置github" class="headerlink" title="测试是否成功配置github"></a>测试是否成功配置github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822132233415.png" alt="image-20220822132233415"></p>
-<h4 id="在github上新建repository"><a href="#在github上新建repository" class="headerlink" title="在github上新建repository"></a>在github上新建repository</h4><p><img src="/2022/08/22/git/image-20220822133050067.png" alt="image-20220822133050067"></p>
-<h4 id="进入到项目目录，输入init命令"><a href="#进入到项目目录，输入init命令" class="headerlink" title="进入到项目目录，输入init命令"></a>进入到项目目录，输入init命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/django01</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822133634551.png" alt="image-20220822133634551"></p>
-<h4 id="在该项目根目录中add并且commit"><a href="#在该项目根目录中add并且commit" class="headerlink" title="在该项目根目录中add并且commit"></a>在该项目根目录中add并且commit</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822134151019.png" alt="image-20220822134151019"></p>
-<h4 id="上传github"><a href="#上传github" class="headerlink" title="上传github"></a>上传github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:kjgggggg/django01.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/22/git/image-20220822134347195.png" alt="image-20220822134347195"></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -811,6 +788,35 @@
       </categories>
       <tags>
         <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git</title>
+    <url>/2022/08/22/git/</url>
+    <content><![CDATA[<h3 id="将项目上传至github"><a href="#将项目上传至github" class="headerlink" title="将项目上传至github"></a>将项目上传至github</h3><h4 id="查看本地是否存在SSH密钥"><a href="#查看本地是否存在SSH密钥" class="headerlink" title="查看本地是否存在SSH密钥"></a>查看本地是否存在SSH密钥</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -al ~/.ssh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>私钥 <code>id_rsa</code> 		公钥 <code>id_rsa.pub</code>即是github中配置的SSH</p>
+</blockquote>
+<h4 id="测试是否成功配置github"><a href="#测试是否成功配置github" class="headerlink" title="测试是否成功配置github"></a>测试是否成功配置github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822132233415.png" alt="image-20220822132233415"></p>
+<h4 id="在github上新建repository"><a href="#在github上新建repository" class="headerlink" title="在github上新建repository"></a>在github上新建repository</h4><p><img src="/2022/08/22/git/image-20220822133050067.png" alt="image-20220822133050067"></p>
+<h4 id="进入到项目目录，输入init命令"><a href="#进入到项目目录，输入init命令" class="headerlink" title="进入到项目目录，输入init命令"></a>进入到项目目录，输入init命令</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/pycharmWorkSpace/django01</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822133634551.png" alt="image-20220822133634551"></p>
+<h4 id="在该项目根目录中add并且commit"><a href="#在该项目根目录中add并且commit" class="headerlink" title="在该项目根目录中add并且commit"></a>在该项目根目录中add并且commit</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822134151019.png" alt="image-20220822134151019"></p>
+<h4 id="上传github"><a href="#上传github" class="headerlink" title="上传github"></a>上传github</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:kjgggggg/django01.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/22/git/image-20220822134347195.png" alt="image-20220822134347195"></p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
