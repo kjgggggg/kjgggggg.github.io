@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>1.两数之和</title>
+    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
+<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
+<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>114.二叉树展开为链表</title>
     <url>/2022/10/07/114-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<h3 id="114-二叉树展开为链表"><a href="#114-二叉树展开为链表" class="headerlink" title="114. 二叉树展开为链表"></a><a href="https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/">114. 二叉树展开为链表</a></h3><p>给你二叉树的根结点 <code>root</code> ，请你将它展开为一个单链表：</p>
@@ -224,31 +249,6 @@
       </tags>
   </entry>
   <entry>
-    <title>1.两数之和</title>
-    <url>/2022/08/04/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
-    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
-<p>示例 1：</p>
-<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
-<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
-<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(mp.<span class="built_in">find</span>(target-nums[i]) != mp.<span class="built_in">end</span>())&#123;	<span class="comment">// mp.end()指向最后元素下一个元素的迭代器</span></span><br><span class="line">                <span class="keyword">return</span> &#123;mp.<span class="built_in">find</span>(target-nums[i])-&gt;second,i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            mp.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(nums[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        d = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target-num <span class="keyword">in</span> d:</span><br><span class="line">                <span class="keyword">return</span>[d[target-num],i]</span><br><span class="line">            <span class="keyword">else</span>: d[num] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>哈希表</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>129.求根节点到叶节点数字之和</title>
     <url>/2022/10/07/129-%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</url>
     <content><![CDATA[<h3 id="129-求根节点到叶节点数字之和"><a href="#129-求根节点到叶节点数字之和" class="headerlink" title="129. 求根节点到叶节点数字之和"></a><a href="https://leetcode.cn/problems/sum-root-to-leaf-numbers/">129. 求根节点到叶节点数字之和</a></h3><p>给你一个二叉树的根节点 <code>root</code> ，树中每个节点都存放有一个 <code>0</code> 到 <code>9</code> 之间的数字。</p>
@@ -282,58 +282,6 @@
         <tag>leetcode</tag>
         <tag>二叉树</tag>
         <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>130.被围绕的区域 面试题13. 机器人的运动范围</title>
-    <url>/2022/10/09/130-%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</url>
-    <content><![CDATA[<h3 id="130-被围绕的区域"><a href="#130-被围绕的区域" class="headerlink" title="130. 被围绕的区域"></a><a href="https://leetcode.cn/problems/surrounded-regions/">130. 被围绕的区域</a></h3><p>给你一个 <code>m x n</code> 的矩阵 <code>board</code> ，由若干字符 <code>&#39;X&#39;</code> 和 <code>&#39;O&#39;</code> ，找到所有被 <code>&#39;X&#39;</code> 围绕的区域，并将这些区域里所有的 <code>&#39;O&#39;</code> 用 <code>&#39;X&#39;</code> 填充。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/09/130-%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/xogrid.jpg" alt="img"></p>
-<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">输入：board = [[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>]]</span><br><span class="line">输出：[[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>]]</span><br><span class="line">解释：被围绕的区间不会存在于边界上，换句话说，任何边界上的 <span class="string">&#x27;O&#x27;</span> 都不会被填充为 <span class="string">&#x27;X&#x27;</span>。 任何不在边界上，或不与边界上的 <span class="string">&#x27;O&#x27;</span> 相连的 <span class="string">&#x27;O&#x27;</span> 最终都会被填充为 <span class="string">&#x27;X&#x27;</span>。如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：board = <span class="string">[[&quot;X&quot;]]</span></span><br><span class="line">输出：<span class="string">[[&quot;X&quot;]]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>m == board.length</code></li>
-<li><code>n == board[i].length</code></li>
-<li><code>1 &lt;= m, n &lt;= 200</code></li>
-<li><code>board[i][j]</code> 为 <code>&#39;X&#39;</code> 或 <code>&#39;O&#39;</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>与<a href="https://kjgggggg.github.io/2022/09/28/200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/">岛屿系列</a>问题思路一致</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; board)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> r = board.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> c = board[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span>(r == <span class="number">1</span> || c == <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; r ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; c ; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="string">&#x27;O&#x27;</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i == <span class="number">0</span> || i == r <span class="number">-1</span> || j == c - <span class="number">1</span>|| j == <span class="number">0</span>) <span class="built_in">dfs</span>(board, i, j);</span><br><span class="line">                    <span class="comment">// if(board[i][j] == &#x27;O&#x27;) board[i][j] = &#x27;X&#x27;; 不能在这写是因为刚变为N后 又被变为O了，然后又被变为X了</span></span><br><span class="line">                    <span class="comment">// if(board[i][j] == &#x27;N&#x27;) board[i][j] = &#x27;O&#x27;; </span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; r ; i++)&#123; <span class="comment">// N变为O O变为X</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; c ; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="string">&#x27;O&#x27;</span>) board[i][j] = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="string">&#x27;N&#x27;</span>) board[i][j] = <span class="string">&#x27;O&#x27;</span>; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; board, <span class="type">int</span> r, <span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(r &lt; <span class="number">0</span> || r &gt; board.<span class="built_in">size</span>() - <span class="number">1</span> || c &lt; <span class="number">0</span> || c &gt; board[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(board[r][c] != <span class="string">&#x27;O&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">        board[r][c] = <span class="string">&#x27;N&#x27;</span>; <span class="comment">// 先遍历边界的O,将与之相连的O全改成N </span></span><br><span class="line">        <span class="built_in">dfs</span>(board, r + <span class="number">1</span>, c);</span><br><span class="line">        <span class="built_in">dfs</span>(board, r - <span class="number">1</span>, c);</span><br><span class="line">        <span class="built_in">dfs</span>(board, r, c + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(board, r, c - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="面试题13-机器人的运动范围"><a href="#面试题13-机器人的运动范围" class="headerlink" title="面试题13. 机器人的运动范围"></a><a href="https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/">面试题13. 机器人的运动范围</a></h3><p>地上有一个m行n列的方格，从坐标 <code>[0,0]</code> 到坐标 <code>[m-1,n-1]</code> 。一个机器人从坐标 <code>[0, 0] </code>的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7&#x3D;18。但它不能进入方格 [35, 38]，因为3+5+3+8&#x3D;19。请问该机器人能够到达多少个格子？</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">2</span>, <span class="built_in">n</span> = <span class="number">3</span>, k = <span class="number">1</span></span><br><span class="line">输出：<span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">1</span>, k = <span class="number">0</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n,m &lt;= 100</code></li>
-<li><code>0 &lt;= k &lt;= 20</code></li>
-</ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>与<a href="https://kjgggggg.github.io/2022/09/28/200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/">岛屿系列</a>问题思路一致</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">movingCount</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">visited</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">0</span>)); <span class="comment">// 初始化为m行n列的0</span></span><br><span class="line">        <span class="built_in">dfs</span>(m, n, <span class="number">0</span>, <span class="number">0</span>, k, visited);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> r, <span class="type">int</span> c, <span class="type">int</span> k, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; visited)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(r &lt; <span class="number">0</span> || r &gt; m - <span class="number">1</span> || c &lt; <span class="number">0</span> || c &gt; n - <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>((r % <span class="number">10</span> + r / <span class="number">10</span> + c % <span class="number">10</span> + c / <span class="number">10</span>) &gt; k) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(visited[r][c] != <span class="number">0</span>) <span class="keyword">return</span>; <span class="comment">// 已经被访问过</span></span><br><span class="line">        visited[r][c] = <span class="number">1</span>;</span><br><span class="line">        res ++;</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r + <span class="number">1</span>, c, k, visited);</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r - <span class="number">1</span>, c, k, visited);</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r , c + <span class="number">1</span>, k, visited);</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r , c - <span class="number">1</span>, k, visited);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>dfs</tag>
-        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -401,6 +349,58 @@
         <tag>leetcode</tag>
         <tag>dfs</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>130.被围绕的区域 面试题13. 机器人的运动范围</title>
+    <url>/2022/10/09/130-%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</url>
+    <content><![CDATA[<h3 id="130-被围绕的区域"><a href="#130-被围绕的区域" class="headerlink" title="130. 被围绕的区域"></a><a href="https://leetcode.cn/problems/surrounded-regions/">130. 被围绕的区域</a></h3><p>给你一个 <code>m x n</code> 的矩阵 <code>board</code> ，由若干字符 <code>&#39;X&#39;</code> 和 <code>&#39;O&#39;</code> ，找到所有被 <code>&#39;X&#39;</code> 围绕的区域，并将这些区域里所有的 <code>&#39;O&#39;</code> 用 <code>&#39;X&#39;</code> 填充。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/09/130-%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/xogrid.jpg" alt="img"></p>
+<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">输入：board = [[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>]]</span><br><span class="line">输出：[[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>],[<span class="string">&quot;X&quot;</span>,<span class="string">&quot;O&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;X&quot;</span>]]</span><br><span class="line">解释：被围绕的区间不会存在于边界上，换句话说，任何边界上的 <span class="string">&#x27;O&#x27;</span> 都不会被填充为 <span class="string">&#x27;X&#x27;</span>。 任何不在边界上，或不与边界上的 <span class="string">&#x27;O&#x27;</span> 相连的 <span class="string">&#x27;O&#x27;</span> 最终都会被填充为 <span class="string">&#x27;X&#x27;</span>。如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：board = <span class="string">[[&quot;X&quot;]]</span></span><br><span class="line">输出：<span class="string">[[&quot;X&quot;]]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == board.length</code></li>
+<li><code>n == board[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 200</code></li>
+<li><code>board[i][j]</code> 为 <code>&#39;X&#39;</code> 或 <code>&#39;O&#39;</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>与<a href="https://kjgggggg.github.io/2022/09/28/200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/">岛屿系列</a>问题思路一致</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; board)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> r = board.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> c = board[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span>(r == <span class="number">1</span> || c == <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; r ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; c ; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="string">&#x27;O&#x27;</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i == <span class="number">0</span> || i == r <span class="number">-1</span> || j == c - <span class="number">1</span>|| j == <span class="number">0</span>) <span class="built_in">dfs</span>(board, i, j);</span><br><span class="line">                    <span class="comment">// if(board[i][j] == &#x27;O&#x27;) board[i][j] = &#x27;X&#x27;; 不能在这写是因为刚变为N后 又被变为O了，然后又被变为X了</span></span><br><span class="line">                    <span class="comment">// if(board[i][j] == &#x27;N&#x27;) board[i][j] = &#x27;O&#x27;; </span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; r ; i++)&#123; <span class="comment">// N变为O O变为X</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; c ; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="string">&#x27;O&#x27;</span>) board[i][j] = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="string">&#x27;N&#x27;</span>) board[i][j] = <span class="string">&#x27;O&#x27;</span>; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; board, <span class="type">int</span> r, <span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(r &lt; <span class="number">0</span> || r &gt; board.<span class="built_in">size</span>() - <span class="number">1</span> || c &lt; <span class="number">0</span> || c &gt; board[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(board[r][c] != <span class="string">&#x27;O&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">        board[r][c] = <span class="string">&#x27;N&#x27;</span>; <span class="comment">// 先遍历边界的O,将与之相连的O全改成N </span></span><br><span class="line">        <span class="built_in">dfs</span>(board, r + <span class="number">1</span>, c);</span><br><span class="line">        <span class="built_in">dfs</span>(board, r - <span class="number">1</span>, c);</span><br><span class="line">        <span class="built_in">dfs</span>(board, r, c + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(board, r, c - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="面试题13-机器人的运动范围"><a href="#面试题13-机器人的运动范围" class="headerlink" title="面试题13. 机器人的运动范围"></a><a href="https://leetcode.cn/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/">面试题13. 机器人的运动范围</a></h3><p>地上有一个m行n列的方格，从坐标 <code>[0,0]</code> 到坐标 <code>[m-1,n-1]</code> 。一个机器人从坐标 <code>[0, 0] </code>的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7&#x3D;18。但它不能进入方格 [35, 38]，因为3+5+3+8&#x3D;19。请问该机器人能够到达多少个格子？</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">2</span>, <span class="built_in">n</span> = <span class="number">3</span>, k = <span class="number">1</span></span><br><span class="line">输出：<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">1</span>, k = <span class="number">0</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n,m &lt;= 100</code></li>
+<li><code>0 &lt;= k &lt;= 20</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>与<a href="https://kjgggggg.github.io/2022/09/28/200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/">岛屿系列</a>问题思路一致</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">movingCount</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">visited</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">0</span>)); <span class="comment">// 初始化为m行n列的0</span></span><br><span class="line">        <span class="built_in">dfs</span>(m, n, <span class="number">0</span>, <span class="number">0</span>, k, visited);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> r, <span class="type">int</span> c, <span class="type">int</span> k, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; visited)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(r &lt; <span class="number">0</span> || r &gt; m - <span class="number">1</span> || c &lt; <span class="number">0</span> || c &gt; n - <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>((r % <span class="number">10</span> + r / <span class="number">10</span> + c % <span class="number">10</span> + c / <span class="number">10</span>) &gt; k) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(visited[r][c] != <span class="number">0</span>) <span class="keyword">return</span>; <span class="comment">// 已经被访问过</span></span><br><span class="line">        visited[r][c] = <span class="number">1</span>;</span><br><span class="line">        res ++;</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r + <span class="number">1</span>, c, k, visited);</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r - <span class="number">1</span>, c, k, visited);</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r , c + <span class="number">1</span>, k, visited);</span><br><span class="line">        <span class="built_in">dfs</span>(m, n, r , c - <span class="number">1</span>, k, visited);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>dfs</tag>
+        <tag>图</tag>
       </tags>
   </entry>
   <entry>
@@ -514,34 +514,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2.两数相加</title>
-    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
-    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例 1：</p>
-<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
-<p>示例 2：</p>
-<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
-<p>示例 3：</p>
-<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>递归</tag>
-        <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>200.岛屿数量 463.岛屿的周长 695.岛屿的最大面积 1254. 统计封闭岛屿的数目</title>
     <url>/2022/09/28/200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</url>
     <content><![CDATA[<h3 id="200-岛屿数量"><a href="#200-岛屿数量" class="headerlink" title="200. 岛屿数量"></a><a href="https://leetcode.cn/problems/number-of-islands/">200. 岛屿数量</a></h3><p>给你一个由 <code>&#39;1&#39;</code>（陆地）和 <code>&#39;0&#39;</code>（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
@@ -641,6 +613,34 @@
       <tags>
         <tag>leetcode</tag>
         <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2.两数相加</title>
+    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例 1：</p>
+<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
+<p>示例 2：</p>
+<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
+<p>示例 3：</p>
+<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>递归</tag>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -856,34 +856,6 @@
       </tags>
   </entry>
   <entry>
-    <title>279.完全平方数</title>
-    <url>/2022/10/22/279-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279. 完全平方数"></a><a href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></h3><p>给你一个整数 <code>n</code> ，返回 <em>和为 <code>n</code> 的完全平方数的最少数量</em> 。</p>
-<p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：n = 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 =<span class="number"> 4 </span>+<span class="number"> 4 </span>+ 4</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">n</span> = <span class="number">13</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">13</span> = <span class="number">4</span> + <span class="number">9</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 104</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>动态规划</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; <span class="built_in">sqrt</span>(i + <span class="number">1</span>); j ++)&#123;</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i - j * j] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>3. 无重复字符的最长子串</title>
     <url>/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
     <content><![CDATA[<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
@@ -913,39 +885,31 @@
       </tags>
   </entry>
   <entry>
-    <title>515.在每个树行中找最大值</title>
-    <url>/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
-    <content><![CDATA[<h3 id="515-在每个树行中找最大值"><a href="#515-在每个树行中找最大值" class="headerlink" title="515. 在每个树行中找最大值"></a><a href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">515. 在每个树行中找最大值</a></h3><p>给定一棵二叉树的根节点 <code>root</code> ，请找出该二叉树中每一层的最大值。</p>
-<p><strong>示例1：</strong></p>
-<p><img src="/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/largest_e1.jpg" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,3,2,5,3,null,9]</span></span><br><span class="line">输出: <span class="comment">[1,3,9]</span></span><br></pre></td></tr></table></figure>
+    <title>279.完全平方数</title>
+    <url>/2022/10/22/279-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279. 完全平方数"></a><a href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></h3><p>给你一个整数 <code>n</code> ，返回 <em>和为 <code>n</code> 的完全平方数的最少数量</em> 。</p>
+<p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：n = 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 =<span class="number"> 4 </span>+<span class="number"> 4 </span>+ 4</span><br></pre></td></tr></table></figure>
 
-<p><strong>示例2：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,2,3]</span></span><br><span class="line">输出: <span class="comment">[1,3]</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">n</span> = <span class="number">13</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">13</span> = <span class="number">4</span> + <span class="number">9</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li>二叉树的节点个数的范围是 <code>[0,104]</code></li>
-<li><code>-231 &lt;= Node.val &lt;= 231 - 1</code></li>
+<li><code>1 &lt;= n &lt;= 104</code></li>
 </ul>
 <h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>DFS</li>
+<li>动态规划</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">largestValues</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="built_in">dfs</span>(root, res, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, vector&lt;<span class="type">int</span>&gt;&amp; res, <span class="type">int</span> currHeight)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(res.<span class="built_in">size</span>() == currHeight)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(root -&gt; val); <span class="comment">//如果当前层还没有最大值, 先随便push一个当前层结点的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        res[currHeight] = <span class="built_in">max</span>(root -&gt; val, res[currHeight]); <span class="comment">// 如果当前层有值了,选最大的</span></span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, res, currHeight + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, res, currHeight + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>BFS(略)</li>
-</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; <span class="built_in">sqrt</span>(i + <span class="number">1</span>); j ++)&#123;</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i - j * j] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>leetcode</category>
       </categories>
       <tags>
         <tag>leetcode</tag>
-        <tag>dfs</tag>
-        <tag>bfs</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -1001,6 +965,42 @@
       <tags>
         <tag>leetcode</tag>
         <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>515.在每个树行中找最大值</title>
+    <url>/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
+    <content><![CDATA[<h3 id="515-在每个树行中找最大值"><a href="#515-在每个树行中找最大值" class="headerlink" title="515. 在每个树行中找最大值"></a><a href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">515. 在每个树行中找最大值</a></h3><p>给定一棵二叉树的根节点 <code>root</code> ，请找出该二叉树中每一层的最大值。</p>
+<p><strong>示例1：</strong></p>
+<p><img src="/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/largest_e1.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,3,2,5,3,null,9]</span></span><br><span class="line">输出: <span class="comment">[1,3,9]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,2,3]</span></span><br><span class="line">输出: <span class="comment">[1,3]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>二叉树的节点个数的范围是 <code>[0,104]</code></li>
+<li><code>-231 &lt;= Node.val &lt;= 231 - 1</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>DFS</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">largestValues</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="built_in">dfs</span>(root, res, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, vector&lt;<span class="type">int</span>&gt;&amp; res, <span class="type">int</span> currHeight)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(res.<span class="built_in">size</span>() == currHeight)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(root -&gt; val); <span class="comment">//如果当前层还没有最大值, 先随便push一个当前层结点的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        res[currHeight] = <span class="built_in">max</span>(root -&gt; val, res[currHeight]); <span class="comment">// 如果当前层有值了,选最大的</span></span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, res, currHeight + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, res, currHeight + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>BFS(略)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>dfs</tag>
+        <tag>bfs</tag>
       </tags>
   </entry>
   <entry>
@@ -1166,6 +1166,57 @@
       <tags>
         <tag>leetcode</tag>
         <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>96.不同的二叉搜索树 95.不同的二叉搜索树II</title>
+    <url>/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <content><![CDATA[<h3 id="96-不同的二叉搜索树"><a href="#96-不同的二叉搜索树" class="headerlink" title="96. 不同的二叉搜索树"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></h3><p>给你一个整数 <code>n</code> ，求恰由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的 <strong>二叉搜索树</strong> 有多少种？返回满足题意的二叉搜索树的种数。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3.jpg" alt="img"></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 19</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155720080.png" alt="image-20221022155720080"></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155737712.png" alt="image-20221022155737712"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">G</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        G[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        G[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">                G[i] += G[j - <span class="number">1</span>] * G[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> G[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="95-不同的二叉搜索树-II"><a href="#95-不同的二叉搜索树-II" class="headerlink" title="95. 不同的二叉搜索树 II"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees-ii/">95. 不同的二叉搜索树 II</a></h3><p>给你一个整数 <code>n</code> ，请你生成并返回所有由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的不同 <strong>二叉搜索树</strong> 。可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3-20221022174206641.jpg" alt="img"></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">n</span> = <span class="number">3</span></span><br><span class="line">输出：[[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">3</span>],[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">3</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">1</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">1</span></span><br><span class="line">输出：<span class="string">[[1]]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 8</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>DFS</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">dfs</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> &#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line">        vector&lt;TreeNode*&gt; allTrees;</span><br><span class="line">        <span class="comment">// 枚举可行根节点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            <span class="comment">// 获得所有可行的左子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; leftTrees = <span class="built_in">dfs</span>(start, i - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获得所有可行的右子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; rightTrees = <span class="built_in">dfs</span>(i + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从左子树集合中选出一棵左子树，从右子树集合中选出一棵右子树，拼接到根节点上</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; left : leftTrees) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; right : rightTrees) &#123;</span><br><span class="line">                    TreeNode* currTree = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(i);</span><br><span class="line">                    currTree-&gt;left = left;</span><br><span class="line">                    currTree-&gt;right = right;</span><br><span class="line">                    allTrees.<span class="built_in">push_back</span>(currTree);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> allTrees;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">generateTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!n) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(<span class="number">1</span>, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>dfs</tag>
+        <tag>动态规划</tag>
+        <tag>BST</tag>
       </tags>
   </entry>
   <entry>
@@ -2195,57 +2246,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Django项目-管理系统</title>
-    <url>/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
-<li><p>新建项目 <code>/django01</code></p>
-</li>
-<li><p>删除templates以及<code>settings.py</code>中<code>DIRS</code>字段的值</p>
-</li>
-<li><p><code>python3.9 manage.py startapp app01  </code></p>
-</li>
-<li><p>去<code>settings.py</code>中注册<code>app01</code></p>
-</li>
-<li><p>在<code>app01</code>目录中新建<code>templates</code>目录以及<code>static</code>目录（<code>static</code>包含<code>css、img、js、plugins</code>目录）</p>
-</li>
-<li><p>在<code>settings.py</code>中进行数据库连接</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;数据库名&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;00000000&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: 3306,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># python manage.py makemigrations</span></span><br><span class="line"><span class="comment"># python manage.py migrate</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="设计数据库表结构"><a href="#设计数据库表结构" class="headerlink" title="设计数据库表结构"></a>设计数据库表结构</h3><h3 id="写页面"><a href="#写页面" class="headerlink" title="写页面"></a>写页面</h3><ul>
-<li>注意点1</li>
-</ul>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820151146120.png" alt="image-20220820151146120"></p>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820152335461.png" alt="image-20220820152335461"></p>
-<p>如图中那样引用静态文件预览正常，项目运行后不正常，需如下操作:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;% load <span class="keyword">static</span> %&#125;</span><br><span class="line">&#123;% csrf_token %&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/css/bootstrap.css&#x27; %&#125; &quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.0.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/js/bootstrap.js&#x27;%&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>注意点2</li>
-</ul>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820173233427.png" alt="image-20220820173233427"></p>
-<ul>
-<li>注意点3</li>
-</ul>
-<p>若请求形式为<code>post</code>，则不能再出现<code>request.GET</code></p>
-<p>解决方法： <code>path(&#39;department/&lt;int:nid&gt;/edit/&#39;,views.depart_edit),</code></p>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220821015541847.png" alt="image-20220821015541847"></p>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>Django</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DP之简单题合集</title>
     <url>/2022/08/09/DP%E4%B9%8B%E7%AE%80%E5%8D%95%E9%A2%98%E5%90%88%E9%9B%86/</url>
     <content><![CDATA[<h3 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
@@ -2396,6 +2396,57 @@
       </tags>
   </entry>
   <entry>
+    <title>Django项目-管理系统</title>
+    <url>/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li><p>新建项目 <code>/django01</code></p>
+</li>
+<li><p>删除templates以及<code>settings.py</code>中<code>DIRS</code>字段的值</p>
+</li>
+<li><p><code>python3.9 manage.py startapp app01  </code></p>
+</li>
+<li><p>去<code>settings.py</code>中注册<code>app01</code></p>
+</li>
+<li><p>在<code>app01</code>目录中新建<code>templates</code>目录以及<code>static</code>目录（<code>static</code>包含<code>css、img、js、plugins</code>目录）</p>
+</li>
+<li><p>在<code>settings.py</code>中进行数据库连接</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;数据库名&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;00000000&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: 3306,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># python manage.py makemigrations</span></span><br><span class="line"><span class="comment"># python manage.py migrate</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设计数据库表结构"><a href="#设计数据库表结构" class="headerlink" title="设计数据库表结构"></a>设计数据库表结构</h3><h3 id="写页面"><a href="#写页面" class="headerlink" title="写页面"></a>写页面</h3><ul>
+<li>注意点1</li>
+</ul>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820151146120.png" alt="image-20220820151146120"></p>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820152335461.png" alt="image-20220820152335461"></p>
+<p>如图中那样引用静态文件预览正常，项目运行后不正常，需如下操作:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;% load <span class="keyword">static</span> %&#125;</span><br><span class="line">&#123;% csrf_token %&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/css/bootstrap.css&#x27; %&#125; &quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.0.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/js/bootstrap.js&#x27;%&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>注意点2</li>
+</ul>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820173233427.png" alt="image-20220820173233427"></p>
+<ul>
+<li>注意点3</li>
+</ul>
+<p>若请求形式为<code>post</code>，则不能再出现<code>request.GET</code></p>
+<p>解决方法： <code>path(&#39;department/&lt;int:nid&gt;/edit/&#39;,views.depart_edit),</code></p>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220821015541847.png" alt="image-20220821015541847"></p>
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IOS开发</title>
     <url>/2022/10/16/IOS%E5%BC%80%E5%8F%91/</url>
     <content><![CDATA[<h3 id="创建IOS项目工程"><a href="#创建IOS项目工程" class="headerlink" title="创建IOS项目工程"></a>创建IOS项目工程</h3><img src="/2022/10/16/IOS%E5%BC%80%E5%8F%91/image-20221016133636928.png" alt="image-20221016133636928" style="zoom: 50%;">
@@ -2434,37 +2485,6 @@
       </categories>
       <tags>
         <tag>IOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self Attention</title>
-    <url>/2022/07/31/Self-Attention/</url>
-    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
-<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
-<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
-<ul>
-<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
-</ul>
-<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
-<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
-</li>
-<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
-</li>
-<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
-</li>
-<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>deeplearning</category>
-      </categories>
-      <tags>
-        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
@@ -2593,6 +2613,37 @@
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self Attention</title>
+    <url>/2022/07/31/Self-Attention/</url>
+    <content><![CDATA[<h3 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/881659278403_.pic.jpg" alt="881659278403_.pic"></p>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30866925-c326e92942025a3a6c6b1e8b96ccc0ce.png" alt="30866925-c326e92942025a3a6c6b1e8b96ccc0ce"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p><img src="/2022/07/31/Self-Attention/30867091-d28fe5868178a62d9faab212486b474b.png" alt="30867091-d28fe5868178a62d9faab212486b474b"></p>
+<h3 id="Muiltihead-Self-Attention"><a href="#Muiltihead-Self-Attention" class="headerlink" title="Muiltihead Self Attention"></a>Muiltihead Self Attention</h3><h4 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h4><p><img src="/2022/07/31/Self-Attention/image-20220801014946983.png" alt="image-20220801014946983"></p>
+<h4 id="细节-1"><a href="#细节-1" class="headerlink" title="细节"></a>细节</h4><p><img src="/2022/07/31/Self-Attention/30867156-2219b84d50e04f41dd60cbe13b2994ac.png" alt="30867156-2219b84d50e04f41dd60cbe13b2994ac"></p>
+<ul>
+<li>这里的 a i 和 a j 是同一个输入(可以理解为下图的X)</li>
+</ul>
+<h4 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h4><p><img src="/2022/07/31/Self-Attention/QQ20220801-015325.png" alt="QQ20220801-015325"></p>
+<p><img src="/2022/07/31/Self-Attention/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>让其他词的Q来和apple这个词不同组的K-V进行attention。</p>
+</li>
+<li><p>再把所有的attention结果拼接起来，通过一个全连接层（矩阵变换）得到最终结果。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>deeplearning</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
       </tags>
   </entry>
   <entry>
