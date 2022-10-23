@@ -50,8 +50,9 @@
 <meta property="og:image" content="https://15445.courses.cs.cmu.edu/icons/layout.gif">
 <meta property="og:image" content="https://15445.courses.cs.cmu.edu/icons/layout.gif">
 <meta property="og:image" content="https://15445.courses.cs.cmu.edu/icons/layout.gif">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/10/21/CMU-15-445/image-20221023224147114.png">
 <meta property="article:published_time" content="2022-10-21T14:06:09.000Z">
-<meta property="article:modified_time" content="2022-10-23T12:41:54.638Z">
+<meta property="article:modified_time" content="2022-10-23T14:53:25.260Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
@@ -243,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-23 20:41:54" itemprop="dateModified" datetime="2022-10-23T20:41:54+08:00">2022-10-23</time>
+                <time title="修改时间：2022-10-23 22:53:25" itemprop="dateModified" datetime="2022-10-23T22:53:25+08:00">2022-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -422,9 +423,9 @@
 <td align="left">268K</td>
 </tr>
 </tbody></table>
-<h3 id="章节"><a href="#章节" class="headerlink" title="章节"></a>章节</h3><h4 id="01-introduction"><a href="#01-introduction" class="headerlink" title="01 - introduction"></a>01 - introduction</h4><h5 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a>Databases</h5><p>数据库是一个可以模拟真实世界的某些方面的有组织的, 相互关联的数据的集合</p>
+<h3 id="章节"><a href="#章节" class="headerlink" title="章节"></a>章节</h3><h4 id="01-introduction"><a href="#01-introduction" class="headerlink" title="01 - introduction"></a>01 - introduction</h4><h5 id="1-Databases"><a href="#1-Databases" class="headerlink" title="1 Databases"></a>1 Databases</h5><p>数据库是一个可以模拟真实世界的某些方面的有组织的, 相互关联的数据的集合</p>
 <p>数据库与数据库管理系统(DBMS, 如MySQL, Oracle, MongoDB)不同.   DBMS是管理数据库的软件</p>
-<h5 id="Flat-File-Strawman"><a href="#Flat-File-Strawman" class="headerlink" title="Flat File Strawman"></a>Flat File Strawman</h5><p>没有数据库之前,我们用简单的文件存储数据,有几个问题 (用开发音乐软件举例) :</p>
+<h5 id="2-Flat-File-Strawman"><a href="#2-Flat-File-Strawman" class="headerlink" title="2 Flat File Strawman"></a>2 Flat File Strawman</h5><p>没有数据库之前,我们用简单的文件存储数据,有几个问题 (用开发音乐软件举例) :</p>
 <ul>
 <li>Data Integrity 数据完整性</li>
 </ul>
@@ -449,14 +450,62 @@
 <p>– What if the machine crashes while our program is updating a record? </p>
 <p>– What if we want to replicate the database on multiple machines for high availability?</p>
 </blockquote>
-<h5 id="Database-Management-System"><a href="#Database-Management-System" class="headerlink" title="Database Management System"></a>Database Management System</h5><h5 id="Relational-Model"><a href="#Relational-Model" class="headerlink" title="Relational Model"></a>Relational Model</h5><h5 id="Data-Manipulation-Languages-DMLs"><a href="#Data-Manipulation-Languages-DMLs" class="headerlink" title="Data Manipulation Languages (DMLs)"></a>Data Manipulation Languages (DMLs)</h5><h5 id="Relational-Algebra"><a href="#Relational-Algebra" class="headerlink" title="Relational Algebra"></a>Relational Algebra</h5><h5 id="相关词汇"><a href="#相关词汇" class="headerlink" title="相关词汇"></a>相关词汇</h5><p>plagiarize   [ˈpleɪdʒəraɪz]	v.剽窃,抄袭</p>
+<h5 id="3-DBMS"><a href="#3-DBMS" class="headerlink" title="3 DBMS"></a>3 DBMS</h5><p>DBMS用于定义、创建、查询、更新和管理数据库</p>
+<p>DBMS很难构建和维护，因为逻辑层和物理层之间存在紧密耦合。</p>
+<p>逻辑层描述数据库具有哪些实体和属性，而物理层是那些实体和属性被存储的方式。在早期，物理层被定义在应用软件中，如果我们想</p>
+<p>更改应用程序正在使用的物理层，我们必须更改所有代码以匹配新的物理层。</p>
+<h5 id="4-Relational-Model-关系模型"><a href="#4-Relational-Model-关系模型" class="headerlink" title="4 Relational Model 关系模型"></a>4 Relational Model 关系模型</h5><p>Ted Codd注意到，每当人们想要更改物理层时，他们都会重写DBMS，因此在1970年，他提出了关系模型来避免这种情况。</p>
+<p>这个关系模型有三个关键点:</p>
+<ul>
+<li><p>将数据库存储在简单的数据结构(关系)中。</p>
+</li>
+<li><p>通过高级语言访问数据。</p>
+</li>
+<li><p>待实现的物理存储。</p>
+</li>
+</ul>
+<blockquote>
+<p><em>数据模型(Data Model)</em>	是用于描述数据库中数据的概念的集合。关系模型是一个数据模型的示例。</p>
+<p><em>架构(Schema)</em>	给定数据模型下对特定的数据集的描述</p>
+</blockquote>
+<p>关系数据模型定义了三个概念:</p>
+<ul>
+<li><p>结构:关系及其内容的定义。</p>
+</li>
+<li><p>完整性:确保数据库的内容满足约束。一个约束的例子是year属性的任何值都必须是一个数字。</p>
+</li>
+<li><p>操作:如何访问和修改数据库的内容。</p>
+</li>
+</ul>
+<blockquote>
+<p> <em>关系</em>	是包含表示实体的属性关系的无序集。关系是无序的，DBMS可以以任何它想要的方式存储它们，允许优化。</p>
+<p><em>元组(Tuple)</em>	是关系中的一组属性值(也称为它的域)。每个属性都可以是特殊的value, NULL，这意味着对于给定的元组，属性是未定义的。</p>
+<p><em>n-ary关系</em>	具有n个属性的关系称为n-ary关系。</p>
+<p><em>主键</em>	关系的主键唯一标识单个元组。一些dbms自动创建一个内部主键如果你没定义的话</p>
+<p><em>外键</em>	指定一个关系中的属性必须映射到另一个关系中的元组。</p>
+</blockquote>
+<h5 id="5-数据操作语言-DMLs"><a href="#5-数据操作语言-DMLs" class="headerlink" title="5 数据操作语言(DMLs)"></a>5 数据操作语言(DMLs)</h5><p>从数据库中存储和检索信息的语言。有两类:</p>
+<ul>
+<li>过程性(Procedural)	查询指定了DBMS应该使用的(高级)策略来查找所需的数据结果。</li>
+<li>非过程性(Non-Procedural)	查询只指定需要什么数据，而不指定如何查找它</li>
+</ul>
+<h5 id="6-Relational-Algebra"><a href="#6-Relational-Algebra" class="headerlink" title="6 Relational Algebra"></a>6 Relational Algebra</h5><p>关系代数是一组用于检索和操作关系中的元组的基本操作。</p>
+<p>每一个运算符接受一个或多个关系作为输入，并输出一个新的关系。</p>
+<p>Relational algebra is a procedural language because it defines the high level-steps of how to compute a query.</p>
+<p>关系代数属于过程性DMLs</p>
+<p><img src="/2022/10/21/CMU-15-445/image-20221023224147114.png" alt="image-20221023224147114"></p>
+<h5 id="相关词汇"><a href="#相关词汇" class="headerlink" title="* 相关词汇"></a>* 相关词汇</h5><p>plagiarize   [ˈpleɪdʒəraɪz]	v.剽窃,抄袭</p>
+<p>manipulate	v.操作</p>
 <p>coordinate 	v. 协调,配合</p>
 <p>formula	n.公式</p>
 <p>fledged	adj.成熟的</p>
 <p>redundant	adj.多余的</p>
 <p>internal	n.内部结构</p>
 <p>inter-related 	adj.相互关联的</p>
-
+<p>coupling	n.耦合</p>
+<p>procedural	adj.程序上的,过程上的</p>
+<p>algebra	n.代数</p>
+<h4 id="02-Advanced-SQL"><a href="#02-Advanced-SQL" class="headerlink" title="02 - Advanced SQL"></a>02 - Advanced SQL</h4><h5 id="1-Relational-Languages"><a href="#1-Relational-Languages" class="headerlink" title="1 Relational Languages"></a>1 Relational Languages</h5><h5 id="2-SQL-History"><a href="#2-SQL-History" class="headerlink" title="2 SQL History"></a>2 SQL History</h5><h5 id="3-Joins"><a href="#3-Joins" class="headerlink" title="3 Joins"></a>3 Joins</h5><h5 id="4-Aggregates"><a href="#4-Aggregates" class="headerlink" title="4 Aggregates"></a>4 Aggregates</h5><h5 id="5-String-Operations"><a href="#5-String-Operations" class="headerlink" title="5 String Operations"></a>5 String Operations</h5><h5 id="6-Date-and-Time"><a href="#6-Date-and-Time" class="headerlink" title="6 Date and Time"></a>6 Date and Time</h5><h5 id="7-Output-Redirection"><a href="#7-Output-Redirection" class="headerlink" title="7 Output Redirection"></a>7 Output Redirection</h5><h5 id="8-Output-Control"><a href="#8-Output-Control" class="headerlink" title="8 Output Control"></a>8 Output Control</h5><h5 id="9-Nested-Queries"><a href="#9-Nested-Queries" class="headerlink" title="9 Nested Queries"></a>9 Nested Queries</h5><h5 id="10-Window-Functions"><a href="#10-Window-Functions" class="headerlink" title="10 Window Functions"></a>10 Window Functions</h5><h5 id="11-Common-Table-Expressions"><a href="#11-Common-Table-Expressions" class="headerlink" title="11 Common Table Expressions"></a>11 Common Table Expressions</h5><h5 id="相关词汇-1"><a href="#相关词汇-1" class="headerlink" title="* 相关词汇"></a>* 相关词汇</h5>
     </div>
 
     
@@ -539,7 +588,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Notes"><span class="nav-number">1.</span> <span class="nav-text">Notes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%A0%E8%8A%82"><span class="nav-number">2.</span> <span class="nav-text">章节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#01-introduction"><span class="nav-number">2.1.</span> <span class="nav-text">01 - introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Databases"><span class="nav-number">2.1.1.</span> <span class="nav-text">Databases</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flat-File-Strawman"><span class="nav-number">2.1.2.</span> <span class="nav-text">Flat File Strawman</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Database-Management-System"><span class="nav-number">2.1.3.</span> <span class="nav-text">Database Management System</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Relational-Model"><span class="nav-number">2.1.4.</span> <span class="nav-text">Relational Model</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Data-Manipulation-Languages-DMLs"><span class="nav-number">2.1.5.</span> <span class="nav-text">Data Manipulation Languages (DMLs)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Relational-Algebra"><span class="nav-number">2.1.6.</span> <span class="nav-text">Relational Algebra</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AF%8D%E6%B1%87"><span class="nav-number">2.1.7.</span> <span class="nav-text">相关词汇</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Notes"><span class="nav-number">1.</span> <span class="nav-text">Notes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%A0%E8%8A%82"><span class="nav-number">2.</span> <span class="nav-text">章节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#01-introduction"><span class="nav-number">2.1.</span> <span class="nav-text">01 - introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Databases"><span class="nav-number">2.1.1.</span> <span class="nav-text">1 Databases</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Flat-File-Strawman"><span class="nav-number">2.1.2.</span> <span class="nav-text">2 Flat File Strawman</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-DBMS"><span class="nav-number">2.1.3.</span> <span class="nav-text">3 DBMS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Relational-Model-%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.1.4.</span> <span class="nav-text">4 Relational Model 关系模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80-DMLs"><span class="nav-number">2.1.5.</span> <span class="nav-text">5 数据操作语言(DMLs)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-Relational-Algebra"><span class="nav-number">2.1.6.</span> <span class="nav-text">6 Relational Algebra</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AF%8D%E6%B1%87"><span class="nav-number">2.1.7.</span> <span class="nav-text">* 相关词汇</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#02-Advanced-SQL"><span class="nav-number">2.2.</span> <span class="nav-text">02 - Advanced SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Relational-Languages"><span class="nav-number">2.2.1.</span> <span class="nav-text">1 Relational Languages</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-SQL-History"><span class="nav-number">2.2.2.</span> <span class="nav-text">2 SQL History</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Joins"><span class="nav-number">2.2.3.</span> <span class="nav-text">3 Joins</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Aggregates"><span class="nav-number">2.2.4.</span> <span class="nav-text">4 Aggregates</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-String-Operations"><span class="nav-number">2.2.5.</span> <span class="nav-text">5 String Operations</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-Date-and-Time"><span class="nav-number">2.2.6.</span> <span class="nav-text">6 Date and Time</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-Output-Redirection"><span class="nav-number">2.2.7.</span> <span class="nav-text">7 Output Redirection</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-Output-Control"><span class="nav-number">2.2.8.</span> <span class="nav-text">8 Output Control</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-Nested-Queries"><span class="nav-number">2.2.9.</span> <span class="nav-text">9 Nested Queries</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-Window-Functions"><span class="nav-number">2.2.10.</span> <span class="nav-text">10 Window Functions</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-Common-Table-Expressions"><span class="nav-number">2.2.11.</span> <span class="nav-text">11 Common Table Expressions</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AF%8D%E6%B1%87-1"><span class="nav-number">2.2.12.</span> <span class="nav-text">* 相关词汇</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
