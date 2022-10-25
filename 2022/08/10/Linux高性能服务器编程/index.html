@@ -20,86 +20,87 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="《Linux高性能服务器编程》第一篇 TCP&#x2F;IP协议族详解">
+  <meta name="description" content="Linux高性能服务器编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP&#x2F;IP协议族详解">
-<meta property="og:url" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:title" content="Linux高性能服务器编程">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="《Linux高性能服务器编程》第一篇 TCP&#x2F;IP协议族详解">
+<meta property="og:description" content="Linux高性能服务器编程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813092011827.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810163355071.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810165616398.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810220933496.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810222545190.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810223345081.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813092713755.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813100212614.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813100318552.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813101613921.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813102928621.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813103621923.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813105711291.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813105921715-0359563.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813110838789.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813111217837.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813112602076.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813112723353.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813113501982.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813113757380.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813114452246.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814011241854.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814173212475.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814175222769.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814175449206.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814180504752.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814181553977.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814182435642.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814183008458.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814184917432.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814185311479.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814202847592.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814203325303.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814204701079.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814205029145.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814210544054.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814211228844.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814212149555.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230237715.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230309640.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814231012789.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815010321281.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815011420728.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815012008336.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013606620.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013707035.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013913471.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014154516.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014432759.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015716834.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015905012.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815143915303.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815144553141.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815154128043.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815155523708.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815161419759.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815161759093.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815161957897.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815162600541.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815164250281.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815165057480.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815165455416.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170345189.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170408136.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170650658.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170717332.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813092011827.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810163355071.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810165616398.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810220933496.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810222545190.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810223345081.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813092713755.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813100212614.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813100318552.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813101613921.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813102928621.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813103621923.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813105711291.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813105921715-0359563.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813110838789.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813111217837.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813112602076.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813112723353.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813113501982.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813113757380.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813114452246.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814011241854.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814173212475.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814175222769.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814175449206.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814180504752.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814181553977.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814182435642.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814183008458.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814184917432.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814185311479.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814202847592.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814203325303.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814204701079.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814205029145.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814210544054.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814211228844.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814212149555.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814230237715.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814230309640.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814231012789.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815010321281.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815011420728.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815012008336.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815013606620.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815013707035.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815013913471.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815014154516.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815014432759.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815015716834.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815015905012.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815143915303.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815144553141.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815154128043.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815155523708.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815161419759.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815161759093.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815161957897.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815162600541.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815164250281.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815165057480.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815165455416.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170345189.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170408136.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170650658.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170717332.png">
 <meta property="article:published_time" content="2022-08-10T07:54:39.000Z">
-<meta property="article:modified_time" content="2022-08-15T09:15:37.088Z">
+<meta property="article:modified_time" content="2022-10-25T15:30:56.476Z">
 <meta property="article:author" content="kjg">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813092011827.png">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813092011827.png">
 
-<link rel="canonical" href="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/">
+<link rel="canonical" href="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">
 
 
 <script id="page-configurations">
@@ -112,7 +113,7 @@
   };
 </script>
 
-  <title>TCP/IP协议族详解 | kjg's blog</title>
+  <title>Linux高性能服务器编程 | kjg's blog</title>
   
 
 
@@ -255,7 +256,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/WechatIMG84.jpeg">
@@ -268,7 +269,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          TCP/IP协议族详解
+          Linux高性能服务器编程
         </h1>
 
         <div class="post-meta">
@@ -285,8 +286,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-15 17:15:37" itemprop="dateModified" datetime="2022-08-15T17:15:37+08:00">2022-08-15</time>
+                <time title="修改时间：2022-10-25 23:30:56" itemprop="dateModified" datetime="2022-10-25T23:30:56+08:00">2022-10-25</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">linux && 服务器</span></a>
+                </span>
+            </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -296,7 +306,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">《Linux高性能服务器编程》第一篇 TCP/IP协议族详解</div>
+            <div class="post-description">Linux高性能服务器编程</div>
 
         </div>
       </header>
@@ -308,7 +318,7 @@
 
       
         <h3 id="全书测试网络"><a href="#全书测试网络" class="headerlink" title="全书测试网络"></a><em><strong>全书测试网络</strong></em></h3><p>为了深入理解网络通信和网络编程，我们准备了图1-8所示的测试网络，其中包括两台主机A和B，以及一个连接到因特网的路由器。后文如没有特别声明，所有测试硬件指的都是该网络。我们将使用机器名来标识测试机器。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813092011827.png" alt="image-20220813092011827"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813092011827.png" alt="image-20220813092011827"></p>
 <center>图 1-8 测试网络</center>
 
 <p>该测试网络主要用于分析ARP协议、IP协议、ICMP协议、TCP协议和DNS协议。我们通过抓取该网络上的以太网帧，查看其中的以太网帧头部、IP数据报头部、TCP报文段头部信息，以获取网络通信的细节。这样，以理论结合实践，我们就清楚TCP&#x2F;IP通信具体是如何进行的了。作者编写的多个客户端、服务器程序都是使用该网络来调试和测试的。对于路由器，我们仅列出了其LAN网络IP地址(192.168.1.1)，而忽略了ISP（Internet Service Provider，因特网服务提供商）给它分配的WAN网络IP地址，因为全书的讨论都不涉及它。</p>
@@ -353,7 +363,7 @@
 <li><p>简单查看数据包内容 	tcpdump -r 1..pcap</p>
 </li>
 </ol>
-<h3 id="TCP-x2F-IP协议族"><a href="#TCP-x2F-IP协议族" class="headerlink" title="TCP&#x2F;IP协议族"></a>TCP&#x2F;IP协议族</h3><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810163355071.png" alt="image-20220810163355071"></p>
+<h3 id="TCP-x2F-IP协议族"><a href="#TCP-x2F-IP协议族" class="headerlink" title="TCP&#x2F;IP协议族"></a>TCP&#x2F;IP协议族</h3><p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810163355071.png" alt="image-20220810163355071"></p>
 <center>图 1-1 TCP/IP协议族体系结构及主要协议</center>
 
 <ol>
@@ -371,7 +381,7 @@
 <li><p>网络层另外一个重要的协议是ICMP协议（Internet Control Message Protocol，因特网控制报文协议）。它是IP协议的重要补充，    主要用于检测网络连接。ICMP协议使用的报文格式如图所示。</p>
 </li>
 </ul>
-<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810165616398.png" alt="image-20220810165616398" style="zoom: 50%;">
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810165616398.png" alt="image-20220810165616398" style="zoom: 50%;">
 
 <ul>
 <li>8位类型字段用于区分报文类型。它将ICMP报文分为两大类：一类是差错报文，这类报文主要用来回应网络错误，比如目标不可到达（类型值为3）和重定向（类型值为5）；另一类是查询报文，这类报文用来查询网络信息，比如ping程序就是使用ICMP报文查看目标是否可到达（类型值为8）的。ICMP报文使用16位校验和字段对整个报文（包括头部和内容部分）进行循环冗余校验（CyclicRedundancy Check，CRC），以检验报文在传输过程中是否损坏。</li>
@@ -398,7 +408,7 @@
 <p>应用层协议（或程序）可能跳过传输层直接使用网络层提供的服务，比如ping程序和OSPF协议。应用层协议（或程序）通常既可以使</p>
 <p>用TCP服务，又可以使用UDP服务，比如DNS协议。我们可以通过&#x2F;etc&#x2F;services文件查看所有知名的应用层协议，以及它们都能使用哪</p>
 <p>些传输层服务。</p>
-<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810220933496.png" alt="image-20220810220933496"></p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810220933496.png" alt="image-20220810220933496"></p>
 <center>图 1-4 封装</center>
 
 <ul>
@@ -406,19 +416,19 @@
 <li>经过IP封装后的数据称为IP数据报（IP datagram）</li>
 <li>经过数据链路层封装的数据称为帧（frame）</li>
 </ul>
-<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810222545190.png" alt="image-20220810222545190" style="zoom:50%;">
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810222545190.png" alt="image-20220810222545190" style="zoom:50%;">
 
 <center>图 1-6 以太网帧封装</center>
 
 <p>​		帧的最大传输单元（Max Transmit Unit，MTU），即帧最多能携带多少上层协议数据（比如IP数据报），通常受到网络类型的限		制。图所示的以太网帧的MTU是1500字节。正因为如此，过长的IP数报可能需要被分片（fragment）传输。</p>
-<h4 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h4><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220810223345081.png" alt="image-20220810223345081"></p>
+<h4 id="分用"><a href="#分用" class="headerlink" title="分用"></a>分用</h4><p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220810223345081.png" alt="image-20220810223345081"></p>
 <center>图 1-7 以太网帧的分用过程</center>
 
 <p>因为IP协议、ARP协议和RARP协议都使用帧传输数据，所以帧的头部需要提供某个字段（具体情况取决于帧的类型）来区分它们。以以太网帧为例，它使用2字节的类型字段来标识上层协议。如果主机接收到的以太网帧类型字段的值为0x800，则帧的数据部分为IP数据报，以太网驱动程序就将帧交付给IP模块；若类型字段的值为0x806，则帧的数据部分为ARP请求或应答报文，以太网驱动程序就将帧交付给ARP模块；若类型字段的值为0x835，则帧的数据部分为RARP请求或应答报文，以太网驱动程序就将帧交付给RARP模块。</p>
 <p>同样，因为ICMP协议、TCP协议和UDP协议都使用IP协议，所以IP数据报的头部采用16位的协议（protocol）字段来区分它们。TCP报文段和UDP数据报则通过其头部中的16位的端口号（portnumber）字段来区分上层应用程序。比如DNS协议对应的端口号是53，HTTP协议（Hyper-Text Transfer Protocol，超文本传送协议）对应的端口号是80。所有知名应用层协议使用的端口号都可在&#x2F;etc&#x2F;services文件中找到。帧通过上述分用步骤后，最终将封装前的原始数据送至目标服务。这样，在顶层目标服务看来，封装和分用似乎没有发生过。</p>
 <h4 id="ARP协议工作原理"><a href="#ARP协议工作原理" class="headerlink" title="ARP协议工作原理"></a>ARP协议工作原理</h4><p>ARP协议能实现任意网络层地址到任意物理地址的转换，不过本书仅讨论从IP地址到以太网地址（MAC地址）的转换。其工作原理是：主机向自己所在的网络广播一个ARP请求，该请求包含目标机器的网络地址。此网络上的其他机器都将收到这个请求，但只有被请求的目标机器会回应一个ARP应答，其中包含自己的物理地址。</p>
 <h5 id="ARP请求-x2F-应答报文详解"><a href="#ARP请求-x2F-应答报文详解" class="headerlink" title="ARP请求&#x2F;应答报文详解"></a>ARP请求&#x2F;应答报文详解</h5><p>以太网ARP请求&#x2F;应答报文的格式如图1-9所示</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813092713755.png" alt="image-20220813092713755"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813092713755.png" alt="image-20220813092713755"></p>
 <center>图 1-9 以太网ARP请求/应答报文</center>
 
 <p>❑硬件类型字段定义物理地址的类型，它的值为1表示MAC地址。</p>
@@ -431,13 +441,13 @@
 </blockquote>
 <h5 id="ARP高速缓存的查看与修改"><a href="#ARP高速缓存的查看与修改" class="headerlink" title="ARP高速缓存的查看与修改"></a>ARP高速缓存的查看与修改</h5><p>通常，ARP维护一个高速缓存，其中包含经常访问（比如网关地址）或最近访问的机器的IP地址到物理地址的映射。这样就避免了重复的ARP请求，提高了发送数据包的速度。</p>
 <p>Linux下可以使用arp命令来查看和修改ARP高速缓存。比如，ernest-laptop在某一时刻（注意，ARP高速缓存是动态变化的）的ARP缓存内容如下（使用arp-a命令）：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813100212614.png" alt="image-20220813100212614"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813100212614.png" alt="image-20220813100212614"></p>
 <p>其中，第一项描述的是另一台测试机器Kongming20（注意，其IP地址、MAC地址都与图1-8描述的一致），第二项描述的是路由器。下面两条命令则分别删除和添加一个ARP缓存项：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813100318552.png" alt="image-20220813100318552"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813100318552.png" alt="image-20220813100318552"></p>
 <h5 id="使用tcpdump观察ARP通信过程"><a href="#使用tcpdump观察ARP通信过程" class="headerlink" title="使用tcpdump观察ARP通信过程"></a>使用tcpdump观察ARP通信过程</h5><p>为了清楚地了解ARP的运作过程，我们从ernest-laptop上执行telnet命令登录Kongming20的echo服务（已经开启），并用tcpdump（详见第17章）抓取这个过程中两台测试机器之间交换的以太网帧。具体的操作过程如下：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813101613921.png" alt="image-20220813101613921"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813101613921.png" alt="image-20220813101613921"></p>
 <p>在执行telnet命令之前，应先清除ARP缓存中与Kongming20对应的项，否则ARP通信不被执行，我们也就无法抓取到期望的以太网帧。当执行telnet命令并在两台通信主机之间建立TCP连接后（telnet输 出“Connected to 192.168.1.109”），输入Ctrl+]以调出telnet程序的命令提示符，然后在telnet命令提示符后输入quit，退出telnet客户端程序（因为ARP通信在TCP连接建立之前就已经完成，故我们不关心后续内容）。tcpdump抓取到的众多数据包中，只有最靠前的两个和ARP通信有关系，现在将它们列出（数据包前面的编号是笔者加入的，后同）：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813102928621.png" alt="image-20220813102928621"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813102928621.png" alt="image-20220813102928621"></p>
 <blockquote>
 <p>由tcpdump抓取的数据包本质上是以太网帧，我们通过该命令的众多选项来控制帧的过滤（比如用dst和src指定通信的目的端IP地址和源端IP地址）和显示（比如用-e选项开启以太网帧头部信息的显示）</p>
 </blockquote>
@@ -448,7 +458,7 @@
 </li>
 </ul>
 <p>为了便于理解，我们将上述讨论用图1-10来详细说明。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813103621923.png" alt="image-20220813103621923"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813103621923.png" alt="image-20220813103621923"></p>
 <center>图 1-10 ARP通信过程</center>
 
 <ul>
@@ -461,12 +471,12 @@
 </ul>
 <h4 id="DNS协议工作原理"><a href="#DNS协议工作原理" class="headerlink" title="DNS协议工作原理"></a>DNS协议工作原理</h4><p>我们通常使用机器的域名来访问这台机器，而不直接使用其IP地址，比如访问因特网上的各种网站。那么如何将机器的域名转换成IP地址呢？这就需要使用域名查询服务。域名查询服务有很多种实现方式，比如NIS（Network Information Service，网络信息服务）、DNS和本地静态文件等。本节主要讨论DNS</p>
 <h5 id="DNS查询和应答报文详解"><a href="#DNS查询和应答报文详解" class="headerlink" title="DNS查询和应答报文详解"></a>DNS查询和应答报文详解</h5><p>DNS是一套分布式的域名服务系统。每个DNS服务器上都存放着大量的机器名和IP地址的映射，并且是动态更新的。众多网络客户端程序都使用DNS协议来向DNS服务器查询目标主机的IP地址。<strong>DNS查询和应答报文的格式如图1-11所示：</strong></p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813105711291.png" alt="image-20220813105711291"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813105711291.png" alt="image-20220813105711291"></p>
 <center>图 1-11 DNS查询和应答报文</center>
 
 <p>16位标识字段用于标记一对DNS查询和应答，以此区分一个DNS应答是哪个DNS查询的回应。</p>
 <p>16位标志字段用于协商具体的通信方式和反馈通信状态。<strong>DNS报文头部的16位标志字段的细节如图1-12所示</strong></p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813105921715-0359563.png" alt="image-20220813105921715"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813105921715-0359563.png" alt="image-20220813105921715"></p>
 <center>图 1-12 DNS报文头部的标志字段</center>
 
 <p>❑QR，查询&#x2F;应答标志。0表示这是一个查询报文，1表示这是一个应答报文。</p>
@@ -479,7 +489,7 @@
 <p>❑rcode，4位返回码，表示应答的状态。常用值有0（无错误）和3（域名不存在）。</p>
 <p>接下来的4个字段则分别指出DNS报文的最后4个字段的资源记录数目。对查询报文而言，它一般包含1个查询问题，而应答资源记录数、授权资源记录数和额外资源记录数则为0。应答报文的应答资源记录数则至少为1，而授权资源记录数和额外资源记录数可为0或非0。</p>
 <p><strong>查询问题的格式如图1-13所示</strong></p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813110838789.png" alt="image-20220813110838789"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813110838789.png" alt="image-20220813110838789"></p>
 <center>图 1-13 DNS查询问题的格式</center>
 
 <p>图1-13中，查询名以一定的格式封装了要查询的主机域名。16位查询类型表示如何执行查询操作，常见的类型有如下几种：</p>
@@ -488,7 +498,7 @@
 <p>❑类型PTR，值是12，表示反向查询。</p>
 <p>16位查询类通常为1，表示获取因特网地址（IP地址）。</p>
 <p>应答字段、授权字段和额外信息字段都使用资源记录（ResourceRecord，RR）格式。<strong>资源记录格式如图1-14所示</strong></p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813111217837.png" alt="image-20220813111217837"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813111217837.png" alt="image-20220813111217837"></p>
 <center>图 1-14 资源记录格式</center>
 
 <p>图1-14中，32位域名是该记录中与资源对应的名字，其格式和查询问题中的查询名字段相同。16位类型和16位类字段的含义也与DNS查</p>
@@ -497,19 +507,19 @@
 <p>16位资源数据长度字段和资源数据字段的内容取决于类型字段。对类型A而言，资源数据是32位的IPv4地址，而资源数据长度则为4（以字节为单位）。</p>
 <h5 id="Linux下访问DNS服务"><a href="#Linux下访问DNS服务" class="headerlink" title="Linux下访问DNS服务"></a>Linux下访问DNS服务</h5><p>我们要访问DNS服务，就必须先知道DNS服务器的IP地址。Linux使用&#x2F;etc&#x2F;resolv.conf文件来存放DNS服务器的IP地址。</p>
 <p>机器ernest-laptop上，该文件的内容如下：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813112602076.png" alt="image-20220813112602076"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813112602076.png" alt="image-20220813112602076"></p>
 <blockquote>
 <p>其中的两个IP地址分别是首选DNS服务器地址和备选DNS服务器地址。文件中的注释语句“Generated by Network Manager”告诉我们，这两个DNS服务器地址是由网络管理程序写入的。</p>
 </blockquote>
 <p>Linux下一个常用的访问DNS服务器的客户端程序是host，比如下面的命令是向首选DNS服务器219.239.26.42查询机器<a href="http://www.baidu.com的IP地址：">www.baidu.com的IP地址：</a></p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813112723353.png" alt="image-20220813112723353"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813112723353.png" alt="image-20220813112723353"></p>
 <p>host命令的输出告诉我们，机器名<a target="_blank" rel="noopener" href="http://www.baidu.com是www.a.shifen.com.的别名,并且该机器名对应两个ip地址.host命令使用dns协议和dns服务器通信,其-t选项告诉dns协议使用哪种查询类型.我们这里使用的是a类型,即通过机器的域名获得其ip地址(但实际上返回的资源记录中还包含机器的别名).关于host命令的详细使用方法,请参考其man手册/">www.baidu.com是www.a.shifen.com.的别名，并且该机器名对应两个IP地址。host命令使用DNS协议和DNS服务器通信，其-t选项告诉DNS协议使用哪种查询类型。我们这里使用的是A类型，即通过机器的域名获得其IP地址（但实际上返回的资源记录中还包含机器的别名）。关于host命令的详细使用方法，请参考其man手册</a>.</p>
 <h5 id="使用tcpdump观察DNS通信过程"><a href="#使用tcpdump观察DNS通信过程" class="headerlink" title="使用tcpdump观察DNS通信过程"></a>使用tcpdump观察DNS通信过程</h5><p>为了看清楚DNS通信的过程，下面我们将从ernest-laptop上运行host命令以查询主机<a href="http://www.baidu.com对应的IP地址，并使用tcpdump抓取这一过程中LAN上传输的以太网帧。具体的操作过程如下：">www.baidu.com对应的IP地址，并使用tcpdump抓取这一过程中LAN上传输的以太网帧。具体的操作过程如下：</a></p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813113501982.png" alt="image-20220813113501982"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813113501982.png" alt="image-20220813113501982"></p>
 <blockquote>
 <p>这一次执行tcpdump抓包时，我们使用“port domain”来过滤数据包，表示只抓取使用domain（域名）服务的数据包，即DNS查询和应答报文。tcpdump的输出如下:</p>
 </blockquote>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813113757380.png" alt="image-20220813113757380"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813113757380.png" alt="image-20220813113757380"></p>
 <p>这两个数据包开始的“IP”指出，它们后面的内容描述的是IP数据报。tcpdump以“IP地址.端口号”的形式来描述通信的某一端；以“＞”表示数据传输的方向，“＞”前面是源端，后面是目的端。可见，第一个数据包是测试机器ernest-laptop（IP地址是192.168.1.108）向其首DNS服务器（IP地址是219.239.26.42）发送的DNS查询报文（目标端口53是DNS服务使用的端口，这一点我们在前面介绍过），第二个数据包是服务器反馈的DNS应答报文</p>
 <p>第一个数据包中，数值57428是DNS查询报文的标识值，因此该值也出现在DNS应答报文中。“+”表示启用递归查询标志。“A?”表示使用A类型的查询方式。“<a target="_blank" rel="noopener" href="http://www.baidu.com”则是dns查询问题中的查询名.括号中的数值31是dns查询报文的长度(以字节为单位)/">www.baidu.com”则是DNS查询问题中的查询名。括号中的数值31是DNS查询报文的长度（以字节为单位）</a></p>
 <p>第二个数据包中，“3&#x2F;4&#x2F;4”表示该报文中包含3个应答资源记录、4个授权资源记录和4个额外信息记录。“CNAME <a target="_blank" rel="noopener" href="http://www.a.shifen.com.,a/">www.a.shifen.com.，A</a> 119.75.218.77，A 119.75.217.56”则表示3个应答资源记录的内容。其中CNAME表示紧随其后的记录是机器的别名，A表示紧随其后的记录是IP地址。该应答报文的长度为226字节</p>
@@ -524,7 +534,7 @@
 <li><p>应用程序可以通过它们来修改内核中各层协议的某些头部信息或其他数据结构，从而精细地控制底层通信的行为。比如可以通过setsockopt函数来设置IP数据报在网络上的存活时间。</p>
 </li>
 </ul>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220813114452246.png" alt="image-20220813114452246"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220813114452246.png" alt="image-20220813114452246"></p>
 <center>图 1-5 TCP报文段封装过程</center>
 
 <p>值得一提的是，socket是一套通用网络编程接口，它不但可以访问内核中TCP&#x2F;IP协议栈，而且可以访问其他网络协议栈（比如X.25协议栈、UNIX本地域协议栈等）</p>
@@ -539,7 +549,7 @@
 <p><strong>无连接（connectionless）</strong>是指IP通信双方都不长久地维持对方的任何信息。这样，上层协议每次发送数据的时候，都必须明确指定对方的IP地址。</p>
 <p><strong>不可靠</strong>是指IP协议不能保证IP数据报准确地到达接收端，它只是承诺尽最大努力（best effort）。很多种情况都能导致IP数据报发送失败。比如，某个中转路由器发现IP数据报在网络上存活的时间太长（根据IP数据报头部字段TTL判断，见后文），那么它将丢弃之，并返回一个ICMP错误消息（超时错误）给发送端。又比如，接收端发现收到的IP数据报不正确（通过校验机制），它也将丢弃之，并返回一个ICMP错误消息（IP头部参数错误）给发送端。无论哪种情况，发送端的IP模块一旦检测到IP数据报发送失败，就通知上层协议发送失败，而不会试图重传。因此，使用IP服务的上层协议（比如TCP协议）需要自己实现数据确认、超时重传等机制以达到可靠传输的目的。</p>
 <h4 id="IPv4头部结构-1总8片首4"><a href="#IPv4头部结构-1总8片首4" class="headerlink" title="IPv4头部结构(1总8片首4)"></a>IPv4头部结构(1总8片首4)</h4><p>IPv4的头部结构如图2-1所示。其长度为20-60字节 </p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814011241854.png" alt="image-20220814011241854"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814011241854.png" alt="image-20220814011241854"></p>
 <center>图 2-1 IPv4头部结构</center>
 
 <ul>
@@ -565,35 +575,35 @@
 </ul>
 </li>
 </ul>
-<h5 id="使用tcpdump观察IPv4头部结构"><a href="#使用tcpdump观察IPv4头部结构" class="headerlink" title="使用tcpdump观察IPv4头部结构"></a>使用tcpdump观察IPv4头部结构</h5><p>为了深入理解IPv4头部中每个字段的含义，我们从测试机器ernest-laptop上执行telnet命令登录本机，并用tcpdump抓取这个过程中telnet客户端程序和telnet服务器程序之间交换的数据包。<strong>127.0.0.1是回送地址，指本地机，一般用来测试使用。</strong><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814173212475.png" alt="image-20220814173212475"></p>
+<h5 id="使用tcpdump观察IPv4头部结构"><a href="#使用tcpdump观察IPv4头部结构" class="headerlink" title="使用tcpdump观察IPv4头部结构"></a>使用tcpdump观察IPv4头部结构</h5><p>为了深入理解IPv4头部中每个字段的含义，我们从测试机器ernest-laptop上执行telnet命令登录本机，并用tcpdump抓取这个过程中telnet客户端程序和telnet服务器程序之间交换的数据包。<strong>127.0.0.1是回送地址，指本地机，一般用来测试使用。</strong><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814173212475.png" alt="image-20220814173212475"></p>
 <center>代码清单2-1 用tcpdump抓取数据包</center>
 
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814175222769.png" alt="image-20220814175222769"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814175222769.png" alt="image-20220814175222769"></p>
 <p>该数据包描述的是一个IP数据报。由于我们是使用telnet登录本机的，所以IP数据报的源端IP地址和目的端IP地址都是“127.0.0.1”。telnet服务器程序使用的端口号是23（参见&#x2F;etc&#x2F;services文件），而telnet客户端程序使用临时端口号41621与服务器通信。关于临时端口号，我们将在第3章讨论。“Flags”、“seq”、“win”和“options”描述的都是TCP头部信息，这也将在第3章讨论。“length”指出该IP数据报所携带的应用程序数据的长度。</p>
 <p>这次抓包我们开启了tcpdump的-x选项，使之输出数据包的二进制码。此数据包共包含60字节，其中前20字节是IP头部，后40字节是TCP头部，不包含应用程序数据（length值为0）。现在我们分析IP头部的每个字节，如表2-1所示</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814175449206.png" alt="image-20220814175449206"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814175449206.png" alt="image-20220814175449206"></p>
 <p>由表2-1可见，telnet服务选择使用具有最小延时的服务，并且默认使用的传输层协议是TCP协议（回顾第1章讨论的分用）。这些都符合我们通常的理解。这个IP数据报没有被分片，因为它没有携带任何应用程序数据。接下来我们将抓取并讨论被分片的IP数据报。</p>
 <h4 id="IP分片"><a href="#IP分片" class="headerlink" title="IP分片"></a>IP分片</h4><p>前文曾提到，当IP数据报的长度超过帧的MTU时，它将被分片传输。分片可能发生在发送端，也可能发生在中转路由器上，而且可能在传输过程中被多次分片，但只有在最终的目标机器上，这些分片才会被内核中的IP模块重新组装。</p>
 <p>IP头部中的如下三个字段给IP的分片和重组提供了足够的信息：数据报标识、标志和片偏移。一个IP数据报的每个分片都具有自己的IP头部，它们具有相同的标识值，但具有不同的片偏移。并且除了最后一个分片外，其他分片都将设置MF标志。此外，每个分片的IP头部的总长度字段将被设置为该分片的长度。</p>
 <p>以太网帧的MTU是1500字节（可以通过ifconfig命令或者netstat命令查看），因此它携带的IP数据报的数据部分最多是1480字节（IP头部占用20字节）。考虑用IP数据报封装一个长度为1481字节的ICMP报文（包括8字节的ICMP头部，所以其数据部分长度为1473字节），则该数据报在使用以太网帧传输时必须被分片，如图2-2所示。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814180504752.png" alt="image-20220814180504752"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814180504752.png" alt="image-20220814180504752"></p>
 <center>图 2-2 携带ICMP报文的IP数据报被分片</center>
 
 <blockquote>
 <p>需要指出的是，ICMP报文的头部长度取决于报文的类型，其变化范围很大。图2-2以8字节为例，因为后面的例子用到了ping程序，而ping程序使用的ICMP回显和应答报文的头部长度是8字节。</p>
 </blockquote>
 <p>为了看清楚IP分片的具体过程，考虑从ernest-laptop来ping机器Kongming20，每次传送1473字节的数据（这是ICMP报文的数据部分）以强制引起IP分片，并用tcpdump抓取这一过程中双方交换的数据包。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814181553977.png" alt="image-20220814181553977"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814181553977.png" alt="image-20220814181553977"></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-i	<span class="comment"># 指定监听的网络接口</span></span><br><span class="line">tcpdump -ntv -i xxx <span class="comment"># -n表示不将网络地址转化为名称,-t不输出时间戳,-v输出一些比较详细的信息(这个很好用)</span></span><br></pre></td></tr></table></figure>
 
 
 
 <p>下面我们考察tcpdump输出的一个IP数据报的两个分片，其内容如下：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814182435642.png" alt="image-20220814182435642"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814182435642.png" alt="image-20220814182435642"></p>
 <p>这两个IP分片的标识值都是61197，说明它们是同一个IP数据报的分片。第一个分片的片偏移值为0，而第二个则是1480。很显然，第二个分片的片偏移值实际上也是第一个分片的ICMP报文的长度。第一个分片设置了MF标志以表示还有后续分片，所以tcpdump输 出“flags[+]”。而第二个分片则没有设置任何标志，所以tcpdump输 出“flags[none]”。这个两个分片的长度分别为1500字节和21字节，这与图2-2描述的一致。</p>
 <p><em><strong>最后，IP层传递给数据链路层的数据可能是一个完整的IP数据报，也可能是一个IP分片，它们统称为IP分组（packet）。本书如无特殊声明，不区分IP数据报和IP分组</strong></em></p>
 <h4 id="IP路由"><a href="#IP路由" class="headerlink" title="IP路由"></a>IP路由</h4><p>IP协议的一个核心任务是数据报的路由，即决定发送数据报到目标机器的路径。为了理解IP路由过程，我们先简要分析IP模块的基本工作流程。</p>
-<h5 id="IP模块工作流程"><a href="#IP模块工作流程" class="headerlink" title="IP模块工作流程"></a>IP模块工作流程</h5><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814183008458.png" alt="image-20220814183008458"></p>
+<h5 id="IP模块工作流程"><a href="#IP模块工作流程" class="headerlink" title="IP模块工作流程"></a>IP模块工作流程</h5><p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814183008458.png" alt="image-20220814183008458"></p>
 <center>图 2-3 IP模块基本工作流程</center>
 
 <p>我们从右往左来分析图2-3。当IP模块接收到来自数据链路层的IP数据报时，它首先对该数据报的头部做CRC校验，确认无误之后就分析其头部的具体信息</p>
@@ -605,24 +615,24 @@
 <h5 id="路由机制"><a href="#路由机制" class="headerlink" title="路由机制"></a>路由机制</h5><p>要研究IP路由机制，需要先了解路由表的内容。我们可以使用route命令或netstat命令查看路由表。在测试机器ernest-laptop上执行route命令，输出内容如代码清单2-2所示。</p>
 <center>代码清单2-2 路由表实例</center>
 
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814184917432.png" alt="image-20220814184917432"></p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814185311479.png" alt="image-20220814185311479"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814184917432.png" alt="image-20220814184917432"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814185311479.png" alt="image-20220814185311479"></p>
 <p>代码清单2-2所示的路由表中，第一项的目标地址是default，即所谓的默认路由项。该项包含一个“G”标志，说明路由的下一跳目标是网关，其地址是192.168.1.1（这是测试网络中路由器的本地IP地址）。另外一个路由项的目标地址是192.168.1.0，它指的是本地局域网。该路由项的网关地址为*，说明数据报不需要路由中转，可以直接发送到目标机器。</p>
 <p><strong>给定数据报的目标IP地址，它将匹配路由表中的哪一项呢？这就是IP的路由机制，分为3个步骤：</strong></p>
 <p>1）查找路由表中和数据报的目标IP地址完全匹配的主机IP地址。如果找到，就使用该路由项，没找到则转步骤2。</p>
 <p>2）查找路由表中和数据报的目标IP地址具有相同网路ID的网络IP地址（*）。如果找到，就使用该路由项；没找到则转步骤3。 </p>
 <p>3）选择默认路由项，这通常意味着数据报的下一跳路由是网关。因此，对于测试机器ernest-laptop而言，所有发送到IP地址为192.168.1.*的机器的IP数据报都可以直接发送到目标机器（匹配路由表第二项），而所有访问因特网的请求都将通过网关来转发（匹配默认路由项）</p>
 <h6 id="路由表更新"><a href="#路由表更新" class="headerlink" title="路由表更新"></a>路由表更新</h6><p>路由表必须能够更新，以反映网络连接的变化，这样IP模块才能准确、高效地转发数据报。route命令可以修改路由表。我们看如下几个例子（在机器ernest-laptop上执行）：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814202847592.png" alt="image-20220814202847592"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814202847592.png" alt="image-20220814202847592"></p>
 <p>第1行表示添加主机192.168.1.109（机器Kongming20）对应的路由项。这样设置之后，所有从ernest-laptop发送到Kongming20的IP数据报将通过网卡eth0直接发送至目标机器的接收网卡。</p>
 <p>第2行表示删除网络192.168.1.0对应的路由项。这样，除了机器Kongming20外，测试机器ernest-laptop将无法访问该局域网上的任何其他机器（能访问到Kongming20是由于执行了上一条命令）。</p>
 <p>第3行表示删除默认路由项，这样做的后果是无法访问因特网。</p>
 <p>第4行表示重新设置默认路由项，不过这次其网关是机器Kongming20（而不是能直接访问因特网的路由器）！</p>
 <p>经过上述修改后的路由表如下：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814203325303.png" alt="image-20220814203325303"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814203325303.png" alt="image-20220814203325303"></p>
 <p>通过route命令或其他工具手工修改路由表，是静态的路由更新方式。对于大型的路由器，它们通常通过BGP（Border GatewayProtocol，边际网关协议）、RIP（Routing Information Protocol，路由信息协议）、OSPF等协议来发现路径，并更新自己的路由表。这种更新方式是动态的、自动的。</p>
 <h4 id="IP转发"><a href="#IP转发" class="headerlink" title="IP转发"></a>IP转发</h4><p>前文提到，不是发送给本机的IP数据报将由数据报转发子模块来处理。路由器都能执行数据报的转发操作，而主机一般只发送和接收数据报，这是因为主机上&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;ip_forward内核参数默认被设置为0。我们可以通过修改它来使能主机的数据报转发功能（在测试机器Kongming20上以root身份执行）：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814204701079.png" alt="image-20220814204701079"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814204701079.png" alt="image-20220814204701079"></p>
 <p>对于允许IP数据报转发的系统（主机或路由器），数据报转发子模块将对期望转发的数据报执行如下操作：</p>
 <p>1）检查数据报头部的TTL值。如果TTL值已经是0，则丢弃该数据报。</p>
 <p>2）查看数据报头部的严格源路由选择选项。如果该选项被设置，则检测数据报的目标IP地址是否是本机的某个IP地址。如果不是，则发送一个ICMP源站选路失败报文给发送端。</p>
@@ -631,7 +641,7 @@
 <p>5）处理IP头部选项。</p>
 <p>6）如果有必要，则执行IP分片操作。</p>
 <h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h4><p>图2-3显示了ICMP重定向报文也能用于更新路由表，因此本节我们简要讨论ICMP重定向。</p>
-<h5 id="ICMP重定向报文"><a href="#ICMP重定向报文" class="headerlink" title="ICMP重定向报文"></a>ICMP重定向报文</h5><p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814205029145.png" alt="image-20220814205029145"></p>
+<h5 id="ICMP重定向报文"><a href="#ICMP重定向报文" class="headerlink" title="ICMP重定向报文"></a>ICMP重定向报文</h5><p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814205029145.png" alt="image-20220814205029145"></p>
 <center>图 2-4 ICMP重定向报文格式</center>
 
 <p>ICMP重定向报文的数据部分含义很明确，它给接收方提供了如下两个信息：</p>
@@ -639,15 +649,15 @@
 <p>❑应该使用的路由器的IP地址。</p>
 <p>接收主机根据这两个信息就可以断定引起重定向的IP数据报应该使用哪个路由器来转发，并且以此来更新路由表（通常是更新路由表缓冲，而不是直接更改路由表）。&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;conf&#x2F;all&#x2F;send_redirects内核参数指定是否允许发送ICMP重定向报文，而&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;conf&#x2F;all&#x2F;accept_redirects内核参数则指定是否允许接收ICMP重定向报文。一般来说，主机只能接收ICMP重定向报文，而路由器只能发送ICMP重定向报文</p>
 <p>2.4.3节中，我们把机器ernest-laptop的网关设置成了机器Kongming20，2.5节中我们又使能了Kongming20的数据报转发功能，因此机器ernest-laptop将通过Kongming20来访问因特网，比如在ernestlaptop上执行如下ping命令：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814210544054.png" alt="image-20220814210544054"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814210544054.png" alt="image-20220814210544054"></p>
 <p>从ping命令的输出来看，Kongming20给ernest-laptop发送了一个ICMP重定向报文，告诉它请通过192.168.1.1来访问目标机器，因为这对ernest-laptop来说是更合理的路由方式。当主机ernest-laptop收到这样的ICMP重定向报文后，它将更新其路由表缓冲（使用命令route-Cn查看），并使用新的路由方式来发送后续数据报。上面讨论的重定向过程可用图2-5来总结。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814211228844.png" alt="image-20220814211228844"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814211228844.png" alt="image-20220814211228844"></p>
 <center>图 2-5 主机重定向过程</center>
 
 
 
 <h4 id="IPv6头部结构"><a href="#IPv6头部结构" class="headerlink" title="IPv6头部结构"></a>IPv6头部结构</h4><p>IPv6头部由40字节的固定头部和可变长的扩展头部组成。图2-6所示是IPv6的固定头部结构</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814212149555.png" alt="image-20220814212149555"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814212149555.png" alt="image-20220814212149555"></p>
 <center>图 2-6 IPv6固定头部结构</center>
 
 
@@ -655,10 +665,10 @@
 <h3 id="TCP-x2F-IP协议详解"><a href="#TCP-x2F-IP协议详解" class="headerlink" title="TCP&#x2F;IP协议详解"></a>TCP&#x2F;IP协议详解</h3><h4 id="TCP服务特点"><a href="#TCP服务特点" class="headerlink" title="TCP服务特点"></a>TCP服务特点</h4><p>传输层协议主要有两个：TCP协议和UDP协议。TCP协议相对于UDP协议的特点是：面向连接、字节流和可靠传输。</p>
 <p>TCP协议的这种连接是一对一的，所以基于广播和多播（目标是多个主机地址）的应用程序不能使用TCP服务。而无连接协议UDP则非常适合于广播和多播。</p>
 <p>发送端执行的写操作次数和接收端执行的读操作次数之间没有任何数量关系，这就是字节流的概念：应用程序对数据的发送和接收是没有边界限制的。UDP则不然。发送端应用程序每执行一次写操作，UDP模块就将其封装成一个UDP数据报并发送之。接收端必须及时针对每一个UDP数据报执行读操作（通过recvfrom系统调用），否则就会丢包（这经常发生在较慢的服务器上）。并且，如果用户没有指定足够的应用程序缓冲区来读取UDP数据，则UDP数据将被截断。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230237715.png" alt="image-20220814230237715"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814230237715.png" alt="image-20220814230237715"></p>
 <center>图 3-1 TCP字节流服务</center>
 
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814230309640.png" alt="image-20220814230309640"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814230309640.png" alt="image-20220814230309640"></p>
 <center>图 3-2 UDP数据报服务</center>
 
 <ul>
@@ -671,7 +681,7 @@
 </ul>
 <h4 id="TCP头部结构"><a href="#TCP头部结构" class="headerlink" title="TCP头部结构"></a>TCP头部结构</h4><p>TCP头部信息出现在每个TCP报文段中，用于指定通信的源端端口，目的端端口，管理TCP连接等，本节详细介绍TCP的头部结构，包括固定头部结构和头部选项。（20B-60B）</p>
 <h5 id="TCP固定头部结构"><a href="#TCP固定头部结构" class="headerlink" title="TCP固定头部结构"></a>TCP固定头部结构</h5><p>TCP头部结构如图3-3所示，其中的诸多字段为管理TCP连接和控制数据流提供了足够的信息。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220814231012789.png" alt="image-20220814231012789"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220814231012789.png" alt="image-20220814231012789"></p>
 <center>图 3-3 TCP头部结构</center>
 
 <ul>
@@ -700,12 +710,12 @@
 <li><p>TCP头部的最后一个选项字段（options）是可变长的可选信息。这部分最多包含40字节，因为TCP头部最长是60字节（其中还包含前面讨论的20字节的固定部分）。典型的TCP头部选项结构如图3-4所示。</p>
 </li>
 </ul>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815010321281.png" alt="image-20220815010321281"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815010321281.png" alt="image-20220815010321281"></p>
 <center>图 3-4 TCP头部选项的一般结构</center>
 
 <h5 id="使用tcpdump观察TCP头部信息"><a href="#使用tcpdump观察TCP头部信息" class="headerlink" title="使用tcpdump观察TCP头部信息"></a>使用tcpdump观察TCP头部信息</h5><center>代码清单3-1 用tcpdump抓取数据包</center>
 
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815011420728.png" alt="image-20220815011420728"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815011420728.png" alt="image-20220815011420728"></p>
 <ul>
 <li>tcpdump输出Flags[S]，表示该TCP报文段包含SYN标志，因此它是一个同步报文段。如果TCP报文段包含其他标志，则tcpdump也会将该标志的首字母显示在“Flags”后的方括号中。</li>
 <li>seq是序号值。因为该同步报文段是从127.0.0.1.41621（客户端IP地址和端口号）到127.0.0.1.23（服务器IP地址和端口号）这个传输方向上的第一个TCP报文段，所以这个序号值也就是此次通信过程中该传输方向的ISN值。并且，因为这是整个通信过程中的第一个TCP报文段，所以它没有针对对方发送来的TCP报文段的确认值（尚未收到任何对方发送来的TCP报文段）。</li>
@@ -716,21 +726,21 @@
 <li>紧接着的nop是一个空操作选项。</li>
 <li>wscale指出发送端使用的窗口扩大因子为6</li>
 </ul>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815012008336.png" alt="image-20220815012008336"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815012008336.png" alt="image-20220815012008336"></p>
 <h4 id="TCP连接的建立和关闭"><a href="#TCP连接的建立和关闭" class="headerlink" title="TCP连接的建立和关闭"></a>TCP连接的建立和关闭</h4><h5 id="使用tcpdump观察TCP连接的建立和关闭"><a href="#使用tcpdump观察TCP连接的建立和关闭" class="headerlink" title="使用tcpdump观察TCP连接的建立和关闭"></a>使用tcpdump观察TCP连接的建立和关闭</h5><p>首先从ernest-laptop上执行telnet命令登录Kongming20的80端口，然后抓取这一过程中客户端和服务器交换的TCP报文段。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013606620.png" alt="image-20220815013606620"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815013606620.png" alt="image-20220815013606620"></p>
 <blockquote>
 <p><em>nt</em>: 指<em>tcpdump</em> 可抓取的数据包, 包括ip 数据包, tcp数据包</p>
 </blockquote>
 <p>当执行telnet命令并在两台通信主机之间建立TCP连接后（telnet输 出“Connected to 192.168.1.109”），输入Ctrl+]以调出telnet程序的命令提示符，然后在telnet命令提示符后输入quit以退出telnet客户端程序，从而结束TCP连接。整个过程中（从连接建立到结束），tcpdump输出的内容如代码清单3-2所示:</p>
 <center>代码清单3-2 建立和关闭TCP连接的过程</center>
 
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013707035.png" alt="image-20220815013707035"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815013707035.png" alt="image-20220815013707035"></p>
 <p>因为整个过程并没有发生应用层数据的交换，所以TCP报文段的数据部分的长度（length）总是0。为了更清楚地表示建立和关闭TCP连接的整个过程，我们将tcpdump输出的内容绘制成图3-6所示的时序图:</p>
-<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815013913471.png" alt="image-20220815013913471" style="zoom:67%;">
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815013913471.png" alt="image-20220815013913471" style="zoom:67%;">
 
 <h5 id="半关闭状态"><a href="#半关闭状态" class="headerlink" title="半关闭状态"></a>半关闭状态</h5><p>TCP连接是全双工的，所以它允许两个方向的数据传输被独立关闭。换言之，通信的一端可以发送结束报文段给对方，告诉它本端已经完成了数据的发送，但允许继续接收来自对方的数据，直到对方也发送结束报文段以关闭连接。TCP连接的这种状态称为半关闭（half close）状态，如图3-7所示。</p>
-<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014154516.png" alt="image-20220815014154516" style="zoom:67%;">
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815014154516.png" alt="image-20220815014154516" style="zoom:67%;">
 
 <center>图 3-7 半关闭状态</center>
 
@@ -738,26 +748,26 @@
 <p>socket网络编程接口通过shutdown函数提供了对半关闭的支持，我们将在后续章节讨论它。这里强调一下，虽然我们介绍了半关闭状态，但是使用半关闭的应用程序很少见。</p>
 <h5 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h5><p>前面我们讨论的是很快建立连接的情况。如果客户端访问一个距离它很远的服务器，或者由于网络繁忙，导致服务器对于客户端发送出的同步报文段没有应答，此时客户端程序将产生什么样的行为呢？显然，对于提供可靠服务的TCP来说，它必然是先进行重连（可能执行多次），如果重连仍然无效，则通知应用程序连接超时</p>
 <p>为了观察连接超时，我们模拟一个繁忙的服务器环境，在ernestlaptop上执行下面的操作：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815014432759.png" alt="image-20220815014432759"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815014432759.png" alt="image-20220815014432759"></p>
 <p>iptable命令用于过滤数据包，这里我们利用它来丢弃所有接收到的连接请求（丢弃所有同步报文段，这样客户端就无法得到任何确认报文段）</p>
 <p>接下来从Kongming20上执行telnet命令登录到ernest-laptop，并用tcpdump抓取这个过程中双方交换的TCP报文段。具体操作如下：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015716834.png" alt="image-20220815015716834"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815015716834.png" alt="image-20220815015716834"></p>
 <p>从两次date命令的输出来看，Kongming20建立TCP连接的超时时间是63s。本次tcpdump的输出如代码清单3-3所示。</p>
 <center>代码清单3-3 TCP超时重连</center>
 
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815015905012.png" alt="image-20220815015905012"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815015905012.png" alt="image-20220815015905012"></p>
 <blockquote>
 <p>这次抓包我们保留了tcpdump输出的时间戳（不使用其-t选项），以便推理Linux的超时重连策略。</p>
 <p>我们一共抓取到6个TCP报文段，它们都是同步报文段，并且具有相同的序号值，这说明后面5个同步报文段都是超时重连报文段。</p>
 <p>观察这些TCP报文段被发送的时间间隔，它们分别为1s、2s、4s、8s和16s（由于定时器精度的问题，这些时间间隔都有一定偏差），可以推断最后一个TCP报文段的超时时间是32s（63s-16s-8s-4s-2s-1s）。因此，TCP模块一共执行了5次重连操作，这是由&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_syn_retries内核变量所定义的。每次重连的超时时间都增加一倍。</p>
 <p>在5次重连均失败的情况下，TCP模块放弃接并通知应用程序。在应用程序中，我们可以修改连接超时时间，具体方法将在本书后续章节中进行介绍。</p>
 </blockquote>
-<h4 id="TCP状态转移"><a href="#TCP状态转移" class="headerlink" title="TCP状态转移"></a>TCP状态转移</h4><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815143915303.png" alt="image-20220815143915303" style="zoom: 50%;">
+<h4 id="TCP状态转移"><a href="#TCP状态转移" class="headerlink" title="TCP状态转移"></a>TCP状态转移</h4><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815143915303.png" alt="image-20220815143915303" style="zoom: 50%;">
 
 <center>图 3-8 TCP状态转移过程</center>
 
 <p>图3-8中的<strong>粗虚线表示典型的服务器端连接的状态转移；粗实线表示典型的客户端连接的状态转移</strong>。CLOSED是一个假想的起始点，并不是一个实际的状态。</p>
-<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815144553141.png" alt="image-20220815144553141" style="zoom:50%;">
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815144553141.png" alt="image-20220815144553141" style="zoom:50%;">
 
 <center>图 3-9 TCP连接的建立和断开过程中客户端和服务器的状态变化</center>
 
@@ -788,7 +798,7 @@
 <p>TCP拥塞控制的标准文档是RFC 5681，其中详细介绍了拥塞控制的四个部分：<strong>慢启动（slow start）、拥塞避免（congestionavoidance）、快速重传（fast retransmit）、快速恢复（fastrecovery）</strong>。拥塞控制算法在Linux下有多种实现，比如reno算法、vegas算法和cubic算法等。它们或者部分或者全部实现了上述四个部分。&#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;tcp_congestion_control文件指示机器当前所使用的拥塞控制算法。</p>
 <p>拥塞控制的最终受控变量是发送端向网络一次连续写入（收到其中第一个数据的确认之前）的数据量，我们称为<strong>SWND（SendWindow，发送窗口）</strong>。不过，发送端最终以TCP报文段来发送数据，所以SWND限定了发送端能连续发送的TCP报文段数量。这些TCP报文段的最大长度（仅指数据部分）称为SMSS（Sender MaximumSegment Size，发送者最大段大小），其值一般等于MSS。</p>
 <p>发送端需要合理地选择SWND的大小。如果SWND太小，会引起明显的网络延迟；反之，如果SWND太大，则容易导致网络拥塞。前文提到，接收方可通过其接收通告窗口（RWND）来控制发送端的SWND。但这显然不够，所以发送端引入了一个称为<strong>拥塞窗口（Congestion Window，CWND）</strong>的状态变量。**实际的SWND&#x3D;min(RWND,CWND)**。图3-11显示了拥塞控制的输入和输出（可见，它是一个闭环反馈控制）。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815154128043.png" alt="image-20220815154128043"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815154128043.png" alt="image-20220815154128043"></p>
 <center>图 3-11 拥塞控制的输入和输出</center>
 
 
@@ -809,7 +819,7 @@
 <blockquote>
 <p>代理服务器是一个位于客户端和原始（资源）服务器之间的服务器，为了从原始服务器取得内容，客户端想代理服务器发送一个请求并指定目标原始服务器，然后代理服务器向原始服务器转交请求并将获得的内容返回给客户</p>
 </blockquote>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815155523708.png" alt="image-20220815155523708"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815155523708.png" alt="image-20220815155523708"></p>
 <center>图 4-1 通过代理服务器访问Internet上的Web服务器</center>
 
 <p>由图4-1可见，wget客户端程序和代理服务器之间，以及代理服务器与Web服务器之间都是使用HTTP协议通信的。HTTP协议是一种应用层协议，它默认使用的传输层协议是TCP协议。我们将在后文中简单讨论HTTP协议。</p>
@@ -820,21 +830,21 @@
 <h4 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h4><p>正向代理要求客户端自己设置代理服务器的地址。客户的每次请求都将直接发送到该代理服务器，并由代理服务器来请求目标资源。比如处于防火墙内的局域网机器要访问Internet，或者要访问一些被屏蔽掉的国外网站，就需要使用正向代理服务器。</p>
 <p>反向代理则被设置在服务器端，因而客户端无须进行任何设置。反向代理是指用代理服务器来接收Internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从内部服务器上得到的结果返回给客户端。这种情况下，代理服务器对外就表现为一个真实的服务器。</p>
 <p>各大网站通常分区域设置了多个代理服务器，所以在不同的地方ping同一个域名可能得到不同的IP地址，因为这些IP地址实际上是代理服务器的IP地址。图4-2显示了正向代理服务器和反向代理服务器在HTTP通信链上的逻辑位置。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815161419759.png" alt="image-20220815161419759"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815161419759.png" alt="image-20220815161419759"></p>
 <center>图 4-2 HTTP通信链上的代理服务器</center>
 
 <p>透明代理只能设置在网关上。用户访问Internet的数据报必然都经过网关，如果在网关上设置代理，则该代理对用户来说显然是透明的。透明代理可以看作正向代理的一种特殊情况。</p>
 <p>代理服务器通常还提供缓存目标资源的功能（可选），这样用户下次访问同一资源时速度将很快。优秀的开源软件squid、varnish都是提供了缓存能力的代理服务器软件，其中squid支持所有代理方式，而varnish仅能用作反向代理。</p>
 <h5 id="部署squid代理服务器"><a href="#部署squid代理服务器" class="headerlink" title="部署squid代理服务器"></a>部署squid代理服务器</h5><p>现在我们在ernest-laptop上部署squid代理服务器。这个过程很简单，只需修改squid服务器的配置文件&#x2F;etc&#x2F;squid3&#x2F;squid.conf，在其中加入如下两行代码（需要root权限，且应该加在合适的位置，详情可参考其他类似条目的设置）：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815161759093.png" alt="image-20220815161759093"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815161759093.png" alt="image-20220815161759093"></p>
 <p>这两行代码的含义是：允许网络192.168.1.0上的所有机器通过该代理服务器来访问Web服务器。其中，“192.168.1.0&#x2F;24”是CIDR（Classless Inter-Domain Routing，无类域间路由）风格的IP地址表示方法：“&#x2F;”前的部分指定网络的IP地址，“&#x2F;”后的部分则指定子网掩码中“1”的位数。对IPv4而言，上述表示等价于“192.168.1.0&#x2F;255.255.255.0”（IP地址&#x2F;子网掩码）</p>
 <p>接下来在ernest-laptop上执行如下命令，以重启squid服务器：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815161957897.png" alt="image-20220815161957897"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815161957897.png" alt="image-20220815161957897"></p>
 <blockquote>
 <p>service是一个脚本程序（&#x2F;usr&#x2F;sbin&#x2F;service），它为&#x2F;etc&#x2F;init.d&#x2F;目录下的众多服务器程序（比如httpd、vsftpd、sshd和mysqld等）的启动（start）、停止（stop）和重启（restart）等动作提供了一个统一的管理。</p>
 </blockquote>
 <h4 id="使用tcpdump抓取传输数据包"><a href="#使用tcpdump抓取传输数据包" class="headerlink" title="使用tcpdump抓取传输数据包"></a>使用tcpdump抓取传输数据包</h4><p>在执行wget命令前，我们首先应删除ernest-laptop的ARP高速缓存中路由器对应的项，以便观察TCP&#x2F;IP通信过程中ARP协议何时起作用。然后，使用tcpdump命令抓取整个通信过程中传输的数据包。完整的操作过程如代码清单4-1所示。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815162600541.png" alt="image-20220815162600541"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815162600541.png" alt="image-20220815162600541"></p>
 <center>代码清单4-1 使用wget抓取网页</center>
 
 <p>wget命令的输出显示，HTTP请求确实是先被送至代理服务器的3128端口，并且代理服务器正确地返回了文件index.html的内容</p>
@@ -854,7 +864,7 @@
 </li>
 </ol>
 <h5 id="访问DNS服务器"><a href="#访问DNS服务器" class="headerlink" title="访问DNS服务器"></a>访问DNS服务器</h5><p>数据包8、9表示代理服务器ernest-laptop向DNS服务器（219.239.26.42，首选DNS服务器的IP地址，见1.6.2节）查询域名<a target="_blank" rel="noopener" href="http://www.baidu.com对应的ip地址,并得到了回复.该回复包括一个主机别名(www.a.shifen.com)和两个ip地址(119.75.218.77和/">www.baidu.com对应的IP地址，并得到了回复。该回复包括一个主机别名（www.a.shifen.com）和两个IP地址（119.75.218.77和</a> 119.75.217.56）。代理服务器执行DNS查询的完整过程如图4-3所示。</p>
-<img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815164250281.png" alt="image-20220815164250281" style="zoom:50%;">
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815164250281.png" alt="image-20220815164250281" style="zoom:50%;">
 
 <center>图 4-3 DNS查询</center>
 
@@ -867,29 +877,29 @@
 </blockquote>
 <h5 id="本地名称查询"><a href="#本地名称查询" class="headerlink" title="本地名称查询"></a>本地名称查询</h5><p>一般来说，通过域名来访问Internet上的某台主机时，需要使用DNS服务来获取该主机的IP地址。但如果我们通过主机名来访问本地局域网上的机器，则可通过本地的静态文件来获得该机器的IP地址。</p>
 <p>Linux将目标主机名及其对应的IP地址存储在&#x2F;etc&#x2F;hosts配置文件中。当需要查询某个主机名对应的IP地址时，程序将首先检查这个文件。Kongming20上&#x2F;etc&#x2F;hosts文件的内容如下（笔者手动修改过）：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815165057480.png" alt="image-20220815165057480"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815165057480.png" alt="image-20220815165057480"></p>
 <p>其中第一项指出本地回路地址127.0.0.1的名称是localhost，第二项和第三项则分别描述了Kongming20和ernest-laptop的IP地址及对应的主机名。</p>
 <p>代码清单4-1中，wget命令输出“Resolving ernest-laptop…192.168.1.108”，即它成功地解析了主机名ernest-laptop对应的IP地址，原因如下：当wget访问某个Web服务器时，它先读取环境变量http_proxy。如果该环境变量被设置，并且我们没有阻止wget使用代理服务，则wget将通过http_proxy指定的代理服务器来访问Web服务。但http_proxy环境变量中包含主机名ernest-laptop，因此wget将首先读取&#x2F;etc&#x2F;hosts配置文件，试图通过它来解析主机名ernest-laptop对应的IP地址。其结果正如wget的输出所示，解析成功。如果程序在&#x2F;etc&#x2F;hosts文件中未找到目标机器名对应的IP地址，它将求助于DNS服务。用户可以通过修改&#x2F;etc&#x2F;host.conf文件来自定义系统解析主机名的方法和顺序（一般是先访问本地文件&#x2F;etc&#x2F;hosts，再访问DNS服务）。</p>
 <p>标准文档RFC 1123指出，网络上的主机都应该实现一个简单的本地名称查询服务</p>
 <h5 id="HTTP通信"><a href="#HTTP通信" class="headerlink" title="HTTP通信"></a>HTTP通信</h5><p>为了方便讨论，我们将wget客户端和代理服务器之间的通信过程画成图4-4所示的TCP时序图。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815165455416.png" alt="image-20220815165455416"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815165455416.png" alt="image-20220815165455416"></p>
 <center>图 4-4 wget客户端和squid服务器之间的TCP通信</center>
 
 <p>首先应该注意的是，TCP连接从建立到关闭的过程中，客户端仅给服务器发送了一个HTTP请求（即TCP报文段4），该请求的长度为136字节【图中37应当改为137】（见代码清单4-2中TCP报文段4的length值）。代理服务器则用6个TCP报文段（23、24、25、33、35和36）给客户端返回了总长度为8522字节（这可以从对方的最后一个确认报文段42的确认值计算得到，考虑同步报文段和结束报文段各占用一个序号）的HTTP应答。客户端使用了7个TCP报文段（32、34、37、38、39、40和42）来确认这8522字节的HTTP应答数据。</p>
 <p>下面我们简单分析一下这136字节的HTTP请求和8522字节的HTTP应答的部分主要内容（开启tcpdump的-X选项来查看）。</p>
 <h6 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h6><p>HTTP请求的部分内容如下：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170345189.png" alt="image-20220815170345189"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170345189.png" alt="image-20220815170345189"></p>
 <p>第1行是请求行。其中“GET”是请求方法，表示客户端以只读的方式来申请资源。常见的HTTP请求方法有9种，如表4-1所示。</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170408136.png" alt="image-20220815170408136"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170408136.png" alt="image-20220815170408136"></p>
 <p>“HTTP&#x2F;1. 0”表示客户端（wget程序）使用的HTTP的版本号是1.0。目前的主流HTTP版本是1.1。</p>
 <p>HTTP请求内容中的第2～4行都是HTTP请求的头部字段。一个HTTP请求可以包含多个头部字段。一个头部字段用一行表示，包含字段名称、冒号、空格和字段的值。HTTP请求中的头部字段可按任意顺序排列。</p>
 <p>“User-Agent:Wget&#x2F;1. 12(linux-gnu)”表示客户端使用的程序是wget。</p>
 <p>“Host:www. baidu.com”表示目标主机名是<a target="_blank" rel="noopener" href="http://www.baidu.com.http协议规定http请求中必须包含的头部字段就是目标主机名./">www.baidu.com。HTTP协议规定HTTP请求中必须包含的头部字段就是目标主机名。</a></p>
 <p>“Connection:close”是我们执行wget命令时传入的（见代码清单4-1），用以告诉服务器处理完这个HTTP请求之后就关闭连接。</p>
 <h6 id="HTTP应答"><a href="#HTTP应答" class="headerlink" title="HTTP应答"></a>HTTP应答</h6><p>HTTP应答的部分内容如下：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170650658.png" alt="image-20220815170650658"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170650658.png" alt="image-20220815170650658"></p>
 <p>第一行是状态行。“HTTP&#x2F;1.0”是服务器使用的HTTP协议的版本号。通常，服务器需要使用和客户端相同的HTTP协议版本。“200OK”是状态码和状态信息。常见的状态码和状态信息及其含义如表4-2所示：</p>
-<p><img src="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/image-20220815170717332.png" alt="image-20220815170717332"></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20220815170717332.png" alt="image-20220815170717332"></p>
 <p>第2～7行是HTTP应答的头部字段。其表示方法与HTTP请求中的头部字段相同。</p>
 <p>“Server:BWS&#x2F;1. 0”表示目标Web服务器程序的名字是BWS（Baidu Web Server）。</p>
 <p>“Content-Length:8024”表示目标文档的长度为8024字节。这个值和wget输出的文档长度一致。</p>
@@ -908,6 +918,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
 
         
 
@@ -915,12 +928,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" rel="prev" title="Linux高性能服务器编程">
-      <i class="fa fa-chevron-left"></i> Linux高性能服务器编程
+    <a href="/2022/08/09/DP%E4%B9%8B%E7%AE%80%E5%8D%95%E9%A2%98%E5%90%88%E9%9B%86/" rel="prev" title="DP之简单题合集">
+      <i class="fa fa-chevron-left"></i> DP之简单题合集
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/08/12/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/" rel="next" title="17.电话号码的字母组合">
-      17.电话号码的字母组合 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/08/10/TCP-IP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" rel="next" title="TCP/IP协议族详解">
+      TCP/IP协议族详解 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
