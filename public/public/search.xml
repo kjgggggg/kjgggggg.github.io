@@ -249,42 +249,6 @@
       </tags>
   </entry>
   <entry>
-    <title>129.求根节点到叶节点数字之和</title>
-    <url>/2022/10/07/129-%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</url>
-    <content><![CDATA[<h3 id="129-求根节点到叶节点数字之和"><a href="#129-求根节点到叶节点数字之和" class="headerlink" title="129. 求根节点到叶节点数字之和"></a><a href="https://leetcode.cn/problems/sum-root-to-leaf-numbers/">129. 求根节点到叶节点数字之和</a></h3><p>给你一个二叉树的根节点 <code>root</code> ，树中每个节点都存放有一个 <code>0</code> 到 <code>9</code> 之间的数字。</p>
-<p>每条从根节点到叶节点的路径都代表一个数字：</p>
-<ul>
-<li>例如，从根节点到叶节点的路径 <code>1 -&gt; 2 -&gt; 3</code> 表示数字 <code>123</code> 。</li>
-</ul>
-<p>计算从根节点到叶节点生成的 <strong>所有数字之和</strong> 。</p>
-<p><strong>叶节点</strong> 是指没有子节点的节点。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/07/129-%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/num1tree.jpg" alt="img"></p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：root = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">输出：<span class="number">25</span></span><br><span class="line">解释：</span><br><span class="line">从根到叶子节点路径 <span class="number">1</span>-&gt;<span class="number">2</span> 代表数字 <span class="number">12</span></span><br><span class="line">从根到叶子节点路径 <span class="number">1</span>-&gt;<span class="number">3</span> 代表数字 <span class="number">13</span></span><br><span class="line">因此，数字总和 = <span class="number">12</span> + <span class="number">13</span> = <span class="number">25</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="/2022/10/07/129-%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/num2tree.jpg" alt="img"></p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：root = [<span class="number">4</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line">输出：<span class="number">1026</span></span><br><span class="line">解释：</span><br><span class="line">从根到叶子节点路径 <span class="number">4</span>-&gt;<span class="number">9</span>-&gt;<span class="number">5</span> 代表数字 <span class="number">495</span></span><br><span class="line">从根到叶子节点路径 <span class="number">4</span>-&gt;<span class="number">9</span>-&gt;<span class="number">1</span> 代表数字 <span class="number">491</span></span><br><span class="line">从根到叶子节点路径 <span class="number">4</span>-&gt;<span class="number">0</span> 代表数字 <span class="number">40</span></span><br><span class="line">因此，数字总和 = <span class="number">495</span> + <span class="number">491</span> + <span class="number">40</span> = <span class="number">1026</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>树中节点的数目在范围 <code>[1, 1000]</code> 内</li>
-<li><code>0 &lt;= Node.val &lt;= 9</code></li>
-<li>树的深度不超过 <code>10</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumNumbers</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(root, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="type">int</span> sum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; left &amp;&amp; !root -&gt; right) <span class="keyword">return</span> sum * <span class="number">10</span> + root -&gt; val;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(root -&gt; left, sum * <span class="number">10</span> + root -&gt; val) + <span class="built_in">dfs</span>(root -&gt; right, sum * <span class="number">10</span> + root -&gt; val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>二叉树</tag>
-        <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>130.被围绕的区域 面试题13. 机器人的运动范围</title>
     <url>/2022/10/09/130-%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/</url>
     <content><![CDATA[<h3 id="130-被围绕的区域"><a href="#130-被围绕的区域" class="headerlink" title="130. 被围绕的区域"></a><a href="https://leetcode.cn/problems/surrounded-regions/">130. 被围绕的区域</a></h3><p>给你一个 <code>m x n</code> 的矩阵 <code>board</code> ，由若干字符 <code>&#39;X&#39;</code> 和 <code>&#39;O&#39;</code> ，找到所有被 <code>&#39;X&#39;</code> 围绕的区域，并将这些区域里所有的 <code>&#39;O&#39;</code> 用 <code>&#39;X&#39;</code> 填充。</p>
@@ -334,6 +298,42 @@
         <tag>leetcode</tag>
         <tag>dfs</tag>
         <tag>图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>129.求根节点到叶节点数字之和</title>
+    <url>/2022/10/07/129-%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h3 id="129-求根节点到叶节点数字之和"><a href="#129-求根节点到叶节点数字之和" class="headerlink" title="129. 求根节点到叶节点数字之和"></a><a href="https://leetcode.cn/problems/sum-root-to-leaf-numbers/">129. 求根节点到叶节点数字之和</a></h3><p>给你一个二叉树的根节点 <code>root</code> ，树中每个节点都存放有一个 <code>0</code> 到 <code>9</code> 之间的数字。</p>
+<p>每条从根节点到叶节点的路径都代表一个数字：</p>
+<ul>
+<li>例如，从根节点到叶节点的路径 <code>1 -&gt; 2 -&gt; 3</code> 表示数字 <code>123</code> 。</li>
+</ul>
+<p>计算从根节点到叶节点生成的 <strong>所有数字之和</strong> 。</p>
+<p><strong>叶节点</strong> 是指没有子节点的节点。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/07/129-%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/num1tree.jpg" alt="img"></p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：root = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">输出：<span class="number">25</span></span><br><span class="line">解释：</span><br><span class="line">从根到叶子节点路径 <span class="number">1</span>-&gt;<span class="number">2</span> 代表数字 <span class="number">12</span></span><br><span class="line">从根到叶子节点路径 <span class="number">1</span>-&gt;<span class="number">3</span> 代表数字 <span class="number">13</span></span><br><span class="line">因此，数字总和 = <span class="number">12</span> + <span class="number">13</span> = <span class="number">25</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="/2022/10/07/129-%E6%B1%82%E6%A0%B9%E8%8A%82%E7%82%B9%E5%88%B0%E5%8F%B6%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/num2tree.jpg" alt="img"></p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：root = [<span class="number">4</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line">输出：<span class="number">1026</span></span><br><span class="line">解释：</span><br><span class="line">从根到叶子节点路径 <span class="number">4</span>-&gt;<span class="number">9</span>-&gt;<span class="number">5</span> 代表数字 <span class="number">495</span></span><br><span class="line">从根到叶子节点路径 <span class="number">4</span>-&gt;<span class="number">9</span>-&gt;<span class="number">1</span> 代表数字 <span class="number">491</span></span><br><span class="line">从根到叶子节点路径 <span class="number">4</span>-&gt;<span class="number">0</span> 代表数字 <span class="number">40</span></span><br><span class="line">因此，数字总和 = <span class="number">495</span> + <span class="number">491</span> + <span class="number">40</span> = <span class="number">1026</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点的数目在范围 <code>[1, 1000]</code> 内</li>
+<li><code>0 &lt;= Node.val &lt;= 9</code></li>
+<li>树的深度不超过 <code>10</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumNumbers</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(root, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="type">int</span> sum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; left &amp;&amp; !root -&gt; right) <span class="keyword">return</span> sum * <span class="number">10</span> + root -&gt; val;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(root -&gt; left, sum * <span class="number">10</span> + root -&gt; val) + <span class="built_in">dfs</span>(root -&gt; right, sum * <span class="number">10</span> + root -&gt; val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>二叉树</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -616,34 +616,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2.两数相加</title>
-    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
-    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例 1：</p>
-<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
-<p>示例 2：</p>
-<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
-<p>示例 3：</p>
-<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>递归</tag>
-        <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>207.课程表 210.课程表II</title>
     <url>/2022/10/06/207-%E8%AF%BE%E7%A8%8B%E8%A1%A8/</url>
     <content><![CDATA[<h3 id="207-课程表"><a href="#207-课程表" class="headerlink" title="207. 课程表"></a><a href="https://leetcode.cn/problems/course-schedule/">207. 课程表</a></h3><p>你这个学期必须选修 <code>numCourses</code> 门课程，记为 <code>0</code> 到 <code>numCourses - 1</code> 。</p>
@@ -718,6 +690,34 @@
       </tags>
   </entry>
   <entry>
+    <title>2.两数相加</title>
+    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例 1：</p>
+<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
+<p>示例 2：</p>
+<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
+<p>示例 3：</p>
+<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>递归</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>21.合并两个有序链表</title>
     <url>/2022/08/07/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<h3 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21. 合并两个有序链表"></a><a href="https://leetcode.cn/problems/merge-two-sorted-lists/">21. 合并两个有序链表</a></h3><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* list1, ListNode* list2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(list1 == <span class="literal">nullptr</span> &amp;&amp; list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(list1 &amp;&amp; list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list1;</span><br><span class="line">        <span class="keyword">if</span>(list2 &amp;&amp; list1 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list2;</span><br><span class="line">      	</span><br><span class="line">      	<span class="comment">//上面三行等价于 if(!list1 || !list2) return l1?l1:l2;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(list1-&gt;val&lt;=list2-&gt;val)&#123;</span><br><span class="line">            list1-&gt;next = <span class="built_in">mergeTwoLists</span>(list1-&gt;next,list2);</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            list2-&gt;next = <span class="built_in">mergeTwoLists</span>(list1,list2-&gt;next);</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -757,6 +757,67 @@
         <tag>leetcode</tag>
         <tag>递归</tag>
         <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>221.最大正方形</title>
+    <url>/2022/10/21/221-%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/</url>
+    <content><![CDATA[<h3 id="221-最大正方形"><a href="#221-最大正方形" class="headerlink" title="221. 最大正方形"></a><a href="https://leetcode.cn/problems/maximal-square/">221. 最大正方形</a></h3><p>在一个由 <code>&#39;0&#39;</code> 和 <code>&#39;1&#39;</code> 组成的二维矩阵内，找到只包含 <code>&#39;1&#39;</code> 的最大正方形，并返回其面积。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/21/221-%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/max1grid.jpg" alt="img"></p>
+<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;0&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>]]</span><br><span class="line">输出：<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="/2022/10/21/221-%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/max2grid.jpg" alt="img"></p>
+<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>]]</span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：matrix = <span class="string">[[&quot;0&quot;]]</span></span><br><span class="line">输出：<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 300</code></li>
+<li><code>matrix[i][j]</code> 为 <code>&#39;0&#39;</code> 或 <code>&#39;1&#39;</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maximalSquare</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> edgeLength = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> r = matrix.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> c = matrix[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(c, <span class="number">0</span>)); <span class="comment">//dp[i][j] 表示以以matrix[i][j]为底角的正方形的边长</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; c; j ++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j] == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i == <span class="number">0</span> || j == <span class="number">0</span>)&#123;</span><br><span class="line">                        dp[i][j] = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> dp[i][j] = <span class="built_in">min</span>(dp[i - <span class="number">1</span>][j - <span class="number">1</span>], <span class="built_in">min</span>(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>])) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                edgeLength = <span class="built_in">max</span>(edgeLength, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> edgeLength * edgeLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>279.完全平方数</title>
+    <url>/2022/10/22/279-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279. 完全平方数"></a><a href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></h3><p>给你一个整数 <code>n</code> ，返回 <em>和为 <code>n</code> 的完全平方数的最少数量</em> 。</p>
+<p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：n = 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 =<span class="number"> 4 </span>+<span class="number"> 4 </span>+ 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">n</span> = <span class="number">13</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">13</span> = <span class="number">4</span> + <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 104</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>动态规划</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; <span class="built_in">sqrt</span>(i + <span class="number">1</span>); j ++)&#123;</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i - j * j] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -823,39 +884,6 @@
       </tags>
   </entry>
   <entry>
-    <title>221.最大正方形</title>
-    <url>/2022/10/21/221-%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/</url>
-    <content><![CDATA[<h3 id="221-最大正方形"><a href="#221-最大正方形" class="headerlink" title="221. 最大正方形"></a><a href="https://leetcode.cn/problems/maximal-square/">221. 最大正方形</a></h3><p>在一个由 <code>&#39;0&#39;</code> 和 <code>&#39;1&#39;</code> 组成的二维矩阵内，找到只包含 <code>&#39;1&#39;</code> 的最大正方形，并返回其面积。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/21/221-%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/max1grid.jpg" alt="img"></p>
-<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;0&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;1&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>]]</span><br><span class="line">输出：<span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="/2022/10/21/221-%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/max2grid.jpg" alt="img"></p>
-<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[<span class="string">&quot;0&quot;</span>,<span class="string">&quot;1&quot;</span>],[<span class="string">&quot;1&quot;</span>,<span class="string">&quot;0&quot;</span>]]</span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：matrix = <span class="string">[[&quot;0&quot;]]</span></span><br><span class="line">输出：<span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>m == matrix.length</code></li>
-<li><code>n == matrix[i].length</code></li>
-<li><code>1 &lt;= m, n &lt;= 300</code></li>
-<li><code>matrix[i][j]</code> 为 <code>&#39;0&#39;</code> 或 <code>&#39;1&#39;</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maximalSquare</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> edgeLength = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> r = matrix.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> c = matrix[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(c, <span class="number">0</span>)); <span class="comment">//dp[i][j] 表示以以matrix[i][j]为底角的正方形的边长</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; c; j ++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j] == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(i == <span class="number">0</span> || j == <span class="number">0</span>)&#123;</span><br><span class="line">                        dp[i][j] = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> dp[i][j] = <span class="built_in">min</span>(dp[i - <span class="number">1</span>][j - <span class="number">1</span>], <span class="built_in">min</span>(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>])) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                edgeLength = <span class="built_in">max</span>(edgeLength, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> edgeLength * edgeLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>3. 无重复字符的最长子串</title>
     <url>/2022/08/06/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
     <content><![CDATA[<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
@@ -882,34 +910,6 @@
         <tag>leetcode</tag>
         <tag>set</tag>
         <tag>滑动窗口</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>279.完全平方数</title>
-    <url>/2022/10/22/279-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279. 完全平方数"></a><a href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></h3><p>给你一个整数 <code>n</code> ，返回 <em>和为 <code>n</code> 的完全平方数的最少数量</em> 。</p>
-<p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：n = 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 =<span class="number"> 4 </span>+<span class="number"> 4 </span>+ 4</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">n</span> = <span class="number">13</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">13</span> = <span class="number">4</span> + <span class="number">9</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 104</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>动态规划</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; <span class="built_in">sqrt</span>(i + <span class="number">1</span>); j ++)&#123;</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i - j * j] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -1068,64 +1068,6 @@
       </tags>
   </entry>
   <entry>
-    <title>62.不同路径 63.不同路径II</title>
-    <url>/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</url>
-    <content><![CDATA[<h3 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62. 不同路径"></a><a href="https://leetcode.cn/problems/unique-paths/">62. 不同路径</a></h3><p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
-<p>问总共有多少条不同的路径？</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot_maze.png" alt="img"></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">7</span></span><br><span class="line">输出：<span class="number">28</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, n = <span class="number">2</span></span><br><span class="line">输出：<span class="number">3</span></span><br><span class="line">解释：</span><br><span class="line">从左上角开始，总共有 <span class="number">3</span> 条路径可以到达右下角。</span><br><span class="line"><span class="number">1.</span> 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line"><span class="number">2.</span> 向下 -&gt; 向下 -&gt; 向右</span><br><span class="line"><span class="number">3.</span> 向下 -&gt; 向右 -&gt; 向下</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">7</span>, <span class="built_in">n</span> = <span class="number">3</span></span><br><span class="line">输出：<span class="number">28</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 4：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">3</span></span><br><span class="line">输出：<span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= m, n &lt;= 100</code></li>
-<li>题目数据保证答案小于等于 <code>2 * 109</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt; m; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span> ; j &lt; n; j ++)&#123;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DFS : 超时</span></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int cnt = 0;</span></span><br><span class="line"><span class="comment">//     int uniquePaths(int m, int n) &#123;</span></span><br><span class="line"><span class="comment">//         // vector&lt;vector&lt;int&gt;&gt; visited = (m, vector&lt;int&gt;(n, 0));</span></span><br><span class="line"><span class="comment">//         dfs(m, n, 0, 0);</span></span><br><span class="line"><span class="comment">//         return cnt;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     void dfs(int m, int n, int r, int c)&#123;</span></span><br><span class="line"><span class="comment">//         if(r &lt; 0 || r &gt; m - 1 || c &lt; 0 || c &gt; n - 1) return;</span></span><br><span class="line"><span class="comment">//         if( r == m - 1 &amp;&amp; c == n - 1) cnt ++;</span></span><br><span class="line"><span class="comment">//         dfs(m, n, r + 1, c);</span></span><br><span class="line"><span class="comment">//         dfs(m, n, r, c + 1);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="63-不同路径-II"><a href="#63-不同路径-II" class="headerlink" title="63. 不同路径 II"></a><a href="https://leetcode.cn/problems/unique-paths-ii/">63. 不同路径 II</a></h3><p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。</p>
-<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
-<p>网格中的障碍物和空位置分别用 <code>1</code> 和 <code>0</code> 来表示。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot1.jpg" alt="img"></p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：obstacleGrid = [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">3</span>x3 网格的正中间有一个障碍物。</span><br><span class="line">从左上角到右下角一共有 <span class="number">2</span> 条不同的路径：</span><br><span class="line"><span class="number">1.</span> 向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line"><span class="number">2.</span> 向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot2.jpg" alt="img"></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：obstacleGrid = <span class="string">[[0,1],[0,0]]</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>m == obstacleGrid.length</code></li>
-<li><code>n == obstacleGrid[i].length</code></li>
-<li><code>1 &lt;= m, n &lt;= 100</code></li>
-<li><code>obstacleGrid[i][j]</code> 为 <code>0</code> 或 <code>1</code></li>
-</ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">uniquePathsWithObstacles</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = obstacleGrid.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> n = obstacleGrid[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m &amp;&amp; obstacleGrid[i][<span class="number">0</span>] == <span class="number">0</span>; i ++) dp[i][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 一遇到 obstacleGrid[i][0] = 1 就停下</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; n &amp;&amp; obstacleGrid[<span class="number">0</span>][j] == <span class="number">0</span>; j ++) dp[<span class="number">0</span>][j] = <span class="number">1</span>; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; m; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; n; j ++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(obstacleGrid[i][j] == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp [m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>856.括号的分数 22.括号生成</title>
     <url>/2022/10/09/856-%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%88%86%E6%95%B0/</url>
     <content><![CDATA[<h3 id="856-括号的分数"><a href="#856-括号的分数" class="headerlink" title="856. 括号的分数"></a><a href="https://leetcode.cn/problems/score-of-parentheses/">856. 括号的分数</a></h3><p>给定一个平衡括号字符串 <code>S</code>，按下述规则计算该字符串的分数：</p>
@@ -1192,6 +1134,115 @@
       <tags>
         <tag>leetcode</tag>
         <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>96.不同的二叉搜索树 95.不同的二叉搜索树II</title>
+    <url>/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <content><![CDATA[<h3 id="96-不同的二叉搜索树"><a href="#96-不同的二叉搜索树" class="headerlink" title="96. 不同的二叉搜索树"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></h3><p>给你一个整数 <code>n</code> ，求恰由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的 <strong>二叉搜索树</strong> 有多少种？返回满足题意的二叉搜索树的种数。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3.jpg" alt="img"></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 19</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155720080.png" alt="image-20221022155720080"></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155737712.png" alt="image-20221022155737712"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">G</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        G[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        G[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">                G[i] += G[j - <span class="number">1</span>] * G[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> G[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="95-不同的二叉搜索树-II"><a href="#95-不同的二叉搜索树-II" class="headerlink" title="95. 不同的二叉搜索树 II"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees-ii/">95. 不同的二叉搜索树 II</a></h3><p>给你一个整数 <code>n</code> ，请你生成并返回所有由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的不同 <strong>二叉搜索树</strong> 。可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3-20221022174206641.jpg" alt="img"></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">n</span> = <span class="number">3</span></span><br><span class="line">输出：[[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">3</span>],[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">3</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">1</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">1</span></span><br><span class="line">输出：<span class="string">[[1]]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 8</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>DFS</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">dfs</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> &#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line">        vector&lt;TreeNode*&gt; allTrees;</span><br><span class="line">        <span class="comment">// 枚举可行根节点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            <span class="comment">// 获得所有可行的左子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; leftTrees = <span class="built_in">dfs</span>(start, i - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获得所有可行的右子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; rightTrees = <span class="built_in">dfs</span>(i + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从左子树集合中选出一棵左子树，从右子树集合中选出一棵右子树，拼接到根节点上</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; left : leftTrees) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; right : rightTrees) &#123;</span><br><span class="line">                    TreeNode* currTree = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(i);</span><br><span class="line">                    currTree-&gt;left = left;</span><br><span class="line">                    currTree-&gt;right = right;</span><br><span class="line">                    allTrees.<span class="built_in">push_back</span>(currTree);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> allTrees;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">generateTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!n) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(<span class="number">1</span>, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>dfs</tag>
+        <tag>动态规划</tag>
+        <tag>BST</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>62.不同路径 63.不同路径II</title>
+    <url>/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</url>
+    <content><![CDATA[<h3 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62. 不同路径"></a><a href="https://leetcode.cn/problems/unique-paths/">62. 不同路径</a></h3><p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
+<p>问总共有多少条不同的路径？</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot_maze.png" alt="img"></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">7</span></span><br><span class="line">输出：<span class="number">28</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, n = <span class="number">2</span></span><br><span class="line">输出：<span class="number">3</span></span><br><span class="line">解释：</span><br><span class="line">从左上角开始，总共有 <span class="number">3</span> 条路径可以到达右下角。</span><br><span class="line"><span class="number">1.</span> 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line"><span class="number">2.</span> 向下 -&gt; 向下 -&gt; 向右</span><br><span class="line"><span class="number">3.</span> 向下 -&gt; 向右 -&gt; 向下</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">7</span>, <span class="built_in">n</span> = <span class="number">3</span></span><br><span class="line">输出：<span class="number">28</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">3</span></span><br><span class="line">输出：<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= m, n &lt;= 100</code></li>
+<li>题目数据保证答案小于等于 <code>2 * 109</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt; m; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span> ; j &lt; n; j ++)&#123;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DFS : 超时</span></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int cnt = 0;</span></span><br><span class="line"><span class="comment">//     int uniquePaths(int m, int n) &#123;</span></span><br><span class="line"><span class="comment">//         // vector&lt;vector&lt;int&gt;&gt; visited = (m, vector&lt;int&gt;(n, 0));</span></span><br><span class="line"><span class="comment">//         dfs(m, n, 0, 0);</span></span><br><span class="line"><span class="comment">//         return cnt;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     void dfs(int m, int n, int r, int c)&#123;</span></span><br><span class="line"><span class="comment">//         if(r &lt; 0 || r &gt; m - 1 || c &lt; 0 || c &gt; n - 1) return;</span></span><br><span class="line"><span class="comment">//         if( r == m - 1 &amp;&amp; c == n - 1) cnt ++;</span></span><br><span class="line"><span class="comment">//         dfs(m, n, r + 1, c);</span></span><br><span class="line"><span class="comment">//         dfs(m, n, r, c + 1);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="63-不同路径-II"><a href="#63-不同路径-II" class="headerlink" title="63. 不同路径 II"></a><a href="https://leetcode.cn/problems/unique-paths-ii/">63. 不同路径 II</a></h3><p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。</p>
+<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
+<p>网格中的障碍物和空位置分别用 <code>1</code> 和 <code>0</code> 来表示。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot1.jpg" alt="img"></p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：obstacleGrid = [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">3</span>x3 网格的正中间有一个障碍物。</span><br><span class="line">从左上角到右下角一共有 <span class="number">2</span> 条不同的路径：</span><br><span class="line"><span class="number">1.</span> 向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line"><span class="number">2.</span> 向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot2.jpg" alt="img"></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：obstacleGrid = <span class="string">[[0,1],[0,0]]</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == obstacleGrid.length</code></li>
+<li><code>n == obstacleGrid[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 100</code></li>
+<li><code>obstacleGrid[i][j]</code> 为 <code>0</code> 或 <code>1</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">uniquePathsWithObstacles</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = obstacleGrid.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> n = obstacleGrid[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m &amp;&amp; obstacleGrid[i][<span class="number">0</span>] == <span class="number">0</span>; i ++) dp[i][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 一遇到 obstacleGrid[i][0] = 1 就停下</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; n &amp;&amp; obstacleGrid[<span class="number">0</span>][j] == <span class="number">0</span>; j ++) dp[<span class="number">0</span>][j] = <span class="number">1</span>; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; m; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; n; j ++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(obstacleGrid[i][j] == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp [m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -1367,57 +1418,6 @@
         <tag>leetcode</tag>
         <tag>二叉树</tag>
         <tag>dfs</tag>
-        <tag>BST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>96.不同的二叉搜索树 95.不同的二叉搜索树II</title>
-    <url>/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
-    <content><![CDATA[<h3 id="96-不同的二叉搜索树"><a href="#96-不同的二叉搜索树" class="headerlink" title="96. 不同的二叉搜索树"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></h3><p>给你一个整数 <code>n</code> ，求恰由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的 <strong>二叉搜索树</strong> 有多少种？返回满足题意的二叉搜索树的种数。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3.jpg" alt="img"></p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 19</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155720080.png" alt="image-20221022155720080"></p>
-<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155737712.png" alt="image-20221022155737712"></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">G</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        G[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        G[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">                G[i] += G[j - <span class="number">1</span>] * G[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> G[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="95-不同的二叉搜索树-II"><a href="#95-不同的二叉搜索树-II" class="headerlink" title="95. 不同的二叉搜索树 II"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees-ii/">95. 不同的二叉搜索树 II</a></h3><p>给你一个整数 <code>n</code> ，请你生成并返回所有由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的不同 <strong>二叉搜索树</strong> 。可以按 <strong>任意顺序</strong> 返回答案。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3-20221022174206641.jpg" alt="img"></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">n</span> = <span class="number">3</span></span><br><span class="line">输出：[[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">3</span>],[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">3</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">1</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">1</span></span><br><span class="line">输出：<span class="string">[[1]]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 8</code></li>
-</ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>DFS</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">dfs</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> &#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line">        vector&lt;TreeNode*&gt; allTrees;</span><br><span class="line">        <span class="comment">// 枚举可行根节点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            <span class="comment">// 获得所有可行的左子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; leftTrees = <span class="built_in">dfs</span>(start, i - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获得所有可行的右子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; rightTrees = <span class="built_in">dfs</span>(i + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从左子树集合中选出一棵左子树，从右子树集合中选出一棵右子树，拼接到根节点上</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; left : leftTrees) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; right : rightTrees) &#123;</span><br><span class="line">                    TreeNode* currTree = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(i);</span><br><span class="line">                    currTree-&gt;left = left;</span><br><span class="line">                    currTree-&gt;right = right;</span><br><span class="line">                    allTrees.<span class="built_in">push_back</span>(currTree);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> allTrees;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">generateTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!n) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(<span class="number">1</span>, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>dfs</tag>
-        <tag>动态规划</tag>
         <tag>BST</tag>
       </tags>
   </entry>
@@ -2010,6 +2010,81 @@
       </tags>
   </entry>
   <entry>
+    <title>DP之打家劫舍合集</title>
+    <url>/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/</url>
+    <content><![CDATA[<h3 id="198-打家劫舍"><a href="#198-打家劫舍" class="headerlink" title="198. 打家劫舍"></a><a href="https://leetcode.cn/problems/house-robber/">198. 打家劫舍</a></h3><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警</strong>。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>不触动警报装置的情况下</strong> ，一夜之内能够偷窃到的最高金额。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：[1,2,3,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：偷窃<span class="number"> 1 </span>号房屋 (金额 = 1) ，然后偷窃<span class="number"> 3 </span>号房屋 (金额 = 3)。</span><br><span class="line">     偷窃到的最高金额 =<span class="number"> 1 </span>+<span class="number"> 3 </span>=<span class="number"> 4 </span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：[2,7,9,3,1]</span><br><span class="line">输出：12</span><br><span class="line">解释：偷窃<span class="number"> 1 </span>号房屋 (金额 = 2), 偷窃<span class="number"> 3 </span>号房屋 (金额 = 9)，接着偷窃<span class="number"> 5 </span>号房屋 (金额 = 1)。</span><br><span class="line">     偷窃到的最高金额 =<span class="number"> 2 </span>+<span class="number"> 9 </span>+<span class="number"> 1 </span>=<span class="number"> 12 </span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 400</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(n, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">2</span>, <span class="number">0</span>));</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//不偷这家</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = nums[<span class="number">0</span>]; <span class="comment">// 偷这家</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i ++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">            dp[i][<span class="number">1</span>] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][<span class="number">0</span>] + nums[i], dp[i - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(dp[n - <span class="number">1</span>][<span class="number">0</span>], dp[n - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">1</span>], nums[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n; i ++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">2</span>] + nums[i], dp[i - <span class="number">1</span>]);  <span class="comment">// 不太明白，记</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="213-打家劫舍-II"><a href="#213-打家劫舍-II" class="headerlink" title="213. 打家劫舍 II"></a><a href="https://leetcode.cn/problems/house-robber-ii/">213. 打家劫舍 II</a></h3><p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 <strong>围成一圈</strong> ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警</strong> 。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>在不触动警报装置的情况下</strong> ，今晚能够偷窃到的最高金额。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [2,3,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：你不能先偷窃<span class="number"> 1 </span>号房屋（金额 = 2），然后偷窃<span class="number"> 3 </span>号房屋（金额 = 2）, 因为他们是相邻的。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,2,3,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：你可以先偷窃<span class="number"> 1 </span>号房屋（金额 = 1），然后偷窃<span class="number"> 3 </span>号房屋（金额 = 3）。</span><br><span class="line">     偷窃到的最高金额 =<span class="number"> 1 </span>+<span class="number"> 3 </span>=<span class="number"> 4 </span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">输入：nums </span>=<span class="string"> [1,2,3]</span></span><br><span class="line"><span class="string">输出：3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 1000</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>分成两个数组 0～n-2 和 1～n-1</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">1</span>], nums[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n - <span class="number">1</span>; i ++)&#123; </span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">2</span>] + nums[i], dp[i - <span class="number">1</span>]);  <span class="comment">// 不太明白，记</span></span><br><span class="line">        &#125;</span><br><span class="line">        res = dp[ n - <span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = nums[<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">2</span>] = <span class="built_in">max</span>(nums[<span class="number">1</span>], nums[<span class="number">2</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">3</span>; i &lt; n; i ++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">2</span>] + nums[i], dp[i - <span class="number">1</span>]);  <span class="comment">// 不太明白，记</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(res, dp[n - <span class="number">1</span>]); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="337-打家劫舍-III"><a href="#337-打家劫舍-III" class="headerlink" title="337. 打家劫舍 III"></a><a href="https://leetcode.cn/problems/house-robber-iii/">337. 打家劫舍 III</a></h3><p>小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为 <code>root</code> 。</p>
+<p>除了 <code>root</code> 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果 <strong>两个直接相连的房子在同一天晚上被打劫</strong> ，房屋将自动报警。</p>
+<p>给定二叉树的 <code>root</code> 。返回 <em><strong>在不触动警报的情况下</strong> ，小偷能够盗取的最高金额</em> 。</p>
+<p><strong>示例 1:</strong></p>
+<p><img src="/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/rob1-tree.jpg" alt="img"></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入: root = [3,2,3,null,3,null,1]</span><br><span class="line">输出:<span class="number"> 7 </span></span><br><span class="line">解释: 小偷一晚能够盗取的最高金额<span class="number"> 3 </span>+<span class="number"> 3 </span>+<span class="number"> 1 </span>= 7</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<p><img src="/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/rob2-tree.jpg" alt="img"></p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">输入: root = [3,4,5,1,3,null,1]</span></span><br><span class="line"><span class="section">输出: 9</span></span><br><span class="line"><span class="section">解释: 小偷一晚能够盗取的最高金额 4 + 5 = 9</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>树的节点数在 <code>[1, 104]</code> 范围内</li>
+<li><code>0 &lt;= Node.val &lt;= 104</code></li>
+</ul>
+<h4 id="C-2"><a href="#C-2" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/image-20221015221538145.png" alt="image-20221015221538145"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    map&lt;TreeNode*, <span class="type">int</span>&gt; yes, no;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">postorder</span>(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(yes[root], no[root]); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">postorder</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">postorder</span>(root -&gt; left);</span><br><span class="line">        <span class="built_in">postorder</span>(root -&gt; right);</span><br><span class="line">        yes[root] = no[root -&gt; left] + no[root -&gt; right] + root -&gt;val;</span><br><span class="line">        no[root] = <span class="built_in">max</span>(no[root -&gt; left],yes[root -&gt; left]) + <span class="built_in">max</span>(no[root -&gt; right],yes[root -&gt; right]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DP之买卖股票合集</title>
     <url>/2022/10/12/DP%E4%B9%8B%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E5%90%88%E9%9B%86/</url>
     <content><![CDATA[<h3 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121. 买卖股票的最佳时机"></a><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></h3><p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素 <code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p>
@@ -2336,6 +2411,57 @@
       </tags>
   </entry>
   <entry>
+    <title>Django项目-管理系统</title>
+    <url>/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li><p>新建项目 <code>/django01</code></p>
+</li>
+<li><p>删除templates以及<code>settings.py</code>中<code>DIRS</code>字段的值</p>
+</li>
+<li><p><code>python3.9 manage.py startapp app01  </code></p>
+</li>
+<li><p>去<code>settings.py</code>中注册<code>app01</code></p>
+</li>
+<li><p>在<code>app01</code>目录中新建<code>templates</code>目录以及<code>static</code>目录（<code>static</code>包含<code>css、img、js、plugins</code>目录）</p>
+</li>
+<li><p>在<code>settings.py</code>中进行数据库连接</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;数据库名&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;00000000&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: 3306,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># python manage.py makemigrations</span></span><br><span class="line"><span class="comment"># python manage.py migrate</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设计数据库表结构"><a href="#设计数据库表结构" class="headerlink" title="设计数据库表结构"></a>设计数据库表结构</h3><h3 id="写页面"><a href="#写页面" class="headerlink" title="写页面"></a>写页面</h3><ul>
+<li>注意点1</li>
+</ul>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820151146120.png" alt="image-20220820151146120"></p>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820152335461.png" alt="image-20220820152335461"></p>
+<p>如图中那样引用静态文件预览正常，项目运行后不正常，需如下操作:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;% load <span class="keyword">static</span> %&#125;</span><br><span class="line">&#123;% csrf_token %&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/css/bootstrap.css&#x27; %&#125; &quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.0.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/js/bootstrap.js&#x27;%&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>注意点2</li>
+</ul>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820173233427.png" alt="image-20220820173233427"></p>
+<ul>
+<li>注意点3</li>
+</ul>
+<p>若请求形式为<code>post</code>，则不能再出现<code>request.GET</code></p>
+<p>解决方法： <code>path(&#39;department/&lt;int:nid&gt;/edit/&#39;,views.depart_edit),</code></p>
+<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220821015541847.png" alt="image-20220821015541847"></p>
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DP之简单题合集</title>
     <url>/2022/08/09/DP%E4%B9%8B%E7%AE%80%E5%8D%95%E9%A2%98%E5%90%88%E9%9B%86/</url>
     <content><![CDATA[<h3 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53. 最大子数组和"></a><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
@@ -2401,132 +2527,6 @@
       <tags>
         <tag>leetcode</tag>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DP之打家劫舍合集</title>
-    <url>/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/</url>
-    <content><![CDATA[<h3 id="198-打家劫舍"><a href="#198-打家劫舍" class="headerlink" title="198. 打家劫舍"></a><a href="https://leetcode.cn/problems/house-robber/">198. 打家劫舍</a></h3><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警</strong>。</p>
-<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>不触动警报装置的情况下</strong> ，一夜之内能够偷窃到的最高金额。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：[1,2,3,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：偷窃<span class="number"> 1 </span>号房屋 (金额 = 1) ，然后偷窃<span class="number"> 3 </span>号房屋 (金额 = 3)。</span><br><span class="line">     偷窃到的最高金额 =<span class="number"> 1 </span>+<span class="number"> 3 </span>=<span class="number"> 4 </span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：[2,7,9,3,1]</span><br><span class="line">输出：12</span><br><span class="line">解释：偷窃<span class="number"> 1 </span>号房屋 (金额 = 2), 偷窃<span class="number"> 3 </span>号房屋 (金额 = 9)，接着偷窃<span class="number"> 5 </span>号房屋 (金额 = 1)。</span><br><span class="line">     偷窃到的最高金额 =<span class="number"> 2 </span>+<span class="number"> 9 </span>+<span class="number"> 1 </span>=<span class="number"> 12 </span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 100</code></li>
-<li><code>0 &lt;= nums[i] &lt;= 400</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(n, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">2</span>, <span class="number">0</span>));</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//不偷这家</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = nums[<span class="number">0</span>]; <span class="comment">// 偷这家</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i ++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">            dp[i][<span class="number">1</span>] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][<span class="number">0</span>] + nums[i], dp[i - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(dp[n - <span class="number">1</span>][<span class="number">0</span>], dp[n - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">1</span>], nums[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n; i ++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">2</span>] + nums[i], dp[i - <span class="number">1</span>]);  <span class="comment">// 不太明白，记</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="213-打家劫舍-II"><a href="#213-打家劫舍-II" class="headerlink" title="213. 打家劫舍 II"></a><a href="https://leetcode.cn/problems/house-robber-ii/">213. 打家劫舍 II</a></h3><p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 <strong>围成一圈</strong> ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，<strong>如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警</strong> 。</p>
-<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 <strong>在不触动警报装置的情况下</strong> ，今晚能够偷窃到的最高金额。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [2,3,2]</span><br><span class="line">输出：3</span><br><span class="line">解释：你不能先偷窃<span class="number"> 1 </span>号房屋（金额 = 2），然后偷窃<span class="number"> 3 </span>号房屋（金额 = 2）, 因为他们是相邻的。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,2,3,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：你可以先偷窃<span class="number"> 1 </span>号房屋（金额 = 1），然后偷窃<span class="number"> 3 </span>号房屋（金额 = 3）。</span><br><span class="line">     偷窃到的最高金额 =<span class="number"> 1 </span>+<span class="number"> 3 </span>=<span class="number"> 4 </span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">输入：nums </span>=<span class="string"> [1,2,3]</span></span><br><span class="line"><span class="string">输出：3</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 100</code></li>
-<li><code>0 &lt;= nums[i] &lt;= 1000</code></li>
-</ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>分成两个数组 0～n-2 和 1～n-1</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">1</span>], nums[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n - <span class="number">1</span>; i ++)&#123; </span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">2</span>] + nums[i], dp[i - <span class="number">1</span>]);  <span class="comment">// 不太明白，记</span></span><br><span class="line">        &#125;</span><br><span class="line">        res = dp[ n - <span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = nums[<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">2</span>] = <span class="built_in">max</span>(nums[<span class="number">1</span>], nums[<span class="number">2</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">3</span>; i &lt; n; i ++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">2</span>] + nums[i], dp[i - <span class="number">1</span>]);  <span class="comment">// 不太明白，记</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(res, dp[n - <span class="number">1</span>]); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="337-打家劫舍-III"><a href="#337-打家劫舍-III" class="headerlink" title="337. 打家劫舍 III"></a><a href="https://leetcode.cn/problems/house-robber-iii/">337. 打家劫舍 III</a></h3><p>小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为 <code>root</code> 。</p>
-<p>除了 <code>root</code> 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果 <strong>两个直接相连的房子在同一天晚上被打劫</strong> ，房屋将自动报警。</p>
-<p>给定二叉树的 <code>root</code> 。返回 <em><strong>在不触动警报的情况下</strong> ，小偷能够盗取的最高金额</em> 。</p>
-<p><strong>示例 1:</strong></p>
-<p><img src="/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/rob1-tree.jpg" alt="img"></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入: root = [3,2,3,null,3,null,1]</span><br><span class="line">输出:<span class="number"> 7 </span></span><br><span class="line">解释: 小偷一晚能够盗取的最高金额<span class="number"> 3 </span>+<span class="number"> 3 </span>+<span class="number"> 1 </span>= 7</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<p><img src="/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/rob2-tree.jpg" alt="img"></p>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">输入: root = [3,4,5,1,3,null,1]</span></span><br><span class="line"><span class="section">输出: 9</span></span><br><span class="line"><span class="section">解释: 小偷一晚能够盗取的最高金额 4 + 5 = 9</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>树的节点数在 <code>[1, 104]</code> 范围内</li>
-<li><code>0 &lt;= Node.val &lt;= 104</code></li>
-</ul>
-<h4 id="C-2"><a href="#C-2" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/image-20221015221538145.png" alt="image-20221015221538145"></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    map&lt;TreeNode*, <span class="type">int</span>&gt; yes, no;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">postorder</span>(root);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(yes[root], no[root]); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">postorder</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">postorder</span>(root -&gt; left);</span><br><span class="line">        <span class="built_in">postorder</span>(root -&gt; right);</span><br><span class="line">        yes[root] = no[root -&gt; left] + no[root -&gt; right] + root -&gt;val;</span><br><span class="line">        no[root] = <span class="built_in">max</span>(no[root -&gt; left],yes[root -&gt; left]) + <span class="built_in">max</span>(no[root -&gt; right],yes[root -&gt; right]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Django项目-管理系统</title>
-    <url>/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
-<li><p>新建项目 <code>/django01</code></p>
-</li>
-<li><p>删除templates以及<code>settings.py</code>中<code>DIRS</code>字段的值</p>
-</li>
-<li><p><code>python3.9 manage.py startapp app01  </code></p>
-</li>
-<li><p>去<code>settings.py</code>中注册<code>app01</code></p>
-</li>
-<li><p>在<code>app01</code>目录中新建<code>templates</code>目录以及<code>static</code>目录（<code>static</code>包含<code>css、img、js、plugins</code>目录）</p>
-</li>
-<li><p>在<code>settings.py</code>中进行数据库连接</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;数据库名&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;00000000&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: 3306,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># python manage.py makemigrations</span></span><br><span class="line"><span class="comment"># python manage.py migrate</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="设计数据库表结构"><a href="#设计数据库表结构" class="headerlink" title="设计数据库表结构"></a>设计数据库表结构</h3><h3 id="写页面"><a href="#写页面" class="headerlink" title="写页面"></a>写页面</h3><ul>
-<li>注意点1</li>
-</ul>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820151146120.png" alt="image-20220820151146120"></p>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820152335461.png" alt="image-20220820152335461"></p>
-<p>如图中那样引用静态文件预览正常，项目运行后不正常，需如下操作:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;% load <span class="keyword">static</span> %&#125;</span><br><span class="line">&#123;% csrf_token %&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/css/bootstrap.css&#x27; %&#125; &quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;js/jquery-3.6.0.js&#x27; %&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1-dist/js/bootstrap.js&#x27;%&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>注意点2</li>
-</ul>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220820173233427.png" alt="image-20220820173233427"></p>
-<ul>
-<li>注意点3</li>
-</ul>
-<p>若请求形式为<code>post</code>，则不能再出现<code>request.GET</code></p>
-<p>解决方法： <code>path(&#39;department/&lt;int:nid&gt;/edit/&#39;,views.depart_edit),</code></p>
-<p><img src="/2022/08/20/Django%E9%A1%B9%E7%9B%AE-%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/image-20220821015541847.png" alt="image-20220821015541847"></p>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -3181,7 +3181,7 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">变长字符串，m代表字符的长度。   最大<span class="number">65535</span>字节<span class="operator">/</span><span class="number">3</span> <span class="operator">=</span> 最大的m</span><br><span class="line"></span><br><span class="line"><span class="type">varchar</span>(<span class="number">11</span>)，真实数据有多少长久按照多长存储。</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb5(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">	mobile <span class="type">varchar</span>(<span class="number">11</span>)</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb5(mobile) <span class="keyword">values</span>(&quot;151&quot;);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb5(mobile) <span class="keyword">values</span>(&quot;15131255555&quot;);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>text</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">text数据类型用于保存变长的大字符串，可以组多到<span class="number">65535</span> (<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">16</span> − <span class="number">1</span>)个字符。</span><br><span class="line"></span><br><span class="line">一般情况下，长文本会用text类型。例如：文章、新闻等。</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb6(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">    title <span class="type">varchar</span>(<span class="number">128</span>),</span><br><span class="line">	content text</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">text数据类型用于保存变长的大字符串，可以组多到<span class="number">65535</span> (<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">16</span> − <span class="number">1</span>)个字符。</span><br><span class="line"></span><br><span class="line">一般情况下，长文本会用text类型。例如：文章、新闻等。</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb6(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">  title <span class="type">varchar</span>(<span class="number">128</span>),</span><br><span class="line">	content text</span><br><span class="line">)<span class="keyword">default</span> charset<span class="operator">=</span>utf8;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>mediumtext</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">A TEXT <span class="keyword">column</span> <span class="keyword">with</span> a maximum length <span class="keyword">of</span> <span class="number">16</span>,<span class="number">777</span>,<span class="number">215</span> (<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">24</span> − <span class="number">1</span>) characters.</span><br></pre></td></tr></table></figure>
@@ -3286,6 +3286,29 @@
 
 
 
+<h4 id="聚合函数、GROUP-BY、HAVING"><a href="#聚合函数、GROUP-BY、HAVING" class="headerlink" title="聚合函数、GROUP BY、HAVING"></a>聚合函数、GROUP BY、HAVING</h4><h5 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h5><p>计数（Count）、求和（SUM）、求平均数（AVG）、最大值（MAX）、最小值（MIN）</p>
+<h5 id="GROUP-BY、HAVING"><a href="#GROUP-BY、HAVING" class="headerlink" title="GROUP BY、HAVING"></a>GROUP BY、HAVING</h5><p><img src="/2022/08/18/%E6%95%B0%E6%8D%AE%E5%BA%93/52b444ad8acd4e4da81a88d29e46a27d.png" alt="img"></p>
+<ol>
+<li>想知道每门学科的最高分</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> course ,<span class="built_in">Max</span>(score) <span class="keyword">AS</span> 最高分数 <span class="keyword">FROM</span> `t_user` t <span class="keyword">GROUP</span> <span class="keyword">BY</span> course</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/18/%E6%95%B0%E6%8D%AE%E5%BA%93/102cce8b375b42a1a6a4c2c8c2cb61c8.png" alt="img"></p>
+<ol start="2">
+<li>想知道考试时间在2022-09-07号之前每门学科的最高分</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> course ,<span class="built_in">MAX</span>(score) <span class="keyword">AS</span> 最高分数 <span class="keyword">FROM</span> `t_user` t <span class="keyword">WHERE</span> t.create_time <span class="operator">&gt;</span> <span class="string">&#x27;2022-09-07&#x27;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> course</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/18/%E6%95%B0%E6%8D%AE%E5%BA%93/bc88340022b949f085c3cb777b8544b1.png" alt="img"></p>
+<ol start="3">
+<li><pre><code>想知道考试时间在2022-09-07号之前每门学科最高分数在70以上有多少人
+</code></pre>
+</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> course ,<span class="built_in">MAX</span>(score) <span class="keyword">AS</span> 最高分数 <span class="keyword">FROM</span> `t_user` t <span class="keyword">WHERE</span> t.create_time <span class="operator">&gt;</span> <span class="string">&#x27;2022-09-07&#x27;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> course <span class="keyword">HAVING</span>(最高分数) <span class="operator">&gt;</span> <span class="number">70</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/18/%E6%95%B0%E6%8D%AE%E5%BA%93/3652288d186f44ac885435272e12340a.png" alt="img"></p>
+<p>可以发现 我们用了having，对分组之后的结果进行了一个筛选。</p>
 <h4 id="关键字顺序-SD-FJ-OW-GWHOL"><a href="#关键字顺序-SD-FJ-OW-GWHOL" class="headerlink" title="关键字顺序 SD FJ OW GWHOL"></a>关键字顺序 SD FJ OW GWHOL</h4><ul>
 <li><strong>SELECT</strong> </li>
 <li><strong>DISTINCT</strong><code>&lt;select_list&gt;</code></li>
