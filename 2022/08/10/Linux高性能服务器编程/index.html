@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221026150832523.png">
 <meta property="article:published_time" content="2022-08-10T07:54:39.000Z">
-<meta property="article:modified_time" content="2022-10-27T05:58:43.775Z">
+<meta property="article:modified_time" content="2022-10-27T09:11:36.899Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 13:58:43" itemprop="dateModified" datetime="2022-10-27T13:58:43+08:00">2022-10-27</time>
+                <time title="修改时间：2022-10-27 17:11:36" itemprop="dateModified" datetime="2022-10-27T17:11:36+08:00">2022-10-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,10 +254,183 @@
       
         <h3 id="Linux快捷键"><a href="#Linux快捷键" class="headerlink" title="Linux快捷键"></a>Linux快捷键</h3><p>清屏	<code>ctrl+l</code></p>
 <p>自动补全 	<code>tab</code></p>
-<h3 id="Linux操作"><a href="#Linux操作" class="headerlink" title="Linux操作"></a>Linux操作</h3><p>touch	<code>touch test.c</code>	如果文件不存在，使用touch命令默认创建一个空文件。</p>
-<p>rm	<code>rm test.c</code>	删除指定文件</p>
-<p>cp	<code>cp -r a/ b/ ../lesson5</code> 将当前目录	a&#x2F;文件夹	b&#x2F;文件夹 递归拷贝到上一级目录下的lesson5目录</p>
-<p>tree 	<code>tree</code>查看目录结构</p>
+<h3 id="Linux操作"><a href="#Linux操作" class="headerlink" title="Linux操作"></a>Linux操作</h3><h4 id="文件和目录操作"><a href="#文件和目录操作" class="headerlink" title="文件和目录操作"></a>文件和目录操作</h4><p>touch	<code>touch [选项] [文件]</code>	如果文件不存在，使用touch命令默认创建一个空文件。</p>
+<blockquote>
+<p>-c -t	touch -c -t 06071930 file1	将文件file1现在的时间已经改为6月7日19点30分</p>
+</blockquote>
+<p>cp	<code>cp [选项] [源文件/目录] [目标文件/目录]</code>拷贝文件</p>
+<blockquote>
+<p><code>cp -r a/ b/ ../lesson5</code> 将当前目录	a&#x2F;文件夹	b&#x2F;文件夹 递归拷贝到上一级目录下的lesson5目录</p>
+</blockquote>
+<p>file	<code>file [文件]</code>显示文件类型</p>
+<p>tree 	<code>tree</code>查看该文件夹内垂直目录结构</p>
+<p>pwd	<code>pwd</code>显示用户当前工作目录路径</p>
+<p>ls 	<code>ls [选项] [文件]</code>查看当前目录下所有可见文件		</p>
+<blockquote>
+<p>-d	只显示当前文件夹	</p>
+<p>-l	以长格式的形式查看当前目录下所有可见文件的详细属性,不包括隐藏文件</p>
+<p>-la	查看文件详细信息，包括隐藏文件。</p>
+<p>-ld	查看当前目录本身的权限与属性信息</p>
+</blockquote>
+<p>mkdir 	<code>mkdir [选项] [文件]</code>创建目录	</p>
+<blockquote>
+<p>-m xxx	创建具有xxx权限的目录</p>
+</blockquote>
+<p>rmdir	 <code>rmdir [选项] [文件]</code>删除目录</p>
+<p>mv	<code>mv [选项] [源文件] [目标文件]</code>文件和目录改名、移动文件和目录路径  如<code>mv -f *.png picture</code></p>
+<blockquote>
+<p>-f	不询问，或者说覆盖前不询问<br>-i 	询问，或者说覆盖前询问<br>-n	不覆盖已存在的文件</p>
+</blockquote>
+<p>rm	<code>rm [选项] [文件]</code>删除文件或目录</p>
+<blockquote>
+<p>-f	 忽略不存在的文件，从不给出提示。</p>
+<p>-i	进行交互式删除</p>
+<p>-r	指示rm将参数中列出的全部目录和子目录均递归地删除。</p>
+<p>-rf	无提示地强制递归删除文件</p>
+<p>-v	详细显示进行的步骤</p>
+</blockquote>
+<p>wc	<code>wc [选项] [文件]</code>统计文件行数、单词数和字节数和字符数 		不加选项的话总是按行数、单词数、字节数、文件的顺序显示每项信息。</p>
+<blockquote>
+<p>-c或–bytes或–chars 	只显示Bytes数。</p>
+<p>-l或–lines 	只显示列数。</p>
+<p>-w或–words 	只显示字数。</p>
+<p>-m	只显示字符数</p>
+</blockquote>
+<p>ln	<code>ln [选项] [源文件] [目标文件]</code>使用ln命令可以创建链接文件（包括软链接文件和硬链接文件）</p>
+<blockquote>
+<p>硬链接文件的使用	<code>echo hello &gt; a</code>	<code>ln a b</code></p>
+<p>软链接文件的使用	<code>echo hello &gt; a</code>	<code>ln –s a b</code></p>
+</blockquote>
+<h4 id="文本内容显示"><a href="#文本内容显示" class="headerlink" title="文本内容显示"></a>文本内容显示</h4><p>cat	<code>cat [选项] [文件]</code>显示文本文件</p>
+<blockquote>
+<p>无选项 	显示文件内容</p>
+<p>cat -n textfile1 &gt; textfile2  	把textfile1文件的内容加上行号后输入到textfile2文件中</p>
+<p>cat &gt;mm.txt&lt;&lt;EOF 输入&gt;Hello	&gt;Linux	&gt;EOF	使用cat命令创建mm.txt并输入Hello Linux。</p>
+</blockquote>
+<p>more	<code>more [选项] [文件名]</code>分页显示文本文件</p>
+<blockquote>
+<p>无选项	分页显示该文件内容</p>
+<p> more -s testfile	逐页显示testfile文件内容，如有连续两行以上空白行则以一行空白行显示</p>
+<p> more +20 testfile	从第20行开始显示testfile文件的内容</p>
+<p> more -2 &#x2F;etc&#x2F;passwd	一次两行显示&#x2F;etc&#x2F;passwd文件内容</p>
+</blockquote>
+<p>less	<code>less [选项] [文件名]</code>回卷显示文本文件</p>
+<blockquote>
+<p> less &#x2F;etc&#x2F;services	回卷显示&#x2F;etc&#x2F;services文件的内容</p>
+</blockquote>
+<p>head	<code>head［选项］[文件]</code>显示指定文件前若干行 如果没有给出具体行数值，默认为10行</p>
+<blockquote>
+<p>head -c -50 a	查看a文件前五十个字节数据</p>
+<p>head -50 a	查看a文件前五十行数据</p>
+</blockquote>
+<p>tail	<code>tail［选项］[文件]</code>显示指定文件末尾若干行 如果没有给出具体行数值，默认为10行 具体选项用法完全同<code>head</code></p>
+<h4 id="文本内容处理"><a href="#文本内容处理" class="headerlink" title="文本内容处理"></a>文本内容处理</h4><p>sort	<code>sort [选项] [文件]</code>对文件中的数据进行排序</p>
+<blockquote>
+<p>-r	倒序排序</p>
+</blockquote>
+<p>uniq	<code>uniq [选项] [文件] </code>将重复行从输出文件中删除</p>
+<blockquote>
+<p>-d	查看文件中重复的数据内容</p>
+<p> -u	查看文件中不重复的数据内容</p>
+</blockquote>
+<p>cut	<code>cut [选项] [ 文件 ]</code>从文件每行中显示出选定的字节、字符或字段</p>
+<blockquote>
+<p>-b	以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非也指定了 -n 标志。</p>
+<p>-c	以字符为单位进行分割。</p>
+<p>-d	自定义分隔符，默认为制表符。</p>
+<p>-f	与-d一起使用，指定显示哪个区域。</p>
+<p>-n	取消分割多字节字符。仅和 -b 标志一起使用。</p>
+</blockquote>
+<blockquote>
+<p>cut -f 1,5 -d: &#x2F;etc&#x2F;passwd 	显示文件&#x2F;etc&#x2F;passwd中的第1个和第5个字段，由冒号隔开。</p>
+</blockquote>
+<p>comm	<code>comm [选项] [文件1] [文件2]</code>逐行比较两个已排过序的文件</p>
+<blockquote>
+<p>-1	不输出文件1特有的行</p>
+<p>-2	不输出文件2特有的行</p>
+<p>-3	不输出两个文件共有的行</p>
+</blockquote>
+<p>diff	<code>diff ［选项］ [文件1] [文件2]</code>逐行比较两个文本文件，列出其不同之处</p>
+<h4 id="文件和命令查找"><a href="#文件和命令查找" class="headerlink" title="文件和命令查找"></a>文件和命令查找</h4><p>grep	<code>grep [选项] [查找模式] [文件名] </code>查找文件中符合条件的字符串</p>
+<blockquote>
+<p>grep ‘test file’ kkk	在文件kkk中搜索匹配字符“test file”</p>
+<p>grep ‘test’ d*	显示所有以d开头的文件中包含“test”的行数据内容</p>
+<p>grep ^b &#x2F;root&#x2F;aa	 在&#x2F;root&#x2F;aa文件中找出以b开头的行内容</p>
+<p>grep -v ^b &#x2F;root&#x2F;aa	在&#x2F;root&#x2F;aa文件中找出不以b开头的行内容</p>
+<p>grep le$ &#x2F;root&#x2F;kkk	在&#x2F;root&#x2F;kkk文件中找出以le结尾的行内容</p>
+<p>ps –ef|grep sshd	查找sshd进程信息</p>
+</blockquote>
+<p>find	<code>find [路径] [选项]</code>列出文件系统内符合条件的文件</p>
+<blockquote>
+<p>find &#x2F; -name ‘*.conf’	查找&#x2F;目录下所有以“.conf”为扩展名的文件</p>
+<p>find . -ctime -20	列出当前目录及其子目录下所有最近20天内更改过的文件</p>
+</blockquote>
+<p>locate	<code>locate [选项][范本样式]</code>在数据库中查找文件</p>
+<blockquote>
+<p>locate httpd.conf	查找httpd.conf</p>
+<p>locate -c httpd.conf	显示找到几个httpd.conf文件</p>
+</blockquote>
+<h4 id="系统信息显示"><a href="#系统信息显示" class="headerlink" title="系统信息显示"></a>系统信息显示</h4><p>uname	<code>uname [选项]</code>显示计算机及操作系统相关信息</p>
+<blockquote>
+<p>-r	显示操作系统的内核发行号</p>
+<p>-m	显示计算机硬件架构名称</p>
+<p>-a	显示操作系统的全部信息</p>
+</blockquote>
+<p>hostname	<code>设置主机名:hostname [选项] [主机名] 	显示主机名:hostname [选项] </code>显示或修改计算机主机名</p>
+<p>free	<code>free [选项]</code>查看内存信息</p>
+<blockquote>
+<p>free	查看系统的物理内存和交换分区使用情况</p>
+<p>free -m	以MB为单位查看系统的物理内存和交换分区使用情况</p>
+<p>free -t	显示系统的物理内存加上交换分区总的容量</p>
+</blockquote>
+<p>du	<code>du [选项] [文件|目录]</code>显示目录或文件的磁盘占用量</p>
+<blockquote>
+<p>无选项	显示文件的磁盘占用量</p>
+<p>-s	显示目录的磁盘占用量</p>
+<p>-sh	以MB为单位显示目录磁盘占用量</p>
+</blockquote>
+<h4 id="查看日期与时间"><a href="#查看日期与时间" class="headerlink" title="查看日期与时间"></a>查看日期与时间</h4><p>cal	<code>cal [选项] [[[日] 月] 年]</code>显示日历信息</p>
+<blockquote>
+<p>cal	显示本月的月历</p>
+<p>cal 2001	显示公元2001年年历。</p>
+<p>cal 9 2007	显示公元2007年9月的月历。</p>
+<p>cal -m 	以星期一为每周的第一天的方式显示本月的日历。</p>
+<p>cal -jy	以1月1日起的天数显示今年的年历。</p>
+</blockquote>
+<p>date	<code>date [选项] [显示时间格式]（以+开头，后面接格式）</code>显示和设置系统日期和时间</p>
+<blockquote>
+<p>date	显示当前计算机上的日期和时间</p>
+<p>date 0202191428	设置计算机日期和时间为2028年2月2日19点14分</p>
+<p>date +’%r%a%d%h%y’	按照指定的格式显示计算机日期和时间</p>
+<p>date -s 09:16:00	设置计算机时间为上午9点16分</p>
+<p>date -s 240414	设置计算机时间为2024年4月14日</p>
+</blockquote>
+<p>hwclock	<code>hwclock [选项] </code>查看和设置硬件时钟</p>
+<blockquote>
+<p>hwclock	查看硬件时间</p>
+<p>hwclock -w 	以系统时间更新硬件时间</p>
+<p>hwclock -s	以硬件时间更新系统时间</p>
+</blockquote>
+<h4 id="信息交流"><a href="#信息交流" class="headerlink" title="信息交流"></a>信息交流</h4><p>echo	<code>echo [选项] [字符串] </code>在显示器上显示文字</p>
+<blockquote>
+<p>echo Hello Linux	将一段信息写到标准输出	结果:Hello Linux</p>
+<p>echo Hello Linux &gt; notes	将文本“Hello Linux”添加到新文件notes中</p>
+<p>echo $HOME	 显示$HOME变量的值</p>
+</blockquote>
+<p>mesg	<code>mesg [选项]</code>允许或拒绝写消息</p>
+<blockquote>
+<p>控制系统中的其它用户是否能够用 write 命令或 talk 命令向您发送消息。不带选项的情况下，mesg 命令显示当前主机消息许可设置</p>
+</blockquote>
+<p>wall	<code>wall [消息] </code>对全部已登录用户发送信息</p>
+<blockquote>
+<p>wall ‘aaaaaaa’	对全部已登录用户发送aaaaaaa</p>
+</blockquote>
+<p>write	<code>write [用户] [终端名称] </code>向用户发送消息</p>
+<blockquote>
+<p>write root tty3	向tty3终端上的root用户发送信息</p>
+</blockquote>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>clear	<code>clear</code>清屏</p>
+<p>uptime	<code>uptime</code>显示系统已经运行的时间</p>
 <h3 id="Linux入门"><a href="#Linux入门" class="headerlink" title="Linux入门"></a>Linux入门</h3><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>安装了远程连接服务器的工具,操作它就不要打开再操作了	<code>sudo yum install openssh-server</code></p>
 <p>查看虚拟机ip地址	<code>ifconfig</code> </p>
 <p>登录该虚拟机	<code>ssh kjg@172.16.208.128</code></p>
@@ -384,7 +557,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.</span> <span class="nav-text">Linux快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">Linux操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%85%A5%E9%97%A8"><span class="nav-number">3.</span> <span class="nav-text">Linux入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gcc%E7%BC%96%E8%AF%91"><span class="nav-number">3.2.</span> <span class="nav-text">Gcc编译</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGCC"><span class="nav-number">3.2.1.</span> <span class="nav-text">什么是GCC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GCC%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.2.</span> <span class="nav-text">GCC命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GCC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.3.</span> <span class="nav-text">GCC工作流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gcc%E4%B8%8Eg-%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.4.</span> <span class="nav-text">gcc与g++区别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93"><span class="nav-number">3.3.</span> <span class="nav-text">静态库和动态库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%93"><span class="nav-number">3.3.1.</span> <span class="nav-text">什么是库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">3.3.2.</span> <span class="nav-text">静态库的命名规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%88%B6%E4%BD%9C"><span class="nav-number">3.3.3.</span> <span class="nav-text">静态库的制作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.3.4.</span> <span class="nav-text">静态库的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">3.3.5.</span> <span class="nav-text">动态库的命名规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%88%B6%E4%BD%9C"><span class="nav-number">3.3.6.</span> <span class="nav-text">动态库的制作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.3.7.</span> <span class="nav-text">动态库的使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Makefile"><span class="nav-number">3.4.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GDB%E8%B0%83%E8%AF%95"><span class="nav-number">3.5.</span> <span class="nav-text">GDB调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.6.</span> <span class="nav-text">虚拟地址空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">3.7.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#open-%E5%87%BD%E6%95%B0"><span class="nav-number">3.8.</span> <span class="nav-text">open 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read-%E5%87%BD%E6%95%B0"><span class="nav-number">3.9.</span> <span class="nav-text">read 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#write-%E5%87%BD%E6%95%B0"><span class="nav-number">3.10.</span> <span class="nav-text">write 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lseek-%E5%87%BD%E6%95%B0"><span class="nav-number">3.11.</span> <span class="nav-text">lseek 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stat-%E5%87%BD%E6%95%B0"><span class="nav-number">3.12.</span> <span class="nav-text">stat 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="nav-number">3.13.</span> <span class="nav-text">目录操作函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dup-%E5%87%BD%E6%95%B0"><span class="nav-number">3.14.</span> <span class="nav-text">dup 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dup2-%E5%87%BD%E6%95%B0"><span class="nav-number">3.15.</span> <span class="nav-text">dup2 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fcntl%E5%87%BD%E6%95%B0"><span class="nav-number">3.16.</span> <span class="nav-text">fcntl函数</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.</span> <span class="nav-text">Linux快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">Linux操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">文件和目录操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA"><span class="nav-number">2.2.</span> <span class="nav-text">文本内容显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%A4%84%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">文本内容处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E6%89%BE"><span class="nav-number">2.4.</span> <span class="nav-text">文件和命令查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%98%BE%E7%A4%BA"><span class="nav-number">2.5.</span> <span class="nav-text">系统信息显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E6%9C%9F%E4%B8%8E%E6%97%B6%E9%97%B4"><span class="nav-number">2.6.</span> <span class="nav-text">查看日期与时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E4%BA%A4%E6%B5%81"><span class="nav-number">2.7.</span> <span class="nav-text">信息交流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.8.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%85%A5%E9%97%A8"><span class="nav-number">3.</span> <span class="nav-text">Linux入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gcc%E7%BC%96%E8%AF%91"><span class="nav-number">3.2.</span> <span class="nav-text">Gcc编译</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGCC"><span class="nav-number">3.2.1.</span> <span class="nav-text">什么是GCC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GCC%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.2.</span> <span class="nav-text">GCC命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GCC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.3.</span> <span class="nav-text">GCC工作流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gcc%E4%B8%8Eg-%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.4.</span> <span class="nav-text">gcc与g++区别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93"><span class="nav-number">3.3.</span> <span class="nav-text">静态库和动态库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%93"><span class="nav-number">3.3.1.</span> <span class="nav-text">什么是库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">3.3.2.</span> <span class="nav-text">静态库的命名规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E5%88%B6%E4%BD%9C"><span class="nav-number">3.3.3.</span> <span class="nav-text">静态库的制作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.3.4.</span> <span class="nav-text">静态库的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">3.3.5.</span> <span class="nav-text">动态库的命名规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E5%88%B6%E4%BD%9C"><span class="nav-number">3.3.6.</span> <span class="nav-text">动态库的制作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.3.7.</span> <span class="nav-text">动态库的使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Makefile"><span class="nav-number">3.4.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GDB%E8%B0%83%E8%AF%95"><span class="nav-number">3.5.</span> <span class="nav-text">GDB调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.6.</span> <span class="nav-text">虚拟地址空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">3.7.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#open-%E5%87%BD%E6%95%B0"><span class="nav-number">3.8.</span> <span class="nav-text">open 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read-%E5%87%BD%E6%95%B0"><span class="nav-number">3.9.</span> <span class="nav-text">read 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#write-%E5%87%BD%E6%95%B0"><span class="nav-number">3.10.</span> <span class="nav-text">write 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lseek-%E5%87%BD%E6%95%B0"><span class="nav-number">3.11.</span> <span class="nav-text">lseek 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stat-%E5%87%BD%E6%95%B0"><span class="nav-number">3.12.</span> <span class="nav-text">stat 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="nav-number">3.13.</span> <span class="nav-text">目录操作函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dup-%E5%87%BD%E6%95%B0"><span class="nav-number">3.14.</span> <span class="nav-text">dup 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dup2-%E5%87%BD%E6%95%B0"><span class="nav-number">3.15.</span> <span class="nav-text">dup2 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fcntl%E5%87%BD%E6%95%B0"><span class="nav-number">3.16.</span> <span class="nav-text">fcntl函数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
