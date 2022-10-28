@@ -2694,6 +2694,7 @@
 </blockquote>
 <p>cp	<code>cp [选项] [源文件/目录] [目标文件/目录]</code>拷贝文件</p>
 <blockquote>
+<p><code>cp makefile makefile1</code>	将makefile另外复制一份为makefile1</p>
 <p><code>cp -r a/ b/ ../lesson5</code> 将当前目录	a&#x2F;文件夹	b&#x2F;文件夹 递归拷贝到上一级目录下的lesson5目录</p>
 </blockquote>
 <p>file	<code>file [文件]</code>显示文件类型</p>
@@ -2908,7 +2909,99 @@
 <p>-l 	在程序编译的时候，指定使用的库。（静态库的名字一定要掐头去尾。如：libCalc.a变为Calc）<br>-L 	在程序编译的时候，指定使用的库的路径。</p>
 <p>如:	<code>gcc main.c -o Calc -L ./ -l Calc</code> [第一个Calc是生成的可执行文件名]</p>
 <p>运行:	<code>./Calc</code></p>
-<h5 id="动态库的命名规则"><a href="#动态库的命名规则" class="headerlink" title="动态库的命名规则"></a>动态库的命名规则</h5><h5 id="动态库的制作"><a href="#动态库的制作" class="headerlink" title="动态库的制作"></a>动态库的制作</h5><h5 id="动态库的使用"><a href="#动态库的使用" class="headerlink" title="动态库的使用"></a>动态库的使用</h5><h4 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h4><h4 id="GDB调试"><a href="#GDB调试" class="headerlink" title="GDB调试"></a>GDB调试</h4><h4 id="虚拟地址空间"><a href="#虚拟地址空间" class="headerlink" title="虚拟地址空间"></a>虚拟地址空间</h4><h4 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h4><h4 id="open-函数"><a href="#open-函数" class="headerlink" title="open 函数"></a>open 函数</h4><h4 id="read-函数"><a href="#read-函数" class="headerlink" title="read 函数"></a>read 函数</h4><h4 id="write-函数"><a href="#write-函数" class="headerlink" title="write 函数"></a>write 函数</h4><h4 id="lseek-函数"><a href="#lseek-函数" class="headerlink" title="lseek 函数"></a>lseek 函数</h4><h4 id="stat-函数"><a href="#stat-函数" class="headerlink" title="stat 函数"></a>stat 函数</h4><h4 id="目录操作函数"><a href="#目录操作函数" class="headerlink" title="目录操作函数"></a>目录操作函数</h4><h4 id="dup-函数"><a href="#dup-函数" class="headerlink" title="dup 函数"></a>dup 函数</h4><h4 id="dup2-函数"><a href="#dup2-函数" class="headerlink" title="dup2 函数"></a>dup2 函数</h4><h4 id="fcntl函数"><a href="#fcntl函数" class="headerlink" title="fcntl函数"></a>fcntl函数</h4>]]></content>
+<h5 id="动态库的命名规则"><a href="#动态库的命名规则" class="headerlink" title="动态库的命名规则"></a>动态库的命名规则</h5><p>Linux:	<code>libxxx.so</code> 	lib:前缀(固定)	xxx ：库的名字，自己起 	so:后缀（固定）	在Linux下是一个可执行文件 </p>
+<p>Windows:	<code>libxxx.dll</code></p>
+<h5 id="动态库的制作"><a href="#动态库的制作" class="headerlink" title="动态库的制作"></a>动态库的制作</h5><p>gcc 得到.o文件，得到和位置无关的代码	 <code>gcc -c -fpic/-fPIC a.c b.c</code><br>gcc 得到动态库	<code>gcc －shared a.o b.o -o libcalc.so</code></p>
+<h5 id="动态库的使用"><a href="#动态库的使用" class="headerlink" title="动态库的使用"></a>动态库的使用</h5><p>库文件是src里源文件的定义，头文件是src里源文件的声明；使用时需要将库文件和头文件都分发给src里的文件们</p>
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028142406885.png" alt="image-20221028142406885" style="zoom:50%;">
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需要将使用的库文件拷贝到当前lib目录下</span></span><br><span class="line">gcc main.c -o main -I include/ -L /lib -l calc   </span><br><span class="line"><span class="comment"># -I include/ 是为了找到head.h  	-L /lib是为了找到库文件的目录		-l calc是为了指定库文件名</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028143032281.png" alt="image-20221028143032281" style="zoom:50%;"> 
+
+
+
+<h5 id="动态库加载失败的原因"><a href="#动态库加载失败的原因" class="headerlink" title="动态库加载失败的原因"></a>动态库加载失败的原因</h5><ul>
+<li><p>静态库：GCC 进行链接时，会把静态库中代码打包到可执行程序中</p>
+</li>
+<li><p>动态库：GCC 进行链接时，动态库的代码不会被打包到可执行程序中</p>
+</li>
+<li><p>程序启动之后，动态库会被动态加载到内存中，通过 <code>ldd </code> 命令检查动态库依赖关系 在上例中就是 <code>ldd main</code></p>
+</li>
+<li><p>如何定位共享库文件呢？</p>
+<p>当系统加载可执行代码时候，能够知道其所依赖的库的名字，但是还需要知道绝对路径。此时就需要系统的动态载入器来获取该绝对路径。对于<code>elf</code>格式的可执行程序，是由<code>ld-linux.so</code>来完成的，它先后搜索<code>elf</code>文件的 <code>DT_RPATH段</code>→<code>环境变量 LD_LIBRARY_PATH</code>→<code>/etc/1d.so.cache文件列表</code>→<code>/lib/</code>或<code>／usr/lib</code>目录找到库文件后将其载入内存。</p>
+</li>
+<li><p>解决动态库加载失败方式</p>
+<ol>
+<li>配置环境变量[一次性的,临时的]</li>
+</ol>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028154045633.png" alt="image-20221028154045633"></p>
+<ol start="2">
+<li>在 <code>.bashrc</code>里配置 同图上同样内容	后输入<code>source .bashrc</code></li>
+<li>在<code>/etc/profile</code>里配置 同图上同样内容    后输入<code>source /etc/profile</code></li>
+</ol>
+</li>
+</ul>
+<h5 id="动静态库优缺点"><a href="#动静态库优缺点" class="headerlink" title="动静态库优缺点"></a>动静态库优缺点</h5><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028160925281.png" alt="image-20221028160925281" style="zoom: 33%;">
+
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028160951754.png" alt="image-20221028160951754" style="zoom: 33%;">
+
+
+
+
+
+<h4 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h4><h5 id="什么是Makefile"><a href="#什么是Makefile" class="headerlink" title="什么是Makefile"></a>什么是Makefile</h5><ul>
+<li><p>一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shel1 脚本一样,也可以执行操作系统的命令</p>
+</li>
+<li><p>Makefile 带来的好处就是“自动化编译”，一旦写好，只需要一个 make 命令[是Makefile的启动器]，整个工程完全自动编译，极大提高了软件开发效率。</p>
+</li>
+<li><p>make 是一个命令工具，是一个解释 Makefile 文件中指令的命令工具，一般来说，大多数的 IDE 都有这个命令，比如 Delphi的make，Visual C++的 nmake，Linux下 GNU的make</p>
+</li>
+</ul>
+<h5 id="Makefile文件命名和规则"><a href="#Makefile文件命名和规则" class="headerlink" title="Makefile文件命名和规则"></a>Makefile文件命名和规则</h5><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028163708993.png" alt="image-20221028163708993" style="zoom: 50%;">
+
+<p>例1:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim Makefile <span class="comment"># 不管当前目录有没有Makefile , 只要有你想编译的.c文件就行</span></span><br><span class="line"></span><br><span class="line">================================================</span><br><span class="line">app : add.c	sub.c	multi.c	div.c	main.c</span><br><span class="line">	gcc add.c	sub.c	multi.c	div.c	main.c -o app</span><br><span class="line">================================================</span><br><span class="line"></span><br><span class="line">make <span class="comment"># sudo yum install make</span></span><br></pre></td></tr></table></figure>
+
+<p>例2:</p>
+<p>如果第一个规则的依赖在当前目录暂时找不到, 那就往后查找看后面的规则的目标是否有满足的</p>
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028172215221.png" alt="image-20221028172215221" style="zoom:50%;">
+
+<p>但这样写太繁琐,	 如何简化呢?	下面引入变量和模式匹配和函数</p>
+<h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><h6 id="自定义变量"><a href="#自定义变量" class="headerlink" title="自定义变量"></a>自定义变量</h6><p>变量名＝ 变量值 	<code>var = hello</code></p>
+<h6 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h6><p>AR 	归档维护程序的名称，默认值为 <code>ar</code></p>
+<p>CC	C编译器的名称，默认值为 <code>cc</code></p>
+<p>CXX	C＋＋编译器的名称，默认值为 <code>g++</code></p>
+<p>$@	目标的完整名称</p>
+<p>$&lt;	第一个依赖文件的名称</p>
+<p>$^	所有的依赖文件</p>
+<h6 id="获取变量的值"><a href="#获取变量的值" class="headerlink" title="获取变量的值"></a>获取变量的值</h6><p>＄（变量名）	如<code>$(var)</code></p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028174622965.png" alt="image-20221028174622965"></p>
+<h5 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h5><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028174905118.png" alt="image-20221028174905118" style="zoom:50%;">
+
+
+
+<h5 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h5><h6 id="wildcard"><a href="#wildcard" class="headerlink" title="wildcard"></a>wildcard</h6><p>获取指定目录下指定类型的文件列表</p>
+<p><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028175247985.png" alt="image-20221028175247985"></p>
+<h6 id="patsubst"><a href="#patsubst" class="headerlink" title="patsubst"></a>patsubst</h6><img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028175559945.png" alt="image-20221028175559945" style="zoom:50%;">
+
+<img src="/2022/08/10/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/image-20221028180448158.png" alt="image-20221028180448158" style="zoom:50%;">
+
+
+
+<h4 id="GDB调试"><a href="#GDB调试" class="headerlink" title="GDB调试"></a>GDB调试</h4><h5 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h5><p>GDB是由GNU软件系统社区提供的调试工具，同GCC配套组成了一套完整的开发环境，是Linux和许多类Unix系统中的标准开发环境。</p>
+<p>一般来说，GDB主要帮助你完成下面四个方面的功能:</p>
+<ol>
+<li><p>启动程序，可以按照自定义的要求随心所欲的运行程序</p>
+</li>
+<li><p>可让被调试的程序在所指定的调置的断点处停住(断点可以是条件表达式)</p>
+</li>
+<li><p>当程序被停住时，可以检查此时程序中所发生的事</p>
+</li>
+<li><p>可以改变程序，将一个BUG产生的影响修正从而测试其他BUG</p>
+</li>
+</ol>
+<h4 id="虚拟地址空间"><a href="#虚拟地址空间" class="headerlink" title="虚拟地址空间"></a>虚拟地址空间</h4><h4 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h4><h4 id="open-函数"><a href="#open-函数" class="headerlink" title="open 函数"></a>open 函数</h4><h4 id="read-函数"><a href="#read-函数" class="headerlink" title="read 函数"></a>read 函数</h4><h4 id="write-函数"><a href="#write-函数" class="headerlink" title="write 函数"></a>write 函数</h4><h4 id="lseek-函数"><a href="#lseek-函数" class="headerlink" title="lseek 函数"></a>lseek 函数</h4><h4 id="stat-函数"><a href="#stat-函数" class="headerlink" title="stat 函数"></a>stat 函数</h4><h4 id="目录操作函数"><a href="#目录操作函数" class="headerlink" title="目录操作函数"></a>目录操作函数</h4><h4 id="dup-函数"><a href="#dup-函数" class="headerlink" title="dup 函数"></a>dup 函数</h4><h4 id="dup2-函数"><a href="#dup2-函数" class="headerlink" title="dup2 函数"></a>dup2 函数</h4><h4 id="fcntl函数"><a href="#fcntl函数" class="headerlink" title="fcntl函数"></a>fcntl函数</h4>]]></content>
       <categories>
         <category>linux &amp;&amp; 服务器</category>
       </categories>
