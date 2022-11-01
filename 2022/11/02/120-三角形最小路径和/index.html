@@ -20,25 +20,21 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="62.不同路径(Mid) 63.不同路径II(Mid)">
+  <meta name="description" content="120.三角形最小路径和(Mid)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="62.不同路径 63.不同路径II">
-<meta property="og:url" content="https://kjgggggg.github.io/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/index.html">
+<meta property="og:title" content="120.三角形最小路径和">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/11/02/120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="62.不同路径(Mid) 63.不同路径II(Mid)">
+<meta property="og:description" content="120.三角形最小路径和(Mid)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot_maze.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot1.jpg">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot2.jpg">
-<meta property="article:published_time" content="2022-10-10T07:11:28.000Z">
-<meta property="article:modified_time" content="2022-10-10T08:26:08.984Z">
+<meta property="article:published_time" content="2022-11-01T18:26:43.000Z">
+<meta property="article:modified_time" content="2022-11-01T18:36:28.948Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://kjgggggg.github.io/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot_maze.png">
 
-<link rel="canonical" href="https://kjgggggg.github.io/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/">
+<link rel="canonical" href="https://kjgggggg.github.io/2022/11/02/120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/">
 
 
 <script id="page-configurations">
@@ -51,7 +47,7 @@
   };
 </script>
 
-  <title>62.不同路径 63.不同路径II | kjg's blog</title>
+  <title>120.三角形最小路径和 | kjg's blog</title>
   
 
 
@@ -194,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/11/02/120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/WechatIMG84.jpeg">
@@ -207,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          62.不同路径 63.不同路径II
+          120.三角形最小路径和
         </h1>
 
         <div class="post-meta">
@@ -218,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-10-10 15:11:28 / 修改时间：16:26:08" itemprop="dateCreated datePublished" datetime="2022-10-10T15:11:28+08:00">2022-10-10</time>
+              <time title="创建时间：2022-11-02 02:26:43 / 修改时间：02:36:28" itemprop="dateCreated datePublished" datetime="2022-11-02T02:26:43+08:00">2022-11-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +234,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">62.不同路径(Mid) 63.不同路径II(Mid)</div>
+            <div class="post-description">120.三角形最小路径和(Mid)</div>
 
         </div>
       </header>
@@ -249,51 +245,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62. 不同路径"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/">62. 不同路径</a></h3><p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
-<p>问总共有多少条不同的路径？</p>
+        <h3 id="120-三角形最小路径和"><a href="#120-三角形最小路径和" class="headerlink" title="120. 三角形最小路径和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/triangle/">120. 三角形最小路径和</a></h3><p>给定一个三角形 <code>triangle</code> ，找出自顶向下的最小路径和。</p>
+<p>每一步只能移动到下一行中相邻的结点上。<strong>相邻的结点</strong> 在这里指的是 <strong>下标</strong> 与 <strong>上一层结点下标</strong> 相同或者等于 <strong>上一层结点下标 + 1</strong> 的两个结点。也就是说，如果正位于当前行的下标 <code>i</code> ，那么下一步可以移动到下一行的下标 <code>i</code> 或 <code>i + 1</code> 。</p>
 <p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot_maze.png" alt="img"></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">7</span></span><br><span class="line">输出：<span class="number">28</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]</span><br><span class="line">输出：11</span><br><span class="line">解释：如下面简图所示：</span><br><span class="line">   2</span><br><span class="line"> <span class="number"> 3 </span>4</span><br><span class="line"><span class="number"> 6 </span>5 7</span><br><span class="line">4<span class="number"> 1 </span>8 3</span><br><span class="line">自顶向下的最小路径和为 11（即，2 +<span class="number"> 3 </span>+<span class="number"> 5 </span>+<span class="number"> 1 </span>= 11）。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, n = <span class="number">2</span></span><br><span class="line">输出：<span class="number">3</span></span><br><span class="line">解释：</span><br><span class="line">从左上角开始，总共有 <span class="number">3</span> 条路径可以到达右下角。</span><br><span class="line"><span class="number">1.</span> 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line"><span class="number">2.</span> 向下 -&gt; 向下 -&gt; 向右</span><br><span class="line"><span class="number">3.</span> 向下 -&gt; 向右 -&gt; 向下</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">7</span>, <span class="built_in">n</span> = <span class="number">3</span></span><br><span class="line">输出：<span class="number">28</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 4：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：m = <span class="number">3</span>, <span class="built_in">n</span> = <span class="number">3</span></span><br><span class="line">输出：<span class="number">6</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：triangle = <span class="string">[[-10]]</span></span><br><span class="line">输出：<span class="number">-10</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= m, n &lt;= 100</code></li>
-<li>题目数据保证答案小于等于 <code>2 * 109</code></li>
+<li><code>1 &lt;= triangle.length &lt;= 200</code></li>
+<li><code>triangle[0].length == 1</code></li>
+<li><code>triangle[i].length == triangle[i - 1].length + 1</code></li>
+<li><code>-104 &lt;= triangle[i][j] &lt;= 104</code></li>
 </ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt; m; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span> ; j &lt; n; j ++)&#123;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DFS : 超时</span></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int cnt = 0;</span></span><br><span class="line"><span class="comment">//     int uniquePaths(int m, int n) &#123;</span></span><br><span class="line"><span class="comment">//         // vector&lt;vector&lt;int&gt;&gt; visited = (m, vector&lt;int&gt;(n, 0));</span></span><br><span class="line"><span class="comment">//         dfs(m, n, 0, 0);</span></span><br><span class="line"><span class="comment">//         return cnt;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     void dfs(int m, int n, int r, int c)&#123;</span></span><br><span class="line"><span class="comment">//         if(r &lt; 0 || r &gt; m - 1 || c &lt; 0 || c &gt; n - 1) return;</span></span><br><span class="line"><span class="comment">//         if( r == m - 1 &amp;&amp; c == n - 1) cnt ++;</span></span><br><span class="line"><span class="comment">//         dfs(m, n, r + 1, c);</span></span><br><span class="line"><span class="comment">//         dfs(m, n, r, c + 1);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br></pre></td></tr></table></figure>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>二维DP</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minimumTotal</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> lvlMin = INT_MAX;</span><br><span class="line">        <span class="type">int</span> r = triangle.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(r, <span class="number">0</span>));</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = triangle[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(r == <span class="number">1</span>) <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>] + triangle[i][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            dp[i][i] = dp[i - <span class="number">1</span>][i - <span class="number">1</span>] + triangle[i][i];</span><br><span class="line">        &#125;</span><br><span class="line">        lvlMin = <span class="built_in">min</span>(dp[r - <span class="number">1</span>][r - <span class="number">1</span>],dp[r - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j ++)&#123;</span><br><span class="line">                dp[i][j] = <span class="built_in">min</span>(dp[i - <span class="number">1</span>][j - <span class="number">1</span>], dp[i - <span class="number">1</span>][j]) + triangle[i][j];</span><br><span class="line">                <span class="keyword">if</span>(i == r - <span class="number">1</span>)&#123;</span><br><span class="line">                    lvlMin = <span class="built_in">min</span>(lvlMin, dp[r - <span class="number">1</span>][j]);</span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> lvlMin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相同思路简洁版</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minimumTotal</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = triangle.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">f</span>(n, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n));</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = triangle[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            f[i][<span class="number">0</span>] = f[i - <span class="number">1</span>][<span class="number">0</span>] + triangle[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; ++j) &#123;</span><br><span class="line">                f[i][j] = <span class="built_in">min</span>(f[i - <span class="number">1</span>][j - <span class="number">1</span>], f[i - <span class="number">1</span>][j]) + triangle[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">            f[i][i] = f[i - <span class="number">1</span>][i - <span class="number">1</span>] + triangle[i][i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="built_in">min_element</span>(f[n - <span class="number">1</span>].<span class="built_in">begin</span>(), f[n - <span class="number">1</span>].<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="63-不同路径-II"><a href="#63-不同路径-II" class="headerlink" title="63. 不同路径 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths-ii/">63. 不同路径 II</a></h3><p>一个机器人位于一个 <code>m x n</code> 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
-<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。</p>
-<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
-<p>网格中的障碍物和空位置分别用 <code>1</code> 和 <code>0</code> 来表示。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot1.jpg" alt="img"></p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">输入：obstacleGrid = [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]]</span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">3</span>x3 网格的正中间有一个障碍物。</span><br><span class="line">从左上角到右下角一共有 <span class="number">2</span> 条不同的路径：</span><br><span class="line"><span class="number">1.</span> 向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</span><br><span class="line"><span class="number">2.</span> 向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="/2022/10/10/62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/robot2.jpg" alt="img"></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：obstacleGrid = <span class="string">[[0,1],[0,0]]</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
 <ul>
-<li><code>m == obstacleGrid.length</code></li>
-<li><code>n == obstacleGrid[i].length</code></li>
-<li><code>1 &lt;= m, n &lt;= 100</code></li>
-<li><code>obstacleGrid[i][j]</code> 为 <code>0</code> 或 <code>1</code></li>
+<li>改进版</li>
 </ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">uniquePathsWithObstacles</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = obstacleGrid.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> n = obstacleGrid[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m &amp;&amp; obstacleGrid[i][<span class="number">0</span>] == <span class="number">0</span>; i ++) dp[i][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 一遇到 obstacleGrid[i][0] = 1 就停下</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; n &amp;&amp; obstacleGrid[<span class="number">0</span>][j] == <span class="number">0</span>; j ++) dp[<span class="number">0</span>][j] = <span class="number">1</span>; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; m; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; n; j ++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(obstacleGrid[i][j] == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp [m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 因为dp[i] [...] 的状态只和dp[i - 1] [...] 的状态有关, 所以只需两个数组轮流存储遍历到的最末尾两行的信息</span></span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -314,13 +291,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/10/09/130-%E8%A2%AB%E5%9B%B4%E7%BB%95%E7%9A%84%E5%8C%BA%E5%9F%9F/" rel="prev" title="130.被围绕的区域 面试题13. 机器人的运动范围">
-      <i class="fa fa-chevron-left"></i> 130.被围绕的区域 面试题13. 机器人的运动范围
+    <a href="/2022/11/01/72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/" rel="prev" title="72.编辑距离">
+      <i class="fa fa-chevron-left"></i> 72.编辑距离
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/" rel="next" title="DFS之二叉树的属性合集">
-      DFS之二叉树的属性合集 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -379,7 +353,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#62-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84"><span class="nav-number">1.</span> <span class="nav-text">62. 不同路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84-II"><span class="nav-number">2.</span> <span class="nav-text">63. 不同路径 II</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-1"><span class="nav-number">2.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">120. 三角形最小路径和</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
