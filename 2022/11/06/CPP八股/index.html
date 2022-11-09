@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1/798C7A2D023204559B62F88B54E35CBB-20221108121453779.png">
 <meta property="article:published_time" content="2022-11-06T14:21:59.000Z">
-<meta property="article:modified_time" content="2022-11-08T04:34:45.259Z">
+<meta property="article:modified_time" content="2022-11-09T05:59:10.559Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-08 12:34:45" itemprop="dateModified" datetime="2022-11-08T12:34:45+08:00">2022-11-08</time>
+                <time title="修改时间：2022-11-09 13:59:10" itemprop="dateModified" datetime="2022-11-09T13:59:10+08:00">2022-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -571,6 +571,87 @@
 </li>
 </ol>
 <hr>
+<h5 id="请你来说一下C-里是怎么定义常量的？常量存放在内存的哪个位置？"><a href="#请你来说一下C-里是怎么定义常量的？常量存放在内存的哪个位置？" class="headerlink" title="请你来说一下C++里是怎么定义常量的？常量存放在内存的哪个位置？"></a>请你来说一下C++里是怎么定义常量的？常量存放在内存的哪个位置？</h5><p>局部常量，存放在栈区；</p>
+<p>全局常量，编译期一般不分配内存，放在符号表中以提高访问效率；</p>
+<p>字面值常量，比如字符串，放在常量区。</p>
+<hr>
+<h5 id="简述C-中内存对齐的使用场景"><a href="#简述C-中内存对齐的使用场景" class="headerlink" title="简述C++中内存对齐的使用场景"></a>简述C++中内存对齐的使用场景</h5><p>内存对齐应用于三种数据类型中：<strong>struct&#x2F;class&#x2F;union</strong>，对齐原则有四个：</p>
+<ol>
+<li>数据成员对齐规则：结构(struct)或联合(union)的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小的整数倍开始。</li>
+<li>结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部”最宽基本类型成员”的整数倍地址开始存储。(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍开始存储)。</li>
+<li>收尾工作:结构体的总大小，也就是sizeof的结果，必须是其内部最大成员的”最宽基本类型成员”的整数倍。不足的要补齐。(基本类型不包括struct&#x2F;class&#x2F;uinon)。</li>
+<li>sizeof(union)，以结构里面size最大元素为union的size，因为在某一时刻，union只有一个成员真正存储于该地址。</li>
+</ol>
+<h4 id="C-面向对象"><a href="#C-面向对象" class="headerlink" title="C++面向对象"></a>C++面向对象</h4><h5 id="简述一下面向对象的三大特征"><a href="#简述一下面向对象的三大特征" class="headerlink" title="简述一下面向对象的三大特征"></a>简述一下面向对象的三大特征</h5><p>面向对象的三大特征是封装、继承、多态。</p>
+<ol>
+<li><p>封装：将数据和操作数据的方法进行有机结合，隐藏对象的属性和实现细节，仅对外公开接口来和对象进行 交互。不想给别人看到的，我们使用protected&#x2F;private把成员封装起来。开放一些共有的成员函数对成员合理的访问。所以封装本质是一种管理。</p>
+</li>
+<li><p>继承：可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。三种继承方式：</p>
+<table>
+<thead>
+<tr>
+<th align="left">继承方式</th>
+<th align="left">private继承</th>
+<th align="left">protected继承</th>
+<th align="left">public继承</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">基类的private成员</td>
+<td align="left">不可见</td>
+<td align="left">不可见</td>
+<td align="left">不可见</td>
+</tr>
+<tr>
+<td align="left">基类的protected成员</td>
+<td align="left">变为private成员</td>
+<td align="left">仍为protected成员</td>
+<td align="left">仍为protected成员</td>
+</tr>
+<tr>
+<td align="left">基类的public成员</td>
+<td align="left">变为private成员</td>
+<td align="left">变为protected成员</td>
+<td align="left">仍为public成员</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>多态：用父类型别的指针指向其子类的实例，然后<strong>通过父类的指针调用实际子类的成员函数</strong>。实现多态，有二种方式，重写，重载。</p>
+</li>
+</ol>
+<hr>
+<h5 id="简述一下-C-的重载和重写"><a href="#简述一下-C-的重载和重写" class="headerlink" title="简述一下 C++ 的重载和重写"></a>简述一下 C++ 的重载和重写</h5><ul>
+<li><p>重写:是指派生类中存在重新定义的函数。</p>
+<p>其函数名，参数列表，返回值类型，所有都必须同基类中被重写的函数一致。<strong>只有函数体不同</strong>，派生类对象调用时会调用派生类的重写函数，不会调用被重写函数。<strong>基类中被重写的函数必须有virtual修饰</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;  </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123; </span><br><span class="line">    <span class="keyword">public</span>:  </span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;   </span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;A&quot;</span>;  </span><br><span class="line">        &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">public</span> A&#123; </span><br><span class="line">    <span class="keyword">public</span>:  </span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;   </span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;B&quot;</span>;  </span><br><span class="line">        &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;  </span><br><span class="line">    A* a = <span class="keyword">new</span> <span class="built_in">B</span>();  </span><br><span class="line">    a -&gt; <span class="built_in">fun</span>();<span class="comment">//输出B，A类中的fun在B类中重写 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重载</p>
+<p>在C++中人们提出了用一个函数名定义多个函数，也就是所谓的函数重载。函数重载是指同一可访问区内被声明的几个<strong>具有不同参数列（参数的类型，个数，顺序不同）的同名函数</strong>，根据参数列表确定调用哪个函数，重载不关心函数返回类型</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;  </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;  </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;&#125;;  </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> i)</span></span>&#123;&#125;;  </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span></span>&#123;&#125;;     </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">fun1</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span></span>&#123;&#125;; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h5 id="说说-C-的重载和重写是如何实现的"><a href="#说说-C-的重载和重写是如何实现的" class="headerlink" title="说说 C++ 的重载和重写是如何实现的"></a>说说 C++ 的重载和重写是如何实现的</h5><ul>
+<li><p>重写</p>
+<p>在基类的函数前加上virtual关键字，在派生类中重写该函数，运行时将会根据对象的实际类型来调用相应的函数。如果对象类型是派生类，就调用派生类的函数；如果对象类型是基类，就调用基类的函数</p>
+<ol>
+<li>用virtual关键字申明的函数叫做虚函数，虚函数肯定是类的成员函数</li>
+<li>有虚函数的类都有个一维的虚函数表叫做虚表，类的对象有一个指向虚表开始的虚指针。</li>
+<li><strong>多态</strong>性是一个接口多种实现，是面向对象的核心，分为类的多态性和函数的多态性</li>
+<li>重写用虚函数来实现，结合动态绑定</li>
+<li>纯虚函数是虚函数再加上 &#x3D; 0</li>
+<li>抽象类是指包括至少一个纯虚函数的类</li>
+</ol>
+<p><strong>纯虚函数：virtual void fun()&#x3D;0。即抽象类必须在子类实现这个函数，即先有名称，没有内容，在派生类实现内容</strong></p>
+</li>
+<li><p>重载</p>
+<p>C++利用命名倾轧（name mangling）技术，来改名函数名，区分参数不同的同名函数。命名倾轧是在编译阶段完成的。</p>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
 <hr>
 <hr>
 <hr>
@@ -657,7 +738,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-x2F-C-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">C&#x2F;C++基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80"><span class="nav-number">1.1.</span> <span class="nav-text">语言基础</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%8BC-%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">简述下C++语言的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4C%E8%AF%AD%E8%A8%80%E5%92%8CC-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.2.</span> <span class="nav-text">说说C语言和C++的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4-C-%E4%B8%AD-struct-%E5%92%8C-class-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.3.</span> <span class="nav-text">说说 C++中 struct 和 class 的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4include%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E6%9F%A5%E6%89%BE%E8%B7%AF%E5%BE%84%E4%BB%A5%E5%8F%8A%E5%8F%8C%E5%BC%95%E5%8F%B7%E2%80%9D%E2%80%9D%E5%92%8C%E5%B0%96%E6%8B%AC%E5%8F%B7-lt-gt-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.4.</span> <span class="nav-text">说说include头文件的查找路径以及双引号””和尖括号&lt;&gt;的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4C-%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8CC%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.5.</span> <span class="nav-text">说说C++结构体和C结构体的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5C%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8CC-%E7%BC%96%E8%AF%91%E6%97%B6%E5%92%8CC%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">1.1.6.</span> <span class="nav-text">导入C函数的关键字是什么，C++编译时和C有什么不同？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0C-%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.7.</span> <span class="nav-text">简述C++从代码到可执行二进制文件的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4-static%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.8.</span> <span class="nav-text">说说 static关键字的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.9.</span> <span class="nav-text">说说静态变量什么时候初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E9%9D%99%E6%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%EF%BC%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.10.</span> <span class="nav-text">说说静态局部变量，全局变量，局部变量的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E6%95%B0%E7%BB%84%E5%92%8C%E6%8C%87%E9%92%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.11.</span> <span class="nav-text">说说数组和指针的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.12.</span> <span class="nav-text">说说什么是函数指针，如何定义函数指针，有什么使用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#nullptr%E5%8F%AF%E4%BB%A5%E8%B0%83%E7%94%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%90%97%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.13.</span> <span class="nav-text">nullptr可以调用成员函数吗？为什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.14.</span> <span class="nav-text">说说使用指针需要注意什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BB%80%E4%B9%88%E6%98%AF%E9%87%8E%E6%8C%87%E9%92%88%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%EF%BC%9F"><span class="nav-number">1.1.15.</span> <span class="nav-text">说说什么是野指针，怎么产生的，如何避免？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.16.</span> <span class="nav-text">说说内联函数和函数的区别，内联函数的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E5%92%8C%E5%AE%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.17.</span> <span class="nav-text">说说内联函数和宏函数的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E8%BF%90%E7%AE%97%E7%AC%A6i-%E5%92%8C-i%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.18.</span> <span class="nav-text">说说运算符i++和++i的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4new%E5%92%8Cmalloc%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E5%90%84%E8%87%AA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.19.</span> <span class="nav-text">说说new和malloc的区别，各自底层实现原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4const%E5%92%8Cdefine%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="nav-number">1.1.20.</span> <span class="nav-text">说说const和define的区别。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4const-int-a-int-const-a-const-int-a-int-const-a-const-int-const-a"><span class="nav-number">1.1.21.</span> <span class="nav-text">说说const int *a, int const *a, const int a, int *const a, const int *const a</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0C-%E6%9C%89%E5%87%A0%E7%A7%8D%E4%BC%A0%E5%80%BC%E6%96%B9%E5%BC%8F%EF%BC%8C%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.22.</span> <span class="nav-text">简述C++有几种传值方式，之间的区别是什么？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-%E5%86%85%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">C++内存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">1.2.1.</span> <span class="nav-text">进程运行时虚拟地址空间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.2.</span> <span class="nav-text">简述一下堆和栈的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0C-%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.3.</span> <span class="nav-text">简述C++的内存管理</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-x2F-C-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">C&#x2F;C++基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80"><span class="nav-number">1.1.</span> <span class="nav-text">语言基础</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%8BC-%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">简述下C++语言的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4C%E8%AF%AD%E8%A8%80%E5%92%8CC-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.2.</span> <span class="nav-text">说说C语言和C++的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4-C-%E4%B8%AD-struct-%E5%92%8C-class-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.3.</span> <span class="nav-text">说说 C++中 struct 和 class 的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4include%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84%E6%9F%A5%E6%89%BE%E8%B7%AF%E5%BE%84%E4%BB%A5%E5%8F%8A%E5%8F%8C%E5%BC%95%E5%8F%B7%E2%80%9D%E2%80%9D%E5%92%8C%E5%B0%96%E6%8B%AC%E5%8F%B7-lt-gt-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.4.</span> <span class="nav-text">说说include头文件的查找路径以及双引号””和尖括号&lt;&gt;的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4C-%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8CC%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.5.</span> <span class="nav-text">说说C++结构体和C结构体的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5C%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8CC-%E7%BC%96%E8%AF%91%E6%97%B6%E5%92%8CC%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">1.1.6.</span> <span class="nav-text">导入C函数的关键字是什么，C++编译时和C有什么不同？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0C-%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.7.</span> <span class="nav-text">简述C++从代码到可执行二进制文件的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4-static%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.8.</span> <span class="nav-text">说说 static关键字的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.9.</span> <span class="nav-text">说说静态变量什么时候初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E9%9D%99%E6%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%EF%BC%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.10.</span> <span class="nav-text">说说静态局部变量，全局变量，局部变量的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E6%95%B0%E7%BB%84%E5%92%8C%E6%8C%87%E9%92%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.11.</span> <span class="nav-text">说说数组和指针的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.12.</span> <span class="nav-text">说说什么是函数指针，如何定义函数指针，有什么使用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#nullptr%E5%8F%AF%E4%BB%A5%E8%B0%83%E7%94%A8%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%90%97%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.13.</span> <span class="nav-text">nullptr可以调用成员函数吗？为什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.14.</span> <span class="nav-text">说说使用指针需要注意什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BB%80%E4%B9%88%E6%98%AF%E9%87%8E%E6%8C%87%E9%92%88%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%EF%BC%9F"><span class="nav-number">1.1.15.</span> <span class="nav-text">说说什么是野指针，怎么产生的，如何避免？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.16.</span> <span class="nav-text">说说内联函数和函数的区别，内联函数的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0%E5%92%8C%E5%AE%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.17.</span> <span class="nav-text">说说内联函数和宏函数的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E8%BF%90%E7%AE%97%E7%AC%A6i-%E5%92%8C-i%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.18.</span> <span class="nav-text">说说运算符i++和++i的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4new%E5%92%8Cmalloc%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E5%90%84%E8%87%AA%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.19.</span> <span class="nav-text">说说new和malloc的区别，各自底层实现原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4const%E5%92%8Cdefine%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82"><span class="nav-number">1.1.20.</span> <span class="nav-text">说说const和define的区别。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4const-int-a-int-const-a-const-int-a-int-const-a-const-int-const-a"><span class="nav-number">1.1.21.</span> <span class="nav-text">说说const int *a, int const *a, const int a, int *const a, const int *const a</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0C-%E6%9C%89%E5%87%A0%E7%A7%8D%E4%BC%A0%E5%80%BC%E6%96%B9%E5%BC%8F%EF%BC%8C%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.22.</span> <span class="nav-text">简述C++有几种传值方式，之间的区别是什么？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-%E5%86%85%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">C++内存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">1.2.1.</span> <span class="nav-text">进程运行时虚拟地址空间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.2.</span> <span class="nav-text">简述一下堆和栈的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0C-%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.3.</span> <span class="nav-text">简述C++的内存管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B7%E4%BD%A0%E6%9D%A5%E8%AF%B4%E4%B8%80%E4%B8%8BC-%E9%87%8C%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F%E7%9A%84%EF%BC%9F%E5%B8%B8%E9%87%8F%E5%AD%98%E6%94%BE%E5%9C%A8%E5%86%85%E5%AD%98%E7%9A%84%E5%93%AA%E4%B8%AA%E4%BD%8D%E7%BD%AE%EF%BC%9F"><span class="nav-number">1.2.4.</span> <span class="nav-text">请你来说一下C++里是怎么定义常量的？常量存放在内存的哪个位置？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0C-%E4%B8%AD%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.5.</span> <span class="nav-text">简述C++中内存对齐的使用场景</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">C++面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81"><span class="nav-number">1.3.1.</span> <span class="nav-text">简述一下面向对象的三大特征</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B-C-%E7%9A%84%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99"><span class="nav-number">1.3.2.</span> <span class="nav-text">简述一下 C++ 的重载和重写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4-C-%E7%9A%84%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84"><span class="nav-number">1.3.3.</span> <span class="nav-text">说说 C++ 的重载和重写是如何实现的</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -673,20 +754,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
