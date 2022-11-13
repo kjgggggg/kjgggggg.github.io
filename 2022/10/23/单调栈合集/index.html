@@ -27,17 +27,17 @@
 <meta property="og:site_name" content="kjg&#39;s blog">
 <meta property="og:description" content="单调栈模板 496.下一个更大元素I(Easy) 503.下一个更大元素II(Mid) 739.每日温度(Mid) 402.移掉K位数字(Mid) 901.股票价格跨度(Mid) 581.最短无序连续子数组(Mid) 42.接雨水(Hard) 84.柱状图中最大的矩形(Hard)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/rainwatertrap.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/rainwatertrap-8362159.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/histogram.jpg">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/histogram-1.jpg">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/7e876ae756613053b3432cebc9274e9dbdaafd2e6b8492d37fc34ee98f7655ea-%E5%9B%BE%E7%89%87.png">
 <meta property="article:published_time" content="2022-10-23T04:44:20.000Z">
-<meta property="article:modified_time" content="2022-10-26T19:02:34.173Z">
+<meta property="article:modified_time" content="2022-11-13T17:56:09.207Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="单调栈">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/rainwatertrap.png">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/rainwatertrap-8362159.png">
 
 <link rel="canonical" href="https://kjgggggg.github.io/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/">
 
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 03:02:34" itemprop="dateModified" datetime="2022-10-27T03:02:34+08:00">2022-10-27</time>
+                <time title="修改时间：2022-11-14 01:56:09" itemprop="dateModified" datetime="2022-11-14T01:56:09+08:00">2022-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@
 <ul>
 <li>C++模板</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>&gt; st;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span>(!st.<span class="built_in">empty</span>() &amp;&amp; st.<span class="built_in">top</span>() &gt; nums[i])</span><br><span class="line">	&#123;</span><br><span class="line">		st.<span class="built_in">pop</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	st.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>&gt; st;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(!st.<span class="built_in">empty</span>() &amp;&amp; st.<span class="built_in">top</span>() &gt; nums[i])&#123;</span><br><span class="line">		st.<span class="built_in">pop</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	st.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -406,7 +406,7 @@
 
 <h3 id="42-接雨水"><a href="#42-接雨水" class="headerlink" title="42. 接雨水"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">42. 接雨水</a></h3><p>给定 <code>n</code> 个非负整数表示每个宽度为 <code>1</code> 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
 <p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/rainwatertrap.png" alt="img"></p>
+<p><img src="/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/rainwatertrap-8362159.png" alt="img"></p>
 <figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：height = [<span class="number">0,1,0,2</span>,<span class="number">1,0,1,3</span>,<span class="number">2,1,2,1</span>]</span><br><span class="line">输出：<span class="number">6</span></span><br><span class="line">解释：上面是由数组 [<span class="number">0,1,0,2</span>,<span class="number">1,0,1,3</span>,<span class="number">2,1,2,1</span>] 表示的高度图，在这种情况下，可以接 <span class="number">6</span> 个单位的雨水（蓝色部分表示雨水）。 </span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
@@ -450,7 +450,7 @@
 <li><code>0 &lt;= heights[i] &lt;= 104</code></li>
 </ul>
 <h4 id="C-7"><a href="#C-7" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/23/%E5%8D%95%E8%B0%83%E6%A0%88%E5%90%88%E9%9B%86/7e876ae756613053b3432cebc9274e9dbdaafd2e6b8492d37fc34ee98f7655ea-%E5%9B%BE%E7%89%87.png" alt="图片.png"></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">largestRectangleArea</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">      <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">      stack&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">      heights.<span class="built_in">insert</span>(heights.<span class="built_in">begin</span>(), <span class="number">0</span>); <span class="comment">//首位加入0</span></span><br><span class="line">      heights.<span class="built_in">push_back</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; heights.<span class="built_in">size</span>(); i ++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!s.<span class="built_in">empty</span>() &amp;&amp; heights[i] &lt; heights[s.<span class="built_in">top</span>()])&#123;</span><br><span class="line">          <span class="type">int</span> top = s.<span class="built_in">top</span>(); <span class="comment">// 栈顶值 ,存放最近最大元素的下标</span></span><br><span class="line">          s.<span class="built_in">pop</span>(); </span><br><span class="line">          <span class="type">int</span> w = i - s.<span class="built_in">top</span>() - <span class="number">1</span>;  </span><br><span class="line">          res = <span class="built_in">max</span>(res, w * heights[top]);</span><br><span class="line">        &#125;</span><br><span class="line">        s.<span class="built_in">push</span>(i);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对于一个高度，如果能得到向左和向右的边界</span></span><br><span class="line"><span class="comment">// 那么就能对每个高度求一次面积</span></span><br><span class="line"><span class="comment">// 遍历所有高度，即可得出最大面积</span></span><br><span class="line"><span class="comment">// 使用单调栈，在出栈操作时得到前后边界并计算面积</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">largestRectangleArea</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">      <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">      stack&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">      heights.<span class="built_in">insert</span>(heights.<span class="built_in">begin</span>(), <span class="number">0</span>);  <span class="comment">// 若没在前加0，不能保证stack不为空，所以left的值就需要赋初始值0</span></span><br><span class="line">      heights.<span class="built_in">push_back</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; heights.<span class="built_in">size</span>(); i ++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!s.<span class="built_in">empty</span>() &amp;&amp; heights[i] &lt; heights[s.<span class="built_in">top</span>()])&#123;  <span class="comment">// 2进栈 6，5被弹出</span></span><br><span class="line">            <span class="comment">//6: cur = 4; left = 4; right = 4; (right - left + 1) = 1</span></span><br><span class="line">            <span class="comment">//5: cur = 3; left = 3; right = 4; (right - left + 1) = 2</span></span><br><span class="line">            <span class="type">int</span> cur = s.<span class="built_in">top</span>();</span><br><span class="line">            s.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="type">int</span> left = s.<span class="built_in">top</span>() + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> right = i - <span class="number">1</span>; </span><br><span class="line">            res = <span class="built_in">max</span>(res, (right - left + <span class="number">1</span>) * heights[cur]);</span><br><span class="line">        &#125;</span><br><span class="line">        s.<span class="built_in">push</span>(i);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
     </div>
