@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1/AD13A5950A4A1A2198C2AF4FE9F49B2A.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1/image-20221116164855060.png">
 <meta property="article:published_time" content="2022-11-06T14:21:59.000Z">
-<meta property="article:modified_time" content="2022-11-19T07:38:10.703Z">
+<meta property="article:modified_time" content="2022-11-20T05:18:52.450Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-19 15:38:10" itemprop="dateModified" datetime="2022-11-19T15:38:10+08:00">2022-11-19</time>
+                <time title="修改时间：2022-11-20 13:18:52" itemprop="dateModified" datetime="2022-11-20T13:18:52+08:00">2022-11-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1078,6 +1078,59 @@
 <p>（10）正则表达式  可以认为正则表达式实质上是一个字符串，该字符串描述了一种特定模式的字符串</p>
 <p>（11）Lambda表达式</p>
 </li>
+</ol>
+<p><strong>详细：</strong></p>
+<ol>
+<li><p>统一的初始化方法</p>
+<p>  C++98&#x2F;03 可以使用初始化列表（initializer list）进行初始化：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> i_arr[<span class="number">3</span>] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;; </span><br><span class="line"><span class="type">long</span> l_arr[] = &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span> &#125;; </span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;     </span><br><span class="line">    <span class="type">int</span> x;     </span><br><span class="line">    <span class="type">int</span> y; </span><br><span class="line">&#125; a = &#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>  <strong>但是</strong>这种初始化方式的<strong>适用性非常狭窄</strong>，只有上面提到的这两种数据类型可以使用初始化列表。在 C++11 中，初始化列表的适用性被大大增加了。它现在可以用于任何类型对象的初始化，实例如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123; </span><br><span class="line">    <span class="keyword">public</span>:     </span><br><span class="line">        <span class="built_in">Foo</span>(<span class="type">int</span>) &#123;&#125; </span><br><span class="line">    <span class="keyword">private</span>:     </span><br><span class="line">        <span class="built_in">Foo</span>(<span class="type">const</span> Foo &amp;); </span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;     </span><br><span class="line">    <span class="function">Foo <span class="title">a1</span><span class="params">(<span class="number">123</span>)</span></span>;     </span><br><span class="line">    Foo a2 = <span class="number">123</span>;  <span class="comment">//error: &#x27;Foo::Foo(const Foo &amp;)&#x27; is private     </span></span><br><span class="line">    Foo a3 = &#123; <span class="number">123</span> &#125;;     </span><br><span class="line">    Foo a4 &#123; <span class="number">123</span> &#125;;     </span><br><span class="line">    <span class="type">int</span> a5 = &#123; <span class="number">3</span> &#125;;     </span><br><span class="line">    <span class="type">int</span> a6 &#123; <span class="number">3</span> &#125;;     </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  在上例中，a3、a4 使用了新的初始化方式来初始化对象，效果如同 a1 的直接初始化。a5、a6 则是基本数据类型的列表初始化方式。可以看到，它们的形式都是统一的。这里需要注意的是，a3 虽然使用了等于号，但它仍然是列表初始化，因此，私有的拷贝构造并不会影响到它。<strong>a4 和 a6 的写法，是 C++98&#x2F;03 所不具备的。在 C++11 中，可以直接在变量名后面跟上初始化列表，来进行对象的初始化。</strong></p>
+</li>
+<li><p>成员变量默认初始化</p>
+<p>好处：构建一个类的对象不需要用构造函数初始化成员变量。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123; </span><br><span class="line">    <span class="keyword">public</span>:  </span><br><span class="line">        <span class="type">int</span> m = <span class="number">1234</span>; <span class="comment">//成员变量有一个初始值  </span></span><br><span class="line">        <span class="type">int</span> n; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    B b;  </span><br><span class="line">    cout &lt;&lt; b.m &lt;&lt; endl;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>auto关键字  </p>
+<p>用于定义变量，编译器可以自动判断的类型（前提：定义一个变量时对其进行初始化）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;     </span><br><span class="line">    vector&lt; vector&lt;<span class="type">int</span>&gt; &gt; v;     </span><br><span class="line">    vector&lt; vector&lt;<span class="type">int</span>&gt; &gt;::iterator i = v.<span class="built_in">begin</span>();   <span class="comment">// auto i = v.begin();  </span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义迭代器 i 的时候, 类型书写比较冗长, 容易出错。然而有了 auto 类型推导, 我们大可不必这样, 只写一个 auto 即可</p>
+</li>
+<li><p>decltype  求表达式的类型</p>
+<p>decltype 是 C++11 新增的一个关键字，它和 auto 的功能一样，都用来在编译时期进行自动类型推导。</p>
+<p>(1)为什么要有decltype</p>
+<p>因为 auto 并不适用于所有的自动类型推导场景，在某些特殊情况下 auto 用起来非常不方便，甚至压根无法使用，所以 decltype 关键字也被引入到 C++11 中。</p>
+<p>auto 和 decltype 关键字都可以自动推导出变量的类型，但它们的用法是有区别的：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> varname = value; <span class="keyword">decltype</span>(exp) varname = value;</span><br></pre></td></tr></table></figure>
+
+<p>其中，varname 表示变量名，value 表示赋给变量的值，exp 表示一个表达式。</p>
+<p>auto 根据”&#x3D;”右边的初始值 value 推导出变量的类型; decltype 根据 exp 表达式推导出变量的类型, 跟”&#x3D;”右边的 value 没关系</p>
+<p>另外，auto 要求变量必须初始化，而 decltype 不要求</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">decltype</span>(exp) varname;</span><br></pre></td></tr></table></figure>
+
+<p>(2)代码示例</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">decltype</span>(a) b = <span class="number">1</span>;  <span class="comment">//b 被推导成了 int </span></span><br><span class="line"><span class="keyword">decltype</span>(<span class="number">10.8</span>) x = <span class="number">5.5</span>;  <span class="comment">//x 被推导成了 double </span></span><br><span class="line"><span class="keyword">decltype</span>(x + <span class="number">100</span>) y;  <span class="comment">//y 被推导成了 double</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>智能指针 shared_ptr</p>
+<p>和 unique_ptr、weak_ptr 不同之处在于，多个 shared_ptr 智能指针可以共同使用同一块堆内存。并且，由于该类型智能指针在实现上采用的是引用计数机制，即便有一个 shared_ptr 指针放弃了堆内存的“使用权”（引用计数减 1），也不会影响其他指向同一堆内存的 shared_ptr 指针（只有引用计数为 0 时，堆内存才会被自动释放</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;     </span><br><span class="line">    <span class="comment">//构建 2 个智能指针     </span></span><br><span class="line">    <span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">10</span>))</span></span>;     </span><br><span class="line">    <span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p2</span><span class="params">(p1)</span></span>;     </span><br><span class="line">    cout &lt;&lt; *p2 &lt;&lt; endl;  <span class="comment">//输出 p2 指向的数据    </span></span><br><span class="line">    p1.<span class="built_in">reset</span>();<span class="comment">//引用计数减 1,p1为空指针     </span></span><br><span class="line">    <span class="keyword">if</span> (p1) cout &lt;&lt; <span class="string">&quot;p1 不为空&quot;</span> &lt;&lt; endl;     </span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;p1 为空&quot;</span> &lt;&lt; endl;     <span class="comment">//以上操作，并不会影响 p2     </span></span><br><span class="line">    cout &lt;&lt; *p2 &lt;&lt; endl;     </span><br><span class="line">    cout &lt;&lt; p2.<span class="built_in">use_count</span>() &lt;&lt; endl;     <span class="comment">//判断当前和 p2 同指向的智能指针有多少个</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;  <span class="comment">/*      程序运行结果：          10  p1 为空  10  1  */</span>     </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>空指针 nullptr（原来NULL）</p>
+<p>nullptr 是 nullptr_t 类型的右值常量，专用于初始化空类型指针。nullptr_t 是 C++11 新增加的数据类型，可称为“指针空值类型”。也就是说，nullpter 仅是该类型的一个实例对象（已经定义好，可以直接使用），如果需要我们完全定义出多个同 nullptr 完全一样的实例对象</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> * a1 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="type">char</span> * a2 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="type">double</span> * a3 = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+<p>另外，通过将指针初始化为 nullptr，可以很好地解决 NULL 遗留的问题，比如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">isnull</span><span class="params">(<span class="type">void</span> *c)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;void*c&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">isnull</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;int n&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">isnull</span>(<span class="literal">NULL</span>); <span class="comment">// 二义性	C++中是这样定义NULL的 #define NULL 0</span></span><br><span class="line">    <span class="built_in">isnull</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*    </span></span><br><span class="line"><span class="comment">    程序运行结果：        </span></span><br><span class="line"><span class="comment">    int n</span></span><br><span class="line"><span class="comment">    void*c</span></span><br><span class="line"><span class="comment">*/</span>          </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基于范围的for循环</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; arr = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> n : arr)&#123;  <span class="comment">//使用基于范围的for循环</span></span><br><span class="line">        std::cout &lt;&lt; n &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，我们都是在使用只读方式遍历容器。如果需要在遍历时修改容器中的值，则需要使用引用，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span>&amp; n : arr)&#123;</span><br><span class="line">    std::cout &lt;&lt; n++ &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <hr>
 <h4 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h4><h5 id="六种关系-依赖-关联-聚合-组合-继承-实现"><a href="#六种关系-依赖-关联-聚合-组合-继承-实现" class="headerlink" title="六种关系: 依赖,关联,聚合,组合,继承,实现"></a>六种关系: 依赖,关联,聚合,组合,继承,实现</h5><p>依赖</p>
