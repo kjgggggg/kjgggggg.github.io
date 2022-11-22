@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="6.Z字形变换(Mid)">
+  <meta name="description" content="6.Z字形变换(Mid) 7.整数反转(Mid) 11.盛最多水的容器(Mid)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数学题合集">
 <meta property="og:url" content="https://kjgggggg.github.io/2022/11/22/%E6%95%B0%E5%AD%A6%E9%A2%98%E5%90%88%E9%9B%86/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="6.Z字形变换(Mid)">
+<meta property="og:description" content="6.Z字形变换(Mid) 7.整数反转(Mid) 11.盛最多水的容器(Mid)">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/11/22/%E6%95%B0%E5%AD%A6%E9%A2%98%E5%90%88%E9%9B%86/question_11.jpg">
 <meta property="article:published_time" content="2022-11-22T08:30:55.000Z">
-<meta property="article:modified_time" content="2022-11-22T08:34:02.533Z">
+<meta property="article:modified_time" content="2022-11-22T15:00:59.189Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/11/22/%E6%95%B0%E5%AD%A6%E9%A2%98%E5%90%88%E9%9B%86/question_11.jpg">
 
 <link rel="canonical" href="https://kjgggggg.github.io/2022/11/22/%E6%95%B0%E5%AD%A6%E9%A2%98%E5%90%88%E9%9B%86/">
 
@@ -213,7 +215,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-11-22 16:30:55 / 修改时间：16:34:02" itemprop="dateCreated datePublished" datetime="2022-11-22T16:30:55+08:00">2022-11-22</time>
+              <time title="创建时间：2022-11-22 16:30:55 / 修改时间：23:00:59" itemprop="dateCreated datePublished" datetime="2022-11-22T16:30:55+08:00">2022-11-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +235,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">6.Z字形变换(Mid)</div>
+            <div class="post-description">6.Z字形变换(Mid) 7.整数反转(Mid) 11.盛最多水的容器(Mid)</div>
 
         </div>
       </header>
@@ -270,6 +272,57 @@
 <h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">找规律</span></span><br><span class="line"><span class="comment">4行的:</span></span><br><span class="line"><span class="comment">0     6      12        18</span></span><br><span class="line"><span class="comment">1   5 7   11 13    17</span></span><br><span class="line"><span class="comment">2 4   8 10   14 16</span></span><br><span class="line"><span class="comment">3     9      15</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">对于n行的, s中的第i个字符,对余数进行判断:</span></span><br><span class="line"><span class="comment">i%(2n-2) == 0 ----&gt; row0</span></span><br><span class="line"><span class="comment">i%(2n-2) == 1 or 2n-2-1 ----&gt; row1</span></span><br><span class="line"><span class="comment">i%(2n-2) == 2 or 2n-2-2 ----&gt; row2</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">i%(2n-2) == n-1 ----&gt; row(n-1)</span></span><br><span class="line"><span class="comment">==&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">对 k = i%(2n-2)进行判断:</span></span><br><span class="line"><span class="comment">k&lt;=n-1时候，s[i]就属于第k行</span></span><br><span class="line"><span class="comment">k&gt;n-1时候，s[i]就属于2n-2-k行</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">最后将rows拼接起来就行了</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">convert</span><span class="params">(string s, <span class="type">int</span> numRows)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(numRows == <span class="number">1</span>) <span class="keyword">return</span> s;</span><br><span class="line">        <span class="function">vector&lt;string&gt; <span class="title">rows</span><span class="params">(numRows)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i ++)&#123;</span><br><span class="line">            <span class="type">int</span> k = i%(<span class="number">2</span>*numRows - <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">if</span>(k &lt;= numRows - <span class="number">1</span>)&#123;</span><br><span class="line">                rows[k] += s[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> rows[<span class="number">2</span>*numRows - <span class="number">2</span>- k] += s[i];</span><br><span class="line">        &#125;</span><br><span class="line">        string res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> elem : rows)&#123;</span><br><span class="line">            res += elem;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
+
+
+
+<h3 id="7-整数反转"><a href="#7-整数反转" class="headerlink" title="7. 整数反转"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-integer/">7. 整数反转</a></h3><p>给你一个 32 位的有符号整数 <code>x</code> ，返回将 <code>x</code> 中的数字部分反转后的结果。</p>
+<p>如果反转后整数超过 32 位的有符号整数的范围 <code>[−231, 231 − 1]</code> ，就返回 0。</p>
+<p><strong>假设环境不允许存储 64 位整数（有符号或无符号）。</strong></p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：x <span class="operator">=</span> <span class="number">123</span></span><br><span class="line">输出：<span class="number">321</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="string">-123</span></span><br><span class="line">输出：<span class="string">-321</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：x <span class="operator">=</span> <span class="number">120</span></span><br><span class="line">输出：<span class="number">21</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：x <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">输出：<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-231 &lt;= x &lt;= 231 - 1</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">reverse</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!x) <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">        string res;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">0</span>) res += <span class="string">&#x27;-&#x27;</span>;</span><br><span class="line">        <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="type">int</span> temp = x % <span class="number">10</span>;</span><br><span class="line">            res += <span class="built_in">to_string</span>(<span class="built_in">abs</span>(temp));</span><br><span class="line">            x = x / <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">stol</span>(res) &gt; INT_MAX || <span class="built_in">stol</span>(res) &lt;INT_MIN ? <span class="number">0</span> : <span class="built_in">stol</span>(res); <span class="comment">// string -&gt; long</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="11-盛最多水的容器"><a href="#11-盛最多水的容器" class="headerlink" title="11. 盛最多水的容器"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/container-with-most-water/">11. 盛最多水的容器</a></h3><p>给定一个长度为 <code>n</code> 的整数数组 <code>height</code> 。有 <code>n</code> 条垂线，第 <code>i</code> 条线的两个端点是 <code>(i, 0)</code> 和 <code>(i, height[i])</code> 。</p>
+<p>找出其中的两条线，使得它们与 <code>x</code> 轴共同构成的容器可以容纳最多的水。</p>
+<p>返回容器可以储存的最大水量。</p>
+<p><strong>说明：</strong>你不能倾斜容器。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/11/22/%E6%95%B0%E5%AD%A6%E9%A2%98%E5%90%88%E9%9B%86/question_11.jpg" alt="img"></p>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：[<span class="number">1,8,6,2</span>,<span class="number">5,4,8,3</span>,<span class="number">7</span>]</span><br><span class="line">输出：<span class="number">49</span> </span><br><span class="line">解释：图中垂直线代表输入数组 [<span class="number">1,8,6,2</span>,<span class="number">5,4,8,3</span>,<span class="number">7</span>]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 <span class="number">49</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">输入：height = [<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == height.length</code></li>
+<li><code>2 &lt;= n &lt;= 105</code></li>
+<li><code>0 &lt;= height[i] &lt;= 104</code></li>
+</ul>
+<h4 id="C-2"><a href="#C-2" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>我们想要让指针移动后的容器面积增大，就要使移动后的容器的高尽量大，所以我们选择高较小的那个指针进行移动，这样我们就保留了容器较高的那条边，放弃了较小的那条边，以获得有更高的边的机会</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> r = height.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">            res = <span class="built_in">max</span>(res, (r - l) * <span class="built_in">min</span>(height[l], height[r]));</span><br><span class="line">            <span class="keyword">if</span>(height[l] &lt;= height[r]) l ++;</span><br><span class="line">            <span class="keyword">else</span> r --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -290,7 +343,10 @@
     <a href="/2022/11/19/%E6%A0%88%E4%B9%8B%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E5%90%88%E9%9B%86/" rel="prev" title="栈之括号匹配合集">
       <i class="fa fa-chevron-left"></i> 栈之括号匹配合集
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/22/DFS%E4%B9%8B%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%E5%90%88%E9%9B%86/" rel="next" title="DFS之组合总和合集">
+      DFS之组合总和合集 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -349,7 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Z-%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">6. Z 字形变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Z-%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">6. Z 字形变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">7. 整数反转</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-1"><span class="nav-number">2.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">11. 盛最多水的容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-2"><span class="nav-number">3.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -365,7 +421,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
