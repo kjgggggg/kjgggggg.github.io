@@ -189,6 +189,45 @@
       </tags>
   </entry>
   <entry>
+    <title>120.三角形最小路径和</title>
+    <url>/2022/11/02/120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</url>
+    <content><![CDATA[<h3 id="120-三角形最小路径和"><a href="#120-三角形最小路径和" class="headerlink" title="120. 三角形最小路径和"></a><a href="https://leetcode.cn/problems/triangle/">120. 三角形最小路径和</a></h3><p>给定一个三角形 <code>triangle</code> ，找出自顶向下的最小路径和。</p>
+<p>每一步只能移动到下一行中相邻的结点上。<strong>相邻的结点</strong> 在这里指的是 <strong>下标</strong> 与 <strong>上一层结点下标</strong> 相同或者等于 <strong>上一层结点下标 + 1</strong> 的两个结点。也就是说，如果正位于当前行的下标 <code>i</code> ，那么下一步可以移动到下一行的下标 <code>i</code> 或 <code>i + 1</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]</span><br><span class="line">输出：11</span><br><span class="line">解释：如下面简图所示：</span><br><span class="line">   2</span><br><span class="line"> <span class="number"> 3 </span>4</span><br><span class="line"><span class="number"> 6 </span>5 7</span><br><span class="line">4<span class="number"> 1 </span>8 3</span><br><span class="line">自顶向下的最小路径和为 11（即，2 +<span class="number"> 3 </span>+<span class="number"> 5 </span>+<span class="number"> 1 </span>= 11）。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：triangle = <span class="string">[[-10]]</span></span><br><span class="line">输出：<span class="number">-10</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= triangle.length &lt;= 200</code></li>
+<li><code>triangle[0].length == 1</code></li>
+<li><code>triangle[i].length == triangle[i - 1].length + 1</code></li>
+<li><code>-104 &lt;= triangle[i][j] &lt;= 104</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>二维DP</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minimumTotal</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> lvlMin = INT_MAX;</span><br><span class="line">        <span class="type">int</span> r = triangle.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(r, <span class="number">0</span>));</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = triangle[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(r == <span class="number">1</span>) <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>] + triangle[i][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            dp[i][i] = dp[i - <span class="number">1</span>][i - <span class="number">1</span>] + triangle[i][i];</span><br><span class="line">        &#125;</span><br><span class="line">        lvlMin = <span class="built_in">min</span>(dp[r - <span class="number">1</span>][r - <span class="number">1</span>],dp[r - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j ++)&#123;</span><br><span class="line">                dp[i][j] = <span class="built_in">min</span>(dp[i - <span class="number">1</span>][j - <span class="number">1</span>], dp[i - <span class="number">1</span>][j]) + triangle[i][j];</span><br><span class="line">                <span class="keyword">if</span>(i == r - <span class="number">1</span>)&#123;</span><br><span class="line">                    lvlMin = <span class="built_in">min</span>(lvlMin, dp[r - <span class="number">1</span>][j]);</span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> lvlMin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相同思路简洁版</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minimumTotal</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = triangle.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">f</span>(n, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n));</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = triangle[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            f[i][<span class="number">0</span>] = f[i - <span class="number">1</span>][<span class="number">0</span>] + triangle[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; ++j) &#123;</span><br><span class="line">                f[i][j] = <span class="built_in">min</span>(f[i - <span class="number">1</span>][j - <span class="number">1</span>], f[i - <span class="number">1</span>][j]) + triangle[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">            f[i][i] = f[i - <span class="number">1</span>][i - <span class="number">1</span>] + triangle[i][i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="built_in">min_element</span>(f[n - <span class="number">1</span>].<span class="built_in">begin</span>(), f[n - <span class="number">1</span>].<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>改进版</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 因为dp[i] [...] 的状态只和dp[i - 1] [...] 的状态有关, 所以只需两个数组轮流存储遍历到的最末尾两行的信息</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>116.填充每个节点的下一个右侧节点指针 117.填充每个节点的下一个右侧节点指针II</title>
     <url>/2022/10/19/116-%E5%A1%AB%E5%85%85%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%8F%B3%E4%BE%A7%E8%8A%82%E7%82%B9%E6%8C%87%E9%92%88/</url>
     <content><![CDATA[<h3 id="116-填充每个节点的下一个右侧节点指针"><a href="#116-填充每个节点的下一个右侧节点指针" class="headerlink" title="116. 填充每个节点的下一个右侧节点指针"></a><a href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/">116. 填充每个节点的下一个右侧节点指针</a></h3><p>给定一个 <strong>完美二叉树</strong> ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：</p>
@@ -249,45 +288,6 @@
         <tag>leetcode</tag>
         <tag>二叉树</tag>
         <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>120.三角形最小路径和</title>
-    <url>/2022/11/02/120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</url>
-    <content><![CDATA[<h3 id="120-三角形最小路径和"><a href="#120-三角形最小路径和" class="headerlink" title="120. 三角形最小路径和"></a><a href="https://leetcode.cn/problems/triangle/">120. 三角形最小路径和</a></h3><p>给定一个三角形 <code>triangle</code> ，找出自顶向下的最小路径和。</p>
-<p>每一步只能移动到下一行中相邻的结点上。<strong>相邻的结点</strong> 在这里指的是 <strong>下标</strong> 与 <strong>上一层结点下标</strong> 相同或者等于 <strong>上一层结点下标 + 1</strong> 的两个结点。也就是说，如果正位于当前行的下标 <code>i</code> ，那么下一步可以移动到下一行的下标 <code>i</code> 或 <code>i + 1</code> 。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]</span><br><span class="line">输出：11</span><br><span class="line">解释：如下面简图所示：</span><br><span class="line">   2</span><br><span class="line"> <span class="number"> 3 </span>4</span><br><span class="line"><span class="number"> 6 </span>5 7</span><br><span class="line">4<span class="number"> 1 </span>8 3</span><br><span class="line">自顶向下的最小路径和为 11（即，2 +<span class="number"> 3 </span>+<span class="number"> 5 </span>+<span class="number"> 1 </span>= 11）。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：triangle = <span class="string">[[-10]]</span></span><br><span class="line">输出：<span class="number">-10</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= triangle.length &lt;= 200</code></li>
-<li><code>triangle[0].length == 1</code></li>
-<li><code>triangle[i].length == triangle[i - 1].length + 1</code></li>
-<li><code>-104 &lt;= triangle[i][j] &lt;= 104</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>二维DP</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minimumTotal</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> lvlMin = INT_MAX;</span><br><span class="line">        <span class="type">int</span> r = triangle.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(r, <span class="number">0</span>));</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = triangle[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span>(r == <span class="number">1</span>) <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>] + triangle[i][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            dp[i][i] = dp[i - <span class="number">1</span>][i - <span class="number">1</span>] + triangle[i][i];</span><br><span class="line">        &#125;</span><br><span class="line">        lvlMin = <span class="built_in">min</span>(dp[r - <span class="number">1</span>][r - <span class="number">1</span>],dp[r - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; r; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j ++)&#123;</span><br><span class="line">                dp[i][j] = <span class="built_in">min</span>(dp[i - <span class="number">1</span>][j - <span class="number">1</span>], dp[i - <span class="number">1</span>][j]) + triangle[i][j];</span><br><span class="line">                <span class="keyword">if</span>(i == r - <span class="number">1</span>)&#123;</span><br><span class="line">                    lvlMin = <span class="built_in">min</span>(lvlMin, dp[r - <span class="number">1</span>][j]);</span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> lvlMin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相同思路简洁版</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minimumTotal</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = triangle.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">f</span>(n, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n));</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = triangle[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            f[i][<span class="number">0</span>] = f[i - <span class="number">1</span>][<span class="number">0</span>] + triangle[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; ++j) &#123;</span><br><span class="line">                f[i][j] = <span class="built_in">min</span>(f[i - <span class="number">1</span>][j - <span class="number">1</span>], f[i - <span class="number">1</span>][j]) + triangle[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">            f[i][i] = f[i - <span class="number">1</span>][i - <span class="number">1</span>] + triangle[i][i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="built_in">min_element</span>(f[n - <span class="number">1</span>].<span class="built_in">begin</span>(), f[n - <span class="number">1</span>].<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>改进版</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 因为dp[i] [...] 的状态只和dp[i - 1] [...] 的状态有关, 所以只需两个数组轮流存储遍历到的最末尾两行的信息</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -553,6 +553,58 @@
         <tag>二叉树</tag>
         <tag>bfs</tag>
         <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2.两数相加</title>
+    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例 1：</p>
+<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
+<p>示例 2：</p>
+<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
+<p>示例 3：</p>
+<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="445-两数相加-II"><a href="#445-两数相加-II" class="headerlink" title="445. 两数相加 II"></a><a href="https://leetcode.cn/problems/add-two-numbers-ii/">445. 两数相加 II</a></h3><p>给你两个 <strong>非空</strong> 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
+<p><strong>示例1：</strong></p>
+<p><img src="/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/1626420025-fZfzMX-image.png" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：l1 = <span class="comment">[7,2,4,3]</span>, l2 = <span class="comment">[5,6,4]</span></span><br><span class="line">输出：<span class="comment">[7,8,0,7]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：l1 = <span class="comment">[2,4,3]</span>, l2 = <span class="comment">[5,6,4]</span></span><br><span class="line">输出：<span class="comment">[8,0,7]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例3：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：l1 = <span class="comment">[0]</span>, l2 = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[0]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表的长度范围为<code> [1, 100]</code></li>
+<li><code>0 &lt;= node.val &lt;= 9</code></li>
+<li>输入数据保证链表代表的数字无前导 0</li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        stack&lt;<span class="type">int</span>&gt; s1,s2; <span class="comment">// 栈顶都是最后一位</span></span><br><span class="line">        <span class="keyword">while</span>(l1)&#123;</span><br><span class="line">            s1.<span class="built_in">push</span>(l1 -&gt; val);</span><br><span class="line">            l1 = l1 -&gt; next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(l2)&#123;</span><br><span class="line">            s2.<span class="built_in">push</span>(l2 -&gt; val);</span><br><span class="line">            l2 =l2 -&gt; next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode* nxt = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="type">int</span> carry = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!s1.<span class="built_in">empty</span>() || !s2.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(((s1.<span class="built_in">empty</span>() ? <span class="number">0</span> : s1.<span class="built_in">top</span>()) + (s2.<span class="built_in">empty</span>() ? <span class="number">0</span> : s2.<span class="built_in">top</span>()) + carry) % <span class="number">10</span>, nxt);</span><br><span class="line">            carry = ((s1.<span class="built_in">empty</span>() ? <span class="number">0</span> : s1.<span class="built_in">top</span>()) + (s2.<span class="built_in">empty</span>() ? <span class="number">0</span> : s2.<span class="built_in">top</span>()) + carry) / <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span>(!s1.<span class="built_in">empty</span>()) s1.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span>(!s2.<span class="built_in">empty</span>()) s2.<span class="built_in">pop</span>();</span><br><span class="line">            nxt = node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//若没有下句，则输入[5],[5]输出为[0]</span></span><br><span class="line">        <span class="keyword">if</span>(carry) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ListNode</span>(carry, nxt); </span><br><span class="line">        <span class="keyword">return</span> nxt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>链表</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -828,86 +880,6 @@
       </tags>
   </entry>
   <entry>
-    <title>279.完全平方数</title>
-    <url>/2022/10/22/279-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279. 完全平方数"></a><a href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></h3><p>给你一个整数 <code>n</code> ，返回 <em>和为 <code>n</code> 的完全平方数的最少数量</em> 。</p>
-<p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：n = 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 =<span class="number"> 4 </span>+<span class="number"> 4 </span>+ 4</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">n</span> = <span class="number">13</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">13</span> = <span class="number">4</span> + <span class="number">9</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 104</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>动态规划</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; <span class="built_in">sqrt</span>(i + <span class="number">1</span>); j ++)&#123;</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i - j * j] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2.两数相加</title>
-    <url>/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
-    <content><![CDATA[<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></h3><p>给你两个 <strong>非空</strong> 的链表，表示两个非负的整数。它们每位数字都是按照 <strong>逆序</strong> 的方式存储的，并且每个节点只能存储 <strong>一位</strong> 数字。</p>
-<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例 1：</p>
-<p>输入：l1 &#x3D; [2, 4, 3],  l2 &#x3D; [5, 6, 4]<br>输出：[7, 0, 8]<br>解释：342 + 465 &#x3D; 807</p>
-<p>示例 2：</p>
-<p>输入：l1 &#x3D; [0],  l2 &#x3D; [0]<br>输出：[0]</p>
-<p>示例 3：</p>
-<p>输入：l1 &#x3D; [9, 9, 9, 9, 9, 9, 9],  l2 &#x3D; [9, 9, 9, 9]<br>输出：[8, 9, 9, 9, 0, 0, 0, 1]</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(l1, l2, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">ListNode* <span class="title">dfs</span><span class="params">(ListNode* l, ListNode* r, <span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!l &amp;&amp; !r &amp;&amp; !i) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        <span class="type">int</span> sum = (l ? l-&gt;val : <span class="number">0</span>) + (r ? r-&gt;val : <span class="number">0</span>) + i;</span><br><span class="line">        ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">//可能有l1与l2都为空但carry不为0的情况</span></span><br><span class="line">        node-&gt;next = <span class="built_in">dfs</span>(l ? l-&gt;next : <span class="literal">nullptr</span>, r ? r-&gt;next : <span class="literal">nullptr</span>, sum / <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">l, r, i</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l <span class="keyword">and</span> <span class="keyword">not</span> r <span class="keyword">and</span> <span class="keyword">not</span> i: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            s = (l.val <span class="keyword">if</span> l <span class="keyword">else</span> <span class="number">0</span>) + (r.val <span class="keyword">if</span> r <span class="keyword">else</span> <span class="number">0</span>) + i</span><br><span class="line">            node = ListNode(s % <span class="number">10</span>)</span><br><span class="line">            <span class="comment"># Python中//是模运算，/是整除运算</span></span><br><span class="line">            node.<span class="built_in">next</span> = dfs(l.<span class="built_in">next</span> <span class="keyword">if</span> l <span class="keyword">else</span> <span class="literal">None</span>, r.<span class="built_in">next</span> <span class="keyword">if</span> r <span class="keyword">else</span> <span class="literal">None</span>, s // <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        <span class="keyword">return</span> dfs(l1, l2, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="445-两数相加-II"><a href="#445-两数相加-II" class="headerlink" title="445. 两数相加 II"></a><a href="https://leetcode.cn/problems/add-two-numbers-ii/">445. 两数相加 II</a></h3><p>给你两个 <strong>非空</strong> 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
-<p><strong>示例1：</strong></p>
-<p><img src="/2022/08/05/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/1626420025-fZfzMX-image.png" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：l1 = <span class="comment">[7,2,4,3]</span>, l2 = <span class="comment">[5,6,4]</span></span><br><span class="line">输出：<span class="comment">[7,8,0,7]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例2：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：l1 = <span class="comment">[2,4,3]</span>, l2 = <span class="comment">[5,6,4]</span></span><br><span class="line">输出：<span class="comment">[8,0,7]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例3：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：l1 = <span class="comment">[0]</span>, l2 = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[0]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表的长度范围为<code> [1, 100]</code></li>
-<li><code>0 &lt;= node.val &lt;= 9</code></li>
-<li>输入数据保证链表代表的数字无前导 0</li>
-</ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        stack&lt;<span class="type">int</span>&gt; s1,s2; <span class="comment">// 栈顶都是最后一位</span></span><br><span class="line">        <span class="keyword">while</span>(l1)&#123;</span><br><span class="line">            s1.<span class="built_in">push</span>(l1 -&gt; val);</span><br><span class="line">            l1 = l1 -&gt; next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(l2)&#123;</span><br><span class="line">            s2.<span class="built_in">push</span>(l2 -&gt; val);</span><br><span class="line">            l2 =l2 -&gt; next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode* nxt = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="type">int</span> carry = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!s1.<span class="built_in">empty</span>() || !s2.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            ListNode* node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(((s1.<span class="built_in">empty</span>() ? <span class="number">0</span> : s1.<span class="built_in">top</span>()) + (s2.<span class="built_in">empty</span>() ? <span class="number">0</span> : s2.<span class="built_in">top</span>()) + carry) % <span class="number">10</span>, nxt);</span><br><span class="line">            carry = ((s1.<span class="built_in">empty</span>() ? <span class="number">0</span> : s1.<span class="built_in">top</span>()) + (s2.<span class="built_in">empty</span>() ? <span class="number">0</span> : s2.<span class="built_in">top</span>()) + carry) / <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span>(!s1.<span class="built_in">empty</span>()) s1.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span>(!s2.<span class="built_in">empty</span>()) s2.<span class="built_in">pop</span>();</span><br><span class="line">            nxt = node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//若没有下句，则输入[5],[5]输出为[0]</span></span><br><span class="line">        <span class="keyword">if</span>(carry) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ListNode</span>(carry, nxt); </span><br><span class="line">        <span class="keyword">return</span> nxt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>链表</tag>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>297.二叉树的序列化与反序列化</title>
     <url>/2022/10/30/297-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
     <content><![CDATA[<h3 id="297-二叉树的序列化与反序列化"><a href="#297-二叉树的序列化与反序列化" class="headerlink" title="297. 二叉树的序列化与反序列化"></a><a href="https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/">297. 二叉树的序列化与反序列化</a></h3><p>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。</p>
@@ -943,6 +915,34 @@
       <tags>
         <tag>leetcode</tag>
         <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>279.完全平方数</title>
+    <url>/2022/10/22/279-%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279. 完全平方数"></a><a href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></h3><p>给你一个整数 <code>n</code> ，返回 <em>和为 <code>n</code> 的完全平方数的最少数量</em> 。</p>
+<p><strong>完全平方数</strong> 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，<code>1</code>、<code>4</code>、<code>9</code> 和 <code>16</code> 都是完全平方数，而 <code>3</code> 和 <code>11</code> 不是。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：n = 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 =<span class="number"> 4 </span>+<span class="number"> 4 </span>+ 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">n</span> = <span class="number">13</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">13</span> = <span class="number">4</span> + <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 104</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>动态规划</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; n + <span class="number">1</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; <span class="built_in">sqrt</span>(i + <span class="number">1</span>); j ++)&#123;</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i - j * j] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -1001,6 +1001,42 @@
       </tags>
   </entry>
   <entry>
+    <title>515.在每个树行中找最大值</title>
+    <url>/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
+    <content><![CDATA[<h3 id="515-在每个树行中找最大值"><a href="#515-在每个树行中找最大值" class="headerlink" title="515. 在每个树行中找最大值"></a><a href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">515. 在每个树行中找最大值</a></h3><p>给定一棵二叉树的根节点 <code>root</code> ，请找出该二叉树中每一层的最大值。</p>
+<p><strong>示例1：</strong></p>
+<p><img src="/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/largest_e1.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,3,2,5,3,null,9]</span></span><br><span class="line">输出: <span class="comment">[1,3,9]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,2,3]</span></span><br><span class="line">输出: <span class="comment">[1,3]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>二叉树的节点个数的范围是 <code>[0,104]</code></li>
+<li><code>-231 &lt;= Node.val &lt;= 231 - 1</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>DFS</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">largestValues</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="built_in">dfs</span>(root, res, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, vector&lt;<span class="type">int</span>&gt;&amp; res, <span class="type">int</span> currHeight)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(res.<span class="built_in">size</span>() == currHeight)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(root -&gt; val); <span class="comment">//如果当前层还没有最大值, 先随便push一个当前层结点的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        res[currHeight] = <span class="built_in">max</span>(root -&gt; val, res[currHeight]); <span class="comment">// 如果当前层有值了,选最大的</span></span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, res, currHeight + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, res, currHeight + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>BFS(略)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>dfs</tag>
+        <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>46.全排列 47.全排列II</title>
     <url>/2022/09/27/46-%E5%85%A8%E6%8E%92%E5%88%97/</url>
     <content><![CDATA[<h3 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46. 全排列"></a><a href="https://leetcode.cn/problems/permutations/">46. 全排列</a></h3><p>给定一个不含重复数字的数组 <code>nums</code> ，返回其 <em>所有可能的全排列</em> 。你可以 <strong>按任意顺序</strong> 返回答案。</p>
@@ -1053,42 +1089,6 @@
       <tags>
         <tag>leetcode</tag>
         <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>515.在每个树行中找最大值</title>
-    <url>/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
-    <content><![CDATA[<h3 id="515-在每个树行中找最大值"><a href="#515-在每个树行中找最大值" class="headerlink" title="515. 在每个树行中找最大值"></a><a href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">515. 在每个树行中找最大值</a></h3><p>给定一棵二叉树的根节点 <code>root</code> ，请找出该二叉树中每一层的最大值。</p>
-<p><strong>示例1：</strong></p>
-<p><img src="/2022/10/08/515-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%A0%91%E8%A1%8C%E4%B8%AD%E6%89%BE%E6%9C%80%E5%A4%A7%E5%80%BC/largest_e1.jpg" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,3,2,5,3,null,9]</span></span><br><span class="line">输出: <span class="comment">[1,3,9]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例2：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: root = <span class="comment">[1,2,3]</span></span><br><span class="line">输出: <span class="comment">[1,3]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>二叉树的节点个数的范围是 <code>[0,104]</code></li>
-<li><code>-231 &lt;= Node.val &lt;= 231 - 1</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>DFS</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">largestValues</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="built_in">dfs</span>(root, res, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, vector&lt;<span class="type">int</span>&gt;&amp; res, <span class="type">int</span> currHeight)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(res.<span class="built_in">size</span>() == currHeight)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(root -&gt; val); <span class="comment">//如果当前层还没有最大值, 先随便push一个当前层结点的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        res[currHeight] = <span class="built_in">max</span>(root -&gt; val, res[currHeight]); <span class="comment">// 如果当前层有值了,选最大的</span></span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, res, currHeight + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, res, currHeight + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>BFS(略)</li>
-</ul>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>dfs</tag>
-        <tag>bfs</tag>
       </tags>
   </entry>
   <entry>
@@ -1289,57 +1289,6 @@
       </tags>
   </entry>
   <entry>
-    <title>96.不同的二叉搜索树 95.不同的二叉搜索树II</title>
-    <url>/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
-    <content><![CDATA[<h3 id="96-不同的二叉搜索树"><a href="#96-不同的二叉搜索树" class="headerlink" title="96. 不同的二叉搜索树"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></h3><p>给你一个整数 <code>n</code> ，求恰由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的 <strong>二叉搜索树</strong> 有多少种？返回满足题意的二叉搜索树的种数。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3.jpg" alt="img"></p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 19</code></li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155720080.png" alt="image-20221022155720080"></p>
-<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155737712.png" alt="image-20221022155737712"></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">G</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        G[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        G[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">                G[i] += G[j - <span class="number">1</span>] * G[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> G[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="95-不同的二叉搜索树-II"><a href="#95-不同的二叉搜索树-II" class="headerlink" title="95. 不同的二叉搜索树 II"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees-ii/">95. 不同的二叉搜索树 II</a></h3><p>给你一个整数 <code>n</code> ，请你生成并返回所有由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的不同 <strong>二叉搜索树</strong> 。可以按 <strong>任意顺序</strong> 返回答案。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3-20221022174206641.jpg" alt="img"></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">n</span> = <span class="number">3</span></span><br><span class="line">输出：[[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">3</span>],[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">3</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">1</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">1</span></span><br><span class="line">输出：<span class="string">[[1]]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= n &lt;= 8</code></li>
-</ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
-<li>DFS</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">dfs</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> &#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line">        vector&lt;TreeNode*&gt; allTrees;</span><br><span class="line">        <span class="comment">// 枚举可行根节点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            <span class="comment">// 获得所有可行的左子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; leftTrees = <span class="built_in">dfs</span>(start, i - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获得所有可行的右子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; rightTrees = <span class="built_in">dfs</span>(i + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从左子树集合中选出一棵左子树，从右子树集合中选出一棵右子树，拼接到根节点上</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; left : leftTrees) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; right : rightTrees) &#123;</span><br><span class="line">                    TreeNode* currTree = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(i);</span><br><span class="line">                    currTree-&gt;left = left;</span><br><span class="line">                    currTree-&gt;right = right;</span><br><span class="line">                    allTrees.<span class="built_in">push_back</span>(currTree);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> allTrees;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">generateTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!n) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(<span class="number">1</span>, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>dfs</tag>
-        <tag>动态规划</tag>
-        <tag>BST</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>91.解码方法</title>
     <url>/2022/10/22/91-%E8%A7%A3%E7%A0%81%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h3 id="91-解码方法"><a href="#91-解码方法" class="headerlink" title="91. 解码方法"></a><a href="https://leetcode.cn/problems/decode-ways/">91. 解码方法</a></h3><p>一条包含字母 <code>A-Z</code> 的消息通过以下映射进行了 <strong>编码</strong> ：</p>
@@ -1388,6 +1337,57 @@
       <tags>
         <tag>leetcode</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>96.不同的二叉搜索树 95.不同的二叉搜索树II</title>
+    <url>/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <content><![CDATA[<h3 id="96-不同的二叉搜索树"><a href="#96-不同的二叉搜索树" class="headerlink" title="96. 不同的二叉搜索树"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></h3><p>给你一个整数 <code>n</code> ，求恰由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的 <strong>二叉搜索树</strong> 有多少种？返回满足题意的二叉搜索树的种数。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3.jpg" alt="img"></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：n <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">输出：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 19</code></li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155720080.png" alt="image-20221022155720080"></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/image-20221022155737712.png" alt="image-20221022155737712"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">G</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        G[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        G[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">                G[i] += G[j - <span class="number">1</span>] * G[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> G[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="95-不同的二叉搜索树-II"><a href="#95-不同的二叉搜索树-II" class="headerlink" title="95. 不同的二叉搜索树 II"></a><a href="https://leetcode.cn/problems/unique-binary-search-trees-ii/">95. 不同的二叉搜索树 II</a></h3><p>给你一个整数 <code>n</code> ，请你生成并返回所有由 <code>n</code> 个节点组成且节点值从 <code>1</code> 到 <code>n</code> 互不相同的不同 <strong>二叉搜索树</strong> 。可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/22/96-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/uniquebstn3-20221022174206641.jpg" alt="img"></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">n</span> = <span class="number">3</span></span><br><span class="line">输出：[[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">3</span>],[<span class="number">1</span>,<span class="literal">null</span>,<span class="number">3</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">1</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：n = <span class="number">1</span></span><br><span class="line">输出：<span class="string">[[1]]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 8</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><ul>
+<li>DFS</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">dfs</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> &#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line">        vector&lt;TreeNode*&gt; allTrees;</span><br><span class="line">        <span class="comment">// 枚举可行根节点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            <span class="comment">// 获得所有可行的左子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; leftTrees = <span class="built_in">dfs</span>(start, i - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获得所有可行的右子树集合</span></span><br><span class="line">            vector&lt;TreeNode*&gt; rightTrees = <span class="built_in">dfs</span>(i + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从左子树集合中选出一棵左子树，从右子树集合中选出一棵右子树，拼接到根节点上</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; left : leftTrees) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; right : rightTrees) &#123;</span><br><span class="line">                    TreeNode* currTree = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(i);</span><br><span class="line">                    currTree-&gt;left = left;</span><br><span class="line">                    currTree-&gt;right = right;</span><br><span class="line">                    allTrees.<span class="built_in">push_back</span>(currTree);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> allTrees;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;TreeNode*&gt; <span class="title">generateTrees</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!n) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dfs</span>(<span class="number">1</span>, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>dfs</tag>
+        <tag>动态规划</tag>
+        <tag>BST</tag>
       </tags>
   </entry>
   <entry>
@@ -1593,6 +1593,164 @@
       </categories>
       <tags>
         <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DFS之二叉树的属性合集</title>
+    <url>/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/</url>
+    <content><![CDATA[<h3 id="543-二叉树的直径"><a href="#543-二叉树的直径" class="headerlink" title="543. 二叉树的直径"></a><a href="https://leetcode.cn/problems/diameter-of-binary-tree/">543. 二叉树的直径</a></h3><p>给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。</p>
+<p><strong>示例 :</strong><br>给定二叉树</p>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">    <span class="number">1</span></span><br><span class="line">   / <span class="string">\</span></span><br><span class="line">  <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"> / <span class="string">\</span>     </span><br><span class="line"><span class="number">4</span>   <span class="number">5</span>    </span><br></pre></td></tr></table></figure>
+
+<p>返回 <strong>3</strong>, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。</p>
+<p><strong>注意：</strong>两结点之间的路径长度是以它们之间边的数目表示。</p>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">diameterOfBinaryTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxHeight</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">maxHeight</span>(root -&gt; left), <span class="built_in">maxHeight</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left);</span><br><span class="line">        res = <span class="built_in">max</span>((<span class="built_in">maxHeight</span>(root -&gt; left) + <span class="built_in">maxHeight</span>(root -&gt; right) ), res);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="111-二叉树的最小深度"><a href="#111-二叉树的最小深度" class="headerlink" title="111. 二叉树的最小深度"></a><a href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">111. 二叉树的最小深度</a></h3><p>给定一个二叉树，找出其最小深度。</p>
+<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
+<p><strong>说明：</strong>叶子节点是指没有子节点的节点。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/ex_depth.jpg" alt="img"></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root</span> = [<span class="number">3</span>,<span class="number">9</span>,<span class="number">20</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">15</span>,<span class="number">7</span>]</span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root</span> = [<span class="number">2</span>,<span class="literal">null</span>,<span class="number">3</span>,<span class="literal">null</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="number">5</span>,<span class="literal">null</span>,<span class="number">6</span>]</span><br><span class="line">输出：<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点数的范围在 <code>[0, 105]</code> 内</li>
+<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; left) <span class="keyword">return</span> <span class="built_in">minDepth</span>(root -&gt; right) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; right) <span class="keyword">return</span> <span class="built_in">minDepth</span>(root -&gt; left) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(<span class="built_in">minDepth</span>(root -&gt; left), <span class="built_in">minDepth</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="104-二叉树的最大深度"><a href="#104-二叉树的最大深度" class="headerlink" title="104. 二叉树的最大深度"></a><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度</a></h3><p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<p><strong>说明:</strong> 叶子节点是指没有子节点的节点。</p>
+<p><strong>示例：</strong><br>给定二叉树 <code>[3,9,20,null,null,15,7]</code>，</p>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">  <span class="number">3</span></span><br><span class="line"> / <span class="string">\</span></span><br><span class="line"><span class="number">9</span>  <span class="number">20</span></span><br><span class="line">  /  <span class="string">\</span></span><br><span class="line"> <span class="number">15</span>   <span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<p>返回它的最大深度 3 。</p>
+<h4 id="C-2"><a href="#C-2" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">maxDepth</span>(root -&gt; left), <span class="built_in">maxDepth</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="993-二叉树的堂兄弟节点"><a href="#993-二叉树的堂兄弟节点" class="headerlink" title="993. 二叉树的堂兄弟节点"></a><a href="https://leetcode.cn/problems/cousins-in-binary-tree/">993. 二叉树的堂兄弟节点</a></h3><p>在二叉树中，根节点位于深度 <code>0</code> 处，每个深度为 <code>k</code> 的节点的子节点位于深度 <code>k+1</code> 处。</p>
+<p>如果二叉树的两个节点深度相同，但 <strong>父节点不同</strong> ，则它们是一对<em>堂兄弟节点</em>。</p>
+<p>我们给出了具有唯一值的二叉树的根节点 <code>root</code> ，以及树中两个不同节点的值 <code>x</code> 和 <code>y</code> 。</p>
+<p>只有与值 <code>x</code> 和 <code>y</code> 对应的节点是堂兄弟节点时，才返回 <code>true</code> 。否则，返回 <code>false</code>。</p>
+<p><strong>示例 1：<br><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/q1248-01.png" alt="img"></strong></p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">输入：root <span class="operator">=</span> [<span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span>]<span class="punctuation">,</span> <span class="keyword">x</span> <span class="operator">=</span> <span class="number">4</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：<br><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/q1248-02.png" alt="img"></strong></p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">输入：root <span class="operator">=</span> [<span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="keyword">null</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">,</span><span class="keyword">null</span><span class="punctuation">,</span><span class="number">5</span>]<span class="punctuation">,</span> <span class="keyword">x</span> <span class="operator">=</span> <span class="number">5</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">4</span></span><br><span class="line">输出：<span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><strong><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/q1248-03.png" alt="img"></strong></p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">输入：root <span class="operator">=</span> [<span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="keyword">null</span><span class="punctuation">,</span><span class="number">4</span>]<span class="punctuation">,</span> <span class="keyword">x</span> <span class="operator">=</span> <span class="number">2</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>二叉树的节点数介于 <code>2</code> 到 <code>100</code> 之间。</li>
+<li>每个节点的值都是唯一的、范围为 <code>1</code> 到 <code>100</code> 的整数。</li>
+</ul>
+<h4 id="C-3"><a href="#C-3" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> x_depth = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> y_depth = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isCousins</span><span class="params">(TreeNode* root, <span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root, x, y, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(x_depth == y_depth)&#123;</span><br><span class="line">            <span class="keyword">return</span> !<span class="built_in">isBrother</span>(root, x, y);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> depth)</span></span>&#123; </span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(root -&gt; val == x) x_depth = depth;</span><br><span class="line">        <span class="keyword">if</span>(root -&gt; val == y) y_depth = depth;</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, x, y, depth + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, x, y, depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isBrother</span><span class="params">(TreeNode* root, <span class="type">int</span> x, <span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>( root -&gt; left &amp;&amp; root -&gt; right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root -&gt; left -&gt; val == x &amp;&amp; root -&gt; right -&gt; val == y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(root -&gt; left -&gt; val == y &amp;&amp; root -&gt; right -&gt; val == x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">isBrother</span>(root -&gt; left, x, y) || <span class="built_in">isBrother</span>(root -&gt; right, x, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="563-二叉树的坡度"><a href="#563-二叉树的坡度" class="headerlink" title="563. 二叉树的坡度"></a><a href="https://leetcode.cn/problems/binary-tree-tilt/">563. 二叉树的坡度</a></h3><p>给你一个二叉树的根节点 <code>root</code> ，计算并返回 <strong>整个树</strong> 的坡度 。</p>
+<p>一个树的 <strong>节点的坡度</strong> 定义即为，该节点左子树的节点之和和右子树节点之和的 <strong>差的绝对值</strong> 。如果没有左子树的话，左子树的节点之和为 0 ；没有右子树的话也是一样。空结点的坡度是 0 。</p>
+<p><strong>整个树</strong> 的坡度就是其所有节点的坡度之和。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/tilt1.jpg" alt="img"></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：root = [1,2,3]</span><br><span class="line">输出：1</span><br><span class="line">解释：</span><br><span class="line">节点<span class="number"> 2 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 3 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 1 </span>的坡度：|2-3| = 1（左子树就是左子节点，所以和是<span class="number"> 2 </span>；右子树就是右子节点，所以和是<span class="number"> 3 </span>）</span><br><span class="line">坡度总和：0 +<span class="number"> 0 </span>+<span class="number"> 1 </span>= 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/tilt2.jpg" alt="img"></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：root = [4,2,9,3,5,null,7]</span><br><span class="line">输出：15</span><br><span class="line">解释：</span><br><span class="line">节点<span class="number"> 3 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 5 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 7 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 2 </span>的坡度：|3-5| = 2（左子树就是左子节点，所以和是<span class="number"> 3 </span>；右子树就是右子节点，所以和是<span class="number"> 5 </span>）</span><br><span class="line">节点<span class="number"> 9 </span>的坡度：|0-7| = 7（没有左子树，所以和是<span class="number"> 0 </span>；右子树正好是右子节点，所以和是<span class="number"> 7 </span>）</span><br><span class="line">节点<span class="number"> 4 </span>的坡度：|(3+5+2)-(9+7)| = |10-16| = 6（左子树值为 3、5 和<span class="number"> 2 </span>，和是<span class="number"> 10 </span>；右子树值为<span class="number"> 9 </span>和<span class="number"> 7 </span>，和是<span class="number"> 16 </span>）</span><br><span class="line">坡度总和：0 +<span class="number"> 0 </span>+<span class="number"> 0 </span>+<span class="number"> 2 </span>+<span class="number"> 7 </span>+<span class="number"> 6 </span>= 15</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/tilt3.jpg" alt="img"></p>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：root = [<span class="number">21,7,14,1</span>,<span class="number">1,2,2,3</span>,<span class="number">3</span>]</span><br><span class="line">输出：<span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点数目的范围在 <code>[0, 104]</code> 内</li>
+<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
+</ul>
+<h4 id="C-4"><a href="#C-4" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findTilt</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123; <span class="comment">// 计算以root为根的树结点之和</span></span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> l = <span class="built_in">dfs</span>(root -&gt; left); <span class="comment">// 左子树之和</span></span><br><span class="line">        <span class="type">int</span> r = <span class="built_in">dfs</span>(root -&gt; right); <span class="comment">// 右子树之和</span></span><br><span class="line">        res += <span class="built_in">abs</span>(l -r);</span><br><span class="line">        <span class="keyword">return</span> root -&gt; val + l + r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="110-平衡二叉树"><a href="#110-平衡二叉树" class="headerlink" title="110. 平衡二叉树"></a><a href="https://leetcode.cn/problems/balanced-binary-tree/">110. 平衡二叉树</a></h3><p>给定一个二叉树，判断它是否是高度平衡的二叉树。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中的节点数在范围 <code>[0, 5000]</code> 内</li>
+<li><code>-104 &lt;= Node.val &lt;= 104</code></li>
+</ul>
+<h4 id="C-5"><a href="#C-5" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">int</span> lh = <span class="built_in">height</span>(root -&gt; left);</span><br><span class="line">        <span class="type">int</span> rh = <span class="built_in">height</span>(root -&gt; right);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">abs</span>(lh - rh) &lt;= <span class="number">1</span> &amp;&amp; <span class="built_in">isBalanced</span>(root -&gt; left) &amp;&amp; <span class="built_in">isBalanced</span>(root -&gt; right); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">height</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">height</span>(root -&gt; left), <span class="built_in">height</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="617. 合并二叉树"></a><a href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></h3><p>给你两棵二叉树： <code>root1</code> 和 <code>root2</code> 。</p>
+<p>想象一下，当你将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，<strong>不为</strong> null 的节点将直接作为新二叉树的节点。</p>
+<p>返回合并后的二叉树。</p>
+<p><strong>注意:</strong> 合并过程必须从两个树的根节点开始。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/merge.jpg" alt="img"></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root1</span> = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>], <span class="attr">root2</span> = [<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="literal">null</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="number">7</span>]</span><br><span class="line">输出：[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="number">7</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：root1 = <span class="comment">[1]</span>, root2 = <span class="comment">[1,2]</span></span><br><span class="line">输出：<span class="comment">[2,2]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>两棵树中的节点数目在范围 <code>[0, 2000]</code> 内</li>
+<li><code>-104 &lt;= Node.val &lt;= 104</code></li>
+</ul>
+<h4 id="C-6"><a href="#C-6" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* root = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">mergeTrees</span><span class="params">(TreeNode* root1, TreeNode* root2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root1 &amp;&amp; !root2) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!root1) <span class="keyword">return</span> root2;<span class="comment">// root1空 root2不空</span></span><br><span class="line">        <span class="keyword">if</span>(!root2) <span class="keyword">return</span> root1;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(root1 -&gt; val + root2 -&gt; val); </span><br><span class="line">        root -&gt; left = <span class="built_in">mergeTrees</span>(root1 -&gt; left, root2 -&gt; left);</span><br><span class="line">        root -&gt; right = <span class="built_in">mergeTrees</span>(root1 -&gt; right, root2 -&gt; right);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="226-翻转二叉树"><a href="#226-翻转二叉树" class="headerlink" title="226. 翻转二叉树"></a><a href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></h3><p>给你一棵二叉树的根节点 <code>root</code> ，翻转这棵二叉树，并返回其根节点。</p>
+<h4 id="C-7"><a href="#C-7" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root || (!root -&gt; left &amp;&amp; !root -&gt; right)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            TreeNode* temp = root -&gt;left;</span><br><span class="line">            root -&gt;left = root -&gt; right;</span><br><span class="line">            root -&gt; right = temp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="572-另一棵树的子树"><a href="#572-另一棵树的子树" class="headerlink" title="572. 另一棵树的子树"></a><a href="https://leetcode.cn/problems/subtree-of-another-tree/">572. 另一棵树的子树</a></h3><p>给你两棵二叉树 <code>root</code> 和 <code>subRoot</code> 。检验 <code>root</code> 中是否包含和 <code>subRoot</code> 具有相同结构和节点值的子树。如果存在，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>二叉树 <code>tree</code> 的一棵子树包括 <code>tree</code> 的某个节点和这个节点的所有后代节点。<code>tree</code> 也可以看做它自身的一棵子树。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/subtree1-tree.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：root = <span class="comment">[3,4,5,1,2]</span>, subRoot = <span class="comment">[4,1,2]</span></span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/subtree2-tree.jpg" alt="img"></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root</span> = [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">0</span>], <span class="attr">subRoot</span> = [<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>root</code> 树上的节点数量范围是 <code>[1, 2000]</code></li>
+<li><code>subRoot</code> 树上的节点数量范围是 <code>[1, 1000]</code></li>
+<li><code>-104 &lt;= root.val &lt;= 104</code></li>
+<li><code>-104 &lt;= subRoot.val &lt;= 104</code></li>
+</ul>
+<h4 id="C-8"><a href="#C-8" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">bool</span> tag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isSubtree</span><span class="params">(TreeNode* root, TreeNode* subRoot)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root, subRoot);</span><br><span class="line">        <span class="keyword">return</span> tag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isSametree</span><span class="params">(TreeNode* root1, TreeNode* root2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root1 &amp;&amp; !root2) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>((!root1 &amp;&amp; root2) || (root1 &amp;&amp; !root2) || root1 -&gt; val != root2 -&gt; val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">isSametree</span>(root1 -&gt; left, root2 -&gt; left) &amp;&amp; <span class="built_in">isSametree</span>(root1 -&gt; right, root2 -&gt; right);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, TreeNode* subRoot)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(root -&gt; val == subRoot -&gt; val)&#123;</span><br><span class="line">            <span class="keyword">if</span>(tag == <span class="literal">true</span>) <span class="keyword">return</span>;</span><br><span class="line">            tag = <span class="built_in">isSametree</span>(root -&gt; left, subRoot -&gt; left) &amp;&amp; <span class="built_in">isSametree</span>(root -&gt; right, subRoot -&gt; right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, subRoot);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, subRoot);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>二叉树</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -1850,152 +2008,32 @@
       </tags>
   </entry>
   <entry>
-    <title>DFS之二叉树的属性合集</title>
-    <url>/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/</url>
-    <content><![CDATA[<h3 id="543-二叉树的直径"><a href="#543-二叉树的直径" class="headerlink" title="543. 二叉树的直径"></a><a href="https://leetcode.cn/problems/diameter-of-binary-tree/">543. 二叉树的直径</a></h3><p>给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。</p>
-<p><strong>示例 :</strong><br>给定二叉树</p>
-<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">    <span class="number">1</span></span><br><span class="line">   / <span class="string">\</span></span><br><span class="line">  <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"> / <span class="string">\</span>     </span><br><span class="line"><span class="number">4</span>   <span class="number">5</span>    </span><br></pre></td></tr></table></figure>
-
-<p>返回 <strong>3</strong>, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。</p>
-<p><strong>注意：</strong>两结点之间的路径长度是以它们之间边的数目表示。</p>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">diameterOfBinaryTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxHeight</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">maxHeight</span>(root -&gt; left), <span class="built_in">maxHeight</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left);</span><br><span class="line">        res = <span class="built_in">max</span>((<span class="built_in">maxHeight</span>(root -&gt; left) + <span class="built_in">maxHeight</span>(root -&gt; right) ), res);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="111-二叉树的最小深度"><a href="#111-二叉树的最小深度" class="headerlink" title="111. 二叉树的最小深度"></a><a href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">111. 二叉树的最小深度</a></h3><p>给定一个二叉树，找出其最小深度。</p>
-<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<p><strong>说明：</strong>叶子节点是指没有子节点的节点。</p>
+    <title>DFS之组合总和合集</title>
+    <url>/2022/11/22/DFS%E4%B9%8B%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%E5%90%88%E9%9B%86/</url>
+    <content><![CDATA[<h3 id="39-组合总和"><a href="#39-组合总和" class="headerlink" title="39. 组合总和"></a><a href="https://leetcode.cn/problems/combination-sum/">39. 组合总和</a></h3><p>给你一个 <strong>无重复元素</strong> 的整数数组 <code>candidates</code> 和一个目标整数 <code>target</code> ，找出 <code>candidates</code> 中可以使数字和为目标数 <code>target</code> 的 所有 <strong>不同组合</strong> ，并以列表形式返回。你可以按 <strong>任意顺序</strong> 返回这些组合。</p>
+<p><code>candidates</code> 中的 <strong>同一个</strong> 数字可以 <strong>无限制重复被选取</strong> 。如果至少一个数字的被选数量不同，则两种组合是不同的。 </p>
+<p>对于给定的输入，保证和为 <code>target</code> 的不同组合数少于 <code>150</code> 个。</p>
 <p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/ex_depth.jpg" alt="img"></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root</span> = [<span class="number">3</span>,<span class="number">9</span>,<span class="number">20</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">15</span>,<span class="number">7</span>]</span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：candidates = [2,3,6,7], target = 7</span><br><span class="line">输出：[[2,2,3],[7]]</span><br><span class="line">解释：</span><br><span class="line">2 和<span class="number"> 3 </span>可以形成一组候选，2 +<span class="number"> 2 </span>+<span class="number"> 3 </span>=<span class="number"> 7 </span>。注意<span class="number"> 2 </span>可以使用多次。</span><br><span class="line">7 也是一个候选，<span class="number"> 7 </span>=<span class="number"> 7 </span>。</span><br><span class="line">仅有这两种组合。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root</span> = [<span class="number">2</span>,<span class="literal">null</span>,<span class="number">3</span>,<span class="literal">null</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="number">5</span>,<span class="literal">null</span>,<span class="number">6</span>]</span><br><span class="line">输出：<span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>树中节点数的范围在 <code>[0, 105]</code> 内</li>
-<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
-</ul>
-<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; left) <span class="keyword">return</span> <span class="built_in">minDepth</span>(root -&gt; right) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root -&gt; right) <span class="keyword">return</span> <span class="built_in">minDepth</span>(root -&gt; left) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(<span class="built_in">minDepth</span>(root -&gt; left), <span class="built_in">minDepth</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="104-二叉树的最大深度"><a href="#104-二叉树的最大深度" class="headerlink" title="104. 二叉树的最大深度"></a><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度</a></h3><p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p><strong>说明:</strong> 叶子节点是指没有子节点的节点。</p>
-<p><strong>示例：</strong><br>给定二叉树 <code>[3,9,20,null,null,15,7]</code>，</p>
-<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">  <span class="number">3</span></span><br><span class="line"> / <span class="string">\</span></span><br><span class="line"><span class="number">9</span>  <span class="number">20</span></span><br><span class="line">  /  <span class="string">\</span></span><br><span class="line"> <span class="number">15</span>   <span class="number">7</span></span><br></pre></td></tr></table></figure>
-
-<p>返回它的最大深度 3 。</p>
-<h4 id="C-2"><a href="#C-2" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">maxDepth</span>(root -&gt; left), <span class="built_in">maxDepth</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="993-二叉树的堂兄弟节点"><a href="#993-二叉树的堂兄弟节点" class="headerlink" title="993. 二叉树的堂兄弟节点"></a><a href="https://leetcode.cn/problems/cousins-in-binary-tree/">993. 二叉树的堂兄弟节点</a></h3><p>在二叉树中，根节点位于深度 <code>0</code> 处，每个深度为 <code>k</code> 的节点的子节点位于深度 <code>k+1</code> 处。</p>
-<p>如果二叉树的两个节点深度相同，但 <strong>父节点不同</strong> ，则它们是一对<em>堂兄弟节点</em>。</p>
-<p>我们给出了具有唯一值的二叉树的根节点 <code>root</code> ，以及树中两个不同节点的值 <code>x</code> 和 <code>y</code> 。</p>
-<p>只有与值 <code>x</code> 和 <code>y</code> 对应的节点是堂兄弟节点时，才返回 <code>true</code> 。否则，返回 <code>false</code>。</p>
-<p><strong>示例 1：<br><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/q1248-01.png" alt="img"></strong></p>
-<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">输入：root <span class="operator">=</span> [<span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span>]<span class="punctuation">,</span> <span class="keyword">x</span> <span class="operator">=</span> <span class="number">4</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：<br><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/q1248-02.png" alt="img"></strong></p>
-<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">输入：root <span class="operator">=</span> [<span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="keyword">null</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">,</span><span class="keyword">null</span><span class="punctuation">,</span><span class="number">5</span>]<span class="punctuation">,</span> <span class="keyword">x</span> <span class="operator">=</span> <span class="number">5</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">4</span></span><br><span class="line">输出：<span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: candidates = <span class="comment">[2,3,5]</span>, target = 8</span><br><span class="line">输出: <span class="comment">[<span class="comment">[2,2,2,2]</span>,<span class="comment">[2,3,3]</span>,<span class="comment">[3,5]</span>]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 3：</strong></p>
-<p><strong><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/q1248-03.png" alt="img"></strong></p>
-<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">输入：root <span class="operator">=</span> [<span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="keyword">null</span><span class="punctuation">,</span><span class="number">4</span>]<span class="punctuation">,</span> <span class="keyword">x</span> <span class="operator">=</span> <span class="number">2</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">输出：<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: candidates = <span class="comment">[2]</span>, target = 1</span><br><span class="line">输出: <span class="comment">[]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li>二叉树的节点数介于 <code>2</code> 到 <code>100</code> 之间。</li>
-<li>每个节点的值都是唯一的、范围为 <code>1</code> 到 <code>100</code> 的整数。</li>
+<li><code>1 &lt;= candidates.length &lt;= 30</code></li>
+<li><code>2 &lt;= candidates[i] &lt;= 40</code></li>
+<li><code>candidates</code> 的所有元素 <strong>互不相同</strong></li>
+<li><code>1 &lt;= target &lt;= 40</code></li>
 </ul>
-<h4 id="C-3"><a href="#C-3" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> x_depth = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> y_depth = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isCousins</span><span class="params">(TreeNode* root, <span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root, x, y, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(x_depth == y_depth)&#123;</span><br><span class="line">            <span class="keyword">return</span> !<span class="built_in">isBrother</span>(root, x, y);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> depth)</span></span>&#123; </span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(root -&gt; val == x) x_depth = depth;</span><br><span class="line">        <span class="keyword">if</span>(root -&gt; val == y) y_depth = depth;</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, x, y, depth + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, x, y, depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isBrother</span><span class="params">(TreeNode* root, <span class="type">int</span> x, <span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>( root -&gt; left &amp;&amp; root -&gt; right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root -&gt; left -&gt; val == x &amp;&amp; root -&gt; right -&gt; val == y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(root -&gt; left -&gt; val == y &amp;&amp; root -&gt; right -&gt; val == x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">isBrother</span>(root -&gt; left, x, y) || <span class="built_in">isBrother</span>(root -&gt; right, x, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 正确, 每个idx都有选或者不选两种情况</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>, candidates, target, path);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> idx,vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target, vector&lt;<span class="type">int</span>&gt; path)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx == candidates.<span class="built_in">size</span>() || target &lt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(target == <span class="number">0</span>) &#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">dfs</span>(idx + <span class="number">1</span>, candidates, target, path); <span class="comment">// 要在前, 因为跳过的话, target不能减少</span></span><br><span class="line"></span><br><span class="line">        path.<span class="built_in">push_back</span>(candidates[idx]);</span><br><span class="line">        <span class="built_in">dfs</span>(idx, candidates, target - candidates[idx], path);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 错误版本:把它想成了根节点为0的四叉树</span></span><br><span class="line"><span class="comment">// 输入 [2,3,6,7] 7</span></span><br><span class="line"><span class="comment">// 输出 [[0,2,2,3],[0,2,3,2],[0,3,2,2],[0,7]]</span></span><br><span class="line"><span class="comment">// 预期结果 [[2,2,3],[7]]</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">    set&lt;vector&lt;<span class="type">int</span>&gt;&gt; st;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">combinationSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>, candidates, target, path);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> elem : st)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(elem);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> cur, vector&lt;<span class="type">int</span>&gt;&amp; candidates, <span class="type">int</span> target, vector&lt;<span class="type">int</span>&gt; path)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(target &lt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(target == <span class="number">0</span>) st.<span class="built_in">insert</span>(path);</span><br><span class="line">        target = target - cur;</span><br><span class="line">        path.<span class="built_in">push_back</span>(cur);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> elem : candidates)&#123;</span><br><span class="line">            <span class="built_in">dfs</span>(elem, candidates, target, path);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
-
-<h3 id="563-二叉树的坡度"><a href="#563-二叉树的坡度" class="headerlink" title="563. 二叉树的坡度"></a><a href="https://leetcode.cn/problems/binary-tree-tilt/">563. 二叉树的坡度</a></h3><p>给你一个二叉树的根节点 <code>root</code> ，计算并返回 <strong>整个树</strong> 的坡度 。</p>
-<p>一个树的 <strong>节点的坡度</strong> 定义即为，该节点左子树的节点之和和右子树节点之和的 <strong>差的绝对值</strong> 。如果没有左子树的话，左子树的节点之和为 0 ；没有右子树的话也是一样。空结点的坡度是 0 。</p>
-<p><strong>整个树</strong> 的坡度就是其所有节点的坡度之和。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/tilt1.jpg" alt="img"></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：root = [1,2,3]</span><br><span class="line">输出：1</span><br><span class="line">解释：</span><br><span class="line">节点<span class="number"> 2 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 3 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 1 </span>的坡度：|2-3| = 1（左子树就是左子节点，所以和是<span class="number"> 2 </span>；右子树就是右子节点，所以和是<span class="number"> 3 </span>）</span><br><span class="line">坡度总和：0 +<span class="number"> 0 </span>+<span class="number"> 1 </span>= 1</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/tilt2.jpg" alt="img"></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：root = [4,2,9,3,5,null,7]</span><br><span class="line">输出：15</span><br><span class="line">解释：</span><br><span class="line">节点<span class="number"> 3 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 5 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 7 </span>的坡度：|0-0| = 0（没有子节点）</span><br><span class="line">节点<span class="number"> 2 </span>的坡度：|3-5| = 2（左子树就是左子节点，所以和是<span class="number"> 3 </span>；右子树就是右子节点，所以和是<span class="number"> 5 </span>）</span><br><span class="line">节点<span class="number"> 9 </span>的坡度：|0-7| = 7（没有左子树，所以和是<span class="number"> 0 </span>；右子树正好是右子节点，所以和是<span class="number"> 7 </span>）</span><br><span class="line">节点<span class="number"> 4 </span>的坡度：|(3+5+2)-(9+7)| = |10-16| = 6（左子树值为 3、5 和<span class="number"> 2 </span>，和是<span class="number"> 10 </span>；右子树值为<span class="number"> 9 </span>和<span class="number"> 7 </span>，和是<span class="number"> 16 </span>）</span><br><span class="line">坡度总和：0 +<span class="number"> 0 </span>+<span class="number"> 0 </span>+<span class="number"> 2 </span>+<span class="number"> 7 </span>+<span class="number"> 6 </span>= 15</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/tilt3.jpg" alt="img"></p>
-<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：root = [<span class="number">21,7,14,1</span>,<span class="number">1,2,2,3</span>,<span class="number">3</span>]</span><br><span class="line">输出：<span class="number">9</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>树中节点数目的范围在 <code>[0, 104]</code> 内</li>
-<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
-</ul>
-<h4 id="C-4"><a href="#C-4" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findTilt</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123; <span class="comment">// 计算以root为根的树结点之和</span></span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> l = <span class="built_in">dfs</span>(root -&gt; left); <span class="comment">// 左子树之和</span></span><br><span class="line">        <span class="type">int</span> r = <span class="built_in">dfs</span>(root -&gt; right); <span class="comment">// 右子树之和</span></span><br><span class="line">        res += <span class="built_in">abs</span>(l -r);</span><br><span class="line">        <span class="keyword">return</span> root -&gt; val + l + r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="110-平衡二叉树"><a href="#110-平衡二叉树" class="headerlink" title="110. 平衡二叉树"></a><a href="https://leetcode.cn/problems/balanced-binary-tree/">110. 平衡二叉树</a></h3><p>给定一个二叉树，判断它是否是高度平衡的二叉树。</p>
-<p><strong>提示：</strong></p>
-<ul>
-<li>树中的节点数在范围 <code>[0, 5000]</code> 内</li>
-<li><code>-104 &lt;= Node.val &lt;= 104</code></li>
-</ul>
-<h4 id="C-5"><a href="#C-5" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">int</span> lh = <span class="built_in">height</span>(root -&gt; left);</span><br><span class="line">        <span class="type">int</span> rh = <span class="built_in">height</span>(root -&gt; right);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">abs</span>(lh - rh) &lt;= <span class="number">1</span> &amp;&amp; <span class="built_in">isBalanced</span>(root -&gt; left) &amp;&amp; <span class="built_in">isBalanced</span>(root -&gt; right); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">height</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">height</span>(root -&gt; left), <span class="built_in">height</span>(root -&gt; right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="617. 合并二叉树"></a><a href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></h3><p>给你两棵二叉树： <code>root1</code> 和 <code>root2</code> 。</p>
-<p>想象一下，当你将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，<strong>不为</strong> null 的节点将直接作为新二叉树的节点。</p>
-<p>返回合并后的二叉树。</p>
-<p><strong>注意:</strong> 合并过程必须从两个树的根节点开始。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/merge.jpg" alt="img"></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root1</span> = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>], <span class="attr">root2</span> = [<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="literal">null</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="number">7</span>]</span><br><span class="line">输出：[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="number">7</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：root1 = <span class="comment">[1]</span>, root2 = <span class="comment">[1,2]</span></span><br><span class="line">输出：<span class="comment">[2,2]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>两棵树中的节点数目在范围 <code>[0, 2000]</code> 内</li>
-<li><code>-104 &lt;= Node.val &lt;= 104</code></li>
-</ul>
-<h4 id="C-6"><a href="#C-6" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TreeNode* root = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">mergeTrees</span><span class="params">(TreeNode* root1, TreeNode* root2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root1 &amp;&amp; !root2) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!root1) <span class="keyword">return</span> root2;<span class="comment">// root1空 root2不空</span></span><br><span class="line">        <span class="keyword">if</span>(!root2) <span class="keyword">return</span> root1;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(root1 -&gt; val + root2 -&gt; val); </span><br><span class="line">        root -&gt; left = <span class="built_in">mergeTrees</span>(root1 -&gt; left, root2 -&gt; left);</span><br><span class="line">        root -&gt; right = <span class="built_in">mergeTrees</span>(root1 -&gt; right, root2 -&gt; right);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="226-翻转二叉树"><a href="#226-翻转二叉树" class="headerlink" title="226. 翻转二叉树"></a><a href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></h3><p>给你一棵二叉树的根节点 <code>root</code> ，翻转这棵二叉树，并返回其根节点。</p>
-<h4 id="C-7"><a href="#C-7" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">invertTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root || (!root -&gt; left &amp;&amp; !root -&gt; right)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            TreeNode* temp = root -&gt;left;</span><br><span class="line">            root -&gt;left = root -&gt; right;</span><br><span class="line">            root -&gt; right = temp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="572-另一棵树的子树"><a href="#572-另一棵树的子树" class="headerlink" title="572. 另一棵树的子树"></a><a href="https://leetcode.cn/problems/subtree-of-another-tree/">572. 另一棵树的子树</a></h3><p>给你两棵二叉树 <code>root</code> 和 <code>subRoot</code> 。检验 <code>root</code> 中是否包含和 <code>subRoot</code> 具有相同结构和节点值的子树。如果存在，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
-<p>二叉树 <code>tree</code> 的一棵子树包括 <code>tree</code> 的某个节点和这个节点的所有后代节点。<code>tree</code> 也可以看做它自身的一棵子树。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/subtree1-tree.jpg" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：root = <span class="comment">[3,4,5,1,2]</span>, subRoot = <span class="comment">[4,1,2]</span></span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="/2022/10/12/DFS%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%88%E9%9B%86/subtree2-tree.jpg" alt="img"></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">root</span> = [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="number">0</span>], <span class="attr">subRoot</span> = [<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>root</code> 树上的节点数量范围是 <code>[1, 2000]</code></li>
-<li><code>subRoot</code> 树上的节点数量范围是 <code>[1, 1000]</code></li>
-<li><code>-104 &lt;= root.val &lt;= 104</code></li>
-<li><code>-104 &lt;= subRoot.val &lt;= 104</code></li>
-</ul>
-<h4 id="C-8"><a href="#C-8" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">bool</span> tag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isSubtree</span><span class="params">(TreeNode* root, TreeNode* subRoot)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(root, subRoot);</span><br><span class="line">        <span class="keyword">return</span> tag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isSametree</span><span class="params">(TreeNode* root1, TreeNode* root2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root1 &amp;&amp; !root2) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>((!root1 &amp;&amp; root2) || (root1 &amp;&amp; !root2) || root1 -&gt; val != root2 -&gt; val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">isSametree</span>(root1 -&gt; left, root2 -&gt; left) &amp;&amp; <span class="built_in">isSametree</span>(root1 -&gt; right, root2 -&gt; right);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, TreeNode* subRoot)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(root -&gt; val == subRoot -&gt; val)&#123;</span><br><span class="line">            <span class="keyword">if</span>(tag == <span class="literal">true</span>) <span class="keyword">return</span>;</span><br><span class="line">            tag = <span class="built_in">isSametree</span>(root -&gt; left, subRoot -&gt; left) &amp;&amp; <span class="built_in">isSametree</span>(root -&gt; right, subRoot -&gt; right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; left, subRoot);</span><br><span class="line">        <span class="built_in">dfs</span>(root -&gt; right, subRoot);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -2003,7 +2041,6 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-        <tag>二叉树</tag>
         <tag>dfs</tag>
       </tags>
   </entry>
@@ -2128,11 +2165,6 @@
         <tag>dfs</tag>
         <tag>动态规划</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>DFS之组合总和合集</title>
-    <url>/2022/11/22/DFS%E4%B9%8B%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%E5%90%88%E9%9B%86/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>DP之买卖股票合集</title>
@@ -2655,57 +2687,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux</title>
-    <url>/2022/09/26/Linux/</url>
-    <content><![CDATA[<h3 id="unix和linux的区别"><a href="#unix和linux的区别" class="headerlink" title="unix和linux的区别"></a>unix和linux的区别</h3><ul>
-<li><p>UNIX是商业化的，而Linux是开源的，是免费、公开源代码的；</p>
-</li>
-<li><p>UNIX系统大多是与硬件配套的，也就是说无法安装在x86服务器和个人计算机上的，而Linux则可以运行在多种硬件平台上。</p>
-</li>
-</ul>
-<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><ul>
-<li><p>Shell 是一个应用程序，它连接了用户和 Linux 内核，让用户能够更加高效、安全、低成本地使用 Linux 内核，这就是 Shell 的本质。<br>Shell 本身并不是内核的一部分，它只是在内核的基础上编写的一个应用程序，它和 QQ、迅雷、Firefox 等其它软件没有什么区别。<br>然而 Shell 也有着它的特殊性，就是开机立马启动，并呈现在用户面前；用户通过 Shell 来使用 Linux，不启动 Shell 的话，用户就没办法使用 Linux。</p>
-<h3 id="bash与zsh的区别"><a href="#bash与zsh的区别" class="headerlink" title="bash与zsh的区别"></a>bash与zsh的区别</h3></li>
-<li><p>一句话，二者均是shell的一种，zsh能基本完美兼容bash的命令，并且使用起来更加优雅。由于bash或zsh本质上都是解释器，他们所共同服务的是shell语言，因此在命令语法上基本相同，部分兼容性差异可参考：zsh和bash的兼容性差异。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chsh -s /bin/bash <span class="comment"># 切换bash</span></span><br><span class="line">chsh -s /bin/zsh <span class="comment"># 切换zsh</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>bash读取的配置文件：<del>&#x2F;.bash_profile文件<br>zsh读取的配置文件：</del>&#x2F;.zshrc文件<br>当从bash切换为zsh时，如果不想重新配置一遍.zshrc文件，可以__在.zshrc文件中加上source ~&#x2F;.bash_profile，从而直接从.bash_profile文件读取配置。</p>
-</li>
-</ul>
-<h3 id="yum和rpm"><a href="#yum和rpm" class="headerlink" title="yum和rpm"></a>yum和rpm</h3><ul>
-<li>rpm命令和yum命令都可以用来安装软件</li>
-<li>但与yum命令最大的区别为yum命令在安装软件时如果碰到了依赖性的问题，yum会去主动尝试解决依赖性，如果解决不了才会反馈给用户。而rpm命令一旦遇到了依赖性的问题不会去解决依赖性，而是直接反馈给用户，让用户自行解决</li>
-</ul>
-<h4 id="repo源"><a href="#repo源" class="headerlink" title="repo源"></a>repo源</h4><ul>
-<li>repo文件是linux中yum源（软件仓库）的配置文件，通常一个repo文件定义了一个或者多个软件仓库的细节内容，例如我们将从哪里下载需要安装或者升级的软件包，repo文件中的设置内容将被yum读取和应用！</li>
-</ul>
-<h3 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h3><ul>
-<li>homebrew是MacOS系统里面包的管理工具，类似于CentOS系统里面的<a href="https://so.csdn.net/so/search?q=yum&spm=1001.2101.3001.7020">yum</a>，主要解决软件或者包下载时的各种依赖包。</li>
-<li>拥有安装、卸载、更新、查看、搜索等很多实用的功能。简单的一条指令，就可以实现包管理，而不用你关心各种依赖和文件路径的情况，十分方便快捷。</li>
-</ul>
-<h3 id="mac终端和linux"><a href="#mac终端和linux" class="headerlink" title="mac终端和linux"></a>mac终端和linux</h3><ul>
-<li><p>Mac和Linux基于都是基于Unix，命令也很多都是仿照Unix的，所以常用命令基本没有区别，如查看文件(ls)，查找文件(find)，复制文件(cp)，创建目录(mkdir)，打包文件(tar)等等，以及他们的软件包安装都是基于相同的理念(.&#x2F;configure，install)。</p>
-</li>
-<li><p>但是一些细节是不同的，比如Linux因为是用C语言写的，所以命令需要区分大小写，而Mac是不存在的。</p>
-<p>使用mac的终端时候，需要递归复制目录，在Linux系统中一般是-r参数，请注意在mac中是-Rp，如果复制的路径是在&#x2F;usr&#x2F;local等级别的路径下，还需要sudo权限</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> -Rp <span class="built_in">source</span> /usr/local/source_copy</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>linux中的yum工具在mac中用homebrew替代</li>
-</ul>
-<h3 id="《高级Linux》-Centos7"><a href="#《高级Linux》-Centos7" class="headerlink" title="《高级Linux》-Centos7"></a>《高级Linux》-Centos7</h3><h4 id="LVM和标准分区"><a href="#LVM和标准分区" class="headerlink" title="LVM和标准分区"></a>LVM和标准分区</h4><p>简单的说就是LVM可以方便的动态调整分区大小。比如你的&#x2F;home分区不够用了，如果是基于分区，那将是非常痛苦的事情。但如果是LVM，使用lvextend命令就可以了</p>
-<p>lvm 分区 虽然 方便也有蛋疼的事   误删除不能恢复  风险 大   一般lvm 用的也少 </p>
-]]></content>
-      <categories>
-        <category>linux &amp;&amp; 服务器</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Flask快速建站</title>
     <url>/2022/08/15/Flask%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/</url>
     <content><![CDATA[<h3 id="Flask为何物"><a href="#Flask为何物" class="headerlink" title="Flask为何物"></a>Flask为何物</h3><p>Falsk是由python开发的轻量的web框架，小巧，灵活，一个脚本就可以启动一个web项目， 开发的难度比较大，flask好多的模块是按照django的思路开发的。和flask类似的框架还有web.py</p>
@@ -2826,6 +2807,57 @@
       </categories>
       <tags>
         <tag>IOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux</title>
+    <url>/2022/09/26/Linux/</url>
+    <content><![CDATA[<h3 id="unix和linux的区别"><a href="#unix和linux的区别" class="headerlink" title="unix和linux的区别"></a>unix和linux的区别</h3><ul>
+<li><p>UNIX是商业化的，而Linux是开源的，是免费、公开源代码的；</p>
+</li>
+<li><p>UNIX系统大多是与硬件配套的，也就是说无法安装在x86服务器和个人计算机上的，而Linux则可以运行在多种硬件平台上。</p>
+</li>
+</ul>
+<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><ul>
+<li><p>Shell 是一个应用程序，它连接了用户和 Linux 内核，让用户能够更加高效、安全、低成本地使用 Linux 内核，这就是 Shell 的本质。<br>Shell 本身并不是内核的一部分，它只是在内核的基础上编写的一个应用程序，它和 QQ、迅雷、Firefox 等其它软件没有什么区别。<br>然而 Shell 也有着它的特殊性，就是开机立马启动，并呈现在用户面前；用户通过 Shell 来使用 Linux，不启动 Shell 的话，用户就没办法使用 Linux。</p>
+<h3 id="bash与zsh的区别"><a href="#bash与zsh的区别" class="headerlink" title="bash与zsh的区别"></a>bash与zsh的区别</h3></li>
+<li><p>一句话，二者均是shell的一种，zsh能基本完美兼容bash的命令，并且使用起来更加优雅。由于bash或zsh本质上都是解释器，他们所共同服务的是shell语言，因此在命令语法上基本相同，部分兼容性差异可参考：zsh和bash的兼容性差异。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chsh -s /bin/bash <span class="comment"># 切换bash</span></span><br><span class="line">chsh -s /bin/zsh <span class="comment"># 切换zsh</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bash读取的配置文件：<del>&#x2F;.bash_profile文件<br>zsh读取的配置文件：</del>&#x2F;.zshrc文件<br>当从bash切换为zsh时，如果不想重新配置一遍.zshrc文件，可以__在.zshrc文件中加上source ~&#x2F;.bash_profile，从而直接从.bash_profile文件读取配置。</p>
+</li>
+</ul>
+<h3 id="yum和rpm"><a href="#yum和rpm" class="headerlink" title="yum和rpm"></a>yum和rpm</h3><ul>
+<li>rpm命令和yum命令都可以用来安装软件</li>
+<li>但与yum命令最大的区别为yum命令在安装软件时如果碰到了依赖性的问题，yum会去主动尝试解决依赖性，如果解决不了才会反馈给用户。而rpm命令一旦遇到了依赖性的问题不会去解决依赖性，而是直接反馈给用户，让用户自行解决</li>
+</ul>
+<h4 id="repo源"><a href="#repo源" class="headerlink" title="repo源"></a>repo源</h4><ul>
+<li>repo文件是linux中yum源（软件仓库）的配置文件，通常一个repo文件定义了一个或者多个软件仓库的细节内容，例如我们将从哪里下载需要安装或者升级的软件包，repo文件中的设置内容将被yum读取和应用！</li>
+</ul>
+<h3 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h3><ul>
+<li>homebrew是MacOS系统里面包的管理工具，类似于CentOS系统里面的<a href="https://so.csdn.net/so/search?q=yum&spm=1001.2101.3001.7020">yum</a>，主要解决软件或者包下载时的各种依赖包。</li>
+<li>拥有安装、卸载、更新、查看、搜索等很多实用的功能。简单的一条指令，就可以实现包管理，而不用你关心各种依赖和文件路径的情况，十分方便快捷。</li>
+</ul>
+<h3 id="mac终端和linux"><a href="#mac终端和linux" class="headerlink" title="mac终端和linux"></a>mac终端和linux</h3><ul>
+<li><p>Mac和Linux基于都是基于Unix，命令也很多都是仿照Unix的，所以常用命令基本没有区别，如查看文件(ls)，查找文件(find)，复制文件(cp)，创建目录(mkdir)，打包文件(tar)等等，以及他们的软件包安装都是基于相同的理念(.&#x2F;configure，install)。</p>
+</li>
+<li><p>但是一些细节是不同的，比如Linux因为是用C语言写的，所以命令需要区分大小写，而Mac是不存在的。</p>
+<p>使用mac的终端时候，需要递归复制目录，在Linux系统中一般是-r参数，请注意在mac中是-Rp，如果复制的路径是在&#x2F;usr&#x2F;local等级别的路径下，还需要sudo权限</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">cp</span> -Rp <span class="built_in">source</span> /usr/local/source_copy</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>linux中的yum工具在mac中用homebrew替代</li>
+</ul>
+<h3 id="《高级Linux》-Centos7"><a href="#《高级Linux》-Centos7" class="headerlink" title="《高级Linux》-Centos7"></a>《高级Linux》-Centos7</h3><h4 id="LVM和标准分区"><a href="#LVM和标准分区" class="headerlink" title="LVM和标准分区"></a>LVM和标准分区</h4><p>简单的说就是LVM可以方便的动态调整分区大小。比如你的&#x2F;home分区不够用了，如果是基于分区，那将是非常痛苦的事情。但如果是LVM，使用lvextend命令就可以了</p>
+<p>lvm 分区 虽然 方便也有蛋疼的事   误删除不能恢复  风险 大   一般lvm 用的也少 </p>
+]]></content>
+      <categories>
+        <category>linux &amp;&amp; 服务器</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -3073,6 +3105,41 @@
       <tags>
         <tag>leetcode</tag>
         <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>栈之括号匹配合集</title>
+    <url>/2022/11/19/%E6%A0%88%E4%B9%8B%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E5%90%88%E9%9B%86/</url>
+    <content><![CDATA[<h3 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20. 有效的括号"></a><a href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></h3><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;&#123;&#39;</code>，<code>&#39;&#125;&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<ol>
+<li>左括号必须用相同类型的右括号闭合。</li>
+<li>左括号必须以正确的顺序闭合。</li>
+<li>每个右括号都有一个对应的相同类型的左括号。</li>
+</ol>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;()&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;()[]&#123;&#125;&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;(]&quot;</span></span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 104</code></li>
+<li><code>s</code> 仅由括号 <code>&#39;()[]&#123;&#125;&#39;</code> 组成</li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() % <span class="number">2</span> != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 如果s的长度为奇数，一定不符合要求</span></span><br><span class="line">        stack&lt;<span class="type">char</span>&gt; stk;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">&#x27;(&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">&#x27;&#123;&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;&#125;&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">&#x27;[&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">            <span class="comment">// 情况1：遍历字符串匹配的过程中，栈已经为空了，没有匹配的字符了，说明右括号没有找到对应的左括号 return false</span></span><br><span class="line">            <span class="comment">// 情况2：遍历字符串匹配的过程中，发现栈里没有我们要匹配的字符。所以return false</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (stk.<span class="built_in">empty</span>() || stk.<span class="built_in">top</span>() != s[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">else</span> stk.<span class="built_in">pop</span>(); <span class="comment">// stk.top() 与 s[i]相等，栈弹出元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 情况3：此时我们已经遍历完了字符串，但是栈不为空，说明有相应的左括号没有右括号来匹配，所以return false，否则就return true</span></span><br><span class="line">        <span class="keyword">return</span> stk.<span class="built_in">empty</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -3481,41 +3548,6 @@
       </tags>
   </entry>
   <entry>
-    <title>栈之括号匹配合集</title>
-    <url>/2022/11/19/%E6%A0%88%E4%B9%8B%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E5%90%88%E9%9B%86/</url>
-    <content><![CDATA[<h3 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20. 有效的括号"></a><a href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></h3><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;&#123;&#39;</code>，<code>&#39;&#125;&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<ol>
-<li>左括号必须用相同类型的右括号闭合。</li>
-<li>左括号必须以正确的顺序闭合。</li>
-<li>每个右括号都有一个对应的相同类型的左括号。</li>
-</ol>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;()&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;()[]&#123;&#125;&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;(]&quot;</span></span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= s.length &lt;= 104</code></li>
-<li><code>s</code> 仅由括号 <code>&#39;()[]&#123;&#125;&#39;</code> 组成</li>
-</ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() % <span class="number">2</span> != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 如果s的长度为奇数，一定不符合要求</span></span><br><span class="line">        stack&lt;<span class="type">char</span>&gt; stk;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">&#x27;(&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">&#x27;&#123;&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;&#125;&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">&#x27;[&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">            <span class="comment">// 情况1：遍历字符串匹配的过程中，栈已经为空了，没有匹配的字符了，说明右括号没有找到对应的左括号 return false</span></span><br><span class="line">            <span class="comment">// 情况2：遍历字符串匹配的过程中，发现栈里没有我们要匹配的字符。所以return false</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (stk.<span class="built_in">empty</span>() || stk.<span class="built_in">top</span>() != s[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">else</span> stk.<span class="built_in">pop</span>(); <span class="comment">// stk.top() 与 s[i]相等，栈弹出元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 情况3：此时我们已经遍历完了字符串，但是栈不为空，说明有相应的左括号没有右括号来匹配，所以return false，否则就return true</span></span><br><span class="line">        <span class="keyword">return</span> stk.<span class="built_in">empty</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>润</title>
     <url>/2022/11/09/%E6%B6%A6/</url>
     <content><![CDATA[<h3 id="考研英语"><a href="#考研英语" class="headerlink" title="考研英语"></a>考研英语</h3><h4 id="小作文"><a href="#小作文" class="headerlink" title="小作文"></a>小作文</h4><h5 id="申请信"><a href="#申请信" class="headerlink" title="申请信"></a>申请信</h5><p><em>Dear Mr.A</em>（后省略此处）</p>
@@ -3534,7 +3566,7 @@
 <p>We have already had several very interesting talks from some distinguished visitors from various countries and <em><strong>we look</strong></em><br><em><strong>forward early to the opportunity to benefit from your experience and wisdom.</strong></em></p>
 <h5 id="通知信"><a href="#通知信" class="headerlink" title="通知信"></a>通知信</h5><p>The first year in Foreign Languages School is drawing to a close. So far, we have been focusing on learning the skills in English listening and speaking. <em><strong>In order to</strong></em> further test your competence in spoken English, <em><strong>we beg to notify you that</strong></em> our school decides to organize an English Speech Contest.</p>
 <p><em><strong>The English Speech Contest is scheduled to be held at 2 p.m. on May 25 in the Lecture Hall of our school.</strong></em> The speech will be centered on the theme of language learning and culture. All the students are welcome to participate in the contest. The two foreign teachers, Professor Smith and Professor Johnson will be invited as the judges and the winners will be awarded an Oxford English Dictionary. </p>
-<p><em><strong>If you are interested in this activity, please feel free to contact us via <a href="mailto:&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#x40;&#x31;&#x36;&#x33;&#46;&#x63;&#111;&#x6d;">&#x78;&#120;&#x78;&#x78;&#120;&#x78;&#x78;&#x40;&#x31;&#x36;&#x33;&#46;&#x63;&#111;&#x6d;</a>. The deadline is  ___. Come and join us now!</strong></em></p>
+<p><em><strong>If you are interested in this activity, please feel free to contact us via <a href="mailto:&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#120;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#x78;&#x78;&#120;&#x78;&#x78;&#120;&#120;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>. The deadline is  ___. Come and join us now!</strong></em></p>
 <h4 id="大作文"><a href="#大作文" class="headerlink" title="大作文"></a>大作文</h4><h5 id="第一段"><a href="#第一段" class="headerlink" title="第一段"></a>第一段</h5><ol>
 <li><p>漫画</p>
 <p><em><strong>The cartoon depicts … Although he…, he …</strong></em></p>
