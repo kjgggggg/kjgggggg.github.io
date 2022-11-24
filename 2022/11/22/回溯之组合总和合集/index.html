@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/22/%E5%9B%9E%E6%BA%AF%E4%B9%8B%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%E5%90%88%E9%9B%86/image-20221124221507614.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/22/%E5%9B%9E%E6%BA%AF%E4%B9%8B%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%E5%90%88%E9%9B%86/image-20221124221531136.png">
 <meta property="article:published_time" content="2022-11-22T15:00:53.000Z">
-<meta property="article:modified_time" content="2022-11-24T15:57:55.609Z">
+<meta property="article:modified_time" content="2022-11-24T18:50:28.446Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="回溯">
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-24 23:57:55" itemprop="dateModified" datetime="2022-11-24T23:57:55+08:00">2022-11-24</time>
+                <time title="修改时间：2022-11-25 02:50:28" itemprop="dateModified" datetime="2022-11-25T02:50:28+08:00">2022-11-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -403,6 +403,10 @@
 <h4 id="C-4"><a href="#C-4" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path = &#123;&#125;;</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsetsWithDup</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());  <span class="comment">// 必须要排序，不然 nums[i] == nums[i - 1] 不起效果</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= nums.<span class="built_in">size</span>(); i ++)&#123;</span><br><span class="line">            <span class="built_in">backtracking</span>(nums, <span class="number">0</span>, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> startIdx, <span class="type">int</span> cnt)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(path.<span class="built_in">size</span>() == cnt)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = startIdx; i &lt; nums.<span class="built_in">size</span>(); i ++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; startIdx &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            path.<span class="built_in">push_back</span>(nums[i]);    </span><br><span class="line">            <span class="built_in">backtracking</span>(nums, i + <span class="number">1</span>, cnt);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
+
+
+
+
     </div>
 
     
@@ -424,7 +428,10 @@
     <a href="/2022/11/22/%E6%95%B0%E5%AD%A6%E9%A2%98%E5%90%88%E9%9B%86/" rel="prev" title="数学题合集">
       <i class="fa fa-chevron-left"></i> 数学题合集
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/25/79-%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/" rel="next" title="79.单词搜索">
+      79.单词搜索 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -499,7 +506,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
