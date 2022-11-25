@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1/AD13A5950A4A1A2198C2AF4FE9F49B2A.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1/image-20221116164855060.png">
 <meta property="article:published_time" content="2022-11-06T14:21:59.000Z">
-<meta property="article:modified_time" content="2022-11-20T05:18:52.450Z">
+<meta property="article:modified_time" content="2022-11-25T11:36:41.019Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-20 13:18:52" itemprop="dateModified" datetime="2022-11-20T13:18:52+08:00">2022-11-20</time>
+                <time title="修改时间：2022-11-25 19:36:41" itemprop="dateModified" datetime="2022-11-25T19:36:41+08:00">2022-11-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1130,9 +1130,166 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; arr = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> n : arr)&#123;  <span class="comment">//使用基于范围的for循环</span></span><br><span class="line">        std::cout &lt;&lt; n &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在上面的例子中，我们都是在使用只读方式遍历容器。如果需要在遍历时修改容器中的值，则需要使用引用，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span>&amp; n : arr)&#123;</span><br><span class="line">    std::cout &lt;&lt; n++ &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span>&amp; n : arr)&#123;</span><br><span class="line">    std::cout &lt;&lt; n++ &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右值引用和move语义 </p>
+<p>(1) 右值引用</p>
+<p> C++98&#x2F;03 标准中就有引用，使用 “&amp;” 表示。但此种引用方式有一个缺陷，即正常情况下只能操作 C++ 中的左值，无法对右值添加引用。举个例子：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> &amp;b = num; <span class="comment">//正确</span></span><br><span class="line"><span class="type">int</span> &amp;c = <span class="number">10</span>; <span class="comment">//错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 虽然 C++98/03 标准不支持为右值建立非常量左值引用，但允许使用常量左值引用操作右值</span></span><br><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;b = num;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;c = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们知道，右值往往是没有名称的，因此要使用它只能借助引用的方式。这就产生一个问题，实际开发中我们可能需要对右值进行修改（实现移动语义时就需要），显然左值引用的方式是行不通的。</p>
+<p>为此，C++11 标准新引入了另一种引用方式，称为右值引用，用 “&amp;&amp;” 表示。</p>
+<p>需要注意的，和声明左值引用一样，右值引用也必须立即进行初始化操作，且只能使用右值进行初始化，比如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="comment">//int &amp;&amp; a = num;  //右值引用不能初始化为左值</span></span><br><span class="line"><span class="type">int</span> &amp;&amp; a = <span class="number">10</span>;</span><br><span class="line">a = <span class="number">100</span>; <span class="comment">// 和常量左值引用不同的是，右值引用还可以对右值进行修改   </span></span><br></pre></td></tr></table></figure>
+
+<p>另外值得一提的是，C++ 语法上是支持定义常量右值引用的，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span>&amp;&amp; a = <span class="number">10</span>;<span class="comment">//编译器不会报错</span></span><br></pre></td></tr></table></figure>
+
+<p>但这种定义出来的右值引用并无实际用处。一方面，右值引用主要用于移动语义和完美转发，其中前者需要有修改右值的权限；其次，常量右值引用的作用就是引用一个不可修改的右值，这项工作完全可以交给常量左值引用完成</p>
+<p>(2) move语义</p>
+<p>move 本意为 “移动”，但该函数并不能移动任何数据，它的功能很简单，就是将某个左值强制转化为右值。基于 move() 函数特殊的功能，其常用于实现移动语义。move() 函数的用法也很简单，其语法格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">move</span>( arg ) <span class="comment">//其中，arg 表示指定的左值对象。该函数会返回 arg 对象的右值形式。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">first</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">first</span>() :<span class="built_in">num</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">0</span>)) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;construct!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//移动构造函数</span></span><br><span class="line">    <span class="built_in">first</span>(first &amp;&amp;d) :<span class="built_in">num</span>(d.num) &#123;</span><br><span class="line">        d.num = <span class="literal">NULL</span>;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;first move construct!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:   </span><br><span class="line">    <span class="type">int</span> *num;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无序容器（哈希表）  </p>
+<p>用法和功能同map一模一样，区别在于哈希表的效率更高。</p>
+<p>(1) 无序容器具有以下 2 个特点：</p>
+<ul>
+<li>无序容器内部存储的键值对是无序的，各键值对的存储位置取决于该键值对中的键</li>
+<li>和关联式容器相比，无序容器擅长通过指定键查找对应的值；但对于使用迭代器遍历容器中存储的元素，执行效率较低</li>
+</ul>
+<p>(2) 和关联式容器一样，无序容器只是一类容器的统称，其包含有 4 个具体容器，分别为 unordered_map、unordered_multimap、unordered_set 以及 unordered_multiset。功能如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">无序容器</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">unordered_map</td>
+<td align="left">存储键值对 &lt;key, value&gt; 类型的元素，其中各个键值对键的值不允许重复，且该容器中存储的键值对是无序的。</td>
+</tr>
+<tr>
+<td align="left">unordered_multimap</td>
+<td align="left">和 unordered_map 唯一的区别在于，该容器允许存储多个键相同的键值对。</td>
+</tr>
+<tr>
+<td align="left">unordered_set</td>
+<td align="left">不再以键值对的形式存储数据，而是直接存储数据元素本身（当然也可以理解为，该容器存储的全部都是键 key 和值 value 相等的键值对，正因为它们相等，因此只存储 value 即可）。另外，该容器存储的元素不能重复，且容器内部存储的元素也是无序的。</td>
+</tr>
+<tr>
+<td align="left">unordered_multiset</td>
+<td align="left">和 unordered_set 唯一的区别在于，该容器允许存储值相同的元素。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>正则表达式  </p>
+<table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">^</td>
+<td align="left">匹配行的开头</td>
+</tr>
+<tr>
+<td align="left">$</td>
+<td align="left">匹配行的结尾</td>
+</tr>
+<tr>
+<td align="left">.</td>
+<td align="left">匹配任意单个字符</td>
+</tr>
+<tr>
+<td align="left">[…]</td>
+<td align="left">匹配[]中的任意一个字符</td>
+</tr>
+<tr>
+<td align="left">(…)</td>
+<td align="left">设定分组</td>
+</tr>
+<tr>
+<td align="left">\</td>
+<td align="left">转义字符</td>
+</tr>
+<tr>
+<td align="left">\d</td>
+<td align="left">匹配数字[0-9]</td>
+</tr>
+<tr>
+<td align="left">\D</td>
+<td align="left">\d 取反</td>
+</tr>
+<tr>
+<td align="left">\w</td>
+<td align="left">匹配字母[a-z]，数字，下划线</td>
+</tr>
+<tr>
+<td align="left">\W</td>
+<td align="left">\w 取反</td>
+</tr>
+<tr>
+<td align="left">\s</td>
+<td align="left">匹配空格</td>
+</tr>
+<tr>
+<td align="left">\S</td>
+<td align="left">\s 取反</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">前面的元素重复1次或多次</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">前面的元素重复任意次</td>
+</tr>
+<tr>
+<td align="left">?</td>
+<td align="left">前面的元素重复0次或1次</td>
+</tr>
+<tr>
+<td align="left">{n}</td>
+<td align="left">前面的元素重复n次</td>
+</tr>
+<tr>
+<td align="left">{n,}</td>
+<td align="left">前面的元素重复至少n次</td>
+</tr>
+<tr>
+<td align="left">{n,m}</td>
+<td align="left">前面的元素重复至少n次，至多m次</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">逻辑或</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>Lambda匿名函数</p>
+<p>所谓匿名函数，简单地理解就是没有名称的函数，又常被称为 lambda 函数或者 lambda 表达式</p>
+<p>(1) 定义</p>
+<p>lambda 匿名函数很简单，可以套用如下的语法格式：</p>
+<p><code>[外部变量访问方式说明符] (参数) mutable noexcept/throw() -&gt; 返回值类型  &#123; 函数体; &#125;;</code></p>
+<blockquote>
+<p>  a.  [ ] 方括号用于向编译器表明当前是一个 lambda 表达式，其不能被省略。在方括号内部，可以注明当前 lambda 函数的函数体中可以使用哪些“外部变量”</p>
+<p>  所谓外部变量，指的是和当前 lambda 表达式位于同一作用域内的所有局部变量</p>
+<p>  b. (参数)   和普通函数的定义一样，lambda 匿名函数也可以接收外部传递的多个参数。和普通函数不同的是，如果不需要传递参数，可以连同 () 小括号一起省略</p>
+<p>  c. mutable   此关键字可以省略，如果使用则之前的 () 小括号将不能省略（参数个数可以为 0）。默认情况下，对于以值传递方式引入的外部变量，不允许在 lambda 表达式内部修改它们的值（可以理解为这部分变量都是 const 常量）。而如果想修改它们，就必须使用 mutable 关键字</p>
+<p>  **注意:**对于以值传递方式引入的外部变量，lambda 表达式修改的是拷贝的那一份，并不会修改真正的外部变量</p>
+<p>  d. noexcept&#x2F;throw()   可以省略，如果使用，在之前的 () 小括号将不能省略（参数个数可以为 0）。默认情况下，lambda 函数的函数体中可以抛出任何类型的异常。而标注 noexcept 关键字，则表示函数体内不会抛出任何异常；使用 throw() 可以指定 lambda 函数内部可以抛出的异常类型</p>
+<p>  e. -&gt; 返回值类型   指明 lambda 匿名函数的返回值类型。值得一提的是，如果 lambda 函数体内只有一个 return 语句，或者该函数返回 void，则编译器可以自行推断出返回值类型，此情况下可以直接省略”-&gt; 返回值类型”</p>
+<p>  f. 函数体   和普通函数一样，lambda 匿名函数包含的内部代码都放置在函数体中。该函数体内除了可以使用指定传递进来的参数之外，还可以使用指定的外部变量以及全局范围内的所有全局变量</p>
+</blockquote>
+<blockquote>
+  <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> num[<span class="number">4</span>] = &#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="comment">//对 a 数组中的元素进行排序</span></span><br><span class="line">    <span class="built_in">sort</span>(num, num + <span class="number">4</span>, [=](<span class="type">int</span> x, <span class="type">int</span> y) -&gt; <span class="type">bool</span>&#123; <span class="keyword">return</span> x &lt; y; &#125; );</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> n : num)&#123;</span><br><span class="line">        cout &lt;&lt; n &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;<span class="comment">// 1 2 3 4 </span></span><br></pre></td></tr></table></figure></blockquote>
+</li>
 </ol>
-<hr>
 <h4 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h4><h5 id="六种关系-依赖-关联-聚合-组合-继承-实现"><a href="#六种关系-依赖-关联-聚合-组合-继承-实现" class="headerlink" title="六种关系: 依赖,关联,聚合,组合,继承,实现"></a>六种关系: 依赖,关联,聚合,组合,继承,实现</h5><p>依赖</p>
 <p>依赖关系是在运行过程中起作用的，就是一个类A使用到了另一个类B，而这种使用关系是具有偶然性的、临时性的、非常弱的</p>
 <ul>
