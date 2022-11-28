@@ -27,11 +27,18 @@
 <meta property="og:site_name" content="kjg&#39;s blog">
 <meta property="og:description" content="Linux">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/26/Linux/image-20221108180023752.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/26/Linux/image-20221108180638552.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/26/Linux/image-20221108191645542.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/26/Linux/image-20221108191848542.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/26/Linux/image-20221108194826444.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/26/Linux/image-20221108201743403.png">
 <meta property="article:published_time" content="2022-09-26T01:57:32.000Z">
-<meta property="article:modified_time" content="2022-10-25T15:28:40.879Z">
+<meta property="article:modified_time" content="2022-11-28T11:49:53.900Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/09/26/Linux/image-20221108180023752.png">
 
 <link rel="canonical" href="https://kjgggggg.github.io/2022/09/26/Linux/">
 
@@ -219,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-25 23:28:40" itemprop="dateModified" datetime="2022-10-25T23:28:40+08:00">2022-10-25</time>
+                <time title="修改时间：2022-11-28 19:49:53" itemprop="dateModified" datetime="2022-11-28T19:49:53+08:00">2022-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,9 +295,338 @@
 <ul>
 <li>linux中的yum工具在mac中用homebrew替代</li>
 </ul>
-<h3 id="《高级Linux》-Centos7"><a href="#《高级Linux》-Centos7" class="headerlink" title="《高级Linux》-Centos7"></a>《高级Linux》-Centos7</h3><h4 id="LVM和标准分区"><a href="#LVM和标准分区" class="headerlink" title="LVM和标准分区"></a>LVM和标准分区</h4><p>简单的说就是LVM可以方便的动态调整分区大小。比如你的&#x2F;home分区不够用了，如果是基于分区，那将是非常痛苦的事情。但如果是LVM，使用lvextend命令就可以了</p>
+<h3 id="高级Linux-Centos7"><a href="#高级Linux-Centos7" class="headerlink" title="高级Linux -Centos7"></a>高级Linux -Centos7</h3><h4 id="LVM和标准分区"><a href="#LVM和标准分区" class="headerlink" title="LVM和标准分区"></a>LVM和标准分区</h4><p>简单的说就是LVM可以方便的动态调整分区大小。比如你的&#x2F;home分区不够用了，如果是基于分区，那将是非常痛苦的事情。但如果是LVM，使用lvextend命令就可以了</p>
 <p>lvm 分区 虽然 方便也有蛋疼的事   误删除不能恢复  风险 大   一般lvm 用的也少 </p>
+<h4 id="文件和目录操作"><a href="#文件和目录操作" class="headerlink" title="文件和目录操作"></a>文件和目录操作</h4><p>touch	<code>touch [选项] [文件]</code>	如果文件不存在，使用touch命令默认创建一个空文件。</p>
+<blockquote>
+<p>-c -t	touch -c -t 06071930 file1	将文件file1现在的时间已经改为6月7日19点30分</p>
+</blockquote>
+<p>cp	<code>cp [选项] [源文件/目录] [目标文件/目录]</code>拷贝文件</p>
+<blockquote>
+<p><code>cp makefile makefile1</code>	将makefile另外复制一份为makefile1</p>
+<p><code>cp -r a/ b/ ../lesson5</code> 将当前目录	a&#x2F;文件夹	b&#x2F;文件夹 递归拷贝到上一级目录下的lesson5目录</p>
+</blockquote>
+<p>file	<code>file [文件]</code>显示文件类型</p>
+<p>tree 	<code>tree</code>查看该文件夹内垂直目录结构</p>
+<p>pwd	<code>pwd</code>显示用户当前工作目录路径</p>
+<p>ls 	<code>ls [选项] [文件]</code>查看当前目录下所有可见文件		</p>
+<blockquote>
+<p>-d	只显示当前文件夹	</p>
+<p>-l	以长格式的形式查看当前目录下所有可见文件的详细属性,不包括隐藏文件</p>
+<p>-la	查看文件详细信息，包括隐藏文件。</p>
+<p>-ld	查看当前目录本身的权限与属性信息</p>
+</blockquote>
+<p>mkdir 	<code>mkdir [选项] [文件]</code>创建目录	</p>
+<blockquote>
+<p>-m xxx	创建具有xxx权限的目录</p>
+</blockquote>
+<p>rmdir	 <code>rmdir [选项] [文件]</code>删除目录</p>
+<p>mv	<code>mv [选项] [源文件] [目标文件]</code>文件和目录改名、移动文件和目录路径  如<code>mv -f *.png picture</code></p>
+<blockquote>
+<p>-f	不询问，或者说覆盖前不询问<br>-i 	询问，或者说覆盖前询问<br>-n	不覆盖已存在的文件</p>
+</blockquote>
+<p>rm	<code>rm [选项] [文件]</code>删除文件或目录</p>
+<blockquote>
+<p>-f	 忽略不存在的文件，从不给出提示。</p>
+<p>-i	进行交互式删除</p>
+<p>-r	指示rm将参数中列出的全部目录和子目录均递归地删除。</p>
+<p>-rf	无提示地强制递归删除文件</p>
+<p>-v	详细显示进行的步骤</p>
+</blockquote>
+<p>wc	<code>wc [选项] [文件]</code>统计文件行数、单词数和字节数和字符数 		不加选项的话总是按行数、单词数、字节数、文件的顺序显示每项信息。</p>
+<blockquote>
+<p>-c或–bytes或–chars 	只显示Bytes数。</p>
+<p>-l或–lines 	只显示列数。</p>
+<p>-w或–words 	只显示字数。</p>
+<p>-m	只显示字符数</p>
+</blockquote>
+<p>ln	<code>ln [选项] [源文件] [目标文件]</code>使用ln命令可以创建链接文件（包括软链接文件和硬链接文件）</p>
+<blockquote>
+<p>硬链接文件的使用	<code>echo hello &gt; a</code>	<code>ln a b</code></p>
+<p>软链接文件的使用	<code>echo hello &gt; a</code>	<code>ln –s a b</code></p>
+</blockquote>
+<h4 id="文本内容显示"><a href="#文本内容显示" class="headerlink" title="文本内容显示"></a>文本内容显示</h4><p>cat	<code>cat [选项] [文件]</code>显示文本文件</p>
+<blockquote>
+<p>无选项 	显示文件内容</p>
+<p>cat -n textfile1 &gt; textfile2  	把textfile1文件的内容加上行号后输入到textfile2文件中</p>
+<p>cat &gt;mm.txt&lt;&lt;EOF 输入&gt;Hello	&gt;Linux	&gt;EOF	使用cat命令创建mm.txt并输入Hello Linux。</p>
+</blockquote>
+<p>more	<code>more [选项] [文件名]</code>分页显示文本文件</p>
+<blockquote>
+<p>无选项	分页显示该文件内容</p>
+<p>more -s testfile	逐页显示testfile文件内容，如有连续两行以上空白行则以一行空白行显示</p>
+<p>more +20 testfile	从第20行开始显示testfile文件的内容</p>
+<p>more -2 &#x2F;etc&#x2F;passwd	一次两行显示&#x2F;etc&#x2F;passwd文件内容</p>
+</blockquote>
+<p>less	<code>less [选项] [文件名]</code>回卷显示文本文件</p>
+<blockquote>
+<p> less &#x2F;etc&#x2F;services	回卷显示&#x2F;etc&#x2F;services文件的内容</p>
+</blockquote>
+<p>head	<code>head［选项］[文件]</code>显示指定文件前若干行 如果没有给出具体行数值，默认为10行</p>
+<blockquote>
+<p>head -c -50 a	查看a文件前五十个字节数据</p>
+<p>head -50 a	查看a文件前五十行数据</p>
+</blockquote>
+<p>tail	<code>tail［选项］[文件]</code>显示指定文件末尾若干行 如果没有给出具体行数值，默认为10行 具体选项用法完全同<code>head</code></p>
+<h4 id="文本内容处理"><a href="#文本内容处理" class="headerlink" title="文本内容处理"></a>文本内容处理</h4><p>sort	<code>sort [选项] [文件]</code>对文件中的数据进行排序</p>
+<blockquote>
+<p>-r	倒序排序</p>
+</blockquote>
+<p>uniq	<code>uniq [选项] [文件] </code>将重复行从输出文件中删除</p>
+<blockquote>
+<p>-d	查看文件中重复的数据内容</p>
+<p>-u	查看文件中不重复的数据内容</p>
+</blockquote>
+<p>cut	<code>cut [选项] [ 文件 ]</code>从文件每行中显示出选定的字节、字符或字段</p>
+<blockquote>
+<p>-b	以字节为单位进行分割。这些字节位置将忽略多字节字符边界，除非也指定了 -n 标志。</p>
+<p>-c	以字符为单位进行分割。</p>
+<p>-d	自定义分隔符，默认为制表符。</p>
+<p>-f	与-d一起使用，指定显示哪个区域。</p>
+<p>-n	取消分割多字节字符。仅和 -b 标志一起使用。</p>
+</blockquote>
+<blockquote>
+<p>cut -f 1,5 -d: &#x2F;etc&#x2F;passwd 	显示文件&#x2F;etc&#x2F;passwd中的第1个和第5个字段，由冒号隔开。</p>
+</blockquote>
+<p>comm	<code>comm [选项] [文件1] [文件2]</code>逐行比较两个已排过序的文件</p>
+<blockquote>
+<p>-1	不输出文件1特有的行</p>
+<p>-2	不输出文件2特有的行</p>
+<p>-3	不输出两个文件共有的行</p>
+</blockquote>
+<p>diff	<code>diff ［选项］ [文件1] [文件2]</code>逐行比较两个文本文件，列出其不同之处</p>
+<h4 id="文件和命令查找"><a href="#文件和命令查找" class="headerlink" title="文件和命令查找"></a>文件和命令查找</h4><p>grep	<code>grep [选项] [查找模式] [文件名] </code>查找文件中符合条件的字符串</p>
+<blockquote>
+<p>grep ‘test file’ kkk	在文件kkk中搜索匹配字符“test file”</p>
+<p>grep ‘test’ d*	显示所有以d开头的文件中包含“test”的行数据内容</p>
+<p>grep ^b &#x2F;root&#x2F;aa	 在&#x2F;root&#x2F;aa文件中找出以b开头的行内容</p>
+<p>grep -v ^b &#x2F;root&#x2F;aa	在&#x2F;root&#x2F;aa文件中找出不以b开头的行内容</p>
+<p>grep le$ &#x2F;root&#x2F;kkk	在&#x2F;root&#x2F;kkk文件中找出以le结尾的行内容</p>
+<p>ps –ef|grep sshd	查找sshd进程信息</p>
+</blockquote>
+<p>find	<code>find [路径] [选项]</code>列出文件系统内符合条件的文件</p>
+<blockquote>
+<p>find &#x2F; -name ‘*.conf’	查找&#x2F;目录下所有以“.conf”为扩展名的文件</p>
+<p>find . -ctime -20	列出当前目录及其子目录下所有最近20天内更改过的文件</p>
+</blockquote>
+<p>locate	<code>locate [选项][范本样式]</code>在数据库中查找文件</p>
+<blockquote>
+<p>locate httpd.conf	查找httpd.conf</p>
+<p>locate -c httpd.conf	显示找到几个httpd.conf文件</p>
+</blockquote>
+<h4 id="系统信息显示"><a href="#系统信息显示" class="headerlink" title="系统信息显示"></a>系统信息显示</h4><p>uname	<code>uname [选项]</code>显示计算机及操作系统相关信息</p>
+<blockquote>
+<p>-r	显示操作系统的内核发行号</p>
+<p>-m	显示计算机硬件架构名称</p>
+<p>-a	显示操作系统的全部信息</p>
+</blockquote>
+<p>hostname	<code>设置主机名:hostname [选项] [主机名] 	显示主机名:hostname [选项] </code>显示或修改计算机主机名</p>
+<p>free	<code>free [选项]</code>查看内存信息</p>
+<blockquote>
+<p>free	查看系统的物理内存和交换分区使用情况</p>
+<p>free -m	以MB为单位查看系统的物理内存和交换分区使用情况</p>
+<p>free -t	显示系统的物理内存加上交换分区总的容量</p>
+</blockquote>
+<p>du	<code>du [选项] [文件|目录]</code>显示目录或文件的磁盘占用量</p>
+<blockquote>
+<p>无选项	显示文件的磁盘占用量</p>
+<p>-s	显示目录的磁盘占用量</p>
+<p>-sh	以MB为单位显示目录磁盘占用量</p>
+</blockquote>
+<h4 id="查看日期与时间"><a href="#查看日期与时间" class="headerlink" title="查看日期与时间"></a>查看日期与时间</h4><p>cal	<code>cal [选项] [[[日] 月] 年]</code>显示日历信息</p>
+<blockquote>
+<p>cal	显示本月的月历</p>
+<p>cal 2001	显示公元2001年年历。</p>
+<p>cal 9 2007	显示公元2007年9月的月历。</p>
+<p>cal -m 	以星期一为每周的第一天的方式显示本月的日历。</p>
+<p>cal -jy	以1月1日起的天数显示今年的年历。</p>
+</blockquote>
+<p>date	<code>date [选项] [显示时间格式]（以+开头，后面接格式）</code>显示和设置系统日期和时间</p>
+<blockquote>
+<p>date	显示当前计算机上的日期和时间</p>
+<p>date 0202191428	设置计算机日期和时间为2028年2月2日19点14分</p>
+<p>date +’%r%a%d%h%y’	按照指定的格式显示计算机日期和时间</p>
+<p>date -s 09:16:00	设置计算机时间为上午9点16分</p>
+<p>date -s 240414	设置计算机时间为2024年4月14日</p>
+</blockquote>
+<p>hwclock	<code>hwclock [选项] </code>查看和设置硬件时钟</p>
+<blockquote>
+<p>hwclock	查看硬件时间</p>
+<p>hwclock -w 	以系统时间更新硬件时间</p>
+<p>hwclock -s	以硬件时间更新系统时间</p>
+</blockquote>
+<h4 id="信息交流"><a href="#信息交流" class="headerlink" title="信息交流"></a>信息交流</h4><p>echo	<code>echo [选项] [字符串] </code>在显示器上显示文字</p>
+<blockquote>
+<p>echo Hello Linux	将一段信息写到标准输出	结果:Hello Linux</p>
+<p>echo Hello Linux &gt; notes	将文本“Hello Linux”添加到新文件notes中</p>
+<p>echo $HOME	 显示$HOME变量的值</p>
+</blockquote>
+<p>mesg	<code>mesg [选项]</code>允许或拒绝写消息</p>
+<blockquote>
+<p>控制系统中的其它用户是否能够用 write 命令或 talk 命令向您发送消息。不带选项的情况下，mesg 命令显示当前主机消息许可设置</p>
+</blockquote>
+<p>wall	<code>wall [消息] </code>对全部已登录用户发送信息</p>
+<blockquote>
+<p>wall ‘aaaaaaa’	对全部已登录用户发送aaaaaaa</p>
+</blockquote>
+<p>write	<code>write [用户] [终端名称] </code>向用户发送消息</p>
+<blockquote>
+<p>write root tty3	向tty3终端上的root用户发送信息</p>
+</blockquote>
+<h4 id="用户和组群账户管理"><a href="#用户和组群账户管理" class="headerlink" title="用户和组群账户管理"></a>用户和组群账户管理</h4><h5 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h5><p>在Linux系统中，用户账户是登录系统的唯一凭证，其中root用户是系统的最高管理者，该用户的UID是0级，与用户和组账户相关的配置文件有&#x2F;etc&#x2F;passwd、&#x2F;etc&#x2F;shadow、&#x2F;etc&#x2F;group和&#x2F;etc&#x2F;gshadow。</p>
+<p>在实际的管理中，用户的角色是通过UID（用户ID号）来标识的，每个用户的UID都是不同的。在Linux系统中有三大类用户，分别是</p>
+<blockquote>
+<p>   root用户：UID为0</p>
+<p>   系统用户：比如bin、daemon、adm、ftp、mail等，这类用户都是系统自身拥有的。系统用户的UID为1~999</p>
+<p>   普通用户：能登录系统，在Linux系统上进行普通操作，能操作自己目录的内容，其使用系统的权限受限，这类用户都是系统管理员创建的。普通用户的UID为1000~60000</p>
+</blockquote>
+<ul>
+<li><p><strong>&#x2F;etc&#x2F;passwd文件</strong>是系统识别用户的一个重要文件，Linux系统中所有的用户都记录在该文件中。假设用户以账户zhangsan登录系统时，系统首先会检查&#x2F;etc&#x2F;passwd文件，看是否有zhangsan这个账户，然后确定用户zhangsan的UID，通过UID来确认用户的身份，如果存在则读取&#x2F;etc&#x2F;shadow文件中所对应的密码。如果密码核实无误则登录系统，读取用户的配置文件</p>
+<p>任何用户都可以读取&#x2F;etc&#x2F;passwd文件内容，在&#x2F;etc&#x2F;passwd文件中，每一行表示的是一个用户账户的信息，一行有7个段位，每个段位用“:”分隔。<code>zhangsan:x:1000:1000:张三:/home/zhangsan:/bin/bash</code></p>
+<p>&#x2F;etc&#x2F;passwd文件字段含义</p>
+</li>
+</ul>
+<img src="/2022/09/26/Linux/image-20221108180023752.png" alt="image-20221108180023752" style="zoom:50%;">
 
+<ul>
+<li><p><strong>&#x2F;etc&#x2F;shadow文件</strong>是&#x2F;etc&#x2F;passwd的影子文件，这个文件并不是由&#x2F;etc&#x2F;passwd文件产生，这两个文件应该是对应互补的。&#x2F;etc&#x2F;shadow文件内容包括用户及被加密的密码以及其它&#x2F;etc&#x2F;passwd不能包括的信息，比如用户账户的有效期等。</p>
+<p>&#x2F;etc&#x2F;shadow文件只有root用可以读取和操作</p>
+</li>
+</ul>
+<p>​	   &#x2F;etc&#x2F;shadow文件字段含义</p>
+<img src="/2022/09/26/Linux/image-20221108180638552.png" alt="image-20221108180638552" style="zoom:50%;">
+
+
+
+<p>useradd	<code>useradd [选项] [用户名] </code>   在Linux系统中创建用户账户</p>
+<blockquote>
+<p>  useradd zhangsan</p>
+<p>  cat &#x2F;etc&#x2F;passwd|grep zhangsan	&#x2F;&#x2F;查看&#x2F;etc&#x2F;passwd文件，显示已经创建了用户zhangsan</p>
+<p>  passwd zhangsan	&#x2F;&#x2F;更改张三的密码</p>
+</blockquote>
+<blockquote>
+<p>  useradd -u 1010 moon		创建用户moon，并设置该用户UID为1010</p>
+<p>  useradd -g root pp		创建用户pp，并指定该用户是属于组群root的成员</p>
+<p>  useradd -s &#x2F;bin&#x2F;ksh abc		创建用户abc，并设置该用户的Shell类型是&#x2F;bin&#x2F;ksh</p>
+<p>  useradd -d &#x2F;home&#x2F;www newuser		创建用户newuser，并设置该用户主目录为&#x2F;home&#x2F;www</p>
+</blockquote>
+<p>usermod   <code>	usermod [选项][用户名]</code>  更改用户的Shell类型、所属的组群、用户密码的有效期，还能更改用户的登录名</p>
+<blockquote>
+<p>  usermod -d &#x2F;home&#x2F;kkk zhangsan		修改用户zhangsan的主目录为&#x2F;home&#x2F;kkk</p>
+<p>  usermod -s &#x2F;bin&#x2F;ksh zhangsan		 修改用户zhangsan的Shell类型为&#x2F;bin&#x2F;ksh</p>
+<p>  usermod -l zhaoliu wangwu		修改用户wangwu的登录名为zhaoliu</p>
+<p>  usermod -u 1700 zhangsan		修改用户账户zhangsan的UID为1700</p>
+<p>  usermod -c 张三 zhangsan		修改用户zhangsan的用户名全称为张三</p>
+<p>  usermod -f 20 zhangsan		修改用户zhangsan在密码过期后20天就禁用该账户</p>
+<p>  usermod -g root sun		修改用户sun所属的组群为root，该组群必须事先存在</p>
+<p>  usermod -L zhangsan		锁住用户zhangsan密码，使密码无效</p>
+<p>  usermod -U zhangsan		解除用户zhangsan密码锁住</p>
+</blockquote>
+<p>userdel	<code>userdel [选项][用户名]</code>	以在Linux系统中删除用户账户，甚至连用户的主目录也一起删除</p>
+<blockquote>
+<p>  userdel -r moon  	删除用户moon，并且在删除该用户的同时一起删除主目录</p>
+</blockquote>
+<h5 id="族群账户管理"><a href="#族群账户管理" class="headerlink" title="族群账户管理"></a>族群账户管理</h5><p>具有某种共同特征的用户集合就是组群。通过组群可以集中设置访问权限和分配管理任务。</p>
+<p>组群账户有关的配置文件&#x2F;etc&#x2F;group和&#x2F;etc&#x2F;gshadow</p>
+<p><strong>&#x2F;etc&#x2F;group文件</strong>是组群的配置文件，内容包括用户和组群，并且能显示出用户是归属哪个组群或哪几个组群。一个用户可以归属一个或多个不同的组群，同一组群的用户之间具有相似的特征。比如把某一用户加入到root组群，那么这个用户就可以浏览root用户主目录的文件，如果root用户把某个文件的读写执行权限开放，root组群的所有用户都可以修改此文件；如果是可执行的文件，root组群的用户也是可以执行的。</p>
+<ul>
+<li><p>组群的特性在系统管理中为系统管理员提供了极大的方便，但安全性也是值得关注的，如某个用户有对系统管理有最重要的内容，最好让用户拥有独立的组群，或者把用户的文件的权限设置为完全私有。</p>
+</li>
+<li><p>&#x2F;etc&#x2F;group文件的内容包括组群名、组群密码、GID及该组群所包含的用户，每个组群一条记录，一行有4个段位，每个段位用“:”分隔。<code>zhangsan:x:1000:</code></p>
+</li>
+</ul>
+<img src="/2022/09/26/Linux/image-20221108191645542.png" alt="image-20221108191645542" style="zoom:50%;">
+
+<p>&#x2F;etc&#x2F;gshadow是&#x2F;etc&#x2F;group的加密文件，组群密码就是存放在这个文件中。&#x2F;etc&#x2F;gshadow和 &#x2F;etc&#x2F;group是互补的两个文件；对于大型服务器，针对很多用户和组群，定制一些关系结构比较复杂的权限模型，设置组群密码是很有必要的。比如不想让一些非组群成员永久拥有组群的权限和特性，可以通过密码验证的方式来让某些用户临时拥有一些组群特性，这时就要用到组群密码。</p>
+<ul>
+<li>&#x2F;etc&#x2F;gshadow文件中每个组群都有一条记录。每个段位用“:”分隔。<code>beijing:$6$E/xvWMmh$rhYLQwwffEqIudVLFzMlv1::ou</code></li>
+</ul>
+<img src="/2022/09/26/Linux/image-20221108191848542.png" alt="image-20221108191848542" style="zoom:50%;">
+
+
+
+<p>groupadd</p>
+<blockquote>
+<p>  groupmod -g 1800 group1		创建组群group1，并且在创建时设置其GID为180</p>
+</blockquote>
+<p>groupmod</p>
+<blockquote>
+<p>  groupmod -n shanghai group1		修改组群group1的新组群名称为“shanghai”</p>
+</blockquote>
+<p>groupdel</p>
+<h4 id="磁盘分区和文件系统管理"><a href="#磁盘分区和文件系统管理" class="headerlink" title="磁盘分区和文件系统管理"></a>磁盘分区和文件系统管理</h4><p>磁盘分区：</p>
+<ul>
+<li><p>在Linux中，如需在某个磁盘上存储数据。则需将<strong>磁盘进行分区，然后创建文件系统，最后将文件系统挂载到目录下</strong></p>
+</li>
+<li><p>在安装Linux系统后需要添加更多的交换空间，可以通过添加一个交换分区或添加一个交换文件来实现</p>
+</li>
+<li><p>磁盘分区一共有3种：主分区、扩展分区和逻辑驱动器。扩展分区只不过是逻辑驱动器的“容器”，实际上只有主分区和逻辑驱动器才能进行数据存储。在一块磁盘上最多只能有四个主分区，可以另外建立一个扩展分区来代替四个主分区的其中一个，然后在扩展分区下可以建立更多的逻辑驱动器</p>
+</li>
+<li><p>在Linux系统中进行分区可以使用<code>fdisk</code>和<code>parted</code>等命令，或者使用相同功能的图形界面程序</p>
+</li>
+</ul>
+<p>格式化：</p>
+<ul>
+<li>磁盘经过分区之后，下一个步骤就是要对磁盘分区进行格式化的工作（也就是创建文件系统的工作）。格式化是指对磁盘分区进行初始化的一种操作，这种操作通常会导致现有的分区中所有的数据被清除。简单说，就是<strong>把一张空白的磁盘划分成一个个小区域并编号</strong>，供计算机储存和读取数据使用</li>
+<li>通过分区当然不能产生任何文件系统。分区只是对磁盘上的磁盘空间进行了保留，还不能直接使用，在此之后分区必须要进行格式化。在Windows系统下可以通过资源管理器下的文件菜单或者format程序来执行，而在Linux系统中大多使用<code>mkfs</code>命令来完成</li>
+<li>Linux系统支持不同的文件系统，目前应用最广泛的就是<code>xfs</code>和<code>ext4</code></li>
+</ul>
+<h5 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h5><p>fdisk	<code>fdisk [选项] [设备]</code>		使用fdisk命令可以用来对磁盘进行分区</p>
+<blockquote>
+<p>  m 	显示所有能在fdisk中使用的子命令</p>
+<p>  p 	显示磁盘分区信息</p>
+<p>  a 	设置磁盘启动分区</p>
+<p>  n 	创建新的分区</p>
+<p>  e 	创建扩展分区</p>
+<p>  p 	创建主分区-t 	更改分区的系统ID（也就是分区类型ID）</p>
+<p>  d 	删除磁盘分区</p>
+<p>  q 	退出fdisk，不保存磁盘分区设置</p>
+<p>  l 	列出已知的分区类型</p>
+<p>  v 	验证分区表</p>
+<p>  w 	保存磁盘分区设置并退出fdisk</p>
+</blockquote>
+<blockquote>
+<p>   fdisk -l &#x2F;dev&#x2F;sda	查看当前磁盘上的分区情况，该磁盘设备是&#x2F;dev&#x2F;sda</p>
+</blockquote>
+<p>Linux常用分区类型</p>
+<img src="/2022/09/26/Linux/image-20221108194826444.png" alt="image-20221108194826444" style="zoom:50%;">
+
+
+
+<h5 id="创建文件系统"><a href="#创建文件系统" class="headerlink" title="创建文件系统"></a>创建文件系统</h5><p>partprobe </p>
+<blockquote>
+<p>  使用fdisk工具只是将分区信息写到磁盘，如果需要mkfs创建文件系统则需要事先重启系统，而使用partprobe则可以使kernel重新读取分区信息，从而避免重启系统</p>
+</blockquote>
+<p>mkfs	<code>mkfs [选项] [设备]</code>	使用mkfs命令可以在分区上创建各种文件系统</p>
+<blockquote>
+<p>  mkfs并不建立文件系统，而是调用相关的程序来执行。这里的文件系统是要指定的，比如xfs、ext4、ext3、vfat或者是msdos等</p>
+</blockquote>
+<blockquote>
+<p>   mkfs -t ext4 &#x2F;dev&#x2F;sda5	格式化&#x2F;dev&#x2F;sda5分区，创建ext4文件系统</p>
+</blockquote>
+<h5 id="挂载和卸载文件系统"><a href="#挂载和卸载文件系统" class="headerlink" title="挂载和卸载文件系统"></a>挂载和卸载文件系统</h5><p>mount 	<code>mount [选项] [设备] [挂载目录] </code>	将指定分区、光盘、U盘或者是移动硬盘挂载到Linux系统的目录下</p>
+<img src="/2022/09/26/Linux/image-20221108201743403.png" alt="image-20221108201743403" style="zoom:50%;">
+
+<blockquote>
+<p>  mount &#x2F;dev&#x2F;sda5 &#x2F;mnt&#x2F;kk		挂载分区&#x2F;dev&#x2F;sda5到&#x2F;mnt&#x2F;kk目录中</p>
+<p>  mount -o ro &#x2F;dev&#x2F;sda5 &#x2F;mnt&#x2F;kk	 以只读方式挂载&#x2F;dev&#x2F;sda5分区到&#x2F;mnt&#x2F;kk目录中</p>
+</blockquote>
+<p>umount	<code>umount [选项] [设备|挂载目录]</code>	卸载分区</p>
+<blockquote>
+<p>   umount &#x2F;dev&#x2F;sda5	卸载分区&#x2F;dev&#x2F;sda5文件系统</p>
+</blockquote>
+<p>df	<code>df [选项] [文件]</code> 	查看磁盘分区挂载情况</p>
+<h6 id="自动挂载"><a href="#自动挂载" class="headerlink" title="自动挂载"></a>自动挂载</h6><p>修改&#x2F;etc&#x2F;fstab文件，使得1GB分区开机时自动挂载到&#x2F;mnt&#x2F;kk目录中。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@centos7 kjg]<span class="comment">#vim /etc/fstab</span></span><br><span class="line">[root@centos7 kjg]<span class="comment">#/dev/sdb1 /mnt/kk xfs defaults 1 2 # 添加</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="交换文件"><a href="#交换文件" class="headerlink" title="交换文件"></a>交换文件</h5><p>在计算机上添加交换文件，文件大小为1GB</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@centos7 kjg]<span class="comment">#mkswap /dev/sda5</span></span><br><span class="line">[root@centos7 kjg]<span class="comment">#swapon /dev/sda5</span></span><br><span class="line">[root@centos7 kjg]<span class="comment">#free</span></span><br><span class="line">[root@centos7 kjg]<span class="comment">#vim /etc/fstab</span></span><br><span class="line">[root@centos7 kjg]<span class="comment">#/dev/sda5 swap swap defaults 0 0 # 添加</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h4><h5 id="RPM软件包管理"><a href="#RPM软件包管理" class="headerlink" title="RPM软件包管理"></a>RPM软件包管理</h5><h5 id="使用yum管理RPM软件包"><a href="#使用yum管理RPM软件包" class="headerlink" title="使用yum管理RPM软件包"></a>使用yum管理RPM软件包</h5><h5 id="tar包管理"><a href="#tar包管理" class="headerlink" title="tar包管理"></a>tar包管理</h5>
     </div>
 
     
@@ -373,7 +709,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#unix%E5%92%8Clinux%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">unix和linux的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell"><span class="nav-number">2.</span> <span class="nav-text">shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash%E4%B8%8Ezsh%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">bash与zsh的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum%E5%92%8Crpm"><span class="nav-number">4.</span> <span class="nav-text">yum和rpm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#repo%E6%BA%90"><span class="nav-number">4.1.</span> <span class="nav-text">repo源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#homebrew"><span class="nav-number">5.</span> <span class="nav-text">homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac%E7%BB%88%E7%AB%AF%E5%92%8Clinux"><span class="nav-number">6.</span> <span class="nav-text">mac终端和linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E9%AB%98%E7%BA%A7Linux%E3%80%8B-Centos7"><span class="nav-number">7.</span> <span class="nav-text">《高级Linux》-Centos7</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LVM%E5%92%8C%E6%A0%87%E5%87%86%E5%88%86%E5%8C%BA"><span class="nav-number">7.1.</span> <span class="nav-text">LVM和标准分区</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#unix%E5%92%8Clinux%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">unix和linux的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell"><span class="nav-number">2.</span> <span class="nav-text">shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash%E4%B8%8Ezsh%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">bash与zsh的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum%E5%92%8Crpm"><span class="nav-number">4.</span> <span class="nav-text">yum和rpm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#repo%E6%BA%90"><span class="nav-number">4.1.</span> <span class="nav-text">repo源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#homebrew"><span class="nav-number">5.</span> <span class="nav-text">homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac%E7%BB%88%E7%AB%AF%E5%92%8Clinux"><span class="nav-number">6.</span> <span class="nav-text">mac终端和linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7Linux-Centos7"><span class="nav-number">7.</span> <span class="nav-text">高级Linux -Centos7</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LVM%E5%92%8C%E6%A0%87%E5%87%86%E5%88%86%E5%8C%BA"><span class="nav-number">7.1.</span> <span class="nav-text">LVM和标准分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">7.2.</span> <span class="nav-text">文件和目录操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA"><span class="nav-number">7.3.</span> <span class="nav-text">文本内容显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%A4%84%E7%90%86"><span class="nav-number">7.4.</span> <span class="nav-text">文本内容处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E5%91%BD%E4%BB%A4%E6%9F%A5%E6%89%BE"><span class="nav-number">7.5.</span> <span class="nav-text">文件和命令查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%98%BE%E7%A4%BA"><span class="nav-number">7.6.</span> <span class="nav-text">系统信息显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E6%9C%9F%E4%B8%8E%E6%97%B6%E9%97%B4"><span class="nav-number">7.7.</span> <span class="nav-text">查看日期与时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E4%BA%A4%E6%B5%81"><span class="nav-number">7.8.</span> <span class="nav-text">信息交流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E7%BE%A4%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">7.9.</span> <span class="nav-text">用户和组群账户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">7.9.1.</span> <span class="nav-text">用户管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%8F%E7%BE%A4%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">7.9.2.</span> <span class="nav-text">族群账户管理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%92%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="nav-number">7.10.</span> <span class="nav-text">磁盘分区和文件系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA"><span class="nav-number">7.10.1.</span> <span class="nav-text">磁盘分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">7.10.2.</span> <span class="nav-text">创建文件系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E5%92%8C%E5%8D%B8%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">7.10.3.</span> <span class="nav-text">挂载和卸载文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD"><span class="nav-number">7.10.3.1.</span> <span class="nav-text">自动挂载</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%96%87%E4%BB%B6"><span class="nav-number">7.10.4.</span> <span class="nav-text">交换文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86"><span class="nav-number">7.11.</span> <span class="nav-text">软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RPM%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86"><span class="nav-number">7.11.1.</span> <span class="nav-text">RPM软件包管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8yum%E7%AE%A1%E7%90%86RPM%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number">7.11.2.</span> <span class="nav-text">使用yum管理RPM软件包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tar%E5%8C%85%E7%AE%A1%E7%90%86"><span class="nav-number">7.11.3.</span> <span class="nav-text">tar包管理</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
