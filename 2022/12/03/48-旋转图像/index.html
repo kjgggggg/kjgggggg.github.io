@@ -20,21 +20,24 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="20.有效的括号(Easy)">
+  <meta name="description" content="48.旋转图像(Mid)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="栈之括号匹配合集">
-<meta property="og:url" content="https://kjgggggg.github.io/2022/11/19/%E6%A0%88%E4%B9%8B%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E5%90%88%E9%9B%86/index.html">
+<meta property="og:title" content="48.旋转图像">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="20.有效的括号(Easy)">
+<meta property="og:description" content="48.旋转图像(Mid)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-19T14:54:21.000Z">
-<meta property="article:modified_time" content="2022-11-20T04:34:22.234Z">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/mat1.jpg">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/mat2.jpg">
+<meta property="article:published_time" content="2022-12-03T07:48:36.000Z">
+<meta property="article:modified_time" content="2022-12-03T07:50:26.648Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="栈">
+<meta property="article:tag" content="数组">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/mat1.jpg">
 
-<link rel="canonical" href="https://kjgggggg.github.io/2022/11/19/%E6%A0%88%E4%B9%8B%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E5%90%88%E9%9B%86/">
+<link rel="canonical" href="https://kjgggggg.github.io/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/">
 
 
 <script id="page-configurations">
@@ -47,7 +50,7 @@
   };
 </script>
 
-  <title>栈之括号匹配合集 | kjg's blog</title>
+  <title>48.旋转图像 | kjg's blog</title>
   
 
 
@@ -190,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/11/19/%E6%A0%88%E4%B9%8B%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E5%90%88%E9%9B%86/">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/WechatIMG84.jpeg">
@@ -203,7 +206,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          栈之括号匹配合集
+          48.旋转图像
         </h1>
 
         <div class="post-meta">
@@ -212,16 +215,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-11-19 22:54:21" itemprop="dateCreated datePublished" datetime="2022-11-19T22:54:21+08:00">2022-11-19</time>
+              <time title="创建时间：2022-12-03 15:48:36 / 修改时间：15:50:26" itemprop="dateCreated datePublished" datetime="2022-12-03T15:48:36+08:00">2022-12-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-20 12:34:22" itemprop="dateModified" datetime="2022-11-20T12:34:22+08:00">2022-11-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -240,7 +237,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">20.有效的括号(Easy)</div>
+            <div class="post-description">48.旋转图像(Mid)</div>
 
         </div>
       </header>
@@ -251,28 +248,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20. 有效的括号"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></h3><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;&#123;&#39;</code>，<code>&#39;&#125;&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<ol>
-<li>左括号必须用相同类型的右括号闭合。</li>
-<li>左括号必须以正确的顺序闭合。</li>
-<li>每个右括号都有一个对应的相同类型的左括号。</li>
-</ol>
+        <h3 id="48-旋转图像"><a href="#48-旋转图像" class="headerlink" title="48. 旋转图像"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-image/">48. 旋转图像</a></h3><p>给定一个 <em>n</em> × <em>n</em> 的二维矩阵 <code>matrix</code> 表示一个图像。请你将图像顺时针旋转 90 度。</p>
+<p>你必须在**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95"> 原地</a>** 旋转图像，这意味着你需要直接修改输入的二维矩阵。<strong>请不要</strong> 使用另一个矩阵来旋转图像。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;()&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/mat1.jpg" alt="img"></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：matrix = <span class="string">[[1,2,3],[4,5,6],[7,8,9]]</span></span><br><span class="line">输出：<span class="string">[[7,4,1],[8,5,2],[9,6,3]]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;()[]&#123;&#125;&quot;</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">s</span> = <span class="string">&quot;(]&quot;</span></span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/12/03/48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/mat2.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：matrix = <span class="comment">[<span class="comment">[5,1,9,11]</span>,<span class="comment">[2,4,8,10]</span>,<span class="comment">[13,3,6,7]</span>,<span class="comment">[15,14,12,16]</span>]</span></span><br><span class="line">输出：<span class="comment">[<span class="comment">[15,13,2,5]</span>,<span class="comment">[14,3,4,1]</span>,<span class="comment">[12,6,8,9]</span>,<span class="comment">[16,7,10,11]</span>]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= s.length &lt;= 104</code></li>
-<li><code>s</code> 仅由括号 <code>&#39;()[]&#123;&#125;&#39;</code> 组成</li>
+<li><code>n == matrix.length == matrix[i].length</code></li>
+<li><code>1 &lt;= n &lt;= 20</code></li>
+<li><code>-1000 &lt;= matrix[i][j] &lt;= 1000</code></li>
 </ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() % <span class="number">2</span> != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 如果s的长度为奇数，一定不符合要求</span></span><br><span class="line">        stack&lt;<span class="type">char</span>&gt; stk;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">&#x27;(&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">&#x27;&#123;&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;&#125;&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">&#x27;[&#x27;</span>) stk.<span class="built_in">push</span>(<span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">            <span class="comment">// 情况1：遍历字符串匹配的过程中，栈已经为空了，没有匹配的字符了，说明右括号没有找到对应的左括号 return false</span></span><br><span class="line">            <span class="comment">// 情况2：遍历字符串匹配的过程中，发现栈里没有我们要匹配的字符。所以return false</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (stk.<span class="built_in">empty</span>() || stk.<span class="built_in">top</span>() != s[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">else</span> stk.<span class="built_in">pop</span>(); <span class="comment">// stk.top() 与 s[i]相等，栈弹出元素</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 情况3：此时我们已经遍历完了字符串，但是栈不为空，说明有相应的左括号没有右括号来匹配，所以return false，否则就return true</span></span><br><span class="line">        <span class="keyword">return</span> stk.<span class="built_in">empty</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先上下反转，再主对角反转</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">rotate</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = matrix.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> n = matrix[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> r = <span class="number">0</span>; r &lt; m/<span class="number">2</span>; r ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> c = <span class="number">0</span>; c &lt; n; c ++)&#123;</span><br><span class="line">                <span class="built_in">swap</span>(matrix[m - <span class="number">1</span> - r][c], matrix[r][c]);</span><br><span class="line">            &#125;<span class="number">48.4</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> r = <span class="number">1</span>; r &lt; m; r ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> c = <span class="number">0</span>; c &lt; r; c ++)&#123;</span><br><span class="line">                <span class="built_in">swap</span>(matrix[r][c], matrix[c][r]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -284,7 +276,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/leetcode/" rel="tag"># leetcode</a>
-              <a href="/tags/%E6%A0%88/" rel="tag"># 栈</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
           </div>
 
         
@@ -293,13 +285,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/11/17/%E9%93%BE%E8%A1%A8%E4%B9%8B%E6%96%B0%E9%A2%96%E9%A2%98%E5%90%88%E9%9B%86/" rel="prev" title="链表之新颖题合集">
-      <i class="fa fa-chevron-left"></i> 链表之新颖题合集
+    <a href="/2022/12/02/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5/" rel="prev" title="54.螺旋矩阵">
+      <i class="fa fa-chevron-left"></i> 54.螺旋矩阵
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/11/22/%E6%95%B0%E5%AD%A6%E9%A2%98%E5%90%88%E9%9B%86/" rel="next" title="数学题合集">
-      数学题合集 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -358,7 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7"><span class="nav-number">1.</span> <span class="nav-text">20. 有效的括号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#48-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F"><span class="nav-number">1.</span> <span class="nav-text">48. 旋转图像</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
