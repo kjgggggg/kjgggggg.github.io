@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1/787ff6e538868898f53a27e55bc30c62.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjAwNjg4Mg==,size_16,color_FFFFFF,t_70.png">
 <meta property="article:published_time" content="2022-11-06T14:21:59.000Z">
-<meta property="article:modified_time" content="2023-01-23T12:03:21.475Z">
+<meta property="article:modified_time" content="2023-01-23T12:11:43.464Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-23 20:03:21" itemprop="dateModified" datetime="2023-01-23T20:03:21+08:00">2023-01-23</time>
+                <time title="修改时间：2023-01-23 20:11:43" itemprop="dateModified" datetime="2023-01-23T20:11:43+08:00">2023-01-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -757,10 +757,10 @@
 <li><p>多态成员变量: 编译运行看左边</p>
 </li>
 <li><p>静态方法和变量：编译运行都看左边，同成员变量一样</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Fu f = <span class="keyword">new</span> <span class="built_in">Zi</span>();</span><br><span class="line">cout &lt;&lt; f.num &lt;&lt; endl; <span class="comment">// 取Fu中的值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Fu *f = <span class="keyword">new</span> <span class="built_in">Zi</span>();</span><br><span class="line">cout &lt;&lt; f -&gt; num &lt;&lt; endl; <span class="comment">// 取Fu中的值</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>多态成员方法: 编译看左边,运行看右边</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Fu f1 = <span class="keyword">new</span> <span class="built_in">Zi</span>();</span><br><span class="line">cout &lt;&lt; f1.<span class="built_in">show</span>() &lt;&lt; endl; <span class="comment">// 实际类型是Fu,调用的是子类重写后的方法</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Fu* f1 = <span class="keyword">new</span> <span class="built_in">Zi</span>();</span><br><span class="line">cout &lt;&lt; f1-&gt;<span class="built_in">show</span>() &lt;&lt; endl; <span class="comment">// 用基类类型指针绑定派生类实例,调用的是子类重写后的方法</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 <hr>
 <h5 id="说说为什么要虚析构-为什么不能虚构造"><a href="#说说为什么要虚析构-为什么不能虚构造" class="headerlink" title="说说为什么要虚析构, 为什么不能虚构造"></a>说说为什么要虚析构, 为什么不能虚构造</h5><ol>
