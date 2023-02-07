@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="595.大的国家(Easy) 175.组合两个表(Easy) 183.从不订购的客户(Easy) 196.删除重复的电子邮箱(Easy) 176.第二高的薪水(Mid) 178.分数排名(Mid)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣数据库合集">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="595.大的国家(Easy) 175.组合两个表(Easy) 183.从不订购的客户(Easy) 196.删除重复的电子邮箱(Easy) 176.第二高的薪水(Mid) 178.分数排名(Mid)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/image-20230207162541722.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/image-20230207164801646.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/image-20230207164841000.png">
+<meta property="article:published_time" content="2023-02-07T07:31:35.000Z">
+<meta property="article:modified_time" content="2023-02-07T09:32:51.045Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/image-20230207162541722.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>力扣数据库合集 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          力扣数据库合集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-07 15:31:35 / 修改时间：17:32:51" itemprop="dateCreated datePublished" datetime="2023-02-07T15:31:35+08:00">2023-02-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">595.大的国家(Easy) 175.组合两个表(Easy) 183.从不订购的客户(Easy) 196.删除重复的电子邮箱(Easy) 176.第二高的薪水(Mid) 178.分数排名(Mid)</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="595-大的国家"><a href="#595-大的国家" class="headerlink" title="595. 大的国家"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/big-countries/">595. 大的国家</a></h3><p><code>World</code> 表：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+-------------+</span>---------+</span><br><span class="line"><span class="section">| Column Name | Type    |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">| name        | varchar |</span><br><span class="line">| continent   | varchar |</span><br><span class="line">| area        | int     |</span><br><span class="line">| population  | int     |</span><br><span class="line"><span class="section">| gdp         | int     |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">name 是这张表的主键。</span><br><span class="line">这张表的每一行提供：国家名称、所属大陆、面积、人口和 GDP 值。</span><br></pre></td></tr></table></figure>
+
+<p>如果一个国家满足下述两个条件之一，则认为该国是 <strong>大国</strong> ：</p>
+<ul>
+<li>面积至少为 300 万平方公里（即，<code>3000000 km2</code>），或者</li>
+<li>人口至少为 2500 万（即 <code>25000000</code>）</li>
+</ul>
+<p>编写一个 SQL 查询以报告 <strong>大国</strong> 的国家名称、人口和面积。</p>
+<p>按 <strong>任意顺序</strong> 返回结果表。</p>
+<p>查询结果格式如下例所示。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line"><span class="section">World 表：</span></span><br><span class="line"><span class="section">+-------------+-----------+---------+------------+--------------+</span></span><br><span class="line"><span class="section">| name        | continent | area    | population | gdp          |</span></span><br><span class="line"><span class="section">+-------------+-----------+---------+------------+--------------+</span></span><br><span class="line">| Afghanistan | Asia      | 652230  | 25500100   | 20343000000  |</span><br><span class="line">| Albania     | Europe    | 28748   | 2831741    | 12960000000  |</span><br><span class="line">| Algeria     | Africa    | 2381741 | 37100000   | 188681000000 |</span><br><span class="line">| Andorra     | Europe    | 468     | 78115      | 3712000000   |</span><br><span class="line"><span class="section">| Angola      | Africa    | 1246700 | 20609294   | 100990000000 |</span></span><br><span class="line"><span class="section">+-------------+-----------+---------+------------+--------------+</span></span><br><span class="line"><span class="section">输出：</span></span><br><span class="line"><span class="section">+-------------+------------+---------+</span></span><br><span class="line"><span class="section">| name        | population | area    |</span></span><br><span class="line"><span class="section">+-------------+------------+---------+</span></span><br><span class="line">| Afghanistan | 25500100   | 652230  |</span><br><span class="line"><span class="section">| Algeria     | 37100000   | 2381741 |</span></span><br><span class="line"><span class="section">+-------------+------------+---------+</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Write your MySQL query statement below</span><br><span class="line">select name, population, area from World where area &gt;= 3000000 or population &gt;= 25000000;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="175-组合两个表"><a href="#175-组合两个表" class="headerlink" title="175. 组合两个表"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combine-two-tables/">175. 组合两个表</a></h3><p>表: <code>Person</code></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+-------------+</span>---------+</span><br><span class="line"><span class="section">| 列名         | 类型     |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">| PersonId    | int     |</span><br><span class="line">| FirstName   | varchar |</span><br><span class="line"><span class="section">| LastName    | varchar |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">personId 是该表的主键列。</span><br><span class="line">该表包含一些人的 ID 和他们的姓和名的信息。</span><br></pre></td></tr></table></figure>
+
+<p>表: <code>Address</code></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+-------------+</span>---------+</span><br><span class="line"><span class="section">| 列名         | 类型    |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">| AddressId   | int     |</span><br><span class="line">| PersonId    | int     |</span><br><span class="line">| City        | varchar |</span><br><span class="line"><span class="section">| State       | varchar |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">addressId 是该表的主键列。</span><br><span class="line">该表的每一行都包含一个 ID = PersonId 的人的城市和州的信息。</span><br></pre></td></tr></table></figure>
+
+<p>编写一个SQL查询来报告 <code>Person</code> 表中每个人的姓、名、城市和州。如 <code>personId</code> 的地址不在 <code>Address</code> 表中，则报告为空  <code>null</code> 。</p>
+<p>以 <strong>任意顺序</strong> 返回结果表。</p>
+<p>查询结果格式如下所示。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line"><span class="section">Person表:</span></span><br><span class="line"><span class="section">+----------+----------+-----------+</span></span><br><span class="line"><span class="section">| personId | lastName | firstName |</span></span><br><span class="line"><span class="section">+----------+----------+-----------+</span></span><br><span class="line">| 1        | Wang     | Allen     |</span><br><span class="line"><span class="section">| 2        | Alice    | Bob       |</span></span><br><span class="line"><span class="section">+----------+----------+-----------+</span></span><br><span class="line"><span class="section">Address表:</span></span><br><span class="line"><span class="section">+-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="section">| addressId | personId | city          | state      |</span></span><br><span class="line"><span class="section">+-----------+----------+---------------+------------+</span></span><br><span class="line">| 1         | 2        | New York City | New York   |</span><br><span class="line"><span class="section">| 2         | 3        | Leetcode      | California |</span></span><br><span class="line"><span class="section">+-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="section">输出: </span></span><br><span class="line"><span class="section">+-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="section">| firstName | lastName | city          | state    |</span></span><br><span class="line"><span class="section">+-----------+----------+---------------+----------+</span></span><br><span class="line">| Allen     | Wang     | Null          | Null     |</span><br><span class="line"><span class="section">| Bob       | Alice    | New York City | New York |</span></span><br><span class="line"><span class="section">+-----------+----------+---------------+----------+</span></span><br><span class="line">解释: </span><br><span class="line">地址表中没有 personId = 1 的地址，所以它们的城市和州返回 null。</span><br><span class="line">addressId = 1 包含了 personId = 2 的地址信息。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MySQL-1"><a href="#MySQL-1" class="headerlink" title="MySQL"></a>MySQL</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Write your MySQL query statement below</span><br><span class="line">select Person.firstName, Person.lastName, Address.city, Address.state </span><br><span class="line">from Person left join Address </span><br><span class="line">on Person.personId = Address.personId;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="183-从不订购的客户"><a href="#183-从不订购的客户" class="headerlink" title="183. 从不订购的客户"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/customers-who-never-order/">183. 从不订购的客户</a></h3><p>某网站包含两个表，<code>Customers</code> 表和 <code>Orders</code> 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。</p>
+<p><code>Customers</code> 表：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+----+</span>-------+</span><br><span class="line"><span class="section">| Id | Name  |</span></span><br><span class="line"><span class="section">+----+-------+</span></span><br><span class="line">| 1  | Joe   |</span><br><span class="line">| 2  | Henry |</span><br><span class="line">| 3  | Sam   |</span><br><span class="line"><span class="section">| 4  | Max   |</span></span><br><span class="line"><span class="section">+----+-------+</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Orders</code> 表：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+----+</span>------------+</span><br><span class="line"><span class="section">| Id | CustomerId |</span></span><br><span class="line"><span class="section">+----+------------+</span></span><br><span class="line">| 1  | 3          |</span><br><span class="line"><span class="section">| 2  | 1          |</span></span><br><span class="line"><span class="section">+----+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>例如给定上述表格，你的查询应返回：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+-----------+</span></span><br><span class="line"><span class="section">| Customers |</span></span><br><span class="line"><span class="section">+-----------+</span></span><br><span class="line">| Henry     |</span><br><span class="line"><span class="section">| Max       |</span></span><br><span class="line"><span class="section">+-----------+</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MySQL-2"><a href="#MySQL-2" class="headerlink" title="MySQL"></a>MySQL</h4><p><code>Customers as A left join Orders as B </code></p>
+<img src="/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/image-20230207162541722.png" alt="image-20230207162541722" style="zoom: 33%;">
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Write your MySQL query statement below</span><br><span class="line">select A.Name as Customers </span><br><span class="line">from Customers as A left join Orders as B </span><br><span class="line">on A.Id = B.CustomerId </span><br><span class="line">where B.Id is null;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="196-删除重复的电子邮箱"><a href="#196-删除重复的电子邮箱" class="headerlink" title="196. 删除重复的电子邮箱"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-duplicate-emails/">196. 删除重复的电子邮箱</a></h3><p>表: <code>Person</code></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+-------------+</span>---------+</span><br><span class="line"><span class="section">| Column Name | Type    |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">| id          | int     |</span><br><span class="line"><span class="section">| email       | varchar |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">id是该表的主键列。</span><br><span class="line">该表的每一行包含一封电子邮件。电子邮件将不包含大写字母。</span><br></pre></td></tr></table></figure>
+
+<p>编写一个 SQL <strong>删除语句</strong>来 <strong>删除</strong> 所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
+<p>以 <strong>任意顺序</strong> 返回结果表。 （<strong>注意</strong>： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
+<p>查询结果格式如下所示。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line"><span class="section">Person 表:</span></span><br><span class="line"><span class="section">+----+------------------+</span></span><br><span class="line"><span class="section">| id | email            |</span></span><br><span class="line"><span class="section">+----+------------------+</span></span><br><span class="line">| 1  | john@example.com |</span><br><span class="line">| 2  | bob@example.com  |</span><br><span class="line"><span class="section">| 3  | john@example.com |</span></span><br><span class="line"><span class="section">+----+------------------+</span></span><br><span class="line"><span class="section">输出: </span></span><br><span class="line"><span class="section">+----+------------------+</span></span><br><span class="line"><span class="section">| id | email            |</span></span><br><span class="line"><span class="section">+----+------------------+</span></span><br><span class="line">| 1  | john@example.com |</span><br><span class="line"><span class="section">| 2  | bob@example.com  |</span></span><br><span class="line"><span class="section">+----+------------------+</span></span><br><span class="line">解释: john@example.com重复两次。我们保留最小的Id = 1。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MySQL-3"><a href="#MySQL-3" class="headerlink" title="MySQL"></a>MySQL</h4><img src="/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/image-20230207164801646.png" alt="image-20230207164801646" style="zoom:50%;">
+
+<p>自连接,就是做笛卡尔积</p>
+<img src="/2023/02/07/%E5%8A%9B%E6%89%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%88%E9%9B%86/image-20230207164841000.png" alt="image-20230207164841000" style="zoom:50%;">
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Please write a DELETE statement and DO NOT write a SELECT statement.</span><br><span class="line"># Write your MySQL query statement below</span><br><span class="line">delete P1 </span><br><span class="line">from Person as P1, Person as P2 </span><br><span class="line">where P1.email = P2.email and P1.id &gt; P2.id;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="176-第二高的薪水"><a href="#176-第二高的薪水" class="headerlink" title="176. 第二高的薪水"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/second-highest-salary/">176. 第二高的薪水</a></h3><p><code>Employee</code> 表：</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+-------------+</span>------+</span><br><span class="line"><span class="section">| Column Name | Type |</span></span><br><span class="line"><span class="section">+-------------+------+</span></span><br><span class="line">| id          | int  |</span><br><span class="line"><span class="section">| salary      | int  |</span></span><br><span class="line"><span class="section">+-------------+------+</span></span><br><span class="line">id 是这个表的主键。</span><br><span class="line">表的每一行包含员工的工资信息。</span><br></pre></td></tr></table></figure>
+
+<p>编写一个 SQL 查询，获取并返回 <code>Employee</code> 表中第二高的薪水 。如果不存在第二高的薪水，查询应该返回 <code>null</code> 。</p>
+<p>查询结果如下例所示。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line"><span class="section">Employee 表：</span></span><br><span class="line"><span class="section">+----+--------+</span></span><br><span class="line"><span class="section">| id | salary |</span></span><br><span class="line"><span class="section">+----+--------+</span></span><br><span class="line">| 1  | 100    |</span><br><span class="line">| 2  | 200    |</span><br><span class="line"><span class="section">| 3  | 300    |</span></span><br><span class="line"><span class="section">+----+--------+</span></span><br><span class="line"><span class="section">输出：</span></span><br><span class="line"><span class="section">+---------------------+</span></span><br><span class="line"><span class="section">| SecondHighestSalary |</span></span><br><span class="line"><span class="section">+---------------------+</span></span><br><span class="line"><span class="section">| 200                 |</span></span><br><span class="line"><span class="section">+---------------------+</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">输入：</span><br><span class="line"><span class="section">Employee 表：</span></span><br><span class="line"><span class="section">+----+--------+</span></span><br><span class="line"><span class="section">| id | salary |</span></span><br><span class="line"><span class="section">+----+--------+</span></span><br><span class="line"><span class="section">| 1  | 100    |</span></span><br><span class="line"><span class="section">+----+--------+</span></span><br><span class="line"><span class="section">输出：</span></span><br><span class="line"><span class="section">+---------------------+</span></span><br><span class="line"><span class="section">| SecondHighestSalary |</span></span><br><span class="line"><span class="section">+---------------------+</span></span><br><span class="line"><span class="section">| null                |</span></span><br><span class="line"><span class="section">+---------------------+</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MySQL-4"><a href="#MySQL-4" class="headerlink" title="MySQL"></a>MySQL</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Write your MySQL query statement below</span><br><span class="line"># select() 是为了防止出现没有第二条数据的情况</span><br><span class="line">select </span><br><span class="line">(select distinct A.salary </span><br><span class="line">from Employee A </span><br><span class="line">order by salary desc </span><br><span class="line">limit 1 offset 1) as SecondHighestSalary ;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="178-分数排名"><a href="#178-分数排名" class="headerlink" title="178. 分数排名"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rank-scores/">178. 分数排名</a></h3><p>表: <code>Scores</code></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="code">+-------------+</span>---------+</span><br><span class="line"><span class="section">| Column Name | Type    |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">| id          | int     |</span><br><span class="line"><span class="section">| score       | decimal |</span></span><br><span class="line"><span class="section">+-------------+---------+</span></span><br><span class="line">Id是该表的主键。</span><br><span class="line">该表的每一行都包含了一场比赛的分数。Score是一个有两位小数点的浮点值。</span><br></pre></td></tr></table></figure>
+
+<p>编写 SQL 查询对分数进行排序。排名按以下规则计算:</p>
+<ul>
+<li>分数应按从高到低排列。</li>
+<li>如果两个分数相等，那么两个分数的排名应该相同。</li>
+<li>在排名相同的分数后，排名数应该是下一个连续的整数。换句话说，排名之间不应该有空缺的数字。</li>
+</ul>
+<p>按 <code>score</code> 降序返回结果表。</p>
+<p>查询结果格式如下所示。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line"><span class="section">Scores 表:</span></span><br><span class="line"><span class="section">+----+-------+</span></span><br><span class="line"><span class="section">| id | score |</span></span><br><span class="line"><span class="section">+----+-------+</span></span><br><span class="line">| 1  | 3.50  |</span><br><span class="line">| 2  | 3.65  |</span><br><span class="line">| 3  | 4.00  |</span><br><span class="line">| 4  | 3.85  |</span><br><span class="line">| 5  | 4.00  |</span><br><span class="line"><span class="section">| 6  | 3.65  |</span></span><br><span class="line"><span class="section">+----+-------+</span></span><br><span class="line"><span class="section">输出: </span></span><br><span class="line"><span class="section">+-------+------+</span></span><br><span class="line"><span class="section">| score | rank |</span></span><br><span class="line"><span class="section">+-------+------+</span></span><br><span class="line">| 4.00  | 1    |</span><br><span class="line">| 4.00  | 1    |</span><br><span class="line">| 3.85  | 2    |</span><br><span class="line">| 3.65  | 3    |</span><br><span class="line">| 3.65  | 3    |</span><br><span class="line"><span class="section">| 3.50  | 4    |</span></span><br><span class="line"><span class="section">+-------+------+</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MySQL-5"><a href="#MySQL-5" class="headerlink" title="MySQL"></a>MySQL</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Write your MySQL query statement below</span><br><span class="line">select A.score as score, </span><br><span class="line">(select count(distinct B.score) from Scores B where B.score &gt;= A.score) as &quot;rank&quot; # rank 是mysql关键字</span><br><span class="line">from Scores A </span><br><span class="line">order by A.score desc;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/02/02/%E5%8A%9B%E6%89%A3%E7%B2%BE%E9%80%89TOP%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="prev" title="力扣精选TOP面试题">
+      <i class="fa fa-chevron-left"></i> 力扣精选TOP面试题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#595-%E5%A4%A7%E7%9A%84%E5%9B%BD%E5%AE%B6"><span class="nav-number">1.</span> <span class="nav-text">595. 大的国家</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#175-%E7%BB%84%E5%90%88%E4%B8%A4%E4%B8%AA%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">175. 组合两个表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-1"><span class="nav-number">2.1.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#183-%E4%BB%8E%E4%B8%8D%E8%AE%A2%E8%B4%AD%E7%9A%84%E5%AE%A2%E6%88%B7"><span class="nav-number">3.</span> <span class="nav-text">183. 从不订购的客户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-2"><span class="nav-number">3.1.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#196-%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E7%AE%B1"><span class="nav-number">4.</span> <span class="nav-text">196. 删除重复的电子邮箱</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-3"><span class="nav-number">4.1.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#176-%E7%AC%AC%E4%BA%8C%E9%AB%98%E7%9A%84%E8%96%AA%E6%B0%B4"><span class="nav-number">5.</span> <span class="nav-text">176. 第二高的薪水</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-4"><span class="nav-number">5.1.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#178-%E5%88%86%E6%95%B0%E6%8E%92%E5%90%8D"><span class="nav-number">6.</span> <span class="nav-text">178. 分数排名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-5"><span class="nav-number">6.1.</span> <span class="nav-text">MySQL</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
