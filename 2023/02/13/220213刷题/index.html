@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="202.快乐数(Easy)">
+  <meta name="description" content="202.快乐数(Easy) 166.分数到小数(Mid)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="220213刷题">
 <meta property="og:url" content="https://kjgggggg.github.io/2023/02/13/220213%E5%88%B7%E9%A2%98/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="202.快乐数(Easy)">
+<meta property="og:description" content="202.快乐数(Easy) 166.分数到小数(Mid)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-13T05:06:01.000Z">
-<meta property="article:modified_time" content="2023-02-13T08:10:41.724Z">
+<meta property="article:modified_time" content="2023-02-13T13:09:37.158Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-02-13 13:06:01 / 修改时间：16:10:41" itemprop="dateCreated datePublished" datetime="2023-02-13T13:06:01+08:00">2023-02-13</time>
+              <time title="创建时间：2023-02-13 13:06:01 / 修改时间：21:09:37" itemprop="dateCreated datePublished" datetime="2023-02-13T13:06:01+08:00">2023-02-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +233,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">202.快乐数(Easy)</div>
+            <div class="post-description">202.快乐数(Easy) 166.分数到小数(Mid)</div>
 
         </div>
       </header>
@@ -268,6 +268,28 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isHappy</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n &lt;= <span class="number">10</span>) <span class="keyword">return</span> (n == <span class="number">1</span>|| n ==<span class="number">10</span> || n == <span class="number">7</span>);</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; st;</span><br><span class="line">        <span class="type">int</span> temp = <span class="number">0</span>, cnt = <span class="number">100</span>; <span class="comment">// 次数</span></span><br><span class="line">        <span class="keyword">while</span>(cnt -- &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            temp = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(n)&#123;</span><br><span class="line">                temp += <span class="built_in">pow</span>(n%<span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line">                n /= <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(temp == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(st.<span class="built_in">find</span>(temp) == st.<span class="built_in">end</span>())&#123;</span><br><span class="line">                st.<span class="built_in">insert</span>(temp);</span><br><span class="line">                n = temp;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
+
+<h3 id="166-分数到小数"><a href="#166-分数到小数" class="headerlink" title="166. 分数到小数"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fraction-to-recurring-decimal/">166. 分数到小数</a></h3><p>给定两个整数，分别表示分数的分子 <code>numerator</code> 和分母 <code>denominator</code>，以 <strong>字符串形式返回小数</strong> 。</p>
+<p>如果小数部分为循环小数，则将循环的部分括在括号内。</p>
+<p>如果存在多个答案，只需返回 <strong>任意一个</strong> 。</p>
+<p>对于所有给定的输入，<strong>保证</strong> 答案字符串的长度小于 <code>104</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">numerator</span> = <span class="number">1</span>, <span class="attr">denominator</span> = <span class="number">2</span></span><br><span class="line">输出：<span class="string">&quot;0.5&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">numerator</span> = <span class="number">2</span>, <span class="attr">denominator</span> = <span class="number">1</span></span><br><span class="line">输出：<span class="string">&quot;2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">输入：<span class="attr">numerator</span> = <span class="number">4</span>, <span class="attr">denominator</span> = <span class="number">333</span></span><br><span class="line">输出：<span class="string">&quot;0.(012)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-231 &lt;= numerator, denominator &lt;= 231 - 1</code></li>
+<li><code>denominator != 0</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">fractionToDecimal</span><span class="params">(<span class="type">int</span> numerator, <span class="type">int</span> denominator)</span> </span>&#123;</span><br><span class="line">        <span class="type">long</span> n = numerator, d = denominator;</span><br><span class="line">        <span class="keyword">if</span>(n % d == <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">to_string</span>(n / d);</span><br><span class="line"></span><br><span class="line">        string res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(n * d &lt; <span class="number">0</span>) res += <span class="string">&#x27;-&#x27;</span>;</span><br><span class="line">        n = <span class="built_in">abs</span>(n), d = <span class="built_in">abs</span>(d);</span><br><span class="line">        res += <span class="built_in">to_string</span>(n / d) + <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">        n %= d;</span><br><span class="line">        </span><br><span class="line">        unordered_map&lt;<span class="type">int</span> ,<span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="type">int</span> len = res.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">while</span>(n &amp;&amp; !mp.<span class="built_in">count</span>(n))&#123;</span><br><span class="line">            mp[n] = len ++;</span><br><span class="line">            n *= <span class="number">10</span>;</span><br><span class="line">            res += <span class="built_in">to_string</span>(n/d);</span><br><span class="line">            n %= d;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(n) res = res.<span class="built_in">substr</span>(<span class="number">0</span>, mp[n]) + <span class="string">&#x27;(&#x27;</span> + res.<span class="built_in">substr</span>(mp[n]) + <span class="string">&#x27;)&#x27;</span>;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -288,7 +310,10 @@
     <a href="/2023/02/12/220212%E5%88%B7%E9%A2%98/" rel="prev" title="220212刷题">
       <i class="fa fa-chevron-left"></i> 220212刷题
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/02/14/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%90%88%E9%9B%86/" rel="next" title="滑动窗口合集">
+      滑动窗口合集 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -347,7 +372,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#202-%E5%BF%AB%E4%B9%90%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">202. 快乐数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#202-%E5%BF%AB%E4%B9%90%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">202. 快乐数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#166-%E5%88%86%E6%95%B0%E5%88%B0%E5%B0%8F%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">166. 分数到小数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-1"><span class="nav-number">2.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -363,7 +388,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
