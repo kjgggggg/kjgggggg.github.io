@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="滑动窗口模板 1658.将x减到0的最小操作数(Mid) 2516.每种字符至少取K个(Mid) 904.水果成篮(Mid)">
+  <meta name="description" content="滑动窗口模板 1658.将x减到0的最小操作数(Mid) 2516.每种字符至少取K个(Mid) 904.水果成篮(Mid) 567.字符串的排列(Mid)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="滑动窗口合集">
 <meta property="og:url" content="https://kjgggggg.github.io/2023/02/14/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%90%88%E9%9B%86/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="滑动窗口模板 1658.将x减到0的最小操作数(Mid) 2516.每种字符至少取K个(Mid) 904.水果成篮(Mid)">
+<meta property="og:description" content="滑动窗口模板 1658.将x减到0的最小操作数(Mid) 2516.每种字符至少取K个(Mid) 904.水果成篮(Mid) 567.字符串的排列(Mid)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-14T08:16:24.000Z">
-<meta property="article:modified_time" content="2023-02-14T17:17:47.849Z">
+<meta property="article:modified_time" content="2023-02-15T02:52:37.616Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="滑动窗口">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-15 01:17:47" itemprop="dateModified" datetime="2023-02-15T01:17:47+08:00">2023-02-15</time>
+                <time title="修改时间：2023-02-15 10:52:37" itemprop="dateModified" datetime="2023-02-15T10:52:37+08:00">2023-02-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">滑动窗口模板 1658.将x减到0的最小操作数(Mid) 2516.每种字符至少取K个(Mid) 904.水果成篮(Mid)</div>
+            <div class="post-description">滑动窗口模板 1658.将x减到0的最小操作数(Mid) 2516.每种字符至少取K个(Mid) 904.水果成篮(Mid) 567.字符串的排列(Mid)</div>
 
         </div>
       </header>
@@ -251,7 +251,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="滑动窗口模板"><a href="#滑动窗口模板" class="headerlink" title="滑动窗口模板"></a>滑动窗口模板</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>, sum = <span class="number">0</span>, windSize = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(r &lt; n)&#123;</span><br><span class="line">            sum += nums[r ++];</span><br><span class="line">            <span class="keyword">while</span>(sum &gt; target &amp;&amp; l &lt; n) sum -= nums[l ++];</span><br><span class="line">            <span class="keyword">if</span>(sum == target) windSize = <span class="built_in">max</span>(windSize, r - l);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="滑动窗口模板"><a href="#滑动窗口模板" class="headerlink" title="滑动窗口模板"></a>滑动窗口模板</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>, sum = <span class="number">0</span>, windSize = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">while</span>(r &lt; n)&#123;</span><br><span class="line">    sum += nums[r ++];</span><br><span class="line">    <span class="keyword">while</span>(sum &gt; target &amp;&amp; l &lt; n) sum -= nums[l ++];</span><br><span class="line">    <span class="keyword">if</span>(sum == target) windSize = <span class="built_in">max</span>(windSize, r - l);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -326,6 +326,41 @@
 <li><code>0 &lt;= fruits[i] &lt; fruits.length</code></li>
 </ul>
 <h4 id="C-2"><a href="#C-2" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">totalFruit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; fruits)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 种类 &lt;= 2 的最大窗口</span></span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>, windSize = <span class="number">0</span>;</span><br><span class="line">        map&lt;<span class="type">int</span> , <span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">while</span>(r &lt; fruits.<span class="built_in">size</span>())&#123;</span><br><span class="line">            mp[fruits[r ++]] ++;</span><br><span class="line">            <span class="keyword">while</span>(l &lt; fruits.<span class="built_in">size</span>() &amp;&amp; mp.<span class="built_in">size</span>() &gt; <span class="number">2</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>( -- mp[fruits[l]] == <span class="number">0</span>) mp.<span class="built_in">erase</span>(fruits[l]);</span><br><span class="line">                l ++;</span><br><span class="line">            &#125;</span><br><span class="line">            windSize = <span class="built_in">max</span>(windSize, r - l);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> windSize;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="567-字符串的排列"><a href="#567-字符串的排列" class="headerlink" title="567. 字符串的排列"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutation-in-string/">567. 字符串的排列</a></h3><p>给你两个字符串 <code>s1</code> 和 <code>s2</code> ，写一个函数来判断 <code>s2</code> 是否包含 <code>s1</code> 的排列。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>换句话说，<code>s1</code> 的排列之一是 <code>s2</code> 的 <strong>子串</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">s1</span> = <span class="string">&quot;ab&quot;</span> <span class="built_in">s2</span> = <span class="string">&quot;eidbaooo&quot;</span></span><br><span class="line">输出：true</span><br><span class="line">解释：<span class="built_in">s2</span> 包含 <span class="built_in">s1</span> 的排列之一 (<span class="string">&quot;ba&quot;</span>).</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：s1<span class="operator">=</span> <span class="string">&quot;ab&quot;</span> s2 <span class="operator">=</span> <span class="string">&quot;eidboaoo&quot;</span></span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s1.length, s2.length &lt;= 104</code></li>
+<li><code>s1</code> 和 <code>s2</code> 仅包含小写字母</li>
+</ul>
+<h4 id="C-3"><a href="#C-3" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">checkInclusion</span><span class="params">(string s1, string s2)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt1</span><span class="params">(<span class="number">26</span>)</span>,<span class="title">cnt2</span><span class="params">(<span class="number">26</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> e : s1)</span><br><span class="line">            cnt1[e - <span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r =<span class="number">0</span> ,windSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(r &lt; s2.<span class="built_in">size</span>())&#123;</span><br><span class="line">            cnt2[s2[r ++] - <span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">            <span class="keyword">while</span>(l &lt; s2.<span class="built_in">size</span>() &amp;&amp; cnt1[s2[l] - <span class="string">&#x27;a&#x27;</span>] &lt;  cnt2[s2[l] - <span class="string">&#x27;a&#x27;</span>]) cnt2[s2[l ++] - <span class="string">&#x27;a&#x27;</span>] --;</span><br><span class="line">            <span class="keyword">if</span>(cnt1 == cnt2) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="159-至多包含两个不同字符的最长子串"><a href="#159-至多包含两个不同字符的最长子串" class="headerlink" title="159. 至多包含两个不同字符的最长子串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-with-at-most-two-distinct-characters/">159. 至多包含两个不同字符的最长子串</a></h3><p>给你一个字符串 <code>s</code> ，请你找出 <strong>至多</strong> 包含 <strong>两个不同字符</strong> 的最长子串，并返回该子串的长度。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：s <span class="operator">=</span> <span class="string">&quot;eceba&quot;</span></span><br><span class="line">输出：<span class="number">3</span></span><br><span class="line">解释：满足题目要求的子串是 <span class="string">&quot;ece&quot;</span> ，长度为 <span class="number">3</span> 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">输入：s <span class="operator">=</span> <span class="string">&quot;ccaabbb&quot;</span></span><br><span class="line">输出：<span class="number">5</span></span><br><span class="line">解释：满足题目要求的子串是 <span class="string">&quot;aabbb&quot;</span> ，长度为 <span class="number">5</span> 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 105</code></li>
+<li><code>s</code> 由英文字母组成</li>
+</ul>
+<h4 id="C-4"><a href="#C-4" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstringTwoDistinct</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r =<span class="number">0</span> ,windSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(r &lt; n)&#123;</span><br><span class="line">            mp[s[r++]] ++;</span><br><span class="line">            <span class="keyword">while</span>(l &lt; n &amp;&amp; mp.<span class="built_in">size</span>() &gt; <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(-- mp[s[l]] == <span class="number">0</span>) mp.<span class="built_in">erase</span>(s[l]);</span><br><span class="line">                l ++;</span><br><span class="line">            &#125;</span><br><span class="line">            windSize = <span class="built_in">max</span>(windSize , r - l);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> windSize;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -408,7 +443,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">滑动窗口模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1658-%E5%B0%86-x-%E5%87%8F%E5%88%B0-0-%E7%9A%84%E6%9C%80%E5%B0%8F%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">1658. 将 x 减到 0 的最小操作数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">2.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2516-%E6%AF%8F%E7%A7%8D%E5%AD%97%E7%AC%A6%E8%87%B3%E5%B0%91%E5%8F%96-K-%E4%B8%AA"><span class="nav-number">3.</span> <span class="nav-text">2516. 每种字符至少取 K 个</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-1"><span class="nav-number">3.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#904-%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE"><span class="nav-number">4.</span> <span class="nav-text">904. 水果成篮</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-2"><span class="nav-number">4.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">滑动窗口模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1658-%E5%B0%86-x-%E5%87%8F%E5%88%B0-0-%E7%9A%84%E6%9C%80%E5%B0%8F%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">1658. 将 x 减到 0 的最小操作数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">2.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2516-%E6%AF%8F%E7%A7%8D%E5%AD%97%E7%AC%A6%E8%87%B3%E5%B0%91%E5%8F%96-K-%E4%B8%AA"><span class="nav-number">3.</span> <span class="nav-text">2516. 每种字符至少取 K 个</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-1"><span class="nav-number">3.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#904-%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE"><span class="nav-number">4.</span> <span class="nav-text">904. 水果成篮</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-2"><span class="nav-number">4.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#567-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">567. 字符串的排列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-3"><span class="nav-number">5.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#159-%E8%87%B3%E5%A4%9A%E5%8C%85%E5%90%AB%E4%B8%A4%E4%B8%AA%E4%B8%8D%E5%90%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="nav-number">6.</span> <span class="nav-text">159. 至多包含两个不同字符的最长子串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-4"><span class="nav-number">6.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
