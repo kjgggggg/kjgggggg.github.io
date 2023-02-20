@@ -15439,8 +15439,7 @@
 </blockquote>
 <p><code>const_cast&lt;type&gt;(a)</code> </p>
 <blockquote>
-<p>  用来修改类型的const属性 常量指针被转化成非常量指针，并且仍然指向原来的对象 .常用于函数重载</p>
-<p>  注意: 不能直接对非指针和非引用的变量使用 const_cast 操作符 </p>
+<p>  用来去除<strong>某指针或者引用的</strong>const属性 常量指针被转化成非常量指针，并且仍然指向原来的对象 </p>
 </blockquote>
 <p><code>reinterpret_cast&lt;type&gt;(a) </code></p>
 <blockquote>
@@ -15496,7 +15495,7 @@
 <tr>
 <td align="left">继承关系</td>
 <td align="center">不可以继承</td>
-<td align="center">可从类或者其他结构体继承</td>
+<td align="center">可继承类或者其他结构体</td>
 </tr>
 <tr>
 <td align="left">初始化</td>
@@ -15536,8 +15535,8 @@
 </li>
 <li><p>链接：将不同的源文件产生的目标文件进行链接，从而形成一个可以执行的程序。</p>
 <p>链接分为静态链接和动态链接。</p>
-<p>静态链接，是在链接的时候就已经把要调用的函数或者过程链接到了生成的可执行文件中，就算你在去把静态库删除也不会影响可执行程序的执行；生成的静态链接库，Windows下以.lib为后缀，Linux下以.a为后缀。</p>
-<p>而动态链接，是在链接的时候没有把调用的函数代码链接进去，而是在执行的过程中，再去找要链接的函数，生成的可执行文件中没有函数代码，只包含函数的重定位信息，所以当你删除动态库时，可执行程序就不能运行。生成的动态链接库，Windows下以.dll为后缀，Linux下以.so为后缀。</p>
+<p>静态链接，是在链接的时候就已经把要调用的函数或者过程链接到了生成的可执行文件中，就算你在去把静态库删除也不会影响可执行程序的执行；生成的静态链接库，Windows下.lib	Linux下.a</p>
+<p>而动态链接，是在链接的时候没有把调用的函数代码链接进去，而是在执行的过程中，再去找要链接的函数，生成的可执行文件中没有函数代码，只包含函数的重定位信息，所以当你删除动态库时，可执行程序就不能运行。生成的动态链接库，Windows下.dll，Linux下.so</p>
 </li>
 </ol>
 <hr>
@@ -15545,11 +15544,11 @@
 <li>修饰<strong>全局变量</strong>时，表明一个全局变量只对定义在同一文件中的函数可见。</li>
 <li>修饰<strong>局部变量</strong>时，表明该变量的值不会因为函数终止而丢失。</li>
 <li>修饰<strong>函数</strong>时，表明该函数只在同一文件中调用。</li>
-<li><strong>静态成员函数和静态成员变量</strong>是类的一部分，可以被多个对象所共享，无法对一个对象中的非静态成员进行访问。</li>
+<li><strong>静态成员函数和静态成员变量</strong>是类的一部分,可以被多个对象所共享,无法对一个对象中的非静态成员进行访问。</li>
 </ol>
 <hr>
-<h5 id="说说静态变量什么时候初始化"><a href="#说说静态变量什么时候初始化" class="headerlink" title="说说静态变量什么时候初始化"></a>说说静态变量什么时候初始化</h5><p>对于C语言的全局和静态变量，初始化发生在任何代码执行之前，属于编译期初始化。</p>
-<p>而C++标准规定：全局或静态对象当且仅当对象首次用到时才进行构造。</p>
+<h5 id="说说静态变量什么时候初始化"><a href="#说说静态变量什么时候初始化" class="headerlink" title="说说静态变量什么时候初始化"></a>说说静态变量什么时候初始化</h5><p>对于C语言的全局和静态变量，初始化发生在任何代码执行之前，属于编译期初始化</p>
+<p>而C++标准规定：全局或静态对象当且仅当对象首次用到时才进行构造</p>
 <hr>
 <h5 id="说说静态局部变量-全局变量-局部变量的特点"><a href="#说说静态局部变量-全局变量-局部变量的特点" class="headerlink" title="说说静态局部变量,全局变量,局部变量的特点"></a>说说静态局部变量,全局变量,局部变量的特点</h5><ol>
 <li><p><strong>首先从作用域考虑</strong>：C++里作用域可分为6种：全局，局部，类，语句，命名空间和文件作用域。</p>
@@ -15563,7 +15562,7 @@
 </ol>
 <hr>
 <h5 id="说说指针和引用的区别"><a href="#说说指针和引用的区别" class="headerlink" title="说说指针和引用的区别"></a>说说指针和引用的区别</h5><ol>
-<li>指针是一种数据类型，用于保存地址类型的数据，而引用可以看成是变量的别名。指针定义格式为：数据类型 <em>；而引用的定义格式为：数据类型 &amp;；</em></li>
+<li>指针用于保存地址类型的数据，而引用可以看成是变量的别名。</li>
 <li>引用不可以为空，当被创建的时候必须初始化，而指针变量可以是空值，在任何时候初始化</li>
 <li>指针可以有多级，但引用只能是一级</li>
 <li>引用使用时无需解引用（*），指针需要解引用  </li>
@@ -15621,9 +15620,9 @@
 </ol>
 <p>   <strong>内联函数的作用</strong>：内联函数在调用时，是将调用表达式用内联函数体来替换。避免函数调用的开销。</p>
 <hr>
-<h5 id="说说内联函数和宏函数的区别"><a href="#说说内联函数和宏函数的区别" class="headerlink" title="说说内联函数和宏函数的区别"></a>说说内联函数和宏函数的区别</h5><ol>
+<h5 id="说说内联函数和宏的区别"><a href="#说说内联函数和宏的区别" class="headerlink" title="说说内联函数和宏的区别"></a>说说内联函数和宏的区别</h5><ol>
 <li><strong>宏定义不是函数</strong>，但是使用起来像函数。预处理器用复制宏代码的方式代替函数的调用，省去了函数压栈退栈过程，提高了效率；<strong>而内联函数本质上是一个函数</strong>，内联函数一般用于函数体的代码比较简单的函数，不能包含复杂的控制语句，while、switch，并且内联函数本身不能直接调用自身</li>
-<li><strong>宏函数</strong>是在预编译的时候字符串替换 ；<strong>而内联函数</strong>则是在编译的时候进行代码插入，编译器会在每处调用内联函数的地方直接把内联函数的内容展开</li>
+<li><strong>宏函数</strong>是在预编译的时候字符串替换；<strong>而内联函数</strong>则是在编译的时候进行代码插入，编译器会在每处调用内联函数的地方直接把内联函数的内容展开</li>
 <li><strong>宏定义</strong>是没有类型检查的，无论对还是错都是直接替换；<strong>而内联函数</strong>在编译的时候会进行类型的检查，内联函数满足函数的性质，比如有返回值、参数列表等</li>
 </ol>
 <hr>
@@ -15635,15 +15634,14 @@
 </ol>
 <hr>
 <h5 id="说说new和malloc的区别，底层实现原理"><a href="#说说new和malloc的区别，底层实现原理" class="headerlink" title="说说new和malloc的区别，底层实现原理"></a>说说new和malloc的区别，底层实现原理</h5><ol>
-<li>new分配的内存空间所在位置是自由存储区，而malloc在堆上动态分配内存。自由存储区不仅可以是堆，还可以是静态存储区</li>
-<li>new是操作符，而malloc是函数。</li>
-<li>new在调用的时候先分配内存，在调用构造函数，释放的时候调用析构函数；而malloc没有构造函数和析构函数。</li>
-<li>malloc需要给定申请内存的大小，返回的指针需要强转；new会调用构造函数，不用指定内存的大小，返回指针不用强转。</li>
-<li>new可以被重载；malloc不行</li>
-<li>new分配内存更直接和安全。</li>
+<li>new是操作符，而malloc是函数。new可以被重载；malloc不行</li>
+<li>new在调用的时候先分配内存，在调用构造函数，释放的时候调用析构函数；而malloc没有构造函数和析构函数</li>
+<li>malloc需要给定申请内存的大小，返回的指针需要强转；new会调用构造函数，不用指定内存的大小，返回指针不用强转</li>
+<li>new分配内存更直接和安全</li>
 <li>new发生错误抛出异常，malloc返回null</li>
 </ol>
-<p><strong>malloc底层实现：</strong>当开辟的空间小于 128K 时，调用 brk () 函数；当开辟的空间大于 128K 时，调用mmap()。malloc采用的是内存池的管理方式，以减少内存碎片。先申请大块内存作为堆区，然后将堆区分为多个内存块。当用户申请内存时，直接从堆区分配一块合适的空闲块。采用隐式链表将所有空闲块，每一个空闲块记录了一个未分配的、连续的内存地址。</p>
+<p><strong>malloc底层实现：</strong>当开辟的空间小于 128K 时，调用 brk () 函数；当开辟的空间大于 128K 时，调用mmap()</p>
+<p>malloc采用的是内存池的管理方式，以减少内存碎片。先申请大块内存作为堆区，然后将堆区分为多个内存块。当用户申请内存时，直接从堆区分配一块合适的空闲块。采用隐式链表将所有空闲块，每一个空闲块记录了一个未分配的、连续的内存地址</p>
 <p><strong>new底层实现：</strong>关键字new在调用构造函数的时候实际上进行了如下的几个步骤：</p>
 <p> (1) 创建一个新的对象</p>
 <p> (2) 将构造函数的作用域赋值给这个新的对象（因此this指向了这个新的对象）</p>
@@ -15672,13 +15670,13 @@
 
 <hr>
 <h5 id="✅简述C-有几种传值方式-区别是什么？"><a href="#✅简述C-有几种传值方式-区别是什么？" class="headerlink" title="✅简述C++有几种传值方式,区别是什么？"></a>✅简述C++有几种传值方式,区别是什么？</h5><ol>
-<li>值传递：形参即使在函数体内值发生变化，也不会影响实参的值</li>
-<li>引用传递：形参在函数体内值发生变化，会影响实参的值</li>
+<li>值传递：不会影响实参的值</li>
+<li>引用传递：会影响实参的值</li>
 <li>指针传递：在指针指向没有发生改变的前提下，形参在函数体内值发生变化，会影响实参的值</li>
 </ol>
 <blockquote>
 <p>  值传递用于对象时，整个对象会拷贝一个副本，这样效率低；而引用传递用于对象时，不发生拷贝行为，只是绑定对象，更高效；指针传递本质是值传递，不如引用传递安全。</p>
-  <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">testfunc</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> *b, <span class="type">int</span> &amp;c)</span></span>&#123;<span class="comment">//形参a值发生了改变，但是没有影响实参i的值；但形参*b、c的值发生了改变，影响到了实参*j、k的值</span></span><br><span class="line">     a += <span class="number">1</span>;</span><br><span class="line">     (*b) += <span class="number">1</span>;</span><br><span class="line">     c += <span class="number">1</span>;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;a= %d, b= %d, c= %d\n&quot;</span>,a,*b,c);<span class="comment">//a= 2, b= 2, c= 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">     <span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">     <span class="type">int</span> *j = &amp;a;</span><br><span class="line">     <span class="type">int</span> k = <span class="number">1</span>;</span><br><span class="line">     <span class="built_in">testfunc</span>(i, j, k);</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;i= %d, j= %d, k= %d\n&quot;</span>,i,*j,k);<span class="comment">//i= 1, j= 2, k= 2</span></span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">testfunc</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> *b, <span class="type">int</span> &amp;c)</span></span>&#123;<span class="comment">//形参a值发生了改变，但是没有影响实参i的值；但形参*b、c的值发生了改变，影响到了实参*j、k的值</span></span><br><span class="line">     a += <span class="number">1</span>;</span><br><span class="line">     (*b) += <span class="number">1</span>;</span><br><span class="line">     c += <span class="number">1</span>;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;a= %d, b= %d, c= %d\n&quot;</span>,a,*b,c);<span class="comment">//a= 2, b= 2, c= 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="type">int</span> i = <span class="number">1</span>, a = <span class="number">1</span>, k = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> *j = &amp;a;</span><br><span class="line">     <span class="built_in">testfunc</span>(i, j, k);</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;i= %d, j= %d, k= %d\n&quot;</span>,i,*j,k);<span class="comment">//i= 1, j= 2, k= 2</span></span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <hr>
 <h5 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++11中允许将类标记为final，方法时直接在类名称后面使用关键字final，如此，意味着继承该类会导致编译错误</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Super</span> <span class="keyword">final</span>&#123;</span><br><span class="line">  <span class="comment">//......</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -15762,7 +15760,7 @@
 <p><strong>栈</strong>，在执行函数时，函数内局部变量的存储单元都可以在栈上创建，函数执行结束时这些存储单元自动被释放</p>
 <p><strong>堆</strong>，就是那些由malloc等分配的内存块，不过是用free来结束自己的生命</p>
 <p><strong>自由存储区</strong>，就是那些由new分配的内存块，和堆是十分相似的，对应delete</p>
-<p><strong>全局&#x2F;静态存储区</strong>，全局变量和静态变量被分配到同一块内存中</p>
+<p><strong>静态存储区</strong>，全局变量和静态变量被分配到同一块内存中</p>
 <p><strong>常量存储区</strong>，这是一块比较特殊的存储区，里面存放的是常量，不允许修改</p>
 </li>
 <li><p><strong>常见的内存错误及其对策</strong>：</p>
@@ -15793,7 +15791,7 @@
 <hr>
 <h5 id="请你来说一下C-里是怎么定义常量的？常量存放在内存的哪个位置？"><a href="#请你来说一下C-里是怎么定义常量的？常量存放在内存的哪个位置？" class="headerlink" title="请你来说一下C++里是怎么定义常量的？常量存放在内存的哪个位置？"></a>请你来说一下C++里是怎么定义常量的？常量存放在内存的哪个位置？</h5><p>局部常量，存放在栈区；</p>
 <p>全局常量，编译期一般不分配内存，放在符号表中以提高访问效率；</p>
-<p>字面值常量，比如字符串，放在常量区。</p>
+<p>字面值常量, 比如字符串，放在常量区。</p>
 <hr>
 <h5 id="简述C-中内存对齐的使用场景"><a href="#简述C-中内存对齐的使用场景" class="headerlink" title="简述C++中内存对齐的使用场景"></a>简述C++中内存对齐的使用场景</h5><p>内存对齐应用于三种数据类型中：<strong>struct&#x2F;class&#x2F;union</strong>，对齐原则有四个：</p>
 <ol>
@@ -15892,7 +15890,7 @@
 <p>在基类的函数前加上virtual关键字，在派生类中重写该函数，运行时将会根据对象的实际类型来调用相应的函数。如果对象类型是派生类，就调用派生类的函数；如果对象类型是基类，就调用基类的函数</p>
 <ol>
 <li>用virtual关键字申明的函数叫做虚函数，虚函数肯定是类的成员函数</li>
-<li>有虚函数的类都有个一维的虚函数表叫做虚表，类的对象有一个指向虚表开始的虚指针。虚函数表中存储的是类中的虚函数的地址。如果派生类重写了基类中的虚函数，则派生类对象的虚函数表中保存的是派生类的虚函数地址，如果派生类没有重写基类中的虚函数，则派生类对象的虚函数表中保存的是父类的虚函数地址</li>
+<li>有虚函数的类都有个一维的虚函数表叫做虚表，类的每个对象有一个指向虚表开始的虚指针。虚函数表中存储的是类中的虚函数的地址。如果派生类重写了基类中的虚函数，则派生类对象的虚指针指向派生类的虚函数地址，如果派生类没有重写基类中的虚函数，则派生类对象的虚指针指向的是父类的虚函数地址</li>
 <li><strong>多态</strong>性是一个接口多种实现，是面向对象的核心，分为类的多态性和函数的多态性</li>
 <li>重写用虚函数来实现，结合动态绑定</li>
 <li>纯虚函数是虚函数再加上 &#x3D; 0；抽象类是指包括至少一个纯虚函数的类</li>
@@ -15927,8 +15925,8 @@
 <h5 id="拷贝构造函数的参数是什么传递方式-为什么"><a href="#拷贝构造函数的参数是什么传递方式-为什么" class="headerlink" title="拷贝构造函数的参数是什么传递方式,为什么"></a>拷贝构造函数的参数是什么传递方式,为什么</h5><ol>
 <li><p>拷贝构造函数的参数必须使用引用传递</p>
 </li>
-<li><p>如果拷贝构造函数中的参数不是一个引用，即形如CClass(const CClass c_class)，那么就相当于采用了传值的方式(pass-by-value)，而传值的方式会调用该类的拷贝构造函数，从而造成无穷递归地调用拷贝构造函数。因此拷贝构造函数的参数必须是一个引用。</p>
-<p>需要澄清的是，传指针其实也是传值，如果上面的拷贝构造函数写成CClass(const CClass* c_class)，也是不行的。事实上，只有传引用不是传值外，其他所有的传递方式都是传值。</p>
+<li><p>如果拷贝构造函数中的参数不是一个引用，即形如CClass(const CClass c_class)，那么就相当于采用了传值的方式(pass-by-value)，<strong>而传值的方式会调用该类的拷贝构造函数，从而造成无穷递归地调用拷贝构造函数</strong>。因此拷贝构造函数的参数必须是一个引用</p>
+<p>需要澄清的是，传指针其实也是传值，如果上面的拷贝构造函数写成CClass(const CClass* c_class)，也是不行的。事实上，只有传引用不是传值外，其他所有的传递方式都是传值</p>
 </li>
 </ol>
 <hr>
@@ -16010,7 +16008,7 @@
 
 <hr>
 <h5 id="简述一下什么是常函数，有什么作用"><a href="#简述一下什么是常函数，有什么作用" class="headerlink" title="简述一下什么是常函数，有什么作用"></a>简述一下什么是常函数，有什么作用</h5><p>类的成员函数后面加 const，表明这个函数不会对这个类对象的数据成员（非静态的数据成员）作任何改变。</p>
-<p>在设计类的时候，一个原则就是对于不改变数据成员的成员函数都要在后面加const，而对于改变数据成员的成员函数不能加 const。所以 const 关键字对成员函数的行为作了更明确的限定：有 const 修饰的成员函数（指 const 放在函数参数表的后面，而不是在函数前面或者参数表内），只能读取数据成员，不能改变数据成员；</p>
+<p>在设计类的时候，一个原则就是对于不改变数据成员的成员函数都要在后面加const，而对于改变数据成员的成员函数不能加 const。所以 const 关键字对成员函数的行为作了更明确的限定：有 const 修饰的成员函数（指 const 放在函数参数表的后面，而不是在函数前面或者参数表内），只能读取数据成员，不能改变数据成员</p>
 <p>没有 const 修饰的成员函数，对数据成员则是可读可写的。</p>
 <p>除此之外，在类的成员函数后面加 const 还有什么好处呢？那就是 const对象可以调用 const 成员函数，而不能调用非const修饰的函数。正如非const类型的数据可以给const类型的变量赋值一样，反之则不成立。</p>
 <p>在实例化对象时添加const关键字，就是const对象，const对象只能访问类中的const成员变量和const成员函数</p>
@@ -16078,7 +16076,7 @@
 </li>
 <li><p>为什么C++不支持内联成员函数为虚函数？</p>
 <p>内联函数就是为了在代码中直接展开，减少函数调用花费的代价</p>
-<p>内联函数是在编译时期展开,而虚函数的特性是运行时才动态联编,所以两者矛盾,不能定义内联函数为虚函数</p>
+<p>内联函数是在编译时期展开,而虚函数的特性是运行时才动态绑定,所以两者矛盾,不能定义内联函数为虚函数</p>
 </li>
 <li><p>为什么C++不支持静态成员函数为虚函数？</p>
 <p>这也很简单，静态成员函数对于每个类来说只有一份代码，所有的对象都共享这一份代码，他也没有要动态绑定的必要性。静态成员函数属于一个类而非某一对象,没有this指针,它无法进行对象的判别</p>
@@ -16615,6 +16613,13 @@
 <p>chmod: 修改用户权限	</p>
 <p>chown: 更改或文件的所有权转让给指定的用户名</p>
 <p>echo: 将一些数据移到文件中。如果要将文本 “Hello, 我的名字叫 John” 添加到名为 name.txt 的文件中，<code> echo Hello,my name is John &gt;&gt; name.txt</code></p>
+<p>ldd: <code>ldd [OPTION] FILE</code>  查看libstdc++.so.6依赖的动态库的详细信息</p>
+<blockquote>
+<p>  ldd -v &#x2F;home&#x2F;libstdc++.so.6</p>
+</blockquote>
+<blockquote>
+<p>  –help 获取指令帮助信息；<br>  –version 打印指令版本号；<br>  -d,–data-relocs 执行重定位和报告任何丢失的对象；<br>  -r, –function-relocs 执行数据对象和函数的重定位，并且报告任何丢失的对象和函数；<br>  -u, –unused 打印未使用的直接依赖；<br>  -v, –verbose 详细信息模式，打印所有相关信息；</p>
+</blockquote>
 <hr>
 <h5 id="Linux中查看进程运行状态的指令、查看内存使用情况的指令、tar解压文件的参数"><a href="#Linux中查看进程运行状态的指令、查看内存使用情况的指令、tar解压文件的参数" class="headerlink" title="Linux中查看进程运行状态的指令、查看内存使用情况的指令、tar解压文件的参数"></a>Linux中查看进程运行状态的指令、查看内存使用情况的指令、tar解压文件的参数</h5><ol>
 <li><p>查看进程运行状态的指令：</p>
@@ -16725,11 +16730,11 @@
 </ol>
 <hr>
 <h5 id="说说进程-线程-协程是什么-区别？"><a href="#说说进程-线程-协程是什么-区别？" class="headerlink" title="说说进程,线程,协程是什么,区别？"></a>说说进程,线程,协程是什么,区别？</h5><ol>
-<li><p><strong>进程</strong>：程序是指令、数据及其组织形式的描述，而进程则是程序的运行实例，包括程序计数器、堆栈和变量值</p>
+<li><p><strong>进程</strong>：进程则是程序的运行实例，包括程序计数器、堆栈和变量值</p>
 </li>
-<li><p><strong>线程</strong>：微进程，一个进程里更小粒度的执行单元。一个进程里包含多个线程并发执行任务</p>
+<li><p><strong>线程</strong>：一个进程里更小粒度的执行单元。一个进程里包含多个线程并发执行任务</p>
 </li>
-<li><p><strong>协程</strong>：协程是微线程，在子程序内部执行，可在子程序内部中断，转而执行别的子程序，在适当的时候再返回来接着执行</p>
+<li><p><strong>协程</strong>：协程是微线程，在线程内部执行，可在线程内部中断，转而执行别的线程</p>
 </li>
 <li><p><strong>线程与进程的区别</strong>：</p>
 <p>（1）一个线程从属于一个进程；一个进程可以包含多个线程</p>
@@ -16743,8 +16748,8 @@
 <li><p><strong>线程与协程的区别：</strong></p>
 <p>（1）切换开销更少。协程直接操作栈基本没有内核切换的开销，所以上下文的切换非常快，切换开销比线程更小</p>
 <p>（2）协程不需要多线程的锁机制，因为协程从属于线程，不存在同时写变量冲突</p>
-<p>（3）协程占用内存少。执行协程只需要极少的栈内存（4～5KB），而线程栈的大小为1MB ; OS对于线程开辟数量限制在千的级别，而协程可以达到上万的级别。</p>
-<p>  (4)   线程是抢占式，而协程是非抢占式的，所以需要用户自己释放使用权来切换到其他协程，因此同一时间其实只有一个协程拥有运行权，相当于单线程的能力；</p>
+<p>（3）协程占用内存少。执行协程只需要极少的栈内存（4～5KB），而线程栈的大小为1MB ;</p>
+<p>  (4)   线程是抢占式，而协程是非抢占式的，所以需要用户自己释放使用权来切换到其他协程</p>
 </li>
 </ol>
 <hr>
@@ -17221,11 +17226,17 @@
 
 <hr>
 <h6 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h6><ol>
-<li>独立的列：在进行查询时，索引列不能是表达式的一部分，也不能是函数的参数，否则无法使用索引。</li>
-<li>多列索引	</li>
-<li>索引列的顺序：让选择性最强的索引列放在前面。		</li>
-<li>前缀索引：对于 BLOB、TEXT 和 VARCHAR 类型的列，必须使用前缀索引，只索引开始的部分字符。	</li>
-<li>覆盖索引：索引包含所有需要查询的字段的值。</li>
+<li><p>独立的列：在进行查询时，索引列不能是表达式的一部分，也不能是函数的参数，否则无法使用索引</p>
+</li>
+<li><p>多列索引	</p>
+</li>
+<li><p>索引列的顺序：让选择性最强的索引列放在前面</p>
+</li>
+<li><p>前缀索引：例如下面 SQL 语句不能使用索引。select * from doc where title like ‘%XX’</p>
+<p>而非前导模糊查询则可以使用索引，如下面的 SQL 语句。select * from doc where title like ‘XX%’</p>
+</li>
+<li><p>覆盖索引：如果有一个查询包含了所有索引的列，并且条件中也是根据这些索引字段检索，我们称之为覆盖索引</p>
+</li>
 </ol>
 <hr>
 <h6 id="应该建立索引的条件"><a href="#应该建立索引的条件" class="headerlink" title="应该建立索引的条件"></a>应该建立索引的条件</h6><ol>
