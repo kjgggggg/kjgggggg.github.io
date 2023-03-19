@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="72.编辑距离(Hard)">
+  <meta name="description" content="78.子集(Mid) 6352.美丽子集的数目(Mid)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="72.编辑距离">
-<meta property="og:url" content="https://kjgggggg.github.io/2022/11/01/72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/index.html">
+<meta property="og:title" content="78.子集">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/03/19/78-%E5%AD%90%E9%9B%86/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="72.编辑距离(Hard)">
+<meta property="og:description" content="78.子集(Mid) 6352.美丽子集的数目(Mid)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-01T14:03:10.000Z">
-<meta property="article:modified_time" content="2022-11-01T14:04:35.216Z">
+<meta property="article:published_time" content="2023-03-19T15:20:00.000Z">
+<meta property="article:modified_time" content="2023-03-19T15:22:07.946Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://kjgggggg.github.io/2022/11/01/72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">
+<link rel="canonical" href="https://kjgggggg.github.io/2023/03/19/78-%E5%AD%90%E9%9B%86/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>72.编辑距离 | kjg's blog</title>
+  <title>78.子集 | kjg's blog</title>
   
 
 
@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/11/01/72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/03/19/78-%E5%AD%90%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/WechatIMG84.jpeg">
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          72.编辑距离
+          78.子集
         </h1>
 
         <div class="post-meta">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-11-01 22:03:10 / 修改时间：22:04:35" itemprop="dateCreated datePublished" datetime="2022-11-01T22:03:10+08:00">2022-11-01</time>
+              <time title="创建时间：2023-03-19 23:20:00 / 修改时间：23:22:07" itemprop="dateCreated datePublished" datetime="2023-03-19T23:20:00+08:00">2023-03-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -234,7 +234,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">72.编辑距离(Hard)</div>
+            <div class="post-description">78.子集(Mid) 6352.美丽子集的数目(Mid)</div>
 
         </div>
       </header>
@@ -245,25 +245,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="72-编辑距离"><a href="#72-编辑距离" class="headerlink" title="72. 编辑距离"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/">72. 编辑距离</a></h3><p>给你两个单词 <code>word1</code> 和 <code>word2</code>， <em>请返回将 <code>word1</code> 转换成 <code>word2</code> 所使用的最少操作数</em> 。</p>
-<p>你可以对一个单词进行如下三种操作：</p>
-<ul>
-<li>插入一个字符</li>
-<li>删除一个字符</li>
-<li>替换一个字符</li>
-</ul>
+        <h3 id="78-子集"><a href="#78-子集" class="headerlink" title="78. 子集"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">78. 子集</a></h3><p>给你一个整数数组 <code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的子集（幂集）。</p>
+<p>解集 <strong>不能</strong> 包含重复的子集。你可以按 <strong>任意顺序</strong> 返回解集。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line">输入：word1 = <span class="string">&quot;horse&quot;</span>, word2 = <span class="string">&quot;ros&quot;</span></span><br><span class="line">输出：<span class="number">3</span></span><br><span class="line">解释：</span><br><span class="line"><span class="function"><span class="title">horse</span> -&gt;</span> rorse (将 <span class="string">&#x27;h&#x27;</span> 替换为 <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">rorse</span> -&gt;</span> rose (删除 <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">rose</span> -&gt;</span> ros (删除 <span class="string">&#x27;e&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[<span class="comment">[]</span>,<span class="comment">[1]</span>,<span class="comment">[2]</span>,<span class="comment">[1,2]</span>,<span class="comment">[3]</span>,<span class="comment">[1,3]</span>,<span class="comment">[2,3]</span>,<span class="comment">[1,2,3]</span>]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line">输入：word1 = <span class="string">&quot;intention&quot;</span>, word2 = <span class="string">&quot;execution&quot;</span></span><br><span class="line">输出：<span class="number">5</span></span><br><span class="line">解释：</span><br><span class="line"><span class="function"><span class="title">intention</span> -&gt;</span> inention (删除 <span class="string">&#x27;t&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">inention</span> -&gt;</span> enention (将 <span class="string">&#x27;i&#x27;</span> 替换为 <span class="string">&#x27;e&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">enention</span> -&gt;</span> exention (将 <span class="string">&#x27;n&#x27;</span> 替换为 <span class="string">&#x27;x&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">exention</span> -&gt;</span> exection (将 <span class="string">&#x27;n&#x27;</span> 替换为 <span class="string">&#x27;c&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">exection</span> -&gt;</span> execution (插入 <span class="string">&#x27;u&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：nums = [<span class="number">0</span>]</span><br><span class="line">输出：<span class="string">[[],[0]]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>0 &lt;= word1.length, word2.length &lt;= 500</code></li>
-<li><code>word1</code> 和 <code>word2</code> 由小写英文字母组成</li>
+<li><code>1 &lt;= nums.length &lt;= 10</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+<li><code>nums</code> 中的所有元素 <strong>互不相同</strong></li>
 </ul>
-<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 问题1：如果 word1[0..i-1] 到 word2[0..j-1] 的变换需要消耗 k 步，那 word1[0..i] 到 word2[0..j] 的变换需要几步呢？</span></span><br><span class="line"><span class="comment">// 答：先使用 k 步，把 word1[0..i-1] 变换到 word2[0..j-1]，消耗 k 步。再把 word1[i] 改成 word2[j]，就行了。如果 word1[i] == word2[j]，什么也不用做，一共消耗 k 步，否则需要修改，一共消耗 k + 1 步。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 问题2：如果 word1[0..i-1] 到 word2[0..j] 的变换需要消耗 k 步，那 word1[0..i] 到 word2[0..j] 的变换需要消耗几步呢？</span></span><br><span class="line"><span class="comment">// 答：先经过 k 步，把 word1[0..i-1] 变换到 word2[0..j]，消耗掉 k 步，再把 word1[i] 删除，这样，word1[0..i] 就完全变成了 word2[0..j] 了。一共 k + 1 步。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 问题3：如果 word1[0..i] 到 word2[0..j-1] 的变换需要消耗 k 步，那 word1[0..i] 到 word2[0..j] 的变换需要消耗几步呢？</span></span><br><span class="line"><span class="comment">// 答：先经过 k 步，把 word1[0..i] 变换成 word2[0..j-1]，消耗掉 k 步，接下来，再插入一个字符 word2[j], word1[0..i] 就完全变成了 word2[0..j] 了。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minDistance</span><span class="params">(string word1, string word2)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = word1.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> n = word2.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(m + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            dp[<span class="number">0</span>][i] = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i ++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j ++)&#123;</span><br><span class="line">              	<span class="comment">// word数组从0开始</span></span><br><span class="line">                <span class="type">int</span> temp = word1[i - <span class="number">1</span>] == word2[j - <span class="number">1</span>] ? dp[i - <span class="number">1</span>][j - <span class="number">1</span>] : dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>; </span><br><span class="line">                dp[i][j] = <span class="built_in">min</span>(<span class="built_in">min</span>(temp, dp[i - <span class="number">1</span>][j] + <span class="number">1</span>), dp[i][j - <span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> cur, vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur == nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不考虑当前位置</span></span><br><span class="line">        <span class="built_in">dfs</span>(cur + <span class="number">1</span>, nums);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 考虑当前位置</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(nums[cur]);</span><br><span class="line">        <span class="built_in">dfs</span>(cur + <span class="number">1</span>, nums);</span><br><span class="line">        path.<span class="built_in">pop_back</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">subsets</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>, nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="6352-美丽子集的数目"><a href="#6352-美丽子集的数目" class="headerlink" title="6352. 美丽子集的数目"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/the-number-of-beautiful-subsets/">6352. 美丽子集的数目</a></h3><p>给你一个由正整数组成的数组 <code>nums</code> 和一个 <strong>正</strong> 整数 <code>k</code> 。</p>
+<p>如果 <code>nums</code> 的子集中，任意两个整数的绝对差均不等于 <code>k</code> ，则认为该子数组是一个 <strong>美丽</strong> 子集。</p>
+<p>返回数组 <code>nums</code> 中 <strong>非空</strong> 且 <strong>美丽</strong> 的子集数目。</p>
+<p><code>nums</code> 的子集定义为：可以经由 <code>nums</code> 删除某些元素（也可能不删除）得到的一个数组。只有在删除元素时选择的索引不同的情况下，两个子集才会被视作是不同的子集。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="comment">[2,4,6]</span>, k = 2</span><br><span class="line">输出：4</span><br><span class="line">解释：数组 nums 中的美丽子集有：<span class="comment">[2]</span>, <span class="comment">[4]</span>, <span class="comment">[6]</span>, <span class="comment">[2, 6]</span> 。</span><br><span class="line">可以证明数组 <span class="comment">[2,4,6]</span> 中只存在 4 个美丽子集。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="comment">[1]</span>, k = 1</span><br><span class="line">输出：1</span><br><span class="line">解释：数组 nums 中的美丽数组有：<span class="comment">[1]</span> 。</span><br><span class="line">可以证明数组 <span class="comment">[1]</span> 中只存在 1 个美丽子集。 </span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 20</code></li>
+<li><code>1 &lt;= nums[i], k &lt;= 1000</code></li>
+</ul>
+<h4 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 选到x的时候，如果之前选过 x−k 或 x+k，则不能选，否则可以选</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">beautifulSubsets</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">-1</span>; <span class="comment">// 去掉空集</span></span><br><span class="line">        map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; cnt; <span class="comment">// 用数组实现比哈希表更快</span></span><br><span class="line">        function&lt;<span class="type">void</span> (<span class="type">int</span>)&gt; dfs = [&amp;](<span class="type">int</span> i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 不选</span></span><br><span class="line">            <span class="built_in">dfs</span>(i + <span class="number">1</span>); </span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 选</span></span><br><span class="line">            <span class="type">int</span> x = nums[i]; <span class="comment">// 避免负数下标</span></span><br><span class="line">            <span class="keyword">if</span> (!cnt[x - k] &amp;&amp; !cnt[x + k]) &#123;</span><br><span class="line">                ++cnt[x]; <span class="comment">// 选</span></span><br><span class="line">                <span class="built_in">dfs</span>(i + <span class="number">1</span>);</span><br><span class="line">                --cnt[x]; <span class="comment">// 恢复现场</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -275,7 +292,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/leetcode/" rel="tag"># leetcode</a>
-              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
           </div>
 
         
@@ -284,13 +301,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/10/30/297-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="prev" title="297.二叉树的序列化与反序列化">
-      <i class="fa fa-chevron-left"></i> 297.二叉树的序列化与反序列化
+    <a href="/2023/03/19/1262-%E5%8F%AF%E8%A2%AB%E4%B8%89%E6%95%B4%E9%99%A4%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C/" rel="prev" title="1262.可被三整除的最大和">
+      <i class="fa fa-chevron-left"></i> 1262.可被三整除的最大和
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/11/02/120-%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/" rel="next" title="120.三角形最小路径和">
-      120.三角形最小路径和 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -349,7 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">72. 编辑距离</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#78-%E5%AD%90%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">78. 子集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6352-%E7%BE%8E%E4%B8%BD%E5%AD%90%E9%9B%86%E7%9A%84%E6%95%B0%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">6352. 美丽子集的数目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-1"><span class="nav-number">2.1.</span> <span class="nav-text">C++</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
