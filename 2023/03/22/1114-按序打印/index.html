@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="1114.按序打印(Easy)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1114.按序打印">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/03/22/1114-%E6%8C%89%E5%BA%8F%E6%89%93%E5%8D%B0/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="1114.按序打印(Easy)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-22T13:58:04.000Z">
+<meta property="article:modified_time" content="2023-03-22T15:25:36.426Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2023/03/22/1114-%E6%8C%89%E5%BA%8F%E6%89%93%E5%8D%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>1114.按序打印 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/03/22/1114-%E6%8C%89%E5%BA%8F%E6%89%93%E5%8D%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          1114.按序打印
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-22 21:58:04 / 修改时间：23:25:36" itemprop="dateCreated datePublished" datetime="2023-03-22T21:58:04+08:00">2023-03-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">1114.按序打印(Easy)</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1114-按序打印"><a href="#1114-按序打印" class="headerlink" title="1114. 按序打印"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/print-in-order/">1114. 按序打印</a></h3><p>给你一个类：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Foo</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">first</span>()</span> &#123; print(<span class="string">&quot;first&quot;</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">second</span>()</span> &#123; print(<span class="string">&quot;second&quot;</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">third</span>()</span> &#123; print(<span class="string">&quot;third&quot;</span>); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>三个不同的线程 A、B、C 将会共用一个 <code>Foo</code> 实例。</p>
+<ul>
+<li>线程 A 将会调用 <code>first()</code> 方法</li>
+<li>线程 B 将会调用 <code>second()</code> 方法</li>
+<li>线程 C 将会调用 <code>third()</code> 方法</li>
+</ul>
+<p>请设计修改程序，以确保 <code>second()</code> 方法在 <code>first()</code> 方法之后被执行，<code>third()</code> 方法在 <code>second()</code> 方法之后被执行。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>尽管输入中的数字似乎暗示了顺序，但是我们并不保证线程在操作系统中的调度顺序。</li>
+<li>你看到的输入格式主要是为了确保测试的全面性。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="selector-attr">[1,2,3]</span></span><br><span class="line">输出：<span class="string">&quot;firstsecondthird&quot;</span></span><br><span class="line">解释：</span><br><span class="line">有三个线程会被异步启动。输入 <span class="selector-attr">[1,2,3]</span> 表示线程 A 将会调用 <span class="built_in">first</span>() 方法，线程 B 将会调用 <span class="built_in">second</span>() 方法，线程 C 将会调用 <span class="built_in">third</span>() 方法。正确的输出是 <span class="string">&quot;firstsecondthird&quot;</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="selector-attr">[1,3,2]</span></span><br><span class="line">输出：<span class="string">&quot;firstsecondthird&quot;</span></span><br><span class="line">解释：</span><br><span class="line">输入 <span class="selector-attr">[1,3,2]</span> 表示线程 A 将会调用 <span class="built_in">first</span>() 方法，线程 B 将会调用 <span class="built_in">third</span>() 方法，线程 C 将会调用 <span class="built_in">second</span>() 方法。正确的输出是 <span class="string">&quot;firstsecondthird&quot;</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>nums</code> 是 <code>[1, 2, 3]</code> 的一组排列</li>
+</ul>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><h5 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h5><p>针对这道题我们可以用两个互斥锁来阻塞 <code>second</code> 和 <code>third</code> 函数，分别在 <code>first</code> 和 <code>second</code> 执行结束后解锁。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    mutex mtx1, mtx2;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>() &#123;</span><br><span class="line">        mtx1.<span class="built_in">lock</span>(), mtx2.<span class="built_in">lock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        mtx1.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        mtx1.<span class="built_in">lock</span>();</span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        mtx1.<span class="built_in">unlock</span>();</span><br><span class="line">        mtx2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        mtx2.<span class="built_in">lock</span>();</span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">        mtx2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码能够 AC，但实际上这种使用 mutex 的方法是 错误的，因为根据 C++ 标准，在一个线程尝试对一个 mutex 对象进行 unlock 操作时，mutex 对象的所有权必须在这个线程上；也就是说，应该 由同一个线程来对一个 mutex 对象进行 lock 和 unlock 操作，否则会产生未定义行为。</p>
+<p>题目中提到了 first，second，third 三个函数分别是由三个不同的线程来调用的，但我们是在 Foo 对象构造时（可以是在 create 这几个线程的主线程中，也可以是在三个线程中的任意一个）对两个 mutex 对象进行 lock 操作的，因此，调用 first 和 second 函数的两个线程中至少有一个在尝试获取其他线程所拥有的 mutex 对象的所有权。</p>
+<p>另外，如果非要讨论这个解法有什么优化的余地的话，因为 mutex 对象本身是不保护任何数据的，我们只是通过 mutex 的机制来保护数据被同时访问，所以最好 使用 lock_guard 或者 unique_lock 提供的 RAII 机制来管理 mutex 对象，而不是直接操作 mutex 对象；其中 lock_guard 只拥有构造和析构函数，用来实现 RAII 机制，而 unique_lock 是一个完整的 mutex 所有权包装器，封装了所有 mutex 的函数：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    mutex mtx_1, mtx_2;</span><br><span class="line">    unique_lock&lt;mutex&gt; lock_1, lock_2;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>() : <span class="built_in">lock_1</span>(mtx_1, try_to_lock), <span class="built_in">lock_2</span>(mtx_2, try_to_lock) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        lock_1.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        <span class="function">lock_guard&lt;mutex&gt; <span class="title">guard</span><span class="params">(mtx_1)</span></span>;</span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        lock_2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        <span class="function">lock_guard&lt;mutex&gt; <span class="title">guard</span><span class="params">(mtx_2)</span></span>;</span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>mutex</code>对象<code>mtx_1</code>和<code>mtx_2</code>用于提供不同的互斥量，确保不同的线程对它们进行独占式访问。</p>
+<p><code>unique_lock</code>对象<code>lock_1</code>和<code>lock_2</code>用于在执行成员函数时锁定<code>mtx_1</code>和<code>mtx_2</code>。这些锁在类的构造函数中被创建，并使用<code>try_to_lock</code>参数进行初始化，该参数会尝试在不阻塞的情况下获取锁，如果锁不可用，则<code>unique_lock</code>将处于未锁定状态。</p>
+<p>成员函数<code>first</code>接受一个函数<code>printFirst</code>作为其参数，仅调用此函数，然后解锁<code>lock_1</code>。</p>
+<p>成员函数<code>second</code>首先使用<code>lock_guard</code>对象<code>guard</code>获取<code>mtx_1</code>的锁，<code>guard</code>对象在其作用域结束时会自动释放锁。然后调用函数<code>printSecond</code>，最后解锁<code>lock_2</code>。</p>
+<p>成员函数<code>third</code>类似地使用<code>lock_guard</code>对象获取<code>mtx_2</code>的锁，调用函数<code>printThird</code>，然后返回。</p>
+<h5 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;semaphore.h&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">sem_t</span> sem_1, sem_2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>() &#123;</span><br><span class="line">        <span class="built_in">sem_init</span>(&amp;sem_1, <span class="number">0</span>, <span class="number">0</span>), <span class="built_in">sem_init</span>(&amp;sem_2, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        <span class="built_in">sem_post</span>(&amp;sem_1); <span class="comment">// V;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sem_wait</span>(&amp;sem_1); <span class="comment">// P</span></span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        <span class="built_in">sem_post</span>(&amp;sem_2); <span class="comment">// V</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sem_wait</span>(&amp;sem_2); <span class="comment">// P</span></span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h5><p>我们平时进行的数据修改都是非原子操作，如果多个线程同时以非原子操作的方式修改同一个对象可能会发生数据争用，从而导致未定义行为；而 原子操作能够保证多个线程顺序访问，不会导致数据争用，其执行时没有任何其它线程能够修改相同的原子对象。</p>
+<p>针对这道题，我们可以让 second 和 third 函数等待原子变量被修改为某个值后再执行，然后分别在 first 和 second 函数中来修改这个原子变量。</p>
+<p>C++ 11 提供了 std::atomic<T> 模板类来构造原子对象：</T></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    std::atomic&lt;<span class="type">bool</span>&gt; a&#123; <span class="literal">false</span> &#125;;</span><br><span class="line">    std::atomic&lt;<span class="type">bool</span>&gt; b&#123; <span class="literal">false</span> &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        a = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!a) this_thread::<span class="built_in">sleep_for</span>(chrono::<span class="built_in">milliseconds</span>(<span class="number">1</span>));</span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        b = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!b) this_thread::<span class="built_in">sleep_for</span>(chrono::<span class="built_in">milliseconds</span>(<span class="number">1</span>));</span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="异步操作"><a href="#异步操作" class="headerlink" title="异步操作"></a>异步操作</h5><p>异步操作是一种，在不需要等待被调用方返回结果之前，就让操作继续进行下去的方法。针对这道题可以使用基于 future&#x2F;promise 的异步编程模型。</p>
+<p>future 和 promise 起源于函数式编程，其目的是将值（future）和计算方式（promise）分离，使得 promise 可以异步地修改 future，从而提高代码的可读性，并减少通信延迟。</p>
+<p>std::future 是用来获取异步操作结果的模板类；std::packaged_task, std::promise, std::async 都可以进行异步操作，并拥有一个 std::future 对象，用来存储它们所进行的异步操作返回或设置的值（或异常），这个值会在将来的某一个时间点，通过某种机制被修改后，保存在其对应的 std::future 对象中：</p>
+<p>对于 std::promise，可以通过调用 std::promise::set_value 来设置值并通知 std::future 对象：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    promise&lt;<span class="type">void</span>&gt; pro1, pro2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        pro1.<span class="built_in">set_value</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        pro1.<span class="built_in">get_future</span>().<span class="built_in">wait</span>();</span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        pro2.<span class="built_in">set_value</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        pro2.<span class="built_in">get_future</span>().<span class="built_in">wait</span>();</span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码定义了一个名为 <code>Foo</code> 的类，其中包含三个方法 <code>first</code>、<code>second</code> 和 <code>third</code>，以及两个 <code>promise</code> 对象 <code>pro1</code> 和 <code>pro2</code>。</p>
+<p>这个类的设计目的是：让三个方法 <code>first</code>、<code>second</code> 和 <code>third</code> 按照固定的顺序依次执行，并且在 <code>first</code> 方法执行后，才能执行 <code>second</code> 方法，<code>second</code> 方法执行后，才能执行 <code>third</code> 方法。</p>
+<p>具体来说，<code>first</code> 方法接收一个函数 <code>printFirst</code>，并立即调用该函数。然后，它调用 <code>pro1.set_value()</code> 方法，将 <code>pro1</code> 对象的值设置为已完成状态。</p>
+<p><code>second</code> 方法接收一个函数 <code>printSecond</code>，并在 <code>pro1</code> 对象的值被设置为已完成状态后（即 <code>pro1.get_future().wait()</code> 返回）才能执行。然后，它调用 <code>printSecond()</code> 方法，将 <code>pro2</code> 对象的值设置为已完成状态。</p>
+<p><code>third</code> 方法接收一个函数 <code>printThird</code>，并在 <code>pro2</code> 对象的值被设置为已完成状态后（即 <code>pro2.get_future().wait()</code> 返回）才能执行。然后，它调用 <code>printThird()</code> 方法。</p>
+<p>这个类的主要目的是为了演示如何使用 <code>promise</code> 和 <code>future</code> 实现多线程编程中的同步操作，保证多个线程按照预定的顺序依次执行。</p>
+<h5 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h5><p><code>std::condition_variable</code> 是一种用来同时阻塞多个线程的<strong>同步原语</strong>（synchronization primitive），**<code>std::condition_variable</code> 必须和 <code>std::unique_lock</code> 搭配使用**：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    condition_variable cv;</span><br><span class="line">    mutex mtx;</span><br><span class="line">    <span class="type">int</span> k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        k = <span class="number">1</span>;</span><br><span class="line">        cv.<span class="built_in">notify_all</span>();    <span class="comment">// 通知其他所有在等待唤醒队列中的线程</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        <span class="function">unique_lock&lt;mutex&gt; <span class="title">lock</span><span class="params">(mtx)</span></span>;   <span class="comment">// lock mtx</span></span><br><span class="line">        cv.<span class="built_in">wait</span>(lock, [<span class="keyword">this</span>]()&#123; <span class="keyword">return</span> k == <span class="number">1</span>; &#125;);  <span class="comment">// unlock mtx，并阻塞等待唤醒通知，需要满足 k == 1 才能继续运行</span></span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        k = <span class="number">2</span>;</span><br><span class="line">        cv.<span class="built_in">notify_one</span>();    <span class="comment">// 随机通知一个（unspecified）在等待唤醒队列中的线程</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        <span class="function">unique_lock&lt;mutex&gt; <span class="title">lock</span><span class="params">(mtx)</span></span>;   <span class="comment">// lock mtx</span></span><br><span class="line">        cv.<span class="built_in">wait</span>(lock, [<span class="keyword">this</span>]()&#123; <span class="keyword">return</span> k == <span class="number">2</span>; &#125;);  <span class="comment">// unlock mtx，并阻塞等待唤醒通知，需要满足 k == 2 才能继续运行</span></span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>first</code> 函数首先被调用，然后将 <code>k</code> 的值设置为 1，并使用 <code>cv.notify_all()</code> 通知其他正在等待唤醒的线程。</p>
+<p><code>second</code> 函数首先获取 <code>mtx</code> 的独占锁，然后使用 <code>cv.wait()</code> 阻塞当前线程，并等待满足 <code>k == 1</code> 的条件，当条件满足时，打印 <code>printSecond</code> 并将 <code>k</code> 的值设置为 2，并使用 <code>cv.notify_one()</code> 随机通知一个正在等待唤醒的线程。</p>
+<p><code>third</code> 函数也获取 <code>mtx</code> 的独占锁，然后使用 <code>cv.wait()</code> 阻塞当前线程，并等待满足 <code>k == 2</code> 的条件，当条件满足时，打印 <code>printThird</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">unique_lock&lt;mutex&gt; <span class="title">lock</span><span class="params">(mtx)</span></span>;  </span><br><span class="line">cv.<span class="built_in">wait</span>(lock, [<span class="keyword">this</span>]()&#123; <span class="keyword">return</span> k == <span class="number">1</span>; &#125;); </span><br></pre></td></tr></table></figure>
+
+<p>首先创建了一个 <code>unique_lock</code> 对象 <code>lock</code> 并使用 <code>mtx</code> 作为其构造函数的参数，从而对 <code>mtx</code> 加锁。</p>
+<p>然后，<code>cv.wait(lock, [this]()&#123; return k == 1; &#125;);</code> 在 <code>cv</code>（条件变量）上等待，此时当前线程会释放 <code>mtx</code>，并阻塞在条件变量上，直到条件函数 <code>[this]()&#123; return k == 1; &#125;</code> 返回 <code>true</code> 或者被唤醒。条件函数的含义是，只有在 <code>k</code> 的值等于 1 时，才允许线程继续往下执行</p>
+<p>等待期间，<code>unique_lock</code> 对象 <code>lock</code> 保持着 <code>mtx</code> 的独占锁，避免了其他线程的干扰。当满足条件后，<code>wait()</code> 函数会重新对 <code>mtx</code> 加锁，并将 <code>lock</code> 对象的所有权从等待线程转移给当前线程，从而使当前线程可以安全地访问共享资源。</p>
+<p>需要注意的是，在等待期间，<code>wait()</code> 函数会释放 <code>mtx</code>，以便其他线程可以访问临界区，这也是条件变量的基本机制之一，可以避免死锁和资源浪费。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/20/51-N-%E7%9A%87%E5%90%8E/" rel="prev" title="51.N皇后">
+      <i class="fa fa-chevron-left"></i> 51.N皇后
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1114-%E6%8C%89%E5%BA%8F%E6%89%93%E5%8D%B0"><span class="nav-number">1.</span> <span class="nav-text">1114. 按序打印</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">1.1.</span> <span class="nav-text">C++</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%92%E6%96%A5%E9%94%81"><span class="nav-number">1.1.1.</span> <span class="nav-text">互斥锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.4.</span> <span class="nav-text">异步操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.5.</span> <span class="nav-text">条件变量</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
