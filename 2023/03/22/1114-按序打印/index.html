@@ -28,7 +28,7 @@
 <meta property="og:description" content="1114.按序打印(Easy)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-22T13:58:04.000Z">
-<meta property="article:modified_time" content="2023-03-22T15:25:36.426Z">
+<meta property="article:modified_time" content="2023-03-28T04:18:29.700Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="多线程">
@@ -212,10 +212,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-03-22 21:58:04 / 修改时间：23:25:36" itemprop="dateCreated datePublished" datetime="2023-03-22T21:58:04+08:00">2023-03-22</time>
+              <time title="创建时间：2023-03-22 21:58:04" itemprop="dateCreated datePublished" datetime="2023-03-22T21:58:04+08:00">2023-03-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-28 12:18:29" itemprop="dateModified" datetime="2023-03-28T12:18:29+08:00">2023-03-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -273,7 +279,7 @@
 <h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><h5 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h5><p>针对这道题我们可以用两个互斥锁来阻塞 <code>second</code> 和 <code>third</code> 函数，分别在 <code>first</code> 和 <code>second</code> 执行结束后解锁。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    mutex mtx1, mtx2;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>() &#123;</span><br><span class="line">        mtx1.<span class="built_in">lock</span>(), mtx2.<span class="built_in">lock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        mtx1.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        mtx1.<span class="built_in">lock</span>();</span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        mtx1.<span class="built_in">unlock</span>();</span><br><span class="line">        mtx2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        mtx2.<span class="built_in">lock</span>();</span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">        mtx2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>这段代码能够 AC，但实际上这种使用 mutex 的方法是 错误的，因为根据 C++ 标准，在一个线程尝试对一个 mutex 对象进行 unlock 操作时，mutex 对象的所有权必须在这个线程上；也就是说，应该 由同一个线程来对一个 mutex 对象进行 lock 和 unlock 操作，否则会产生未定义行为。</p>
+<p>这段代码能够 AC，但实际上这种使用 mutex 的方法是 错误的，因为根据 C++ 标准，在一个线程尝试对一个 mutex 对象进行 unlock 操作时，mutex 对象的所有权必须在这个线程上；<strong>也就是说，应该 由同一个线程来对一个 mutex 对象进行 lock 和 unlock 操作</strong>，否则会产生未定义行为。</p>
 <p>题目中提到了 first，second，third 三个函数分别是由三个不同的线程来调用的，但我们是在 Foo 对象构造时（可以是在 create 这几个线程的主线程中，也可以是在三个线程中的任意一个）对两个 mutex 对象进行 lock 操作的，因此，调用 first 和 second 函数的两个线程中至少有一个在尝试获取其他线程所拥有的 mutex 对象的所有权。</p>
 <p>另外，如果非要讨论这个解法有什么优化的余地的话，因为 mutex 对象本身是不保护任何数据的，我们只是通过 mutex 的机制来保护数据被同时访问，所以最好 使用 lock_guard 或者 unique_lock 提供的 RAII 机制来管理 mutex 对象，而不是直接操作 mutex 对象；其中 lock_guard 只拥有构造和析构函数，用来实现 RAII 机制，而 unique_lock 是一个完整的 mutex 所有权包装器，封装了所有 mutex 的函数：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">    mutex mtx_1, mtx_2;</span><br><span class="line">    unique_lock&lt;mutex&gt; lock_1, lock_2;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>() : <span class="built_in">lock_1</span>(mtx_1, try_to_lock), <span class="built_in">lock_2</span>(mtx_2, try_to_lock) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">first</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printFirst)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printFirst</span>();</span><br><span class="line">        lock_1.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">second</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printSecond)</span> </span>&#123;</span><br><span class="line">        <span class="function">lock_guard&lt;mutex&gt; <span class="title">guard</span><span class="params">(mtx_1)</span></span>;</span><br><span class="line">        <span class="built_in">printSecond</span>();</span><br><span class="line">        lock_2.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">third</span><span class="params">(function&lt;<span class="type">void</span>()&gt; printThird)</span> </span>&#123;</span><br><span class="line">        <span class="function">lock_guard&lt;mutex&gt; <span class="title">guard</span><span class="params">(mtx_2)</span></span>;</span><br><span class="line">        <span class="built_in">printThird</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
