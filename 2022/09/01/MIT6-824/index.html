@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="MIT6.824">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT6.824">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="MIT6.824">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/image-20230401215921894.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/image-20230403000919945.png">
+<meta property="article:published_time" content="2022-09-01T13:18:15.000Z">
+<meta property="article:modified_time" content="2023-04-03T05:42:57.509Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="MIT6.824">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/image-20230401215921894.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2022/09/01/MIT6-824/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MIT6.824 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/09/01/MIT6-824/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIT6.824
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-01 21:18:15" itemprop="dateCreated datePublished" datetime="2022-09-01T21:18:15+08:00">2022-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-03 13:42:57" itemprop="dateModified" datetime="2023-04-03T13:42:57+08:00">2023-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MIT6-824/" itemprop="url" rel="index"><span itemprop="name">MIT6.824</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">MIT6.824</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">/Users/jiangangkong/workSpace/vscodeWorkSpace/<span class="number">6.824</span></span><br><span class="line">- Makefile	</span><br><span class="line">- src</span><br><span class="line">    - <span class="keyword">go</span>.mod		</span><br><span class="line">    - labgob		</span><br><span class="line">		labgob.<span class="keyword">go</span>	test_test.<span class="keyword">go</span></span><br><span class="line">    - models		</span><br><span class="line">		kv.<span class="keyword">go</span></span><br><span class="line">    - porcupine	</span><br><span class="line">		bitset.<span class="keyword">go</span>		model.<span class="keyword">go</span>		visualization.<span class="keyword">go</span></span><br><span class="line">		checker.<span class="keyword">go</span>		porcupine.<span class="keyword">go</span></span><br><span class="line">    - shardkv</span><br><span class="line">		client.<span class="keyword">go</span>	common.<span class="keyword">go</span>	config.<span class="keyword">go</span>	server.<span class="keyword">go</span>	test_test.<span class="keyword">go</span></span><br><span class="line">    - <span class="keyword">go</span>.sum		</span><br><span class="line">    - labrpc	</span><br><span class="line">		labrpc.<span class="keyword">go</span>	test_test.<span class="keyword">go</span></span><br><span class="line">    - mr		</span><br><span class="line">		coordinator.<span class="keyword">go</span>	  rpc.<span class="keyword">go</span>	worker.<span class="keyword">go</span></span><br><span class="line">    - raft</span><br><span class="line">		config.<span class="keyword">go</span>	persister.<span class="keyword">go</span>	raft.<span class="keyword">go</span>		test_test.<span class="keyword">go</span>	util.<span class="keyword">go</span></span><br><span class="line">    - kvraft</span><br><span class="line">		client.<span class="keyword">go</span>	common.<span class="keyword">go</span>	config.<span class="keyword">go</span>	server.<span class="keyword">go</span>	test_test.<span class="keyword">go</span></span><br><span class="line">    - main	</span><br><span class="line">		diskvd.<span class="keyword">go</span>			pbd.<span class="keyword">go</span>					pg-sherlock_holmes.txt</span><br><span class="line">        lockc.<span class="keyword">go</span>			pg-being_ernest.txt		pg-tom_sawyer.txt</span><br><span class="line">        lockd.<span class="keyword">go</span>			pg-dorian_gray.txt		test-mr-many.sh</span><br><span class="line">        mrcoordinator.<span class="keyword">go</span>	pg-frankenstein.txt		test-mr.sh</span><br><span class="line">        mrsequential.<span class="keyword">go</span>		pg-grimm.txt			viewd.<span class="keyword">go</span></span><br><span class="line">        mrworker.<span class="keyword">go</span>			pg-huckleberry_finn.txt</span><br><span class="line">        pbc.<span class="keyword">go</span>				pg-metamorphosis.txt</span><br><span class="line">    - mrapps	</span><br><span class="line">		crash.<span class="keyword">go</span>		indexer.<span class="keyword">go</span>		mtiming.<span class="keyword">go</span>		rtiming.<span class="keyword">go</span></span><br><span class="line">		early_exit.<span class="keyword">go</span>	jobcount.<span class="keyword">go</span>		nocrash.<span class="keyword">go</span>		wc.<span class="keyword">go</span></span><br><span class="line">    - shardctrler</span><br><span class="line">		client.<span class="keyword">go</span>	common.<span class="keyword">go</span>	config.<span class="keyword">go</span>	server.<span class="keyword">go</span>	test_test.<span class="keyword">go</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="Lab-1-MapReduce"><a href="#Lab-1-MapReduce" class="headerlink" title="Lab 1: MapReduce"></a>Lab 1: MapReduce</h3><p><strong>Introduction</strong></p>
+<p>在本实验中，您将构建一个MapReduce系统。您将实现一个调用应用程序Map和Reduce函数并处理文件读写的工作进程，以及一个将任务分发给workers进程并处理失败的工作进程的master进程。您将构建与MapReduce论文类似的东西</p>
+<p><strong>Getting started</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/vscodeWorkSpace</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://g.csail.mit.edu/6.824-golabs-2020 6.824</span><br><span class="line"><span class="built_in">cd</span> 6.824</span><br><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2022/09/01/MIT6-824/image-20230401215921894.png" alt="image-20230401215921894" style="zoom:50%;">
+
+<p>我们在 <code>src/main/mrsequential.go</code>为你提供了一个简单的  sequential mapreduce 实现  It runs the maps and reduces one at a time, in a single process. </p>
+<p>We also provide you with a couple of MapReduce applications:  </p>
+<p>单词计数器 <code>mrapps/wc.go</code>,  文本索引器  <code>mrapps/indexer.go</code>. 你可以按如下指令运行它们</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/jiangangkong/workSpace/vscodeWorkSpace/6.824</span><br><span class="line"><span class="built_in">cd</span> src/main</span><br><span class="line"><span class="comment"># 使用 Go 工具链中的 go build 命令来构建一个插件，插件的源代码是 ../mrapps/wc.go 文件</span></span><br><span class="line">go build -buildmode=plugin ../mrapps/wc.go</span><br><span class="line"><span class="comment"># 删除所有以 &quot;mr-out&quot; 开头的文件，例如 &quot;mr-out-1.txt&quot;，&quot;mr-out-2.txt&quot;</span></span><br><span class="line"><span class="built_in">rm</span> mr-out*</span><br><span class="line"><span class="comment"># 使用wc.so作业和所有以pg开头并以.txt结尾的当前目录中的文件作为输入来运行mrsequential.go程序</span></span><br><span class="line"><span class="comment"># mrsequential.go 程序将读取输入文件，使用 wc.so 作业进行处理，并输出结果</span></span><br><span class="line">go run mrsequential.go wc.so pg*.txt </span><br><span class="line">more mr-out-0 <span class="comment"># 查看文件内容 Q退出more模式</span></span><br></pre></td></tr></table></figure>
+
+<p>请随意从mrsequence .go中借用代码。您还应该看看mrapps&#x2F;wc。去看看MapReduce应用程序代码是什么样的</p>
+<p><strong>Your Job</strong></p>
+<p>您的工作是实现一个分布式MapReduce，由两个程序组成, the master and the worker. There will be just one master process, and one or more worker processes executing in parallel. </p>
+<p>The workers will talk to the master via RPC. Each worker process will ask the master for a task, read the task’s input from one or more files, execute the task, and write the task’s output to one or more files. The master should notice if a worker hasn’t completed its task in a reasonable amount of time (for this lab, use ten seconds), and give the same task to a different worker.</p>
+<p>为方便你开始，The “main” routines for the master and worker are in <code>main/mrmaster.go</code> and <code>main/mrworker.go</code>; </p>
+<p>don’t change these files. Put your implementation in <code>mr/master.go</code>, <code>mr/worker.go</code>, and <code>mr/rpc.go</code>.</p>
+<p><strong>Run your code</strong></p>
+<p>Here’s how to run your code on the word-count MapReduce application.</p>
+<p>First, make sure the word-count plugin is freshly built:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go build -buildmode=plugin ../mrapps/wc.go</span><br></pre></td></tr></table></figure>
+
+<p>In the <code>main</code> directory, run the master.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> mr-out*</span><br><span class="line">go run mrmaster.go pg-*.txt</span><br></pre></td></tr></table></figure>
+
+<p>The <code>pg-*.txt</code> arguments to <code>mrmaster.go</code> are the input files; each file corresponds to one “split”, and is the input to one Map task.</p>
+<p>In one or more other windows, run some workers:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go run mrworker.go wc.so</span><br></pre></td></tr></table></figure>
+
+<p>When the workers and master have finished, look at the output in <code>mr-out-*</code>. When you’ve completed the lab, the sorted union of the output files should match the sequential output, like this:</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cat</span> mr-<span class="keyword">out</span>-* | <span class="keyword">sort</span> | <span class="keyword">more</span></span><br><span class="line"></span><br><span class="line">A 509</span><br><span class="line"><span class="keyword">ABOUT</span> 2</span><br><span class="line">ACT 8</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>We supply you with a test script in <code>main/test-mr.sh</code>. The tests check that the <code>wc</code> and <code>indexer</code> MapReduce applications produce the correct output when given the <code>pg-xxx.txt</code> files as input. The tests also check that your implementation runs the Map and Reduce tasks in parallel, and that your implementation recovers from workers that crash while running tasks.</p>
+<p>If you run the test script now, it will hang because the master never finishes:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/6.824/src/main</span><br><span class="line">sh test-mr.sh</span><br><span class="line">*** Starting <span class="built_in">wc</span> <span class="built_in">test</span>.</span><br></pre></td></tr></table></figure>
+
+<p>You can change <code>ret := false</code> to true in the Done function in <code>mr/master.go</code> so that the master exits immediately. Then:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh ./test-mr.sh</span><br><span class="line">*** Starting <span class="built_in">wc</span> <span class="built_in">test</span>.</span><br><span class="line"><span class="built_in">sort</span>: No such file or directory</span><br><span class="line">cmp: EOF on mr-wc-all</span><br><span class="line">--- <span class="built_in">wc</span> output is not the same as mr-correct-wc.txt</span><br><span class="line">--- <span class="built_in">wc</span> <span class="built_in">test</span>: FAIL</span><br></pre></td></tr></table></figure>
+
+<p>The test script expects to see output in files named <code>mr-out-X</code>, one for each reduce task. The empty implementations of <code>mr/master.go</code> and <code>mr/worker.go</code> don’t produce those files (or do much of anything else), so the test fails.</p>
+<p>When you’ve finished, the test script output should look like this:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh ./test-mr.sh</span><br><span class="line">*** Starting <span class="built_in">wc</span> <span class="built_in">test</span>.</span><br><span class="line">--- <span class="built_in">wc</span> <span class="built_in">test</span>: PASS</span><br><span class="line">*** Starting indexer <span class="built_in">test</span>.</span><br><span class="line">--- indexer <span class="built_in">test</span>: PASS</span><br><span class="line">*** Starting map parallelism <span class="built_in">test</span>.</span><br><span class="line">--- map parallelism <span class="built_in">test</span>: PASS</span><br><span class="line">*** Starting reduce parallelism <span class="built_in">test</span>.</span><br><span class="line">--- reduce parallelism <span class="built_in">test</span>: PASS</span><br><span class="line">*** Starting crash <span class="built_in">test</span>.</span><br><span class="line">--- crash <span class="built_in">test</span>: PASS</span><br><span class="line">*** PASSED ALL TESTS</span><br></pre></td></tr></table></figure>
+
+<p>You’ll also see some errors from the Go RPC package that look like</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">2019/12/16 13:27:09 rpc.Register: method <span class="string">&quot;Done&quot;</span> has 1 input parameters; needs exactly three</span><br></pre></td></tr></table></figure>
+
+<p>Ignore these messages.</p>
+<h4 id="A-few-rules"><a href="#A-few-rules" class="headerlink" title="A few rules:"></a>A few rules:</h4><ul>
+<li><p>map 阶段 should divide the intermediate keys into buckets for <code>nReduce</code> reduce tasks, where <code>nReduce</code> is the argument that <code>main/mrmaster.go</code> passes to <code>MakeMaster()</code>.</p>
+</li>
+<li><p>The worker implementation should put the output of the X’th reduce task in the file <code>mr-out-X</code>.</p>
+</li>
+<li><p>A <code>mr-out-X</code> file should contain one line per Reduce function output. The line should be generated with the Go <code>&quot;%v %v&quot;</code> format, called with the key and value. Have a look in <code>main/mrsequential.go</code></p>
+</li>
+<li><p><code>main/mrmaster.go</code> expects <code>mr/master.go</code> to implement a <code>Done()</code> method that returns true when the MapReduce job is completely finished; at that point, <code>mrmaster.go</code> will exit.</p>
+</li>
+<li><p>When the job is completely finished, the worker processes should exit. A simple way to implement this is to use the return value from <code>call()</code>: if the worker fails to contact the master, it can assume that the master has exited because the job is done, and so the worker can terminate too. Depending on your design, you might also find it helpful to have a “please exit” pseudo-task （伪任务） that the master can give to workers</p>
+</li>
+</ul>
+<h4 id="Hints"><a href="#Hints" class="headerlink" title="Hints"></a>Hints</h4><ul>
+<li><p><strong>One way to get started</strong> is to modify <code>mr/worker.go</code>中的 <code>Worker()</code> to send an RPC to the master asking for a task. Then modify the master to respond with the file name of an 尚未启动的 map task. Then modify the worker to read that file and call the application Map function, as in <code>mrsequential.go</code>.</p>
+</li>
+<li><p>中间文件的合理命名约定是mr-X-Y，其中X是Map任务编号，Y是reduce任务编号</p>
+</li>
+<li><p>Workers的map部分可以使用ihash(key)函数为给定的key选择reduce任务</p>
+</li>
+<li><p>Workers 有时需要等待，reduces can’t start until the last map has finished. One possibility is for workers to periodically ask the master for work, sleeping with <code>time.Sleep()</code> between each request. Another possibility is for the relevant RPC handler in the master to have a loop that waits, either with <code>time.Sleep()</code> or <code>sync.Cond</code>. Go runs the handler for each RPC in its own thread, so the fact that one handler is waiting won’t prevent the master from processing other RPCs.</p>
+</li>
+</ul>
+<h4 id="※流程"><a href="#※流程" class="headerlink" title="※流程"></a>※流程</h4><p><img src="/2022/09/01/MIT6-824/image-20230403000919945.png" alt="image-20230403000919945"></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">run main/mrcoordinator.<span class="keyword">go</span> XXX*.txt</span><br><span class="line">-&gt; 调用 mr/coordinator.<span class="keyword">go</span>/MakeCoordinator() 初始化 c *Coordinato  </span><br><span class="line">-&gt; 调用 c.server() start a thread that listens <span class="keyword">for</span> RPCs from worker.<span class="keyword">go</span></span><br><span class="line">-&gt; 调用 <span class="keyword">go</span> c.schedule() 启动一个线程调度任务执行，根据阶段和任务状态分配新任务，</span><br><span class="line">   处理工作节点的心跳和报告信息，并将任务分配给空闲工作节点</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Coordinator)</span></span> schedule() &#123;</span><br><span class="line">	c.initMapPhase() <span class="comment">// 进入 Map 流程, 将所有.txt文件封装成task 放入 c.tasks</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 进入一个无限循环中，通过 select 语句监听两个通道：heartbeatCh 和 reportCh</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="comment">// 当从heartbeatCh中收到消息时, 它会根据当前任务的阶段</span></span><br><span class="line">        <span class="comment">//（MapPhase、ReducePhase 或 CompletePhase）来选择一个任务并将其分配给一个可用的 Worker</span></span><br><span class="line">		<span class="keyword">case</span> msg := &lt;-c.heartbeatCh:</span><br><span class="line">			<span class="keyword">if</span> c.phase == CompletePhase &#123;</span><br><span class="line">				msg.response.JobType = CompleteJob</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> c.selectTask(msg.response) &#123;</span><br><span class="line">				<span class="keyword">switch</span> c.phase &#123;</span><br><span class="line">				<span class="keyword">case</span> MapPhase:</span><br><span class="line">					log.Printf(<span class="string">&quot;Coordinator: %v finished, start %v \n&quot;</span>, MapPhase, ReducePhase)</span><br><span class="line">					c.initReducePhase()</span><br><span class="line">					c.selectTask(msg.response) <span class="comment">// 并改写 msg.response</span></span><br><span class="line">				<span class="keyword">case</span> ReducePhase:</span><br><span class="line">					log.Printf(<span class="string">&quot;Coordinator: %v finished, Congratulations \n&quot;</span>, ReducePhase)</span><br><span class="line">					c.initCompletePhase()</span><br><span class="line">					msg.response.JobType = CompleteJob</span><br><span class="line">				<span class="keyword">case</span> CompletePhase:</span><br><span class="line">					<span class="built_in">panic</span>(fmt.Sprintf(<span class="string">&quot;Coordinator: enter unexpected branch&quot;</span>))</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			log.Printf(<span class="string">&quot;Coordinator: assigned a task %v to worker \n&quot;</span>, msg.response)</span><br><span class="line">			msg.ok &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">		<span class="keyword">case</span> msg := &lt;-c.reportCh:</span><br><span class="line">			<span class="keyword">if</span> msg.request.Phase == c.phase &#123;</span><br><span class="line">				log.Printf(<span class="string">&quot;Coordinator: Worker has executed task %v \n&quot;</span>, msg.request)</span><br><span class="line">				c.tasks[msg.request.Id].status = Finished</span><br><span class="line">			&#125;</span><br><span class="line">			msg.ok &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Worker-模块"><a href="#Worker-模块" class="headerlink" title="Worker 模块"></a>Worker 模块</h5><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 只有 doHeartbeat 可能引起状态的转换，doReport 是一个worker 进程完成了</span></span><br><span class="line">main/mrworker.<span class="keyword">go</span> calls mr/mrworker.<span class="keyword">go</span>/Worker()</span><br><span class="line">-&gt; Worker() 首先 doHeartbeat()</span><br><span class="line">拿到 response := doHeartbeat() 后，将 response 传给 doMapTask/ doReduceTask</span><br><span class="line">-&gt; 根据response.JobType 决定 doMapTask()/doReduceTask() 会 doReport()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doHeartbeat</span><span class="params">()</span></span> *HeartbeatResponse &#123;</span><br><span class="line">	response := HeartbeatResponse&#123;&#125;</span><br><span class="line">	call(<span class="string">&quot;Coordinator.Heartbeat&quot;</span>, &amp;HeartbeatRequest&#123;&#125;, &amp;response)</span><br><span class="line">	<span class="keyword">return</span> &amp;response</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doReport</span><span class="params">(id <span class="type">int</span>, phase SchedulePhase)</span></span> &#123;</span><br><span class="line">	call(<span class="string">&quot;Coordinator.Report&quot;</span>, &amp;ReportRequest&#123;id, phase&#125;, &amp;ReportResponse&#123;&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Lab-2A-Raft选举"><a href="#Lab-2A-Raft选举" class="headerlink" title="Lab 2A: Raft选举"></a>Lab 2A: Raft选举</h3><p>A service calls <code>Make(peers,me,…)</code> to create a Raft peer. The peers argument is an array of network identifiers of the Raft peers (including this one), for use with RPC. The <code>me</code> argument is the index of this peer in the peers array.</p>
+<p>The service expects your implementation to send an <code>ApplyMsg</code> for each newly committed log entry to the <code>applyCh</code> channel argument to <code>Make()</code>.</p>
+<p><code>raft.go</code> contains example code that sends an RPC (<code>sendRequestVote()</code>) and that handles an incoming RPC (<code>RequestVote()</code>). Your Raft peers should exchange RPCs using the labrpc Go package (source in <code>src/labrpc</code>). The tester can tell <code>labrpc</code> to delay RPCs, re-order them, and discard them to simulate various network failures. While you can temporarily modify <code>labrpc</code>, make sure your Raft works with the original <code>labrpc</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 一开始，集群内所有节点都是follower状态，term都为<span class="number">1</span>,各节点维护自己的election_timeout</span><br><span class="line"><span class="number">2.</span> 如果在某节点election_timeout到达时还没有收到Leader节点的心跳，就会发起新一轮的Leader选举过程</span><br><span class="line"><span class="number">3.</span> 此时S2节点最先超时，现将自己term+<span class="number">1</span>变为<span class="number">2</span>, 将自己的状态切换为Candidate状态，投自己一票，并向其余所有节点发起Request Vote RPC请求</span><br><span class="line"><span class="number">4.</span> 由于目前集群中只有一个Candidate，因此其余节点都投了赞成票，然后将自己的term都+<span class="number">1</span>保持与Candidate节点一致的状态</span><br><span class="line"><span class="number">5.</span> 由于S2节点都到了超过集群机器数一半的票数，当选为Leader节点，状态转换为Leader，S2称为Leader后会不断向其他节点发心跳</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MIT6-824/" rel="tag"># MIT6.824</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/26/flutter/" rel="prev" title="flutter">
+      <i class="fa fa-chevron-left"></i> flutter
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/09/26/Linux/" rel="next" title="Linux">
+      Linux <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-MapReduce"><span class="nav-number">2.</span> <span class="nav-text">Lab 1: MapReduce</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-few-rules"><span class="nav-number">2.1.</span> <span class="nav-text">A few rules:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hints"><span class="nav-number">2.2.</span> <span class="nav-text">Hints</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%BB%E6%B5%81%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">※流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Worker-%E6%A8%A1%E5%9D%97"><span class="nav-number">2.3.1.</span> <span class="nav-text">Worker 模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-2A-Raft%E9%80%89%E4%B8%BE"><span class="nav-number">3.</span> <span class="nav-text">Lab 2A: Raft选举</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
