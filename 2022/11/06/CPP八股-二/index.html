@@ -20,21 +20,20 @@
     var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
   </script>
 
-  <meta name="description" content="MIT分布式">
+  <meta name="description" content="CPP八股(二)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MIT分布式">
+<meta property="og:title" content="CPP八股(二)">
 <meta property="og:url" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/index.html">
 <meta property="og:site_name" content="kjg&#39;s blog">
-<meta property="og:description" content="MIT分布式">
+<meta property="og:description" content="CPP八股(二)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230331224549573.png">
-<meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230401015053515.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230209194441920.png">
 <meta property="article:published_time" content="2022-11-06T14:21:59.000Z">
-<meta property="article:modified_time" content="2023-03-31T17:51:00.648Z">
+<meta property="article:modified_time" content="2023-04-05T08:20:38.556Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230331224549573.png">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230209194441920.png">
 
 <link rel="canonical" href="https://kjgggggg.github.io/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/">
 
@@ -49,7 +48,7 @@
   };
 </script>
 
-  <title>MIT分布式 | kjg's blog</title>
+  <title>CPP八股(二) | kjg's blog</title>
   
 
 
@@ -205,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MIT分布式
+          CPP八股(二)
         </h1>
 
         <div class="post-meta">
@@ -222,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-01 01:51:00" itemprop="dateModified" datetime="2023-04-01T01:51:00+08:00">2023-04-01</time>
+                <time title="修改时间：2023-04-05 16:20:38" itemprop="dateModified" datetime="2023-04-05T16:20:38+08:00">2023-04-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +241,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">MIT分布式</div>
+            <div class="post-description">CPP八股(二)</div>
 
         </div>
       </header>
@@ -253,8 +252,172 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="01-Intro"><a href="#01-Intro" class="headerlink" title="01 Intro"></a>01 Intro</h1><p><img src="/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230331224549573.png" alt="image-20230331224549573"></p>
-<img src="/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230401015053515.png" alt="image-20230401015053515" style="zoom:50%;">
+        <h4 id="C-语言基础"><a href="#C-语言基础" class="headerlink" title="C++语言基础"></a>C++语言基础</h4><h5 id="简述下C-语言的特点"><a href="#简述下C-语言的特点" class="headerlink" title="简述下C++语言的特点"></a>简述下C++语言的特点</h5><ol>
+<li><p>C++在C语言基础上引入了<strong>面对对象(三大特性:封装、继承、多态)<strong>的机制，同时也</strong>兼容C语言</strong></p>
+</li>
+<li><p>C++运行<strong>效率高</strong>，仅比汇编语言慢10%～20%</p>
+</li>
+<li><p>C++更加安全, 增加了const常量、引用、四类cast转换（static_cast、dynamic_cast、const_cast、reinterpret_cast）、智能指针、try catch</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dynamic_cast</span>&lt;type&gt;(a) <span class="comment">// 用于类之间的转型，运行期间会做检查，转型失败会返回0并抛出bad_cast.</span></span><br><span class="line"><span class="built_in">static_cast</span>&lt;type&gt;(a) <span class="comment">// 这个其实和传统的C语言的强制转换是一样的，它不会做任何检查，如果转型失败就会发生未知错误。</span></span><br><span class="line"><span class="built_in">const_cast</span>&lt;type&gt;(a) <span class="comment">// 把a从const型转为非const型，常用于函数重载</span></span><br><span class="line"><span class="built_in">reinterpret_cast</span>&lt;type&gt;(a) <span class="comment">// 可进行任意转型，把a中的内存按type的方式来解读，需要程序员保证转换的正确性。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C++<strong>可复用性</strong>高，C++引入了<strong>模板</strong>的概念，后面在此基础上，实现了方便开发的标准模板库STL（Standard Template Library）</p>
+</li>
+<li><p>C++是<strong>不断在发展</strong>的语言。C++后续版本更是发展了不少新特性，如C++11中引入了nullptr、auto变量、Lambda函数、右值引用、智能指针</p>
+</li>
+</ol>
+<hr>
+<h5 id="说说C语言和C-的区别"><a href="#说说C语言和C-的区别" class="headerlink" title="说说C语言和C++的区别"></a>说说C语言和C++的区别</h5><ol>
+<li><p>C++<strong>面对对象</strong>；C是<strong>面对过程</strong></p>
+</li>
+<li><p>C是C++的子集，但是C++又有很多<strong>新特性</strong>，如引用、智能指针、auto变量等</p>
+</li>
+<li><p>C不安全，如指针使用的潜在危险、强制转换的不确定性、内存泄露等。而C++<strong>更安全</strong>，如const常量、引用、cast转换、智能指针、try catch</p>
+</li>
+<li><p>C++<strong>可复用性</strong>高，C++引入了<strong>模板</strong>的概念，实现了STL。相对于C语言的函数库<strong>更灵活、更通用</strong>。</p>
+</li>
+</ol>
+<hr>
+<h5 id="说说指针和引用的区别"><a href="#说说指针和引用的区别" class="headerlink" title="说说指针和引用的区别"></a>说说指针和引用的区别</h5><ol>
+<li>指针用于保存地址类型的数据，而引用可以看成是变量的别名。</li>
+<li>引用不可以为空，当被创建的时候必须初始化，而指针变量可以是空值，在任何时候初始化</li>
+<li>指针可以有多级，但引用只能是一级</li>
+<li>引用使用时无需解引用（*），指针需要解引用  </li>
+<li>指针的值在初始化后可以指向其它的存储单元，而引用在进行初始化后就不会再改变了 </li>
+<li>sizeof 引用得到的是所指向的变量（对象）的大小，而 sizeof 指针得到的是指针变量本身的大小</li>
+<li>指针作为函数参数传递时传递的是指针变量的值，而<strong>引用作为函数参数传递时传的是实参本身</strong>，不是副本</li>
+<li>指针和引用进行++运算意义不一样</li>
+</ol>
+<p><img src="/2022/11/06/CPP%E5%85%AB%E8%82%A1-%E4%BA%8C/image-20230209194441920.png" alt="image-20230209194441920"></p>
+<hr>
+<h5 id="说说使用指针需要注意什么"><a href="#说说使用指针需要注意什么" class="headerlink" title="说说使用指针需要注意什么"></a>说说使用指针需要注意什么</h5><ol>
+<li>定义指针时，先初始化为NULL</li>
+<li>用malloc或new申请内存之后，应该<strong>立即检查</strong>指针值是否不为NULL。防止使用空指针</li>
+<li>用free或delete释放了内存之后，立即将指针<strong>设置为NULL</strong>，防止“野指针”</li>
+<li>不要忘记为数组和动态内存<strong>赋初值</strong></li>
+<li>避免数字或指针的下标<strong>越界</strong>，特别要当心发生“多1”或者“少1”操作</li>
+<li>动态内存的申请与释放必须配对，防止<strong>内存泄漏</strong></li>
+</ol>
+<hr>
+<h5 id="什么是野指针-怎么产生的-如何避免？"><a href="#什么是野指针-怎么产生的-如何避免？" class="headerlink" title="什么是野指针,怎么产生的,如何避免？"></a>什么是野指针,怎么产生的,如何避免？</h5><ol>
+<li><p><strong>概念：</strong>野指针就是指针指向的位置是不可知的（随机的、不正确的、没有明确限制的）</p>
+</li>
+<li><p><strong>产生原因</strong>：释放内存后指针不及时置空（野指针），依然指向了该内存，那么可能出现非法访问的错误。这些我们都要注意避免</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> *p = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">char</span>)*<span class="number">100</span>);  </span><br><span class="line"><span class="built_in">strcpy</span>(p, <span class="string">&quot;Douya&quot;</span>);  </span><br><span class="line"><span class="built_in">free</span>(p);<span class="comment">//p所指向的内存被释放，但是p所指的地址仍然不变  </span></span><br><span class="line">...  </span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>)&#123;<span class="comment">//没有起到防错作用  </span></span><br><span class="line">    <span class="built_in">strcpy</span>(p, <span class="string">&quot;hello, Douya!&quot;</span>);<span class="comment">//出错  </span></span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>避免办法：</strong></p>
+<p>（1）初始化置NULL  <em><strong>空</strong></em></p>
+<p>（2）申请内存后判空   <em><strong>不空</strong></em></p>
+<p>（3）指针释放后置NULL   <em><strong>空</strong></em></p>
+<p>（4）使用智能指针 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> *p = <span class="literal">NULL</span>; <span class="comment">//初始化置NULL</span></span><br><span class="line">p = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">int</span>)*n); <span class="comment">//申请n个int内存空间  </span></span><br><span class="line"><span class="built_in">assert</span>(p != <span class="literal">NULL</span>); <span class="comment">//判空，防错设计</span></span><br><span class="line">p = (<span class="type">int</span> *) <span class="built_in">realloc</span>(p, <span class="number">25</span>);<span class="comment">//重新分配内存, p 所指向的内存块会被释放并分配一个新的内存地址</span></span><br><span class="line"><span class="built_in">free</span>(p);  </span><br><span class="line">p = <span class="literal">NULL</span>; <span class="comment">//释放后置空</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> *p1 = <span class="literal">NULL</span>; <span class="comment">//初始化置NULL</span></span><br><span class="line">p1 = (<span class="type">int</span> *)<span class="built_in">calloc</span>(n, <span class="built_in">sizeof</span>(<span class="type">int</span>)); <span class="comment">//申请n个int内存空间同时初始化为0 </span></span><br><span class="line"><span class="built_in">assert</span>(p1 != <span class="literal">NULL</span>); <span class="comment">//判空，防错设计</span></span><br><span class="line"><span class="built_in">free</span>(p1);  </span><br><span class="line">p1 = <span class="literal">NULL</span>; <span class="comment">//释放后置空</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> *p2 = <span class="literal">NULL</span>; <span class="comment">//初始化置NULL</span></span><br><span class="line">p2 = <span class="keyword">new</span> <span class="type">int</span>[n]; <span class="comment">//申请n个int内存空间  </span></span><br><span class="line"><span class="built_in">assert</span>(p2 != <span class="literal">NULL</span>); <span class="comment">//判空，防错设计</span></span><br><span class="line"><span class="keyword">delete</span> []p2;  </span><br><span class="line">p2 = <span class="literal">nullptr</span>; <span class="comment">//释放后置空  </span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h5 id="说说运算符i-和-i的区别"><a href="#说说运算符i-和-i的区别" class="headerlink" title="说说运算符i++和++i的区别"></a>说说运算符i++和++i的区别</h5><ol>
+<li><p><strong>效率不同</strong>：后置++ 执行速度比前置的慢</p>
+</li>
+<li><p><strong>i++ 不能作为左值，而++i 可以</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span>* p1 = &amp;(++i);<span class="comment">//正确</span></span><br><span class="line"><span class="comment">// int* p2 = &amp;(i++);//错误</span></span><br><span class="line">++i = <span class="number">1</span>;<span class="comment">//正确</span></span><br><span class="line"><span class="comment">// i++ = 1;//错误</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h5 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++11中允许将类标记为final，方法时直接在类名称后面使用关键字final，如此，意味着继承该类会导致编译错误</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Super</span> <span class="keyword">final</span>&#123;</span><br><span class="line">  <span class="comment">//......</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// C++中还允许将方法标记为final，这意味着无法再子类中重写该方法。这时final关键字至于方法参数列表后面</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Super</span> &#123;</span><br><span class="line">    <span class="built_in">Super</span>();</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">SomeMethod</span><span class="params">()</span> <span class="keyword">final</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="如何让两个类互相引用"><a href="#如何让两个类互相引用" class="headerlink" title="如何让两个类互相引用"></a>如何让两个类互相引用</h5><p>如果两个类相互引用，需要使用前置声明（forward declaration）来解决循环依赖问题。前置声明可以让编译器知道类的存在，而不需要提供完整的类定义</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>; <span class="comment">// 前置声明</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setB</span><span class="params">(B* b)</span> </span>&#123; m_b = b; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    B* m_b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setA</span><span class="params">(A* a)</span> </span>&#123; m_a = a; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    A* m_a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="C-内存"><a href="#C-内存" class="headerlink" title="C++内存"></a>C++内存</h4><h5 id="简述一下堆和栈的区别"><a href="#简述一下堆和栈的区别" class="headerlink" title="简述一下堆和栈的区别"></a>简述一下堆和栈的区别</h5><ol>
+<li><strong>堆栈空间分配不同</strong>。栈由操作系统自动分配释放 ，存放函数的参数值，局部变量的值等；堆一般由程序员分配释放。</li>
+<li><strong>堆栈缓存方式不同</strong>。栈使用的是一级缓存；堆则是存放在二级缓存中，速度要慢些。</li>
+<li><strong>堆栈数据结构不同</strong>。堆类似数组结构；栈类似栈结构，先进后出。</li>
+</ol>
+<hr>
+<h5 id><a href="#" class="headerlink" title></a></h5><h4 id="C-面向对象"><a href="#C-面向对象" class="headerlink" title="C++面向对象"></a>C++面向对象</h4><h5 id="简述一下面向对象的三大特征"><a href="#简述一下面向对象的三大特征" class="headerlink" title="简述一下面向对象的三大特征"></a>简述一下面向对象的三大特征</h5><p>面向对象的三大特征是封装、继承、多态。</p>
+<ol>
+<li><p>封装：将数据和操作数据的方法进行有机结合，隐藏对象的属性和实现细节，仅对外公开接口来和对象进行 交互。不想给别人看到的，我们使用protected&#x2F;private把成员封装起来。开放一些共有的成员函数对成员合理的访问。</p>
+</li>
+<li><p>继承：可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。</p>
+<table>
+<thead>
+<tr>
+<th align="left">继承方式</th>
+<th align="left">private继承</th>
+<th align="left">protected继承</th>
+<th align="left">public继承</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">基类的private成员</td>
+<td align="left">不可见</td>
+<td align="left">不可见</td>
+<td align="left">不可见</td>
+</tr>
+<tr>
+<td align="left">基类的protected成员</td>
+<td align="left">变为private成员</td>
+<td align="left">仍为protected成员</td>
+<td align="left">仍为protected成员</td>
+</tr>
+<tr>
+<td align="left">基类的public成员</td>
+<td align="left">变为private成员</td>
+<td align="left">变为protected成员</td>
+<td align="left">仍为public成员</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>多态：用父类型别的指针指向其子类的实例，然后<strong>通过父类的指针调用实际子类的成员函数</strong>。</p>
+</li>
+</ol>
+<hr>
+<h5 id="成员访问限定符"><a href="#成员访问限定符" class="headerlink" title="成员访问限定符"></a>成员访问限定符</h5><table>
+<thead>
+<tr>
+<th align="left">关键字</th>
+<th align="left">权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">public</td>
+<td align="left">可以被任意实体访问</td>
+</tr>
+<tr>
+<td align="left">protected</td>
+<td align="left">只允许子类及本类的成员函数访问</td>
+</tr>
+<tr>
+<td align="left">private</td>
+<td align="left">只允许本类的成员函数访问</td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="拷贝构造函数的参数是什么传递方式-为什么"><a href="#拷贝构造函数的参数是什么传递方式-为什么" class="headerlink" title="拷贝构造函数的参数是什么传递方式,为什么"></a>拷贝构造函数的参数是什么传递方式,为什么</h5><ol>
+<li><p>拷贝构造函数的参数必须使用引用传递</p>
+</li>
+<li><p>如果拷贝构造函数中的参数不是一个引用，即形如CClass(const CClass c_class)或CClass(const CClass* c_class)，那么就相当于采用了传值的方式(pass-by-value)，<strong>而传值的方式会调用该类的拷贝构造函数，从而造成无穷递归地调用拷贝构造函数</strong>。因此拷贝构造函数的参数必须是一个引用</p>
+</li>
+</ol>
+<hr>
+<h5 id="拷贝构造和移动构造的不同"><a href="#拷贝构造和移动构造的不同" class="headerlink" title="拷贝构造和移动构造的不同"></a>拷贝构造和移动构造的不同</h5><p>拷贝和移动是不同的操作：从A拷贝到B意味着，B分配了新内存，A的整个内容被拷贝到为B分配的新内存上。 而从A移动到B意味着分配给A的内存转移给了B，没有分配新的内存，它仅仅包含简单地拷贝指针</p>
+<hr>
+<h5 id="说说-C-类对象的初始化顺序-有多重继承的情况呢"><a href="#说说-C-类对象的初始化顺序-有多重继承的情况呢" class="headerlink" title="说说 C++ 类对象的初始化顺序,有多重继承的情况呢"></a>说说 C++ 类对象的初始化顺序,有多重继承的情况呢</h5><p>父类构造函数 –&gt; 成员类对象构造函数 –&gt; 自身构造函数</p>
+<blockquote>
+<p>  其中成员变量的初始化与声明顺序有关，构造函数的调用顺序是类派生列表中的顺序</p>
+<p>  析构顺序和构造顺序相反</p>
+</blockquote>
+<hr>
+<h5 id="仿函数了解吗？有什么作用"><a href="#仿函数了解吗？有什么作用" class="headerlink" title="仿函数了解吗？有什么作用"></a>仿函数了解吗？有什么作用</h5><ol>
+<li>仿函数（functor）又称为函数对象（function object）是一个能行使函数功能的类。仿函数的语法几乎和我们普通的函数调用一样，不过<strong>作为仿函数的类，都必须重载operator()运算符</strong>，举个例子：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Func</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> string&amp; str)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Func myFunc;</span><br><span class="line"><span class="built_in">myFunc</span>(<span class="string">&quot;helloworld!&quot;</span>);</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;helloworld!</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>仿函数既能像普通函数一样传入给定数量的参数，还能存储或者处理更多我们需要的有用信息</strong>。我们可以举个例子：假设有一个vector<string>,你的任务是统计长度小于5的string的个数，如果使用函数的话，你的代码可能长成这样：</string></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">LengthIsLessThanFive</span><span class="params">(<span class="type">const</span> string&amp; str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.<span class="built_in">length</span>() &lt; <span class="number">5</span>;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">LenthIsLessThan</span><span class="params">(<span class="type">const</span> string&amp; str, <span class="type">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.<span class="built_in">length</span>()&lt;len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -338,7 +501,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-Intro"><span class="nav-number">1.</span> <span class="nav-text">01 Intro</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">C++语言基础</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%8BC-%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">简述下C++语言的特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4C%E8%AF%AD%E8%A8%80%E5%92%8CC-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">说说C语言和C++的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.</span> <span class="nav-text">说说指针和引用的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88"><span class="nav-number">1.4.</span> <span class="nav-text">说说使用指针需要注意什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%87%8E%E6%8C%87%E9%92%88-%E6%80%8E%E4%B9%88%E4%BA%A7%E7%94%9F%E7%9A%84-%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">什么是野指针,怎么产生的,如何避免？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E8%BF%90%E7%AE%97%E7%AC%A6i-%E5%92%8C-i%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.</span> <span class="nav-text">说说运算符i++和++i的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#final%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.7.</span> <span class="nav-text">final关键字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%A4%E4%B8%AA%E7%B1%BB%E4%BA%92%E7%9B%B8%E5%BC%95%E7%94%A8"><span class="nav-number">1.8.</span> <span class="nav-text">如何让两个类互相引用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-%E5%86%85%E5%AD%98"><span class="nav-number">2.</span> <span class="nav-text">C++内存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">简述一下堆和栈的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">C++面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81"><span class="nav-number">3.1.</span> <span class="nav-text">简述一下面向对象的三大特征</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">3.2.</span> <span class="nav-text">成员访问限定符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E6%98%AF%E4%BB%80%E4%B9%88%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F-%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-number">3.3.</span> <span class="nav-text">拷贝构造函数的参数是什么传递方式,为什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%92%8C%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="nav-number">3.4.</span> <span class="nav-text">拷贝构造和移动构造的不同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4-C-%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F-%E6%9C%89%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E7%9A%84%E6%83%85%E5%86%B5%E5%91%A2"><span class="nav-number">3.5.</span> <span class="nav-text">说说 C++ 类对象的初始化顺序,有多重继承的情况呢</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%BF%E5%87%BD%E6%95%B0%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8"><span class="nav-number">3.6.</span> <span class="nav-text">仿函数了解吗？有什么作用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
