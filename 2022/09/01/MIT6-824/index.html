@@ -29,8 +29,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/image-20230401215921894.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/image-20230403000919945.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/image-20230405191056704.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2022/09/01/MIT6-824/image-20230405195601354.png">
 <meta property="article:published_time" content="2022-09-01T13:18:15.000Z">
-<meta property="article:modified_time" content="2023-04-05T05:09:02.271Z">
+<meta property="article:modified_time" content="2023-04-06T03:20:56.924Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="MIT6.824">
 <meta name="twitter:card" content="summary">
@@ -222,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-05 13:09:02" itemprop="dateModified" datetime="2023-04-05T13:09:02+08:00">2023-04-05</time>
+                <time title="修改时间：2023-04-06 11:20:56" itemprop="dateModified" datetime="2023-04-06T11:20:56+08:00">2023-04-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -346,11 +348,100 @@
 
 
 
-<h3 id="Lab-2A-Raft选举"><a href="#Lab-2A-Raft选举" class="headerlink" title="Lab 2A: Raft选举"></a>Lab 2A: Raft选举</h3><p>A service calls <code>Make(peers,me,…)</code> to create a Raft peer. The peers argument is an array of network identifiers of the Raft peers (including this one), for use with RPC. The <code>me</code> argument is the index of this peer in the peers array.</p>
-<p>The service expects your implementation to send an <code>ApplyMsg</code> for each newly committed log entry to the <code>applyCh</code> channel argument to <code>Make()</code>.</p>
-<p><code>raft.go</code> contains example code that sends an RPC (<code>sendRequestVote()</code>) and that handles an incoming RPC (<code>RequestVote()</code>). Your Raft peers should exchange RPCs using the labrpc Go package (source in <code>src/labrpc</code>). The tester can tell <code>labrpc</code> to delay RPCs, re-order them, and discard them to simulate various network failures. While you can temporarily modify <code>labrpc</code>, make sure your Raft works with the original <code>labrpc</code></p>
+<h3 id="Lab-2A-Raft"><a href="#Lab-2A-Raft" class="headerlink" title="Lab 2A: Raft"></a>Lab 2A: Raft</h3><p>选举：</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 一开始，集群内所有节点都是follower状态，term都为<span class="number">1</span>,各节点维护自己的election_timeout</span><br><span class="line"><span class="number">2.</span> 如果在某节点election_timeout到达时还没有收到Leader节点的心跳，就会发起新一轮的Leader选举过程</span><br><span class="line"><span class="number">3.</span> 此时S2节点最先超时，现将自己term+<span class="number">1</span>变为<span class="number">2</span>, 将自己的状态切换为Candidate状态，投自己一票，并向其余所有节点发起Request Vote RPC请求</span><br><span class="line"><span class="number">4.</span> 由于目前集群中只有一个Candidate，因此其余节点都投了赞成票，然后将自己的term都+<span class="number">1</span>保持与Candidate节点一致的状态</span><br><span class="line"><span class="number">5.</span> 由于S2节点都到了超过集群机器数一半的票数，当选为Leader节点，状态转换为Leader，S2称为Leader后会不断向其他节点发心跳</span><br></pre></td></tr></table></figure>
 
+
+
+
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">type Raft <span class="keyword">struct</span> &#123;</span><br><span class="line">	mu        sync.RWMutex        <span class="comment">// Lock to protect shared access to this peer&#x27;s state</span></span><br><span class="line">	peers     []*labrpc.ClientEnd <span class="comment">// RPC end points of all peers</span></span><br><span class="line">	persister *Persister          <span class="comment">// Object to hold this peer&#x27;s persisted state</span></span><br><span class="line">	me        <span class="type">int</span>                 <span class="comment">// this peer&#x27;s index into peers[]</span></span><br><span class="line">	dead      int32               <span class="comment">// set by Kill()</span></span><br><span class="line"></span><br><span class="line">	applyCh        chan ApplyMsg</span><br><span class="line">	applyCond      *sync.Cond   <span class="comment">// used to wakeup applier goroutine after committing new entries</span></span><br><span class="line">	replicatorCond []*sync.Cond <span class="comment">// used to signal replicator goroutine to batch replicating entries</span></span><br><span class="line">	state          NodeState</span><br><span class="line"></span><br><span class="line">	currentTerm <span class="type">int</span></span><br><span class="line">	votedFor    <span class="type">int</span></span><br><span class="line">	logs        []Entry <span class="comment">// the first entry is a dummy entry which contains LastSnapshotTerm, LastSnapshotIndex and nil Command</span></span><br><span class="line"></span><br><span class="line">	commitIndex <span class="type">int</span>   <span class="comment">// 已经被提交的日志条目的索引</span></span><br><span class="line">	lastApplied <span class="type">int</span>   <span class="comment">// 已经被应用到状态机的日志条目的索引</span></span><br><span class="line">	nextIndex   []<span class="type">int</span> <span class="comment">// 表示该节点对于每个peer节点需要发送的下一个日志条目的索引</span></span><br><span class="line">	matchIndex  []<span class="type">int</span> <span class="comment">// 表示该节点已知的每个peer节点已经复制的最高日志条目的索引</span></span><br><span class="line"></span><br><span class="line">	electionTimer  *time.Timer</span><br><span class="line">	heartbeatTimer *time.Timer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> GetState() (<span class="type">int</span>, <span class="type">bool</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> GetRaftStateSize() <span class="type">int</span> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> persist()</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> readPersist(data []<span class="type">byte</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> encodeState() []<span class="type">byte</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> CondInstallSnapshot(lastIncludedTerm <span class="type">int</span>, lastIncludedIndex <span class="type">int</span>, snapshot []<span class="type">byte</span>) <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> Snapshot(index <span class="type">int</span>, snapshot []<span class="type">byte</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> RequestVote(request *RequestVoteRequest, response *RequestVoteResponse)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> AppendEntries(request *AppendEntriesRequest, response *AppendEntriesResponse) </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> InstallSnapshot(request *InstallSnapshotRequest, response *InstallSnapshotResponse)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> sendRequestVote(server <span class="type">int</span>, request *RequestVoteRequest, response *RequestVoteResponse) <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> sendAppendEntries(server <span class="type">int</span>, request *AppendEntriesRequest, response *AppendEntriesResponse) <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> sendInstallSnapshot(server <span class="type">int</span>, request *InstallSnapshotRequest, response *InstallSnapshotResponse) <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> StartElection()</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> BroadcastHeartbeat(isHeartBeat <span class="type">bool</span>) </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> replicateOneRound(peer <span class="type">int</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> genRequestVoteRequest() *RequestVoteRequest</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> genAppendEntriesRequest(prevLogIndex <span class="type">int</span>) *AppendEntriesRequest</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> handleAppendEntriesResponse(peer <span class="type">int</span>, request *AppendEntriesRequest, response *AppendEntriesResponse) </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> genInstallSnapshotRequest() *InstallSnapshotRequest</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> handleInstallSnapshotResponse(peer <span class="type">int</span>, request *InstallSnapshotRequest, response *InstallSnapshotResponse)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> ChangeState(state NodeState) </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> advanceCommitIndexForLeader()</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> advanceCommitIndexForFollower(leaderCommit <span class="type">int</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> getLastLog() Entry</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> getFirstLog() Entry</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> isLogUpToDate(term, index <span class="type">int</span>) <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> matchLog(term, index <span class="type">int</span>) <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> appendNewEntry(command <span class="keyword">interface</span>&#123;&#125;) Entry</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> needReplicating(peer <span class="type">int</span>) <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> HasLogInCurrentTerm() <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> Start(command <span class="keyword">interface</span>&#123;&#125;) (<span class="type">int</span>, <span class="type">int</span>, <span class="type">bool</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> Kill()</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> killed() <span class="type">bool</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> Me() <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> ticker()</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> applier() </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rf *Raft)</span></span> replicator(peer <span class="type">int</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Make</span><span class="params">(peers []*labrpc.ClientEnd, me <span class="type">int</span>, persister *Persister, applyCh <span class="keyword">chan</span> ApplyMsg)</span></span> *Raft</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="Lab3-高可用的-KV-存储服务"><a href="#Lab3-高可用的-KV-存储服务" class="headerlink" title="Lab3:高可用的 KV 存储服务"></a>Lab3:高可用的 KV 存储服务</h3><h4 id="1-Finding-the-cluster"><a href="#1-Finding-the-cluster" class="headerlink" title="1. Finding the cluster"></a>1. Finding the cluster</h4><p>当Raft被公开为网络服务时，客户机必须定位集群以便与复制状态机交互。对于具有固定成员的集群，这很简单;例如,服务器的网络地址可以静态存储在配置文件中。</p>
+<p>然而当它的服务器集可以随时间变化时，发现集群是一个更大的挑战。一般有两种方法:</p>
+<ol>
+<li>客户端可以使用广播或多播来查找所有集群服务器。然而，这将只能在支持这些特性的特定环境中工作。</li>
+<li>是客户端通过外部目录服务(如DNS)找到集群中的服务器，并在集群成员更改时更新目录</li>
+</ol>
+<blockquote>
+<p>  LogCabin客户端目前使用DNS来查找集群。</p>
+<p>  LogCabin目前不自动更新DNS在成员更改之前和之后的记录(这交给管理脚本)</p>
+</blockquote>
+<p><img src="/2022/09/01/MIT6-824/image-20230405191056704.png" alt="image-20230405191056704"></p>
+<p>Clients 使用 ClientRequest RPC 修改 replicated state;</p>
+<p>Clients 使用 ClientQuery RPC 查询 replicated state. </p>
+<p>New Clients 通过 RegisterClient RPC 接收他们的 client identifier , which helps identify when session information needed for linearizability has been discarded. </p>
+<p>不是leader 的服务器 redirect clients to the leader, and read-only requests are serviced without relying on clocks for linearizability (本文提出了替代方案). </p>
+<h4 id="2-Routing-requests-to-the-leader"><a href="#2-Routing-requests-to-the-leader" class="headerlink" title="2. Routing requests to the leader"></a>2. Routing requests to the leader</h4><p>Raft中的客户端请求是通过leader处理的。当客户端第一次启动时，它连接到一个随机选择的服务器。如果客户的选择不是leader，该服务器拒绝请求。如果客户端暴力枚举并标记选过的server，那么n大小的集群平均需要n+1&#x2F;2次尝试，对于小的集群已经足够快了</p>
+<p>通过简单的优化也可以更快地将请求路由到leader。follower服务器通常知道当前集群leader的地址，因为AppendEntries请求包括leader的地址。当不是leader的服务器接收到来自客户端的请求时，它可以执行两种操作中的一种：</p>
+<ol>
+<li>我们推荐的也是LogCabin实现的，是让服务拒绝请求并返回leader的地址(如果已知)给客户端</li>
+<li>服务器可以将客户端的请求代理给领导者。这可能更简单</li>
+</ol>
+<p>Raft 还必须防止陈旧的leader信息无限期地延迟客户请求。信息可能会在整个系统中变得陈旧，包括leader、follower和client：</p>
+<ul>
+<li><p>leader：A server might be in the leader state, but if it isn’t the current leader, it could be needlessly delaying client requests. For example, suppose a leader is partitioned from the rest of the cluster, but it can still communicate with a particular client. Without additional mechanism, it could delay a request from that client forever, being unable to replicate a log entry to any other servers.Meanwhile, there might be another leader of a newer term that is able to communicate with a majority of the cluster and would be able to commit the client’s request. Thus, a leader in Raft steps down if an election timeout elapses without a successful round of heartbeats to a majority of its cluster; this allows clients to retry their requests with another server.</p>
+</li>
+<li><p>follower：follower跟踪leader的身份，以便他们可以重定向或代理客户。 他们必须在开始新的选举或任期届满时丢弃这些信息。 否则，他们可能会不必要地延迟客户（例如，有可能两个服务器相互重定向，将客户端置于无限循环中）。</p>
+</li>
+<li><p>client：如果客户端失去与leader（或任何特定服务器）的连接，它应该只需使用随机服务器重试。 坚持能够联系最后一个已知的领导者.如果该服务器出现故障，将导致不必要的延迟。</p>
+</li>
+</ul>
+<h4 id="3-Implementing-linearizable-semantics语义"><a href="#3-Implementing-linearizable-semantics语义" class="headerlink" title="3. Implementing linearizable semantics语义"></a>3. Implementing linearizable semantics语义</h4><blockquote>
+<p>  即实现对KV 存储服务操作的幂等性</p>
+<p>  在后端开发中，幂等性指的是一个操作的执行结果在多次重复执行时，产生的效果与仅执行一次的效果相同。简单来说，就是对于同一个操作，多次执行所产生的结果和仅执行一次的结果相同。</p>
+<p>  幂等性是一个非常重要的概念，因为在分布式系统中，由于网络的不可靠性和消息重复的可能性，会导致同一个请求被多次执行，如果该请求是非幂等的，则可能会导致系统数据的错误或者不一致。而如果该请求是幂等的，则可以保证系统数据的正确性和一致性。</p>
+</blockquote>
+<ul>
+<li><p>每个要做proposal的client需要一个唯一的identifier，它的每个<strong>不同</strong>proposal需要有一个顺序递增的序列号，client id和这个序列号由此可以唯一确定一个不同的proposal，从而使得各个raft节点可以记录保存各proposal应用以后的结果。</p>
+</li>
+<li><p>当一个proposal超时，client不提高proposal的序列号，使用原proposal序列号重试。</p>
+</li>
+<li><p>当一个proposal被成功提交并应用且被成功回复给client以后，client顺序提高proposal的序列号，并记录下收到的成功回复的proposal的序列号。raft节点收到一个proposal请求以后，得到请求中夹带的这个最大成功回复的proposal的序列号，它和它之前所有的应用结果都可以删去。proposal序列号和client id可用于判断这个proposal是否应用过，如果已经应用过，则不再再次应用，直接返回已保存的结果。<strong>等于是每个不同的proposal可以被commit多次，在log中出现多次，但永远只会被apply一次。</strong></p>
+</li>
+<li><p>系统维护一定数量允许的client数量，比如可以用LRU策略淘汰。请求过来了，而client已经被LRU淘汰掉了，则让client直接fail掉。</p>
+</li>
+<li><p>这些已经注册的client信息，包括和这些client配套的上述proposal结果、各序列号等等，需要在<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=raft%E7%BB%84&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:400962941%7D">raft组</a>内一致的维护。也就是说，<strong>上述各raft端数据结构和它们的操作实际是state machine的一部分</strong>。在做snapshotting的时候，它们同样需要被保存与恢复。</p>
+</li>
+</ul>
+<p>以下是论文⬇️</p>
+<hr>
+<hr>
+<p>假设一个client 向leader发送了一条命令 and the leader appends the command 并提交了log条目, 但是leader在回复client前崩溃了。</p>
+<p>由于客户端没有收到确认，所以它将命令重新提交给新的leader，它反过来将命令作为一个新条目追加到它的日志中，并提交这个新条目。尽管客户端希望命令执行一次，但实际上执行了两次。</p>
+<p>如果网络可以复制客户端的请求，即使没有客户端的参与，命令也可以应用多次。</p>
+<p>这个问题并不是Raft独有的;它出现在大多数<strong>有状态的</strong>分布式系统中。然而,这些“至少一次”语义特别不适合基于共识的系统，在这种系统中客户通常需要更强的保证。</p>
+<p>重复命令的问题可能会以微妙的方式表现出来，client很难从中恢复过来。 </p>
+<p>这些问题会导致不正确的结果或不正确的状态。 图 6.2 显示了一个错误结果的示例：状态机正在提供锁，而客户端发现它无法获取锁，因为它的原始请求——它没有收到确认——已经获取了锁。 </p>
+<img src="/2022/09/01/MIT6-824/image-20230405195601354.png" alt="image-20230405195601354" style="zoom:50%;">
+
+<p>我们在 Raft 中的目标是实现可线性化的语义 ，从而避免这些类别的问题。 在可线性化中，每个操作都立即执行，精确的一次，在它的调用和响应之间的某一时间点。 这是一种强一致性形式，对于客户端进行推理，并且它不允许多次处理命令。</p>
+<p>为了在Raft中实现线性化，服务器必须过滤掉重复的请求。基本思想是服务器保存客户端操作的结果，并使用它们跳过执行相同的请求。 </p>
+<p>为了实现这一点，每个client都有一个唯一的标识符，client为每个命令分配唯一的序列号。 每个server的状态机为每个client维护一个session。该会话跟踪被client处理的最新序列号，以及相关的响应。 如果server收到序列号已经被执行过的命令，它会立即响应，而不会重新执行该请求。</p>
+<p>有了重复请求的过滤，Raft提供了线性化。Raft日志提供了一个在每台服务器上应用命令的串行顺序。命令根据它们在 Raft 日志中的第一次出现立即生效，并且恰好一次，因为任何后续出现都会被状态机过滤掉。</p>
+<p>client会记录它已经发送的请求序列号和对应的响应，以确保不会丢失或重复处理请求。同时，cilent还会告诉server它尚未收到的最低序列号，以确保server不会重复发送之前已经发送过的响应。server则会根据client的请求序列号和最低未收到响应的序列号，保证client能够正确处理所有请求。如果client已经收到了某个序列号的响应，那么它可以丢弃所有低于该序列号的响应，因为这些响应已经不再需要了</p>
+<p>不幸的是，由于空间有限，会话不能永远保存。服务器最终必须决定终止客户端的会话，但这会产生两个问题:</p>
+<ol>
+<li>服务器何时使客户端的会话过期</li>
+<li>如何处理会话被过早终止的活动客户端</li>
+</ol>
+<p>服务器必须就客户端会话何时过期达成一致； 否则，服务器的状态机可能会彼此不同。 例如，假设一个服务器使特定客户端的会话过期，然后重新应用该客户端的许多重复命令； 同时，其他服务器使会话保持活动状态并且不应用重复项。 复制的状态机将变得不一致。 为避免此类问题，会话过期必须是确定性的，就像正常的状态机操作一样。 </p>
+<p>一种选择是设置会话数量的上限并使用 LRU（最近最少使用）策略删除条目。 </p>
+<p>另一种选择是根据商定的时间源使会话过期。</p>
+<p>在 LogCabin 中，领导者使用当前时间来增加它附加到 Raft 日志的每个命令。 作为提交日志条目的一部分，服务器就此时间达成一致； 然后，状态机确定性地使用这个时间输入来使非活动会话过期。 Live clients 在不活动期间发出 keep-alive 请求，这些请求也增加了 leader 的时间戳并提交到 Raft 日志，以维持他们的会话。</p>
+<p>第二个问题是如何处理会话过期后继续运行的客户端。 我们希望这是一种特殊情况； 然而，它总是存在一些风险，因为通常无法知道客户何时退出。 一种选择是在没有记录的任何时候为客户端分配一个新会话，但这会冒重复执行的风险<br>在客户端的上一个会话过期之前执行的命令。 为了提供更严格的保证，服务器需要区分新客户端和会话已过期的客户端。 当客户端首次启动时，它可以使用 RegisterClient RPC 将自己注册到集群。 这会分配新客户端的会话并向客户端返回其标识符，客户端将其包含在所有后续命令中。 如果状态机遇到没有会话记录的命令，它不会处理该命令，而是向客户端返回错误。 在这种情况下，LogCabin 当前会导致客户端崩溃（大多数客户端可能不会优雅且正确地处理会话过期错误，但系统通常必须已经处理客户端崩溃）。</p>
 
     </div>
 
@@ -434,7 +525,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-MapReduce"><span class="nav-number">2.</span> <span class="nav-text">Lab 1: MapReduce</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-few-rules"><span class="nav-number">2.1.</span> <span class="nav-text">A few rules:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hints"><span class="nav-number">2.2.</span> <span class="nav-text">Hints</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%BB%E6%B5%81%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">※流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Worker-%E6%A8%A1%E5%9D%97"><span class="nav-number">2.3.1.</span> <span class="nav-text">Worker 模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-2A-Raft%E9%80%89%E4%B8%BE"><span class="nav-number">3.</span> <span class="nav-text">Lab 2A: Raft选举</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-MapReduce"><span class="nav-number">2.</span> <span class="nav-text">Lab 1: MapReduce</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-few-rules"><span class="nav-number">2.1.</span> <span class="nav-text">A few rules:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hints"><span class="nav-number">2.2.</span> <span class="nav-text">Hints</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%BB%E6%B5%81%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">※流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Worker-%E6%A8%A1%E5%9D%97"><span class="nav-number">2.3.1.</span> <span class="nav-text">Worker 模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-2A-Raft"><span class="nav-number">3.</span> <span class="nav-text">Lab 2A: Raft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab3-%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84-KV-%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">Lab3:高可用的 KV 存储服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Finding-the-cluster"><span class="nav-number">4.1.</span> <span class="nav-text">1. Finding the cluster</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Routing-requests-to-the-leader"><span class="nav-number">4.2.</span> <span class="nav-text">2. Routing requests to the leader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Implementing-linearizable-semantics%E8%AF%AD%E4%B9%89"><span class="nav-number">4.3.</span> <span class="nav-text">3. Implementing linearizable semantics语义</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
