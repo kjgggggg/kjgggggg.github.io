@@ -28,7 +28,7 @@
 <meta property="og:description" content="python语法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-02T08:17:11.000Z">
-<meta property="article:modified_time" content="2022-10-13T06:18:06.177Z">
+<meta property="article:modified_time" content="2023-04-14T07:22:27.683Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-13 14:18:06" itemprop="dateModified" datetime="2022-10-13T14:18:06+08:00">2022-10-13</time>
+                <time title="修改时间：2023-04-14 15:22:27" itemprop="dateModified" datetime="2023-04-14T15:22:27+08:00">2023-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,373 +250,104 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><h4 id="创建列表"><a href="#创建列表" class="headerlink" title="创建列表"></a>创建列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list1 = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ]</span><br><span class="line">list3 = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>]</span><br><span class="line">list4 = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;yellow&#x27;</span>, <span class="string">&#x27;white&#x27;</span>, <span class="string">&#x27;black&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="访问列表中的值"><a href="#访问列表中的值" class="headerlink" title="访问列表中的值"></a>访问列表中的值</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&quot;Zhihu&quot;</span>, <span class="string">&quot;Taobao&quot;</span>, <span class="string">&quot;Wiki&quot;</span>]</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 读取第二位</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;list[1]: &quot;</span>, <span class="built_in">list</span>[<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 从第二位开始（包含）截取到倒数第二位（不包含）</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;list[1:-2]: &quot;</span>, <span class="built_in">list</span>[<span class="number">1</span>:-<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
-
-<p>result：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>[<span class="number">1</span>]:  Runoob</span><br><span class="line"><span class="built_in">list</span>[<span class="number">1</span>:-<span class="number">2</span>]:  [<span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Zhihu&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="更新列表"><a href="#更新列表" class="headerlink" title="更新列表"></a>更新列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span> (<span class="string">&quot;第三个元素为 : &quot;</span>, <span class="built_in">list</span>[<span class="number">2</span>])</span><br><span class="line"><span class="built_in">list</span>[<span class="number">2</span>] = <span class="number">2001</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;更新后的第三个元素为 : &quot;</span>, <span class="built_in">list</span>[<span class="number">2</span>])</span><br><span class="line"> </span><br><span class="line">list1 = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>]</span><br><span class="line">list1.append(<span class="string">&#x27;Baidu&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;更新后的列表 : &quot;</span>, list1)</span><br></pre></td></tr></table></figure>
-
-<p>result:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第三个元素为 :  <span class="number">1997</span></span><br><span class="line">更新后的第三个元素为 :  <span class="number">2001</span></span><br><span class="line">更新后的列表 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>, <span class="string">&#x27;Baidu&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="append与extend的区别"><a href="#append与extend的区别" class="headerlink" title="append与extend的区别"></a>append与extend的区别</h4><ul>
-<li>ist.append(object) 向列表中添加一个对象object</li>
-<li>list.extend(sequence) 把一个序列seq的内容添加到列表中</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista = [<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>listb = [<span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista.extend(listb)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lista</span><br><span class="line">[<span class="string">&#x27;compact disc&#x27;</span>, <span class="string">&#x27;8-track tape&#x27;</span>, <span class="string">&#x27;long playing record&#x27;</span>, <span class="string">&#x27;DVD Audio disc&#x27;</span>, <span class="string">&#x27;Super Audio CD&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="删除列表元素"><a href="#删除列表元素" class="headerlink" title="删除列表元素"></a>删除列表元素</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>.pop();</span><br><span class="line">  </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;原始列表 : &quot;</span>, <span class="built_in">list</span>)</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">list</span>[<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;删除第三个元素 : &quot;</span>, <span class="built_in">list</span>)</span><br></pre></td></tr></table></figure>
-
-<p>result:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">原始列表 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">1997</span>, <span class="number">2000</span>]</span><br><span class="line">删除第三个元素 :  [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="number">2000</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="列表脚本操作符"><a href="#列表脚本操作符" class="headerlink" title="列表脚本操作符"></a>列表脚本操作符</h4><table>
+        <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/">https://www.runoob.com/python3/</a></p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><table>
 <thead>
 <tr>
-<th align="left">Python 表达式</th>
-<th align="left">结果</th>
+<th align="left">运算符</th>
+<th align="left">逻辑表达式</th>
 <th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">len([1, 2, 3])</td>
-<td align="left">3</td>
-<td align="left">长度</td>
-</tr>
-<tr>
-<td align="left">[1, 2, 3] + [4, 5, 6]</td>
-<td align="left">[1, 2, 3, 4, 5, 6]</td>
-<td align="left">组合</td>
-</tr>
-<tr>
-<td align="left">[‘Hi!’] * 4</td>
-<td align="left">[‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]</td>
-<td align="left">重复</td>
-</tr>
-<tr>
-<td align="left">3 in [1, 2, 3]</td>
-<td align="left">True</td>
-<td align="left">元素是否存在于列表中</td>
-</tr>
-<tr>
-<td align="left">for x in [1, 2, 3]: print(x, end&#x3D;” “)</td>
-<td align="left">1 2 3</td>
-<td align="left">迭代</td>
-</tr>
-</tbody></table>
-<h4 id="列表截取与拼接"><a href="#列表截取与拼接" class="headerlink" title="列表截取与拼接"></a>列表截取与拼接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">L=[<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="left">Python 表达式</th>
-<th align="left">结果</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">L[2]</td>
-<td align="left">‘Taobao’</td>
-<td align="left">读取第三个元素</td>
-</tr>
-<tr>
-<td align="left">L[-2]</td>
-<td align="left">‘Runoob’</td>
-<td align="left">从右侧开始读取倒数第二个元素: count from the right</td>
-</tr>
-<tr>
-<td align="left">L[1:]</td>
-<td align="left">[‘Runoob’, ‘Taobao’]</td>
-<td align="left">输出从第二个元素开始后的所有元素</td>
-</tr>
-</tbody></table>
-<h4 id="嵌套列表"><a href="#嵌套列表" class="headerlink" title="嵌套列表"></a>嵌套列表</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;a = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>n = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = [a, n]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>]</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"><span class="string">&#x27;b&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="列表比较"><a href="#列表比较" class="headerlink" title="列表比较"></a>列表比较</h4><p>列表比较需要引入 <strong>operator</strong> 模块的 <strong>eq</strong> 方法</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 导入 operator 模块</span></span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">b = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">c = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;operator.eq(a,b): &quot;</span>, operator.eq(a,b))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;operator.eq(c,b): &quot;</span>, operator.eq(c,b))</span><br></pre></td></tr></table></figure>
-
-<p>result:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">operator.eq(a,b):  <span class="literal">False</span></span><br><span class="line">operator.eq(c,b):  <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="函数与方法"><a href="#函数与方法" class="headerlink" title="函数与方法"></a>函数与方法</h4><p>Python包含以下函数:</p>
-<table>
-<thead>
-<tr>
-<th align="left">序号</th>
-<th align="left">函数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-len.html">len(list)</a> 列表元素个数</td>
-</tr>
-<tr>
-<td align="left">2</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-max.html">max(list)</a> 返回列表元素最大值</td>
-</tr>
-<tr>
-<td align="left">3</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-min.html">min(list)</a> 返回列表元素最小值</td>
-</tr>
-<tr>
-<td align="left">4</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-list.html">list(seq)</a> 将元组转换为列表</td>
-</tr>
-</tbody></table>
-<p>Python包含以下方法:</p>
-<table>
-<thead>
-<tr>
-<th align="left">序号</th>
-<th align="left">方法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-append.html">list.append(obj)</a> 在列表末尾添加新的对象</td>
-</tr>
-<tr>
-<td align="left">2</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-count.html">list.count(obj)</a> 统计某个元素在列表中出现的次数</td>
-</tr>
-<tr>
-<td align="left">3</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-extend.html">list.extend(seq)</a> 在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
-</tr>
-<tr>
-<td align="left">4</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-index.html">list.index(obj)</a> 从列表中找出某个值第一个匹配项的索引位置</td>
-</tr>
-<tr>
-<td align="left">5</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-insert.html">list.insert(index, obj)</a> 将对象插入列表</td>
-</tr>
-<tr>
-<td align="left">6</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-pop.html">list.pop([index&#x3D;-1])</a> 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
-</tr>
-<tr>
-<td align="left">7</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-remove.html">list.remove(obj)</a> 移除列表中某个值的第一个匹配项</td>
-</tr>
-<tr>
-<td align="left">8</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-reverse.html">list.reverse()</a> 反向列表中元素</td>
-</tr>
-<tr>
-<td align="left">9</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-sort.html">list.sort( key&#x3D;None, reverse&#x3D;False)</a> 对原列表进行排序</td>
-</tr>
-<tr>
-<td align="left">10</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-clear.html">list.clear()</a> 清空列表</td>
-</tr>
-<tr>
-<td align="left">11</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-copy.html">list.copy()</a> 复制列表</td>
-</tr>
-</tbody></table>
-<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 字典是另一种可变容器模型，且可存储任意类型对象。</span></span><br><span class="line"><span class="comment"># 字典的每个键值 key=&gt;value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 &#123;&#125; 中 ,格式如下所示：</span></span><br><span class="line">d = &#123;key1 : value1, key2 : value2, key3 : value3 &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 键必须是唯一的，但值则不必。</span></span><br><span class="line"><span class="comment"># 值可以取任何数据类型，但键必须是不可变的，如字符串，数字。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个简单的字典实例：</span></span><br><span class="line">tinydict = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;runoob&#x27;</span>, <span class="string">&#x27;likes&#x27;</span>: <span class="number">123</span>, <span class="string">&#x27;url&#x27;</span>: <span class="string">&#x27;www.runoob.com&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可如此创建字典：</span></span><br><span class="line">tinydict1 = &#123; <span class="string">&#x27;abc&#x27;</span>: <span class="number">456</span> &#125;</span><br><span class="line">tinydict2 = &#123; <span class="string">&#x27;abc&#x27;</span>: <span class="number">123</span>, <span class="number">98.6</span>: <span class="number">37</span> &#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="创建字典"><a href="#创建字典" class="headerlink" title="创建字典"></a>创建字典</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用大括号 &#123;&#125; 来创建空字典</span></span><br><span class="line">emptyDict = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">emptyDict = <span class="built_in">dict</span>()</span><br></pre></td></tr></table></figure>
-
-<h4 id="访问具体的值"><a href="#访问具体的值" class="headerlink" title="访问具体的值"></a>访问具体的值</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tinydict = &#123;<span class="string">&#x27;Name&#x27;</span>: <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Age&#x27;</span>: <span class="number">7</span>, <span class="string">&#x27;Class&#x27;</span>: <span class="string">&#x27;First&#x27;</span>&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;tinydict[&#x27;Name&#x27;]: &quot;</span>, tinydict[<span class="string">&#x27;Name&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;tinydict[&#x27;Age&#x27;]: &quot;</span>, tinydict[<span class="string">&#x27;Age&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># tinydict[&#x27;Name&#x27;]:  Runoob</span></span><br><span class="line"><span class="comment"># tinydict[&#x27;Age&#x27;]:  7</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="删除字典元素"><a href="#删除字典元素" class="headerlink" title="删除字典元素"></a>删除字典元素</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line">tinydict = &#123;<span class="string">&#x27;Name&#x27;</span>: <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Age&#x27;</span>: <span class="number">7</span>, <span class="string">&#x27;Class&#x27;</span>: <span class="string">&#x27;First&#x27;</span>&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">del</span> tinydict[<span class="string">&#x27;Name&#x27;</span>] <span class="comment"># 删除键 &#x27;Name&#x27;</span></span><br><span class="line">tinydict.clear()     <span class="comment"># 清空字典</span></span><br><span class="line"><span class="keyword">del</span> tinydict         <span class="comment"># 删除字典</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;tinydict[&#x27;Age&#x27;]: &quot;</span>, tinydict[<span class="string">&#x27;Age&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;tinydict[&#x27;School&#x27;]: &quot;</span>, tinydict[<span class="string">&#x27;School&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-<h4 id="字典键的特性"><a href="#字典键的特性" class="headerlink" title="字典键的特性"></a>字典键的特性</h4><p>字典值可以是任何的 python 对象，既可以是标准的对象，也可以是用户定义的，但键不行。</p>
-<p>两个重要的点需要记住：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1）不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住，如下实例：</span></span><br><span class="line"> </span><br><span class="line">tinydict = &#123;<span class="string">&#x27;Name&#x27;</span>: <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Age&#x27;</span>: <span class="number">7</span>, <span class="string">&#x27;Name&#x27;</span>: <span class="string">&#x27;小菜鸟&#x27;</span>&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;tinydict[&#x27;Name&#x27;]: &quot;</span>, tinydict[<span class="string">&#x27;Name&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># tinydict[&#x27;Name&#x27;]:  小菜鸟</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2）键必须不可变，所以可以用数字，字符串或元组充当，而用列表就不行，如下实例：</span></span><br><span class="line"> </span><br><span class="line">tinydict = &#123;[<span class="string">&#x27;Name&#x27;</span>]: <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Age&#x27;</span>: <span class="number">7</span>&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;tinydict[&#x27;Name&#x27;]: &quot;</span>, tinydict[<span class="string">&#x27;Name&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-<h4 id="字典内置函数-amp-方法"><a href="#字典内置函数-amp-方法" class="headerlink" title="字典内置函数&amp;方法"></a>字典内置函数&amp;方法</h4><table>
-<thead>
-<tr>
-<th align="left">序号</th>
-<th align="left">函数及描述</th>
 <th align="left">实例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">1</td>
-<td align="left">len(dict) 计算字典元素个数，即键的总数。</td>
-<td align="left"><code>&gt;&gt;&gt; tinydict = &#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;&#125; &gt;&gt;&gt; len(tinydict) 3</code></td>
+<td align="left">and</td>
+<td align="left">x and y</td>
+<td align="left">布尔”与” - 如果 x 为 False，x and y 返回 x 的值，否则返回 y 的计算值。</td>
+<td align="left">(a and b) 返回 20。</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="left">str(dict) 输出字典，可以打印的字符串表示。</td>
-<td align="left"><code>&gt;&gt;&gt; tinydict = &#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;&#125; &gt;&gt;&gt; str(tinydict) &quot;&#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Class&#39;: &#39;First&#39;, &#39;Age&#39;: 7&#125;&quot;</code></td>
+<td align="left">or</td>
+<td align="left">x or y</td>
+<td align="left">布尔”或” - 如果 x 是 True，它返回 x 的值，否则它返回 y 的计算值。</td>
+<td align="left">(a or b) 返回 10。</td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="left">type(variable) 返回输入的变量类型，如果变量是字典就返回字典类型。</td>
-<td align="left"><code>&gt;&gt;&gt; tinydict = &#123;&#39;Name&#39;: &#39;Runoob&#39;, &#39;Age&#39;: 7, &#39;Class&#39;: &#39;First&#39;&#125; &gt;&gt;&gt; type(tinydict) &lt;class &#39;dict&#39;&gt;</code></td>
+<td align="left">not</td>
+<td align="left">not x</td>
+<td align="left">布尔”非” - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。</td>
+<td align="left">not(a and b) 返回 False</td>
 </tr>
 </tbody></table>
-<p>Python字典包含了以下内置方法：</p>
+<h4 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h4><p>除了以上的一些运算符之外，Python还支持成员运算符，测试实例中包含了一系列的成员，包括字符串，列表或元组。</p>
 <table>
 <thead>
 <tr>
-<th align="left">序号</th>
-<th align="left">函数及描述</th>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">1</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-clear.html">dict.clear()</a> 删除字典内所有元素</td>
+<td align="left">in</td>
+<td align="left">如果在指定的序列中找到值返回 True，否则返回 False。</td>
+<td align="left">x 在 y 序列中 , 如果 x 在 y 序列中返回 True。</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-copy.html">dict.copy()</a> 返回一个字典的浅复制</td>
-</tr>
-<tr>
-<td align="left">3</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-fromkeys.html">dict.fromkeys()</a> 创建一个新字典，以序列seq中元素做字典的键，val为字典所有键对应的初始值</td>
-</tr>
-<tr>
-<td align="left">4</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-get.html">dict.get(key, default&#x3D;None)</a> 返回指定键的值，如果键不在字典中返回 default 设置的默认值</td>
-</tr>
-<tr>
-<td align="left">5</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-in.html">key in dict</a> 如果键在字典dict里返回true，否则返回false</td>
-</tr>
-<tr>
-<td align="left">6</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-items.html">dict.items()</a> 以列表返回一个视图对象</td>
-</tr>
-<tr>
-<td align="left">7</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-keys.html">dict.keys()</a> 返回一个视图对象</td>
-</tr>
-<tr>
-<td align="left">8</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-setdefault.html">dict.setdefault(key, default&#x3D;None)</a> 和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</td>
-</tr>
-<tr>
-<td align="left">9</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-update.html">dict.update(dict2)</a> 把字典dict2的键&#x2F;值对更新到dict里</td>
-</tr>
-<tr>
-<td align="left">10</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-values.html">dict.values()</a> 返回一个视图对象</td>
-</tr>
-<tr>
-<td align="left">11</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-pop.html">pop(key[,default])</a> 删除字典 key（键）所对应的值，返回被删除的值。</td>
-</tr>
-<tr>
-<td align="left">12</td>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-dictionary-popitem.html">popitem()</a> 返回并删除字典中的最后一对键和值。</td>
+<td align="left">not in</td>
+<td align="left">如果在指定的序列中没有找到值返回 True，否则返回 False。</td>
+<td align="left">x 不在 y 序列中 , 如果 x 不在 y 序列中返回 True。</td>
 </tr>
 </tbody></table>
-<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p><code>set</code>是一个无序的不重复元素序列。</p>
-<p>可以使用大括号 <strong>{ }</strong> 或者 <strong>set()</strong> 函数创建集合，注意：创建一个空集合必须用 <strong>set()</strong> 而不是 **{ }**，因为 <strong>{ }</strong> 是用来创建一个空字典。</p>
-<p>创建格式：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>basket = &#123;<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;pear&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(basket)                      <span class="comment"># 这里演示的是去重功能</span></span><br><span class="line">&#123;<span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;pear&#x27;</span>, <span class="string">&#x27;apple&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;orange&#x27;</span> <span class="keyword">in</span> basket                 <span class="comment"># 快速判断元素是否在集合内</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;crabgrass&#x27;</span> <span class="keyword">in</span> basket</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># 下面展示两个集合间的运算.</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="built_in">set</span>(<span class="string">&#x27;abracadabra&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="built_in">set</span>(<span class="string">&#x27;alacazam&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a                                  </span><br><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a - b                              <span class="comment"># 集合a中包含而集合b中不包含的元素</span></span><br><span class="line">&#123;<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a | b                              <span class="comment"># 集合a或b中包含的所有元素</span></span><br><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;z&#x27;</span>, <span class="string">&#x27;l&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a &amp; b                              <span class="comment"># 集合a和b中都包含了的元素</span></span><br><span class="line">&#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a ^ b                              <span class="comment"># 不同时包含于a和b的元素</span></span><br><span class="line">&#123;<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;z&#x27;</span>, <span class="string">&#x27;l&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="string">&#x27;abracadabra&#x27;</span> <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;abc&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">&#123;<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将元素 x 添加到集合 s 中，如果元素已存在，则不进行任何操作。</span></span><br><span class="line">s.add( x )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 还有一个方法，也可以添加元素，且参数可以是列表，元组，字典等，语法格式如下：</span></span><br><span class="line">s.update( x )</span><br></pre></td></tr></table></figure>
-
-<h4 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将元素 x 从集合 s 中移除，如果元素不存在，则会发生错误。</span></span><br><span class="line">s.remove( x ) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 此外还有一个方法也是移除集合中的元素，且如果元素不存在，不会发生错误。格式如下所示：</span></span><br><span class="line">s.discard( x )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我们也可以设置随机删除集合中的一个元素，语法格式如下：</span></span><br><span class="line">s.pop()</span><br></pre></td></tr></table></figure>
-
-<h4 id="计算元素个数"><a href="#计算元素个数" class="headerlink" title="计算元素个数"></a>计算元素个数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">len</span>(s)</span><br></pre></td></tr></table></figure>
-
-<h4 id="清空集合"><a href="#清空集合" class="headerlink" title="清空集合"></a>清空集合</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.clear()</span><br></pre></td></tr></table></figure>
-
-<h4 id="集合内置函数-amp-方法"><a href="#集合内置函数-amp-方法" class="headerlink" title="集合内置函数&amp;方法"></a>集合内置函数&amp;方法</h4><table>
+<h4 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h4><p>身份运算符用于比较两个对象的存储单元</p>
+<table>
 <thead>
 <tr>
-<th align="left">方法</th>
+<th align="left">运算符</th>
 <th align="left">描述</th>
+<th align="left">实例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-add.html">add()</a></td>
-<td align="left">为集合添加元素</td>
+<td align="left">is</td>
+<td align="left">is 是判断两个标识符是不是引用自一个对象</td>
+<td align="left"><strong>x is y</strong>, 类似 <strong>id(x) &#x3D;&#x3D; id(y)</strong> , 如果引用的是同一个对象则返回 True，否则返回 False</td>
 </tr>
 <tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-clear.html">clear()</a></td>
-<td align="left">移除集合中的所有元素</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-copy.html">copy()</a></td>
-<td align="left">拷贝一个集合</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-difference.html">difference()</a></td>
-<td align="left">返回多个集合的差集</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-difference_update.html">difference_update()</a></td>
-<td align="left">移除集合中的元素，该元素在指定的集合也存在。</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-discard.html">discard()</a></td>
-<td align="left">删除集合中指定的元素</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-intersection.html">intersection()</a></td>
-<td align="left">返回集合的交集</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-intersection_update.html">intersection_update()</a></td>
-<td align="left">返回集合的交集。</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-isdisjoint.html">isdisjoint()</a></td>
-<td align="left">判断两个集合是否包含相同的元素，如果没有返回 True，否则返回 False。</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-issubset.html">issubset()</a></td>
-<td align="left">判断指定集合是否为该方法参数集合的子集。</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-issuperset.html">issuperset()</a></td>
-<td align="left">判断该方法的参数集合是否为指定集合的子集</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-pop.html">pop()</a></td>
-<td align="left">随机移除元素</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-remove.html">remove()</a></td>
-<td align="left">移除指定元素</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-symmetric_difference.html">symmetric_difference()</a></td>
-<td align="left">返回两个集合中不重复的元素集合。</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-symmetric_difference_update.html">symmetric_difference_update()</a></td>
-<td align="left">移除当前集合中在另外一个指定集合相同的元素，并将另外一个指定集合中不同的元素插入到当前集合中。</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-union.html">union()</a></td>
-<td align="left">返回两个集合的并集</td>
-</tr>
-<tr>
-<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/ref-set-update.html">update()</a></td>
-<td align="left">给集合添加元素</td>
+<td align="left">is not</td>
+<td align="left">is not 是判断两个标识符是不是引用自不同对象</td>
+<td align="left"><strong>x is not y</strong> ， 类似 **id(x) !&#x3D; id(y)**。如果引用的不是同一个对象则返回结果 True，否则返回 False。</td>
 </tr>
 </tbody></table>
+<p><strong>注：</strong> <a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-func-id.html">id()</a> 函数用于获取对象内存地址。</p>
+<h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">max</span> = a <span class="keyword">if</span> a&gt;b <span class="keyword">else</span> b</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h3><ul>
+<li><p>if … else if.. else</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> 表达式<span class="number">1</span>:</span><br><span class="line">    语句</span><br><span class="line">    <span class="keyword">if</span> 表达式<span class="number">2</span>:</span><br><span class="line">        语句</span><br><span class="line">    <span class="keyword">elif</span> 表达式<span class="number">3</span>:</span><br><span class="line">        语句</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        语句</span><br><span class="line"><span class="keyword">elif</span> 表达式<span class="number">4</span>:</span><br><span class="line">    语句</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    语句</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>switch…case</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">match</span> subject:</span><br><span class="line">    <span class="keyword">case</span> &lt;pattern_1&gt;:</span><br><span class="line">        &lt;action_1&gt;</span><br><span class="line">    <span class="keyword">case</span> &lt;pattern_2&gt;:</span><br><span class="line">        &lt;action_2&gt;</span><br><span class="line">    <span class="keyword">case</span> &lt;pattern_3&gt;:</span><br><span class="line">        &lt;action_3&gt;</span><br><span class="line">    <span class="keyword">case</span> _:	<span class="comment"># 类似于 C 和 Java 中的 default:，当其他 case 都无法匹配时，匹配这条，保证永远会匹配成功。</span></span><br><span class="line">        &lt;action_wildcard&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><ul>
+<li><p>for</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> iterable:</span><br><span class="line">    <span class="comment"># 循环主体</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 循环结束后执行的代码</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>range() 函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = [<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Baidu&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>, <span class="string">&#x27;QQ&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">	<span class="built_in">print</span>(i, a[i])</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用 range() 函数来创建一个列表：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">5</span>))	<span class="comment"># [0, 1, 2, 3, 4]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><h4 id="bisect-bisect-left-x2F-bisect-bisect-right"><a href="#bisect-bisect-left-x2F-bisect-bisect-right" class="headerlink" title="bisect.bisect_left &#x2F; bisect.bisect_right"></a>bisect.bisect_left &#x2F; bisect.bisect_right</h4><p>bisect.bisect和bisect.bisect_right返回大于x的第一个下标(相当于C++中的upper_bound)，bisect.bisect_left返回大于等于x的第一个下标(相当于C++中的lower_bound)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">index = bisect_left(ls, x)   <span class="comment">#第1个参数是列表，第2个参数是要查找的数，返回值为索引</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h3 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h3><ul>
 <li><em>Numpy</em> 是 <em>Python</em> 中科学计算的核心库，<em>NumPy</em> 这个词来源于 <em>Numerical</em> 和 <em>Python</em> 两个单词。它提供了一个高性能的多维<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E7%BB%84&spm=1001.2101.3001.7020">数组</a>对象，以及大量的库函数和操作，可以帮助程序员轻松地进行数值计算，广泛应用于机器学习模型、图像处理和计算机图形学、数学任务等领域。</li>
 </ul>
@@ -932,7 +663,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%88%97%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">创建列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%BC"><span class="nav-number">1.2.</span> <span class="nav-text">访问列表中的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">更新列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#append%E4%B8%8Eextend%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.</span> <span class="nav-text">append与extend的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="nav-number">1.5.</span> <span class="nav-text">删除列表元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.6.</span> <span class="nav-text">列表脚本操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%88%AA%E5%8F%96%E4%B8%8E%E6%8B%BC%E6%8E%A5"><span class="nav-number">1.7.</span> <span class="nav-text">列表截取与拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8"><span class="nav-number">1.8.</span> <span class="nav-text">嵌套列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%AF%94%E8%BE%83"><span class="nav-number">1.9.</span> <span class="nav-text">列表比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8E%E6%96%B9%E6%B3%95"><span class="nav-number">1.10.</span> <span class="nav-text">函数与方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8"><span class="nav-number">2.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%97%E5%85%B8"><span class="nav-number">2.1.</span> <span class="nav-text">创建字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%85%B7%E4%BD%93%E7%9A%84%E5%80%BC"><span class="nav-number">2.2.</span> <span class="nav-text">访问具体的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AD%97%E5%85%B8%E5%85%83%E7%B4%A0"><span class="nav-number">2.3.</span> <span class="nav-text">删除字典元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E9%94%AE%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">2.4.</span> <span class="nav-text">字典键的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0-amp-%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.</span> <span class="nav-text">字典内置函数&amp;方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-number">3.1.</span> <span class="nav-text">添加元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">3.2.</span> <span class="nav-text">移除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">计算元素个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E7%A9%BA%E9%9B%86%E5%90%88"><span class="nav-number">3.4.</span> <span class="nav-text">清空集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0-amp-%E6%96%B9%E6%B3%95"><span class="nav-number">3.5.</span> <span class="nav-text">集合内置函数&amp;方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numpy"><span class="nav-number">4.</span> <span class="nav-text">Numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E6%95%B0%E7%BB%84%EF%BC%9Andarray"><span class="nav-number">4.1.</span> <span class="nav-text">Numpy数组：ndarray</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B1"><span class="nav-number">4.1.1.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B2-dtype-%E5%8F%82%E6%95%B0%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">例2:dtype 参数用法示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B3-copy-%E5%8F%82%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">4.1.3.</span> <span class="nav-text">例3:copy 参数的用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B4%EF%BC%9Andmin-%E5%8F%82%E6%95%B0%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.1.4.</span> <span class="nav-text">例4：ndmin 参数用法示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B5%EF%BC%9Asubok-%E5%8F%82%E6%95%B0%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.1.5.</span> <span class="nav-text">例5：subok 参数用法示例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E6%95%B0%E7%BB%84%E5%B1%9E%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">Numpy数组属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E4%B8%AD%E7%9A%84%E5%B8%B8%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">Numpy中的常数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">4.4.</span> <span class="nav-text">Numpy创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-empty"><span class="nav-number">4.4.1.</span> <span class="nav-text">numpy.empty</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">4.4.2.</span> <span class="nav-text">numpy.zeros</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-ones"><span class="nav-number">4.4.3.</span> <span class="nav-text">numpy.ones</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-full"><span class="nav-number">4.4.4.</span> <span class="nav-text">numpy.full</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E4%BB%8E%E6%95%B0%E5%80%BC%E8%8C%83%E5%9B%B4%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">4.5.</span> <span class="nav-text">Numpy从数值范围创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-arange"><span class="nav-number">4.5.1.</span> <span class="nav-text">numpy.arange</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">4.5.2.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">4.5.3.</span> <span class="nav-text">numpy.logspace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-geomspace"><span class="nav-number">4.5.4.</span> <span class="nav-text">numpy.geomspace</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E4%BB%8E%E5%B7%B2%E6%9C%89%E7%9A%84%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">4.6.</span> <span class="nav-text">Numpy从已有的数组创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">4.6.1.</span> <span class="nav-text">numpy.asarray</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-frombuffer"><span class="nav-number">4.6.2.</span> <span class="nav-text">numpy.frombuffer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">4.6.3.</span> <span class="nav-text">numpy.fromiter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-empty-like"><span class="nav-number">4.6.4.</span> <span class="nav-text">numpy.empty_like</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-zeros-like"><span class="nav-number">4.6.5.</span> <span class="nav-text">numpy.zeros_like</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-ones-like"><span class="nav-number">4.6.6.</span> <span class="nav-text">numpy.ones_like</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-full-like"><span class="nav-number">4.6.7.</span> <span class="nav-text">numpy.full_like</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.1.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%88%90%E5%91%98%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.2.</span> <span class="nav-text">成员运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">身份运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.4.</span> <span class="nav-text">三元运算符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">4.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bisect-bisect-left-x2F-bisect-bisect-right"><span class="nav-number">5.1.</span> <span class="nav-text">bisect.bisect_left &#x2F; bisect.bisect_right</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numpy"><span class="nav-number">6.</span> <span class="nav-text">Numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E6%95%B0%E7%BB%84%EF%BC%9Andarray"><span class="nav-number">6.1.</span> <span class="nav-text">Numpy数组：ndarray</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B1"><span class="nav-number">6.1.1.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B2-dtype-%E5%8F%82%E6%95%B0%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">6.1.2.</span> <span class="nav-text">例2:dtype 参数用法示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B3-copy-%E5%8F%82%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">6.1.3.</span> <span class="nav-text">例3:copy 参数的用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B4%EF%BC%9Andmin-%E5%8F%82%E6%95%B0%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">6.1.4.</span> <span class="nav-text">例4：ndmin 参数用法示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B5%EF%BC%9Asubok-%E5%8F%82%E6%95%B0%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="nav-number">6.1.5.</span> <span class="nav-text">例5：subok 参数用法示例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E6%95%B0%E7%BB%84%E5%B1%9E%E6%80%A7"><span class="nav-number">6.2.</span> <span class="nav-text">Numpy数组属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E4%B8%AD%E7%9A%84%E5%B8%B8%E6%95%B0"><span class="nav-number">6.3.</span> <span class="nav-text">Numpy中的常数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">6.4.</span> <span class="nav-text">Numpy创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-empty"><span class="nav-number">6.4.1.</span> <span class="nav-text">numpy.empty</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">6.4.2.</span> <span class="nav-text">numpy.zeros</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-ones"><span class="nav-number">6.4.3.</span> <span class="nav-text">numpy.ones</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-full"><span class="nav-number">6.4.4.</span> <span class="nav-text">numpy.full</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E4%BB%8E%E6%95%B0%E5%80%BC%E8%8C%83%E5%9B%B4%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">6.5.</span> <span class="nav-text">Numpy从数值范围创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-arange"><span class="nav-number">6.5.1.</span> <span class="nav-text">numpy.arange</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">6.5.2.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">6.5.3.</span> <span class="nav-text">numpy.logspace</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-geomspace"><span class="nav-number">6.5.4.</span> <span class="nav-text">numpy.geomspace</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Numpy%E4%BB%8E%E5%B7%B2%E6%9C%89%E7%9A%84%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-number">6.6.</span> <span class="nav-text">Numpy从已有的数组创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">6.6.1.</span> <span class="nav-text">numpy.asarray</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-frombuffer"><span class="nav-number">6.6.2.</span> <span class="nav-text">numpy.frombuffer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">6.6.3.</span> <span class="nav-text">numpy.fromiter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-empty-like"><span class="nav-number">6.6.4.</span> <span class="nav-text">numpy.empty_like</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-zeros-like"><span class="nav-number">6.6.5.</span> <span class="nav-text">numpy.zeros_like</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-ones-like"><span class="nav-number">6.6.6.</span> <span class="nav-text">numpy.ones_like</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#numpy-full-like"><span class="nav-number">6.6.7.</span> <span class="nav-text">numpy.full_like</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
