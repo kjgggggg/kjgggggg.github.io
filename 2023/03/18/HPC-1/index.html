@@ -27,11 +27,22 @@
 <meta property="og:site_name" content="kjg&#39;s blog">
 <meta property="og:description" content="HPC梳理">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230419133905269.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230419201500259.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230419204006761.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230419223116444.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230419223932734.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230419230352291.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230420113250979.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230420114212027.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230420114121227.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230420114356341.png">
 <meta property="article:published_time" content="2023-03-18T02:46:16.000Z">
-<meta property="article:modified_time" content="2023-03-18T03:12:13.930Z">
+<meta property="article:modified_time" content="2023-04-20T03:51:06.647Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="HPC">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2023/03/18/HPC-1/image-20230419133905269.png">
 
 <link rel="canonical" href="https://kjgggggg.github.io/2023/03/18/HPC-1/">
 
@@ -211,10 +222,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-03-18 10:46:16 / 修改时间：11:12:13" itemprop="dateCreated datePublished" datetime="2023-03-18T10:46:16+08:00">2023-03-18</time>
+              <time title="创建时间：2023-03-18 10:46:16" itemprop="dateCreated datePublished" datetime="2023-03-18T10:46:16+08:00">2023-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-20 11:51:06" itemprop="dateModified" datetime="2023-04-20T11:51:06+08:00">2023-04-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -244,8 +261,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="基本工具"><a href="#基本工具" class="headerlink" title="基本工具"></a>基本工具</h3><h4 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h4><h4 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h4><h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><p>想在超算集群中开发一些程序所要用到的库</p>
-<h4 id="SIMD"><a href="#SIMD" class="headerlink" title="SIMD"></a>SIMD</h4><h5 id="SSE-x2F-AVX"><a href="#SSE-x2F-AVX" class="headerlink" title="SSE&#x2F;AVX"></a>SSE&#x2F;AVX</h5><h4 id="SIMT"><a href="#SIMT" class="headerlink" title="SIMT"></a>SIMT</h4><h5 id="CUDA-x2F-ROCm"><a href="#CUDA-x2F-ROCm" class="headerlink" title="CUDA&#x2F;ROCm"></a>CUDA&#x2F;ROCm</h5><h5 id="OpenCL"><a href="#OpenCL" class="headerlink" title="OpenCL"></a>OpenCL</h5><h4 id="Multi-Thread"><a href="#Multi-Thread" class="headerlink" title="Multi-Thread"></a>Multi-Thread</h4><h5 id="OpenMP"><a href="#OpenMP" class="headerlink" title="OpenMP"></a>OpenMP</h5><h3 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h3><h4 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h4><h4 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h4><h4 id="RDMA"><a href="#RDMA" class="headerlink" title="RDMA"></a>RDMA</h4>
+        <h1 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h1><p>Programming Languages： </p>
+<ul>
+<li>MPI</li>
+<li>OpenMP</li>
+<li>Pthread</li>
+<li>CUDA</li>
+<li>Hadoop &amp; Spark (Java &amp; SCALA)</li>
+</ul>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p><img src="/2023/03/18/HPC-1/image-20230419133905269.png" alt="image-20230419133905269"></p>
+<h3 id="并行计算的发展"><a href="#并行计算的发展" class="headerlink" title="并行计算的发展"></a>并行计算的发展</h3><p><img src="/2023/03/18/HPC-1/image-20230419201500259.png" alt="image-20230419201500259"></p>
+<p>异构计算（Heterogeneous Computing）指的是将多个不同种类的计算资源（如CPU、GPU、FPGA等）组合起来，形成一个统一的计算系统，并利用它们各自的优势，来完成特定的计算任务。相对于传统的同构计算（Homogeneous Computing），异构计算在处理高性能、大数据、人工智能等领域的计算任务时，具有更高的计算效率、更低的能耗和更小的空间占用。</p>
+<p>在异构计算中，不同类型的计算资源通常都有各自独特的优势。例如，GPU在并行计算方面具有出色的性能，而FPGA在处理特定类型的计算任务（如信号处理、加密解密等）时具有优势。通过将它们组合起来，可以充分发挥它们各自的优势，提高整个系统的性能和效率。</p>
+<h3 id="并行计算机分类"><a href="#并行计算机分类" class="headerlink" title="并行计算机分类"></a>并行计算机分类</h3><h4 id="Flynn的经典分类法"><a href="#Flynn的经典分类法" class="headerlink" title="Flynn的经典分类法"></a>Flynn的经典分类法</h4><p><img src="/2023/03/18/HPC-1/image-20230419204006761.png" alt="image-20230419204006761"></p>
+<h4 id="基于内存的分类"><a href="#基于内存的分类" class="headerlink" title="基于内存的分类"></a>基于内存的分类</h4><p><img src="/2023/03/18/HPC-1/image-20230419223116444.png" alt="image-20230419223116444"></p>
+<h5 id="Shared-memory"><a href="#Shared-memory" class="headerlink" title="Shared memory"></a>Shared memory</h5><img src="/2023/03/18/HPC-1/image-20230419223932734.png" alt="image-20230419223932734">
+
+<p>UMA和NUMA是与计算机内存架构相关的术语。</p>
+<p>UMA（Uniform Memory Access）指的是一种内存访问模式，在这种模式下，处理器可以在同等的时间内（即具有相同的延迟）访问任何一个内存地址。这种架构通常用于单处理器系统或者小型的对称多处理器（SMP）系统，其中所有处理器都可以访问相同的物理内存。</p>
+<p>NUMA（Non-Uniform Memory Access）则是一种非均匀内存访问模式。在NUMA架构中，不同的处理器可以访问到不同的物理内存区域，而且不同的内存区域可能与不同的处理器相连。这意味着，访问某些内存区域的延迟可能比访问其他区域的延迟更长。NUMA架构通常用于大型的多处理器系统，其中各处理器之间需要共享内存资源。</p>
+<p>总之，UMA和NUMA是两种不同的内存访问模式，它们的适用范围和使用场景也不同。UMA通常用于小型系统，而NUMA则更适用于大型的多处理器系统。</p>
+<h3 id="并行计算编程分类"><a href="#并行计算编程分类" class="headerlink" title="并行计算编程分类"></a>并行计算编程分类</h3><p><img src="/2023/03/18/HPC-1/image-20230419230352291.png" alt="image-20230419230352291"></p>
+<p>但是编程模型不受机器或内存体系结构的限制</p>
+<p>消息传递模型可以在SHARED内存上支持机器: 例如，单个服务器上的MPI</p>
+<p>分布式内存机器上的共享内存模型:例如，分区全局地址空间</p>
+<p><img src="/2023/03/18/HPC-1/image-20230420113250979.png" alt="image-20230420113250979"></p>
+<p>举个例子，SHARED MEEORY PROGAMMING MODEL 有两种实现</p>
+<p><img src="/2023/03/18/HPC-1/image-20230420114212027.png" alt="image-20230420114212027"></p>
+<p><img src="/2023/03/18/HPC-1/image-20230420114121227.png" alt="image-20230420114121227"></p>
+<h4 id="两种编程模型分类"><a href="#两种编程模型分类" class="headerlink" title="两种编程模型分类"></a>两种编程模型分类</h4><p><img src="/2023/03/18/HPC-1/image-20230420114356341.png" alt="image-20230420114356341"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>编程模型（programming model） 和并行系统（parallel system）的设计和流行程度是相互影响的。<br>OpenMP、MPI、Pthreads、CUDA只是供用户进行并行编程的一些并行语言。</p>
+<h1 id="高性能计算"><a href="#高性能计算" class="headerlink" title="高性能计算"></a>高性能计算</h1><h2 id="基本工具"><a href="#基本工具" class="headerlink" title="基本工具"></a>基本工具</h2><h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><h3 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h3><h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><p>想在超算集群中开发一些程序所要用到的库</p>
+<h2 id="SIMD"><a href="#SIMD" class="headerlink" title="SIMD"></a>SIMD</h2><h3 id="SSE-x2F-AVX"><a href="#SSE-x2F-AVX" class="headerlink" title="SSE&#x2F;AVX"></a>SSE&#x2F;AVX</h3><h2 id="SIMT"><a href="#SIMT" class="headerlink" title="SIMT"></a>SIMT</h2><h3 id="CUDA-x2F-ROCm"><a href="#CUDA-x2F-ROCm" class="headerlink" title="CUDA&#x2F;ROCm"></a>CUDA&#x2F;ROCm</h3><h3 id="OpenCL"><a href="#OpenCL" class="headerlink" title="OpenCL"></a>OpenCL</h3><h2 id="Multi-Thread"><a href="#Multi-Thread" class="headerlink" title="Multi-Thread"></a>Multi-Thread</h2><h3 id="OpenMP"><a href="#OpenMP" class="headerlink" title="OpenMP"></a>OpenMP</h3><h2 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h2><h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><h3 id="RDMA"><a href="#RDMA" class="headerlink" title="RDMA"></a>RDMA</h3>
     </div>
 
     
@@ -328,7 +375,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">基本工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ssh"><span class="nav-number">1.1.</span> <span class="nav-text">ssh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rsync"><span class="nav-number">1.2.</span> <span class="nav-text">rsync</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMD"><span class="nav-number">2.1.</span> <span class="nav-text">SIMD</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SSE-x2F-AVX"><span class="nav-number">2.1.1.</span> <span class="nav-text">SSE&#x2F;AVX</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMT"><span class="nav-number">2.2.</span> <span class="nav-text">SIMT</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CUDA-x2F-ROCm"><span class="nav-number">2.2.1.</span> <span class="nav-text">CUDA&#x2F;ROCm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OpenCL"><span class="nav-number">2.2.2.</span> <span class="nav-text">OpenCL</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-Thread"><span class="nav-number">2.3.</span> <span class="nav-text">Multi-Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#OpenMP"><span class="nav-number">2.3.1.</span> <span class="nav-text">OpenMP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="nav-number">3.</span> <span class="nav-text">性能调优</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU"><span class="nav-number">3.1.</span> <span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU"><span class="nav-number">3.2.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDMA"><span class="nav-number">3.3.</span> <span class="nav-text">RDMA</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97"><span class="nav-number">1.</span> <span class="nav-text">并行计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E5%86%85%E5%AE%B9"><span class="nav-number">1.1.</span> <span class="nav-text">课程内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%9A%84%E5%8F%91%E5%B1%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">并行计算的发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">并行计算机分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Flynn%E7%9A%84%E7%BB%8F%E5%85%B8%E5%88%86%E7%B1%BB%E6%B3%95"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Flynn的经典分类法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">基于内存的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Shared-memory"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">Shared memory</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%BC%96%E7%A8%8B%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">并行计算编程分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">两种编程模型分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">高性能计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.</span> <span class="nav-text">基本工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">2.1.1.</span> <span class="nav-text">ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync"><span class="nav-number">2.1.2.</span> <span class="nav-text">rsync</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">开发工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SIMD"><span class="nav-number">2.3.</span> <span class="nav-text">SIMD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-x2F-AVX"><span class="nav-number">2.3.1.</span> <span class="nav-text">SSE&#x2F;AVX</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SIMT"><span class="nav-number">2.4.</span> <span class="nav-text">SIMT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA-x2F-ROCm"><span class="nav-number">2.4.1.</span> <span class="nav-text">CUDA&#x2F;ROCm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenCL"><span class="nav-number">2.4.2.</span> <span class="nav-text">OpenCL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Thread"><span class="nav-number">2.5.</span> <span class="nav-text">Multi-Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenMP"><span class="nav-number">2.5.1.</span> <span class="nav-text">OpenMP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="nav-number">2.6.</span> <span class="nav-text">性能调优</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPU"><span class="nav-number">2.6.1.</span> <span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU"><span class="nav-number">2.6.2.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDMA"><span class="nav-number">2.6.3.</span> <span class="nav-text">RDMA</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -344,20 +391,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

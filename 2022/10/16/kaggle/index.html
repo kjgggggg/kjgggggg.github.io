@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="kaggle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kaggle">
+<meta property="og:url" content="https://kjgggggg.github.io/2022/10/16/kaggle/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="kaggle">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-16T05:22:21.000Z">
+<meta property="article:modified_time" content="2023-04-22T16:40:23.131Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="kaggle">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2022/10/16/kaggle/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>kaggle | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2022/10/16/kaggle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kaggle
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-16 13:22:21" itemprop="dateCreated datePublished" datetime="2022-10-16T13:22:21+08:00">2022-10-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-23 00:40:23" itemprop="dateModified" datetime="2023-04-23T00:40:23+08:00">2023-04-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kaggle/" itemprop="url" rel="index"><span itemprop="name">kaggle</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">kaggle</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h3><h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><ul>
+<li>遍历list</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="string">&quot;01&quot;</span>, <span class="string">&quot;02&quot;</span>, <span class="string">&quot;03&quot;</span>, <span class="string">&quot;04&quot;</span>]</span><br><span class="line">	<span class="comment"># 1</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">        <span class="built_in">print</span>(num)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)):</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">list</span>[i])</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">iter</span>(<span class="built_in">list</span>):</span><br><span class="line">        <span class="built_in">print</span>(num)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 4</span></span><br><span class="line">    <span class="keyword">for</span> obj <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">list</span>):</span><br><span class="line">        <span class="built_in">print</span>(obj)</span><br><span class="line">    <span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">list</span>):</span><br><span class="line">    	<span class="built_in">print</span>(<span class="string">&quot;index =&quot;</span>, index, <span class="string">&quot;value =&quot;</span>, value)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>比较list元素, [False, True, True, False]</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用列表推导式</span></span><br><span class="line"><span class="built_in">print</span>([x &gt; <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> a])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 map 函数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x: x &gt; <span class="number">2</span>, a)))</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">multi_word_search</span>(<span class="params">doc_list, keywords</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Takes list of documents (each document is a string) and a list of keywords.  </span></span><br><span class="line"><span class="string">    Returns a dictionary where each key is a keyword, and the value is a list of indices</span></span><br><span class="line"><span class="string">    (from doc_list) of the documents containing that keyword</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; doc_list = [&quot;The Learn Python Challenge Casino.&quot;, &quot;They bought a car and a casino&quot;, &quot;Casinoville&quot;]</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; keywords = [&#x27;casino&#x27;, &#x27;they&#x27;]</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; multi_word_search(doc_list, keywords)</span></span><br><span class="line"><span class="string">    &#123;&#x27;casino&#x27;: [0, 1], &#x27;they&#x27;: [1]&#125;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    indices = &#123;&#125; </span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> keywords:</span><br><span class="line">        indices[x] = []</span><br><span class="line">    <span class="keyword">for</span> i, doc <span class="keyword">in</span> <span class="built_in">enumerate</span>(doc_list):</span><br><span class="line">        tokens = doc.split()</span><br><span class="line">        normalized = [token.rstrip(<span class="string">&#x27;.,&#x27;</span>).lower() <span class="keyword">for</span> token <span class="keyword">in</span> tokens]</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> keywords:</span><br><span class="line">            <span class="keyword">if</span> x.lower() <span class="keyword">in</span> normalized:</span><br><span class="line">                indices[x].append(i)</span><br><span class="line">    <span class="keyword">return</span> indices</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>判断key是否在dict中</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dict</span> = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;age&#x27;</span>: <span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dict</span>.has_key(<span class="string">&#x27;name&#x27;</span>)) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;name&#x27;</span> <span class="keyword">in</span> <span class="built_in">dict</span>.keys())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;name&#x27;</span> <span class="keyword">in</span> <span class="built_in">dict</span>)  <span class="comment"># 结果返回True</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h3><h4 id="Creating-Reading-and-Writing"><a href="#Creating-Reading-and-Writing" class="headerlink" title="Creating, Reading and Writing"></a>Creating, Reading and Writing</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Creating data：There are two core objects in pandas: the <strong>DataFrame</strong> and the <strong>Series</strong>.</p>
+<h5 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Yes&#x27;</span>: [<span class="number">50</span>, <span class="number">21</span>], <span class="string">&#x27;No&#x27;</span>: [<span class="number">131</span>, <span class="number">2</span>]&#125;)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Yes</th>
+<th>No</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">50</td>
+<td>131</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">21</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Bob&#x27;</span>: [<span class="string">&#x27;I liked it.&#x27;</span>, <span class="string">&#x27;It was awful.&#x27;</span>], <span class="string">&#x27;Sue&#x27;</span>: [<span class="string">&#x27;Pretty good.&#x27;</span>, <span class="string">&#x27;Bland.&#x27;</span>]&#125;)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Bob</th>
+<th>Sue</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">I liked it.</td>
+<td>Pretty good.</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">It was awful.</td>
+<td>Bland.</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Bob&#x27;</span>: [<span class="string">&#x27;I liked it.&#x27;</span>, <span class="string">&#x27;It was awful.&#x27;</span>], </span><br><span class="line">              <span class="string">&#x27;Sue&#x27;</span>: [<span class="string">&#x27;Pretty good.&#x27;</span>, <span class="string">&#x27;Bland.&#x27;</span>]&#125;,</span><br><span class="line">             index=[<span class="string">&#x27;Product A&#x27;</span>, <span class="string">&#x27;Product B&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Bob</th>
+<th>Sue</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Product A</td>
+<td align="left">I liked it.</td>
+<td>Pretty good.</td>
+</tr>
+<tr>
+<td align="left">Product B</td>
+<td align="left">It was awful.</td>
+<td>Bland.</td>
+</tr>
+</tbody></table>
+<h5 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">0</span>    <span class="number">1</span></span><br><span class="line"><span class="attribute">1</span>    <span class="number">2</span></span><br><span class="line"><span class="attribute">2</span>    <span class="number">3</span></span><br><span class="line"><span class="attribute">3</span>    <span class="number">4</span></span><br><span class="line"><span class="attribute">4</span>    <span class="number">5</span></span><br><span class="line"><span class="attribute">dtype</span>: int64</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.Series([<span class="number">30</span>, <span class="number">35</span>, <span class="number">40</span>], index=[<span class="string">&#x27;2015 Sales&#x27;</span>, <span class="string">&#x27;2016 Sales&#x27;</span>, <span class="string">&#x27;2017 Sales&#x27;</span>], name=<span class="string">&#x27;Product A&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">2015 </span><span class="string">Sales</span>    <span class="number">30</span></span><br><span class="line"><span class="number">2016 </span><span class="string">Sales</span>    <span class="number">35</span></span><br><span class="line"><span class="number">2017 </span><span class="string">Sales</span>    <span class="number">40</span></span><br><span class="line"><span class="attr">Name:</span> <span class="string">Product</span> <span class="string">A,</span> <span class="attr">dtype:</span> <span class="string">int64</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Indexing-Selecting-amp-Assigning"><a href="#Indexing-Selecting-amp-Assigning" class="headerlink" title="Indexing, Selecting &amp; Assigning"></a>Indexing, Selecting &amp; Assigning</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">country</th>
+<th align="left">description</th>
+<th align="left">designation</th>
+<th align="left">points</th>
+<th align="left">price</th>
+<th align="left">province</th>
+<th align="left">region_1</th>
+<th align="left">region_2</th>
+<th align="left">taster_name</th>
+<th align="left">taster_twitter_handle</th>
+<th align="left">title</th>
+<th align="left">variety</th>
+<th align="left">winery</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">Italy</td>
+<td align="left">Aromas include tropical fruit, broom, brimston…</td>
+<td align="left">Vulkà Bianco</td>
+<td align="left">87</td>
+<td align="left">NaN</td>
+<td align="left">Sicily &amp; Sardinia</td>
+<td align="left">Etna</td>
+<td align="left">NaN</td>
+<td align="left">Kerin O’Keefe</td>
+<td align="left">@kerinokeefe</td>
+<td align="left">Nicosia 2013 Vulkà Bianco (Etna)</td>
+<td align="left">White Blend</td>
+<td>Nicosia</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Portugal</td>
+<td align="left">This is ripe and fruity, a wine that is smooth…</td>
+<td align="left">Avidagos</td>
+<td align="left">87</td>
+<td align="left">15.0</td>
+<td align="left">Douro</td>
+<td align="left">NaN</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Quinta dos Avidagos 2011 Avidagos Red (Douro)</td>
+<td align="left">Portuguese Red</td>
+<td>Quinta dos Avidagos</td>
+</tr>
+<tr>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td>…</td>
+</tr>
+<tr>
+<td align="left">129969</td>
+<td align="left">France</td>
+<td align="left">A dry style of Pinot Gris, this is crisp with …</td>
+<td align="left">NaN</td>
+<td align="left">90</td>
+<td align="left">32.0</td>
+<td align="left">Alsace</td>
+<td align="left">Alsace</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Domaine Marcel Deiss 2012 Pinot Gris (Alsace)</td>
+<td align="left">Pinot Gris</td>
+<td>Domaine Marcel Deiss</td>
+</tr>
+<tr>
+<td align="left">129970</td>
+<td align="left">France</td>
+<td align="left">Big, rich and off-dry, this is powered by inte…</td>
+<td align="left">Lieu-dit Harth Cuvée Caroline</td>
+<td align="left">90</td>
+<td align="left">21.0</td>
+<td align="left">Alsace</td>
+<td align="left">Alsace</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Domaine Schoffit 2012 Lieu-dit Harth Cuvée Car…</td>
+<td align="left">Gewürztraminer</td>
+<td>Domaine Schoffit</td>
+</tr>
+</tbody></table>
+<ul>
+<li>查看某列</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.country <span class="comment"># reviews[&#x27;country&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>            <span class="string">Italy</span></span><br><span class="line"><span class="number">1</span>         <span class="string">Portugal</span></span><br><span class="line">            <span class="string">...</span>   </span><br><span class="line"><span class="number">129969</span>      <span class="string">France</span></span><br><span class="line"><span class="number">129970</span>      <span class="string">France</span></span><br><span class="line"><span class="attr">Name:</span> <span class="string">country,</span> <span class="attr">Length:</span> <span class="number">129971</span><span class="string">,</span> <span class="attr">dtype:</span> <span class="string">object</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看某列的某一行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews[<span class="string">&#x27;country&#x27;</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line"><span class="symbol">&#x27;Italy</span>&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="iloc"><a href="#iloc" class="headerlink" title="iloc"></a>iloc</h5><blockquote>
+<p>  loc和iloc都是行第一，列第二， iloc基于数字，loc基于标签</p>
+</blockquote>
+<ul>
+<li>查看第一行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.iloc[<span class="number">0</span>] <span class="comment"># 查看总体数据的某一行</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight mathematica"><table><tr><td class="code"><pre><span class="line"><span class="variable">country</span>                                                    <span class="variable">Italy</span></span><br><span class="line"><span class="variable">description</span>    <span class="variable">Aromas</span> <span class="variable">include</span> <span class="variable">tropical</span> <span class="variable">fruit</span><span class="operator">,</span> <span class="variable">broom</span><span class="operator">,</span> <span class="variable">brimston</span><span class="operator">...</span></span><br><span class="line">                                     <span class="operator">...</span>                        </span><br><span class="line"><span class="variable">variety</span>                                              <span class="built_in">White</span> <span class="built_in">Blend</span></span><br><span class="line"><span class="variable">winery</span>                                                   <span class="variable">Nicosia</span></span><br><span class="line"><span class="variable">Name</span><span class="operator">:</span> <span class="number">0</span><span class="operator">,</span> <span class="built_in">Length</span><span class="operator">:</span> <span class="number">13</span><span class="operator">,</span> <span class="variable">dtype</span><span class="operator">:</span> <span class="variable">object</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看第一列</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.iloc[:, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>            <span class="string">Italy</span></span><br><span class="line"><span class="number">1</span>         <span class="string">Portugal</span></span><br><span class="line">            <span class="string">...</span>   </span><br><span class="line"><span class="number">129969</span>      <span class="string">France</span></span><br><span class="line"><span class="number">129970</span>      <span class="string">France</span></span><br><span class="line"><span class="attr">Name:</span> <span class="string">country,</span> <span class="attr">Length:</span> <span class="number">129971</span><span class="string">,</span> <span class="attr">dtype:</span> <span class="string">object</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看第一列的前三行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.iloc[:<span class="number">3</span>, <span class="number">0</span>] <span class="comment"># reviews.iloc[[0, 1, 2], 0]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>       Italy</span><br><span class="line"><span class="number">1</span>    Portugal</span><br><span class="line"><span class="number">2</span>          US</span><br><span class="line"><span class="keyword">Name</span>: country, dtype: <span class="keyword">object</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看最后5行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.iloc[-<span class="number">5</span>:]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">country</th>
+<th align="left">description</th>
+<th align="left">designation</th>
+<th align="left">points</th>
+<th align="left">price</th>
+<th align="left">province</th>
+<th align="left">region_1</th>
+<th align="left">region_2</th>
+<th align="left">taster_name</th>
+<th align="left">taster_twitter_handle</th>
+<th align="left">title</th>
+<th align="left">variety</th>
+<th align="left">winery</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">129966</td>
+<td align="left">Germany</td>
+<td align="left">Notes of honeysuckle and cantaloupe sweeten th…</td>
+<td align="left">Brauneberger Juffer-Sonnenuhr Spätlese</td>
+<td align="left">90</td>
+<td align="left">28.0</td>
+<td align="left">Mosel</td>
+<td align="left">NaN</td>
+<td align="left">NaN</td>
+<td align="left">Anna Lee C. Iijima</td>
+<td align="left">NaN</td>
+<td align="left">Dr. H. Thanisch (Erben Müller-Burggraef) 2013 …</td>
+<td align="left">Riesling</td>
+<td>Dr. H. Thanisch (Erben Müller-Burggraef)</td>
+</tr>
+<tr>
+<td align="left">129967</td>
+<td align="left">US</td>
+<td align="left">Citation is given as much as a decade of bottl…</td>
+<td align="left">NaN</td>
+<td align="left">90</td>
+<td align="left">75.0</td>
+<td align="left">Oregon</td>
+<td align="left">Oregon</td>
+<td align="left">Oregon Other</td>
+<td align="left">Paul Gregutt</td>
+<td align="left">@paulgwine</td>
+<td align="left">Citation 2004 Pinot Noir (Oregon)</td>
+<td align="left">Pinot Noir</td>
+<td>Citation</td>
+</tr>
+<tr>
+<td align="left">129968</td>
+<td align="left">France</td>
+<td align="left">Well-drained gravel soil gives this wine its c…</td>
+<td align="left">Kritt</td>
+<td align="left">90</td>
+<td align="left">30.0</td>
+<td align="left">Alsace</td>
+<td align="left">Alsace</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Domaine Gresser 2013 Kritt Gewurztraminer (Als…</td>
+<td align="left">Gewürztraminer</td>
+<td>Domaine Gresser</td>
+</tr>
+<tr>
+<td align="left">129969</td>
+<td align="left">France</td>
+<td align="left">A dry style of Pinot Gris, this is crisp with …</td>
+<td align="left">NaN</td>
+<td align="left">90</td>
+<td align="left">32.0</td>
+<td align="left">Alsace</td>
+<td align="left">Alsace</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Domaine Marcel Deiss 2012 Pinot Gris (Alsace)</td>
+<td align="left">Pinot Gris</td>
+<td>Domaine Marcel Deiss</td>
+</tr>
+<tr>
+<td align="left">129970</td>
+<td align="left">France</td>
+<td align="left">Big, rich and off-dry, this is powered by inte…</td>
+<td align="left">Lieu-dit Harth Cuvée Caroline</td>
+<td align="left">90</td>
+<td align="left">21.0</td>
+<td align="left">Alsace</td>
+<td align="left">Alsace</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Domaine Schoffit 2012 Lieu-dit Harth Cuvée Car…</td>
+<td align="left">Gewürztraminer</td>
+<td>Domaine Schoffit</td>
+</tr>
+</tbody></table>
+<h5 id="loc"><a href="#loc" class="headerlink" title="loc"></a>loc</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.loc[<span class="number">0</span>, <span class="string">&#x27;country&#x27;</span>] <span class="comment"># country 列的第一行</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line"><span class="symbol">&#x27;Italy</span>&#x27;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>‘taster_name’, ‘taster_twitter_handle’, ‘points’列的所有行</li>
+</ul>
+<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">reviews.loc[:, [<span class="string">&#x27;taster_name&#x27;</span>, <span class="string">&#x27;taster_twitter_handle&#x27;</span>, <span class="string">&#x27;points&#x27;</span>]]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">taster_name</th>
+<th align="left">taster_twitter_handle</th>
+<th align="left">points</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">Kerin O’Keefe</td>
+<td align="left">@kerinokeefe</td>
+<td align="left">87</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">87</td>
+</tr>
+<tr>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+</tr>
+<tr>
+<td align="left">129969</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">90</td>
+</tr>
+<tr>
+<td align="left">129970</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">90</td>
+</tr>
+</tbody></table>
+<h5 id="条件选择"><a href="#条件选择" class="headerlink" title="条件选择"></a>条件选择</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.country == <span class="string">&#x27;Italy&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>          <span class="literal">True</span></span><br><span class="line"><span class="number">1</span>         <span class="literal">False</span></span><br><span class="line">          <span class="string">...</span>  </span><br><span class="line"><span class="number">129969</span>    <span class="literal">False</span></span><br><span class="line"><span class="number">129970</span>    <span class="literal">False</span></span><br><span class="line"><span class="attr">Name:</span> <span class="string">country,</span> <span class="attr">Length:</span> <span class="number">129971</span><span class="string">,</span> <span class="attr">dtype:</span> <span class="string">bool</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>选出 country 列为 Italy 的行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.loc[reviews.country == <span class="string">&#x27;Italy&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">country</th>
+<th align="left">description</th>
+<th align="left">designation</th>
+<th align="left">points</th>
+<th align="left">price</th>
+<th align="left">province</th>
+<th align="left">region_1</th>
+<th align="left">region_2</th>
+<th align="left">taster_name</th>
+<th align="left">taster_twitter_handle</th>
+<th align="left">title</th>
+<th align="left">variety</th>
+<th align="left">winery</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">Italy</td>
+<td align="left">Aromas include tropical fruit, broom, brimston…</td>
+<td align="left">Vulkà Bianco</td>
+<td align="left">87</td>
+<td align="left">NaN</td>
+<td align="left">Sicily &amp; Sardinia</td>
+<td align="left">Etna</td>
+<td align="left">NaN</td>
+<td align="left">Kerin O’Keefe</td>
+<td align="left">@kerinokeefe</td>
+<td align="left">Nicosia 2013 Vulkà Bianco (Etna)</td>
+<td align="left">White Blend</td>
+<td>Nicosia</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">Italy</td>
+<td align="left">Here’s a bright, informal red that opens with …</td>
+<td align="left">Belsito</td>
+<td align="left">87</td>
+<td align="left">16.0</td>
+<td align="left">Sicily &amp; Sardinia</td>
+<td align="left">Vittoria</td>
+<td align="left">NaN</td>
+<td align="left">Kerin O’Keefe</td>
+<td align="left">@kerinokeefe</td>
+<td align="left">Terre di Giurfo 2013 Belsito Frappato (Vittoria)</td>
+<td align="left">Frappato</td>
+<td>Terre di Giurfo</td>
+</tr>
+<tr>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td>…</td>
+</tr>
+<tr>
+<td align="left">129961</td>
+<td align="left">Italy</td>
+<td align="left">Intense aromas of wild cherry, baking spice, t…</td>
+<td align="left">NaN</td>
+<td align="left">90</td>
+<td align="left">30.0</td>
+<td align="left">Sicily &amp; Sardinia</td>
+<td align="left">Sicilia</td>
+<td align="left">NaN</td>
+<td align="left">Kerin O’Keefe</td>
+<td align="left">@kerinokeefe</td>
+<td align="left">COS 2013 Frappato (Sicilia)</td>
+<td align="left">Frappato</td>
+<td>COS</td>
+</tr>
+<tr>
+<td align="left">129962</td>
+<td align="left">Italy</td>
+<td align="left">Blackberry, cassis, grilled herb and toasted a…</td>
+<td align="left">Sàgana Tenuta San Giacomo</td>
+<td align="left">90</td>
+<td align="left">40.0</td>
+<td align="left">Sicily &amp; Sardinia</td>
+<td align="left">Sicilia</td>
+<td align="left">NaN</td>
+<td align="left">Kerin O’Keefe</td>
+<td align="left">@kerinokeefe</td>
+<td align="left">Cusumano 2012 Sàgana Tenuta San Giacomo Nero d…</td>
+<td align="left">Nero d’Avola</td>
+<td>Cusumano</td>
+</tr>
+</tbody></table>
+<ul>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.loc[(reviews.country == <span class="string">&#x27;Italy&#x27;</span>) &amp; (reviews.points &gt;= <span class="number">90</span>)]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li></li>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.loc[(reviews.country == <span class="string">&#x27;Italy&#x27;</span>) | (reviews.points &gt;= <span class="number">90</span>)]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.loc[reviews.country.isin([<span class="string">&#x27;Italy&#x27;</span>, <span class="string">&#x27;France&#x27;</span>])]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.loc[reviews.price.notnull()]</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h5><figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">reviews[<span class="string">&#x27;critic&#x27;</span>] = <span class="string">&#x27;everyone&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将 index_backwards 的值设置为 倒序排列</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews[<span class="string">&#x27;index_backwards&#x27;</span>] = <span class="built_in">range</span>(<span class="built_in">len</span>(reviews), <span class="number">0</span>, -<span class="number">1</span>) </span><br><span class="line">reviews[<span class="string">&#x27;index_backwards&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>         <span class="number">129971</span></span><br><span class="line"><span class="number">1</span>         <span class="number">129970</span></span><br><span class="line">           <span class="string">...</span>  </span><br><span class="line"><span class="number">129969</span>         <span class="number">2</span></span><br><span class="line"><span class="number">129970</span>         <span class="number">1</span></span><br><span class="line"><span class="attr">Name:</span> <span class="string">index_backwards,</span> <span class="attr">Length:</span> <span class="number">129971</span><span class="string">,</span> <span class="attr">dtype:</span> <span class="string">int64</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Summary-Functions-and-Maps"><a href="#Summary-Functions-and-Maps" class="headerlink" title="Summary Functions and Maps"></a>Summary Functions and Maps</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.points.describe()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">reviews.<span class="built_in">points</span>.<span class="built_in">mean</span>()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回该列的所有不重复的值</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">reviews<span class="selector-class">.taster_name</span><span class="selector-class">.unique</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">array</span>([<span class="string">&#x27;Kerin O’Keefe&#x27;</span>, <span class="string">&#x27;Roger Voss&#x27;</span>, <span class="string">&#x27;Paul Gregutt&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Alexander Peartree&#x27;</span>, <span class="string">&#x27;Michael Schachner&#x27;</span>, <span class="string">&#x27;Anna Lee C. Iijima&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Virginie Boone&#x27;</span>, <span class="string">&#x27;Matt Kettmann&#x27;</span>, <span class="keyword">nan</span>, <span class="string">&#x27;Sean P. Sullivan&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Jim Gordon&#x27;</span>, <span class="string">&#x27;Joe Czerwinski&#x27;</span>, <span class="string">&#x27;Anne Krebiehl\xa0MW&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Lauren Buzzeo&#x27;</span>, <span class="string">&#x27;Mike DeSimone&#x27;</span>, <span class="string">&#x27;Jeff Jenssen&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Susan Kostrzewa&#x27;</span>, <span class="string">&#x27;Carrie Dykes&#x27;</span>, <span class="string">&#x27;Fiona Adams&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Christina Pickard&#x27;</span>], dtype=<span class="keyword">object</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="map-Series"><a href="#map-Series" class="headerlink" title="map - Series"></a>map - Series</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">review_points_mean = reviews.points.mean()</span><br><span class="line">reviews.points.<span class="built_in">map</span>(<span class="keyword">lambda</span> p: p - review_points_mean)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>        -<span class="number">1.447138</span></span><br><span class="line"><span class="number">1</span>        -<span class="number">1.447138</span></span><br><span class="line">            ...   </span><br><span class="line"><span class="number">129969</span>    <span class="number">1.552862</span></span><br><span class="line"><span class="number">129970</span>    <span class="number">1.552862</span></span><br><span class="line">Name: points, Length: <span class="number">129971</span>, dtype: float64</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="apply-DataFrame"><a href="#apply-DataFrame" class="headerlink" title="apply - DataFrame"></a>apply - DataFrame</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">remean_points</span>(<span class="params">row</span>):</span><br><span class="line">    row.points = row.points - review_points_mean</span><br><span class="line">    <span class="keyword">return</span> row</span><br><span class="line"></span><br><span class="line">reviews.apply(remean_points, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">country</th>
+<th align="left">description</th>
+<th align="left">designation</th>
+<th align="left">points</th>
+<th align="left">price</th>
+<th align="left">province</th>
+<th align="left">region_1</th>
+<th align="left">region_2</th>
+<th align="left">taster_name</th>
+<th align="left">taster_twitter_handle</th>
+<th align="left">title</th>
+<th align="left">variety</th>
+<th align="left">winery</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">Italy</td>
+<td align="left">Aromas include tropical fruit, broom, brimston…</td>
+<td align="left">Vulkà Bianco</td>
+<td align="left">-1.447138</td>
+<td align="left">NaN</td>
+<td align="left">Sicily &amp; Sardinia</td>
+<td align="left">Etna</td>
+<td align="left">NaN</td>
+<td align="left">Kerin O’Keefe</td>
+<td align="left">@kerinokeefe</td>
+<td align="left">Nicosia 2013 Vulkà Bianco (Etna)</td>
+<td align="left">White Blend</td>
+<td>Nicosia</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">Portugal</td>
+<td align="left">This is ripe and fruity, a wine that is smooth…</td>
+<td align="left">Avidagos</td>
+<td align="left">-1.447138</td>
+<td align="left">15.0</td>
+<td align="left">Douro</td>
+<td align="left">NaN</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Quinta dos Avidagos 2011 Avidagos Red (Douro)</td>
+<td align="left">Portuguese Red</td>
+<td>Quinta dos Avidagos</td>
+</tr>
+<tr>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td>…</td>
+</tr>
+<tr>
+<td align="left">129969</td>
+<td align="left">France</td>
+<td align="left">A dry style of Pinot Gris, this is crisp with …</td>
+<td align="left">NaN</td>
+<td align="left">1.552862</td>
+<td align="left">32.0</td>
+<td align="left">Alsace</td>
+<td align="left">Alsace</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Domaine Marcel Deiss 2012 Pinot Gris (Alsace)</td>
+<td align="left">Pinot Gris</td>
+<td>Domaine Marcel Deiss</td>
+</tr>
+<tr>
+<td align="left">129970</td>
+<td align="left">France</td>
+<td align="left">Big, rich and off-dry, this is powered by inte…</td>
+<td align="left">Lieu-dit Harth Cuvée Caroline</td>
+<td align="left">1.552862</td>
+<td align="left">21.0</td>
+<td align="left">Alsace</td>
+<td align="left">Alsace</td>
+<td align="left">NaN</td>
+<td align="left">Roger Voss</td>
+<td align="left">@vossroger</td>
+<td align="left">Domaine Schoffit 2012 Lieu-dit Harth Cuvée Car…</td>
+<td align="left">Gewürztraminer</td>
+<td>Domaine Schoffit</td>
+</tr>
+</tbody></table>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><ul>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">review_points_mean = reviews.points.mean()</span><br><span class="line">reviews.points - review_points_mean</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>        -<span class="number">1.447138</span></span><br><span class="line"><span class="number">1</span>        -<span class="number">1.447138</span></span><br><span class="line">            ...   </span><br><span class="line"><span class="number">129969</span>    <span class="number">1.552862</span></span><br><span class="line"><span class="number">129970</span>    <span class="number">1.552862</span></span><br><span class="line">Name: points, Length: <span class="number">129971</span>, dtype: float64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">reviews.country + <span class="string">&quot; - &quot;</span> + reviews.region_1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>            Italy - Etna</span><br><span class="line"><span class="number">1</span>                     <span class="literal">NaN</span></span><br><span class="line">               ...       </span><br><span class="line"><span class="number">129969</span>    France - Alsace</span><br><span class="line"><span class="number">129970</span>    France - Alsace</span><br><span class="line"><span class="built_in">Length</span>: <span class="number">129971</span>, <span class="attr">dtype</span>: object</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Grouping-and-Sorting"><a href="#Grouping-and-Sorting" class="headerlink" title="Grouping and Sorting"></a>Grouping and Sorting</h4><h3 id="DecisionTreeRegressor"><a href="#DecisionTreeRegressor" class="headerlink" title="DecisionTreeRegressor"></a>DecisionTreeRegressor</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Code you have previously used to load data</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># Path of the file to read</span></span><br><span class="line">iowa_file_path = <span class="string">&#x27;../input/home-data-for-ml-course/train.csv&#x27;</span></span><br><span class="line"></span><br><span class="line">home_data = pd.read_csv(iowa_file_path)</span><br><span class="line"><span class="comment"># Create target object and call it y</span></span><br><span class="line">y = home_data.SalePrice</span><br><span class="line"><span class="comment"># Create X</span></span><br><span class="line">features = [<span class="string">&#x27;LotArea&#x27;</span>, <span class="string">&#x27;YearBuilt&#x27;</span>, <span class="string">&#x27;1stFlrSF&#x27;</span>, <span class="string">&#x27;2ndFlrSF&#x27;</span>, <span class="string">&#x27;FullBath&#x27;</span>, <span class="string">&#x27;BedroomAbvGr&#x27;</span>, <span class="string">&#x27;TotRmsAbvGrd&#x27;</span>]</span><br><span class="line">X = home_data[features]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Split into validation and training data</span></span><br><span class="line">train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Specify Model</span></span><br><span class="line">iowa_model = DecisionTreeRegressor(random_state=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># Fit Model</span></span><br><span class="line">iowa_model.fit(train_X, train_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make validation predictions and calculate mean absolute error</span></span><br><span class="line">val_predictions = iowa_model.predict(val_X)</span><br><span class="line">val_mae = mean_absolute_error(val_predictions, val_y)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Validation MAE: &#123;:,.0f&#125;&quot;</span>.<span class="built_in">format</span>(val_mae))</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="优化DecisionTreeRegressor"><a href="#优化DecisionTreeRegressor" class="headerlink" title="优化DecisionTreeRegressor"></a>优化DecisionTreeRegressor</h4><ul>
+<li>改变决策树的最大深度</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_mae</span>(<span class="params">max_leaf_nodes, train_X, val_X, train_y, val_y</span>):</span><br><span class="line">    model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=<span class="number">0</span>)</span><br><span class="line">    model.fit(train_X, train_y)</span><br><span class="line">    preds_val = model.predict(val_X)</span><br><span class="line">    mae = mean_absolute_error(val_y, preds_val)</span><br><span class="line">    <span class="keyword">return</span>(mae)</span><br><span class="line"></span><br><span class="line">candidate_max_leaf_nodes = [<span class="number">5</span>, <span class="number">25</span>, <span class="number">50</span>, <span class="number">100</span>, <span class="number">250</span>, <span class="number">500</span>]</span><br><span class="line">scores = &#123;leaf_size: get_mae(leaf_size, train_X, val_X, train_y, val_y) <span class="keyword">for</span> leaf_size <span class="keyword">in</span> candidate_max_leaf_nodes&#125;</span><br><span class="line">best_tree_size = <span class="built_in">min</span>(scores, key=scores.get)</span><br><span class="line"></span><br><span class="line">final_model = DecisionTreeRegressor(max_leaf_nodes=best_tree_size, random_state=<span class="number">0</span>)</span><br><span class="line">final_model.fit(X, y)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="RandomForest"><a href="#RandomForest" class="headerlink" title="RandomForest"></a>RandomForest</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define the model. Set random_state to 1</span></span><br><span class="line">rf_model = RandomForestRegressor(random_state = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fit your model</span></span><br><span class="line">rf_model.fit(train_X, train_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calculate the mean absolute error of your Random Forest model on the validation data</span></span><br><span class="line">rf_val_mae = mean_absolute_error(rf_model.predict(val_X), val_y)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Validation MAE for Random Forest Model: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(rf_val_mae))</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/kaggle/" rel="tag"># kaggle</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/14/DP%E4%B9%8B%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D%E5%90%88%E9%9B%86/" rel="prev" title="DP之打家劫舍合集">
+      <i class="fa fa-chevron-left"></i> DP之打家劫舍合集
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/10/16/IOS%E5%BC%80%E5%8F%91/" rel="next" title="IOS开发">
+      IOS开发 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Python基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#list"><span class="nav-number">1.1.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dict"><span class="nav-number">1.2.</span> <span class="nav-text">dict</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pandas"><span class="nav-number">2.</span> <span class="nav-text">Pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Creating-Reading-and-Writing"><span class="nav-number">2.1.</span> <span class="nav-text">Creating, Reading and Writing</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DataFrame"><span class="nav-number">2.1.1.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Series"><span class="nav-number">2.1.2.</span> <span class="nav-text">Series</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Indexing-Selecting-amp-Assigning"><span class="nav-number">2.2.</span> <span class="nav-text">Indexing, Selecting &amp; Assigning</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#iloc"><span class="nav-number">2.2.1.</span> <span class="nav-text">iloc</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#loc"><span class="nav-number">2.2.2.</span> <span class="nav-text">loc</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.3.</span> <span class="nav-text">条件选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC"><span class="nav-number">2.2.4.</span> <span class="nav-text">赋值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary-Functions-and-Maps"><span class="nav-number">2.3.</span> <span class="nav-text">Summary Functions and Maps</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#map-Series"><span class="nav-number">2.3.1.</span> <span class="nav-text">map - Series</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apply-DataFrame"><span class="nav-number">2.3.2.</span> <span class="nav-text">apply - DataFrame</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.3.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Grouping-and-Sorting"><span class="nav-number">2.4.</span> <span class="nav-text">Grouping and Sorting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DecisionTreeRegressor"><span class="nav-number">3.</span> <span class="nav-text">DecisionTreeRegressor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96DecisionTreeRegressor"><span class="nav-number">3.1.</span> <span class="nav-text">优化DecisionTreeRegressor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RandomForest"><span class="nav-number">4.</span> <span class="nav-text">RandomForest</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
