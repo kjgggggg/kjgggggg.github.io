@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="03-HDF5数据结构及实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03-HDF5数据结构及实现">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="03-HDF5数据结构及实现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230511231202637.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230509162411845.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230509173518683.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510093754268.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510091655221.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510095135834.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510095952037.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510103344190.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510104153439.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510104210652.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510110930776.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512092948053.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512093552910.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512101325987.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512102727250.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512103054441.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512103750556.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512104227445.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512113931803.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512131343706.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512132219376.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512142642350.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512154516372.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512164353847.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512164222964.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512170431178.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512170455196.png">
+<meta property="article:published_time" content="2023-05-09T07:25:52.000Z">
+<meta property="article:modified_time" content="2023-05-12T09:24:20.355Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="实习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230511231202637.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>03-HDF5数据结构及实现 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          03-HDF5数据结构及实现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-09 15:25:52" itemprop="dateCreated datePublished" datetime="2023-05-09T15:25:52+08:00">2023-05-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-12 17:24:20" itemprop="dateModified" datetime="2023-05-12T17:24:20+08:00">2023-05-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%9E%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">实习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">03-HDF5数据结构及实现</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><h3 id="总体文件组织结构"><a href="#总体文件组织结构" class="headerlink" title="总体文件组织结构"></a>总体文件组织结构</h3><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230511231202637.png" alt="image-20230511231202637" style="zoom:50%;">
+
+
+
+<h3 id="允许数据切片"><a href="#允许数据切片" class="headerlink" title="允许数据切片"></a>允许数据切片</h3><p>HDF5格式是一种压缩格式。HDF5中包含的所有数据的大小进行了优化，使整体文件大小更小。然而，即使经过压缩，HDF5文件通常也包含大数据，因此仍然相当大。HDF5的一个强大属性是数据切片，通过它可以提取数据集的特定子集进行处理。这意味着不需要将整个数据集读入内存(RAM); 允许更有效地处理非常大的(千兆字节或更多)数据集</p>
+<h3 id="HDF4和HDF5"><a href="#HDF4和HDF5" class="headerlink" title="HDF4和HDF5"></a>HDF4和HDF5</h3><p>The HDF Group 开发的两种不同的文件格式和库，用于存储和处理科学数据集。以下是它们之间的主要区别：</p>
+<ol>
+<li>数据模型：HDF4采用传统的“数据集-属性”模型，而HDF5采用了更灵活的“组-数据集-属性”模型。这意味着在HDF5中，可以将数据集组织成任意的树形结构，而不仅仅是一个平面的网格状结构。</li>
+<li>性能：HDF5在数据存取和压缩方面比HDF4更快。HDF5还具有更好的并行I&#x2F;O性能，可处理更大的数据集，并且支持更多的文件大小和元素数量限制。</li>
+<li>API和库：HDF5提供了一套全新的API和库，与HDF4不兼容。这些API和库提供了更多的功能和灵活性，例如：更好的错误处理、更好的元数据管理、更好的过滤器支持、更好的分块和压缩等等。</li>
+<li>跨平台支持：HDF5支持多种操作系统和处理器体系结构，包括Windows、Linux、Mac OS X、Solaris、IBM AIX等。HDF4则没有与现代操作系统的广泛兼容性。</li>
+</ol>
+<p>HDF5是一个更现代、更强大和更可扩展的文件格式和库，比HDF4更适合处理大型科学数据集。</p>
+<h2 id="1⃣️Disk-File-Format"><a href="#1⃣️Disk-File-Format" class="headerlink" title="1⃣️Disk File Format"></a>1⃣️Disk File Format</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a target="_blank" rel="noopener" href="http://web.mit.edu/fwtools_v3.1.0/www/H5.format.html#Intro">Introduction</a></h3><p>HDF5文件对用户显示为有向图。该图的节点是HDF5 api公开的高级HDF5对象:</p>
+<ol>
+<li>组Group	</li>
+<li>数据集 Datasets	 </li>
+<li>命名数据类型	Named Datatypes</li>
+</ol>
+<hr>
+<p>HDF5文件是一种用于存储和组织大型和复杂数据集的二进制文件格式。在最低级别上，HDF5文件由以下对象组成：</p>
+<ol>
+<li>A super block 超级块：是HDF5文件中的第一个对象，包含有关文件的元数据，如文件格式版本、各种数据结构的大小和根对象的位置等。</li>
+<li>B-tree nodes B树节点：用于组织和索引存储在文件中的数据。它们可以包含符号节点或原始数据块。符号节点存储有关HDF5对象的信息，例如名称、类型和位置，而原始数据块存储实际的数据值。</li>
+<li>Object headers 对象头：包含有关HDF5对象的元数据，例如大小、类型和创建时间。文件中的每个对象都有一个相关联的对象头。</li>
+<li>A global heap 全局堆：全局堆是用于管理大型可变大小数据的内存分配的数据结构。它用于存储与HDF5对象相关的小型元数据，例如其属性和创建属性。</li>
+<li>Local heaps 本地堆：本地堆类似于全局堆，但用于存储与特定HDF5对象相关的元数据。每个对象都可以有自己的本地堆。</li>
+<li>Free space 空闲空间：当在HDF5文件中添加、修改或删除数据时，可以创建空闲空间。这些空闲空间由空闲空间管理器管理，它跟踪文件中的可用空间，并允许在这些空闲区域中存储新数据。</li>
+</ol>
+<hr>
+<p>级别0包含用于标识和定义文件信息的基本信息。</p>
+<p>第1级信息包含文件中许多对象(如b树和堆)共享的文件片段的信息。</p>
+<p>第2层是文件的其余部分，包含所有数据对象，每个对象被划分为头信息(也称为元数据)和数据。</p>
+<hr>
+<blockquote>
+<p>  以下布局表中各个字段的大小是通过查看字段在表中跨越的列数来确定的。有三种例外情况:(1)可以通过在括号中指定大小来覆盖大小，(2)地址的大小由超级块中的偏移量大小字段决定，并在本文档中用上标’O’表示，(3)长度字段的大小由超级块中的长度大小字段决定，并在本文档中用上标’L’表示。</p>
+</blockquote>
+<blockquote>
+<p>  以下所有字段的值都应被视为无符号整数，除非在字段的描述中另有说明。此外，所有元数据字段都以小端字节顺序存储。</p>
+</blockquote>
+<h3 id="Level-0-文件元数据"><a href="#Level-0-文件元数据" class="headerlink" title="Level 0 - 文件元数据"></a><a target="_blank" rel="noopener" href="http://web.mit.edu/fwtools_v3.1.0/www/H5.format.html#FileMetaData">Level 0 - 文件元数据</a></h3><h4 id="超级块"><a href="#超级块" class="headerlink" title="超级块"></a>超级块</h4><p>超级块由文件签名、超级块和组版本号、用于描述文件内项目的偏移量大小和长度值的信息、每个组页面的大小以及文件中根对象的组条目组成。</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230509162411845.png" alt="image-20230509162411845"></p>
+<p>(上表中带“O”号的项目为在“Size of Offsets”中指定的大小)	(上表中带“1”的项目为超级块第1版新增功能)</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Field Name</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">HDF5 File Signature</td>
+<td>文件签名是一种数据完整性检查的方法，用于确保文件在传输或存储过程中没有被损坏或篡改。在HDF5文件中，文件签名存储在超级块中，固定8字节数组，表示文件的唯一标识符。每当文件被打开时，HDF5库都会检查文件签名是否正确，以确保文件的完整性。文件签名还可以用于帮助区分不同的HDF5文件。如有多个HDF5文件，并且它们都包含相同的元数据信息，但是您不确定它们是否是同一个文件，那么可以使用文件签名进行比较。</td>
+</tr>
+<tr>
+<td align="left">Version #  of Super Block</td>
+<td>该值用于确定超级块中信息的格式。当超级块中的信息格式发生变化时，版本号将增加到下一个整数，并可用于确定超级块中的信息如何格式化。</td>
+</tr>
+<tr>
+<td align="left">Version # of Free-space Storage</td>
+<td>当前该字段中唯一有效的值是’0’，这表示空闲空间索引的格式如后文所述</td>
+</tr>
+<tr>
+<td align="left">Version # of Root Group Symbol Table Entry</td>
+<td>用于确定根组符号表项中信息的格式。当该字段中信息的格式发生更改时，版本号将增加到下一个整数，并可用于确定如何格式化该字段中的信息。当前该字段中唯一有效的值是’0’，它表示根组符号表项的格式如后文所述。</td>
+</tr>
+<tr>
+<td align="left">Version #of  Shared Header Message Format</td>
+<td>此值用于确定共享对象头消息中信息的格式。由于共享报头消息的格式不同于其他私有报头消息，因此使用版本号来标识格式的更改。当前该字段中唯一有效的值是’0’，这表明共享头消息的格式后文所述。</td>
+</tr>
+<tr>
+<td align="left">Size of Offsets</td>
+<td>内容是字节数，该字节数是此HDF5文件中数据块能被允许的的最大偏置字节数</td>
+</tr>
+<tr>
+<td align="left">Size of Lengths</td>
+<td>用于存储对象大小的字节数</td>
+</tr>
+<tr>
+<td align="left">Group Leaf Node K</td>
+<td>每个组B树的叶子节点将至少有这么多条目，但不超过两倍。</td>
+</tr>
+<tr>
+<td align="left">Group Internal Node K</td>
+<td>b组树的每个内部节点至少有这么多条目，但不超过这个数的两倍。</td>
+</tr>
+<tr>
+<td align="left">File Consistency Flags</td>
+<td>文件一致性标志:  位0设置表示打开文件进行写访问。位1表示该文件已经过一致性校验，并保证与本文档定义的格式一致。位2-31被保留以备将来使用。</td>
+</tr>
+<tr>
+<td align="left">Indexed Storage Internal Node K</td>
+<td>索引存储b树的每个内部节点至少有这么多条目，但不超过两倍。</td>
+</tr>
+<tr>
+<td align="left">Base Address</td>
+<td>这是文件中HDF5数据的第一个字节的绝对文件地址。除非另有说明，所有其他文件地址都是相对于这个基址的。</td>
+</tr>
+<tr>
+<td align="left">Address of Global Free-space Index</td>
+<td>还未定义</td>
+</tr>
+<tr>
+<td align="left">End of File Address</td>
+<td>这是所有HDF5数据结束后的第一个字节的绝对文件地址。它用于确定文件是否被意外截断，并作为一个地址，如果未使用空闲列表中的空间，则可以在此进行文件数据分配。</td>
+</tr>
+<tr>
+<td align="left">Driver Information Block Address</td>
+<td>这是文件驱动程序信息块的相对文件地址，其中包含重新打开文件所需的特定于驱动程序的信息。如果没有驱动程序信息阻塞，那么这个条目应该是[未定义的地址]</td>
+</tr>
+<tr>
+<td align="left">Root Group Symbol Table Entry</td>
+<td>This is the <a target="_blank" rel="noopener" href="http://web.mit.edu/fwtools_v3.1.0/www/H5.format.html#SymbolTableEntry">symbol table entry</a> of the root group, which serves as the entry point into the group graph for the file.</td>
+</tr>
+</tbody></table>
+<h4 id="文件驱动信息"><a href="#文件驱动信息" class="headerlink" title="文件驱动信息"></a>文件驱动信息</h4><p>在HDF5文件中，驱动程序负责管理文件的读取和写入，处理文件的元数据和数据块的存储和检索。每个驱动程序都有其自己的特定需求和功能，因此需要在文件中记录驱动程序的信息。DIB中的信息允许HDF5库使用正确的驱动程序打开文件，以确保文件能够正确地读取和写入。</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230509173518683.png" alt="image-20230509173518683"></p>
+<h3 id="Level-1-文件基础结构"><a href="#Level-1-文件基础结构" class="headerlink" title="Level 1 - 文件基础结构"></a><a target="_blank" rel="noopener" href="http://web.mit.edu/fwtools_v3.1.0/www/H5.format.html#FileInfra">Level 1 - 文件基础结构</a></h3><h4 id="B-link-Tree-Node"><a href="#B-link-Tree-Node" class="headerlink" title="B-link Tree Node"></a>B-link Tree Node</h4><p>B-link树允许灵活存储对象，这些对象往往以不连续的方式增长。</p>
+<blockquote>
+<p>  由文件格式实现的B-link树所包含的键数比子键数多一个。换句话说，b树节点的每个子指针都有一个左键和一个右键。内部节点的指针指向子树，而叶节点的指针指向符号节点和原始数据块。除了这个区别之外，内部节点和叶节点是相同的。</p>
+<p>  我的理解：</p>
+<p>  <img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510093754268.png" alt="image-20230510093754268"></p>
+</blockquote>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510091655221.png" alt="image-20230510091655221"></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Field Name</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Signature</td>
+<td>The ASCII character string “<code>TREE</code>“ is used to indicate the beginning of a B-link tree node. This gives file consistency checking utilities a better chance of reconstructing a damaged file.</td>
+</tr>
+<tr>
+<td align="left">Node Type</td>
+<td>0 该树指向组节点                          1 该树指向原始数据块节点</td>
+</tr>
+<tr>
+<td align="left">Node Level</td>
+<td>节点级别表示该节点在树中出现的级别(叶节点在级别0)。该级别不仅指示子指针是指向子树还是指向数据，而且还可用于帮助文件一致性检查实用程序重建损坏的树。</td>
+</tr>
+<tr>
+<td align="left">Entries Used</td>
+<td>该节点所指向的子节点的数量</td>
+</tr>
+<tr>
+<td align="left">Address of Left Sibling</td>
+<td>这是当前节点的左同级的相对文件地址。如果当前节点是该级别最左边的节点，则该字段为未定义地址</td>
+</tr>
+<tr>
+<td align="left">Address of Right Sibling</td>
+<td>这是当前节点的右同级的相对文件地址。如果当前节点是该级别最右边的节点，则该字段为未定义地址。</td>
+</tr>
+<tr>
+<td align="left">Keys and Child Pointers</td>
+<td>每个树有2K个键，键之间有2K个子指针。实际包含有效值的键和子指针的数量由节点的Entries Used字段决定。如果该字段为N，则B-link树包含N个Child Pointer和N+1个Key。</td>
+</tr>
+</tbody></table>
+<h4 id="Group-Node"><a href="#Group-Node" class="headerlink" title="Group Node"></a>Group Node</h4><blockquote>
+<p>  组所指向的对象的某些元数据除了对象的头数据外，还可以缓存在组的符号表中</p>
+</blockquote>
+<p>组是由B-link树指向的组节点的集合。每个组节点包含一个或多个符号的条目。如果尝试向包含2K项的已满的组节点添加一个符号，则该节点将被分割，一个节点包含K个符号，另一个包含K+1个符号</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510095135834.png" alt="image-20230510095135834"></p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Signature</td>
+<td><code>“SNOD”</code>表示组节点的开始。这使文件一致性检查实用程序有更好的机会重建损坏的文件。</td>
+</tr>
+<tr>
+<td>Version Number</td>
+<td>组节点的版本号</td>
+</tr>
+<tr>
+<td>Number of Symbols</td>
+<td>该字段表示有多少条目包含有效数据</td>
+</tr>
+<tr>
+<td>Group Entries</td>
+<td>Each symbol has an entry in the group node. The format of the entry is described below. There are 2<em>K</em> entries in each group node, where <em>K</em> is the “Group Leaf Node K” value from the super block</td>
+</tr>
+</tbody></table>
+<h4 id="Group-Entry"><a href="#Group-Entry" class="headerlink" title="Group Entry"></a>Group Entry</h4><p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510095952037.png" alt="image-20230510095952037"></p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name Offset</td>
+<td>对象名称在组的 本地堆 中的字节偏移量</td>
+</tr>
+<tr>
+<td>Object Header Address</td>
+<td>每个对象都有一个对象头，作为对象元数据的永久位置。除了出现在对象header中， some metadata can be cached in the scratch-pad space.</td>
+</tr>
+<tr>
+<td>Cache Type</td>
+<td>The cache type is determined from the object header. It also determines the format for the scratch-pad space: Type:Description:0 组表项不缓存任何数据.  1 对象标头元数据缓存在组条目中  2 该条目是一个符号链接 .</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td>对齐值</td>
+</tr>
+<tr>
+<td>Scratch-pad Space</td>
+<td>是一个用于存储元数据的缓存空间。它可以存储与该组相关的一些元数据，例如链接计数、最大创建索引等信息，以提高I&#x2F;O性能并减少元数据访问的开销。在写入或更新文件时，HDF5库将Scratch-pad Space中的元数据写入到文件的磁盘位置，以确保元数据的持久性。此外，Scratch-pad Space还可以存储数据集对象的元数据，以避免在访问数据集对象时需要频繁读取文件。</td>
+</tr>
+</tbody></table>
+<h5 id="Format-of-the-Scratch-pad-Space"><a href="#Format-of-the-Scratch-pad-Space" class="headerlink" title="Format of the Scratch-pad Space"></a>Format of the Scratch-pad Space</h5><p>略</p>
+<h4 id="Local-Heaps"><a href="#Local-Heaps" class="headerlink" title="Local Heaps"></a>Local Heaps</h4><p>Local Heap是一种用于存储小块可变长度数据的堆结构，通常与数据集或属性相关联。在HDF5文件中，每个Group可以包含一个或多个数据集或属性，这些数据集或属性都可能需要使用Local Heap来存储它们的元数据【类型，维度，名称，块大小，其他元数据】</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510103344190.png" alt="image-20230510103344190"></p>
+<p>(Items marked with an ‘L’ are  specified in “Size of Lengths.”) (Items marked with an ‘O’ are specified in “Size of Offsets.”)</p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Signature</td>
+<td>ASCII字符串<code>“HEAP”</code>用于表示堆的开始。这使文件一致性检查实用程序有更好的机会重建损坏的文件</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>每个本地堆都有自己的版本号，以便可以将新堆添加到旧文件中</td>
+</tr>
+<tr>
+<td>Data Segment Size</td>
+<td>为堆数据分配的磁盘内存总量。这可能大于存储在堆中的对象所需的空间量。堆中额外的未使用空间包含一个空闲块的链表</td>
+</tr>
+<tr>
+<td>Offset to Head of Free-list</td>
+<td></td>
+</tr>
+<tr>
+<td>Address of Data Segment</td>
+<td>数据段最初在堆头之后立即开始，但如果由于添加更多对象而必须增长数据段，则数据段可能会整体重新定位到文件的另一部分</td>
+</tr>
+</tbody></table>
+<h4 id="Global-Heap"><a href="#Global-Heap" class="headerlink" title="Global Heap"></a>Global Heap</h4><p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510104153439.png" alt="image-20230510104153439"></p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Signature</td>
+<td>ASCII字符串“’ GCOL ‘”用于表示集合的开始。这使文件一致性检查实用程序有更好的机会重建损坏的文件。</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>每个集合都有自己的版本号，以便可以将新集合添加到旧文件中</td>
+</tr>
+<tr>
+<td>Collection Size</td>
+<td>This is the size in bytes of the entire collection including this field. The default (and minimum) collection size is 4096 bytes which is a typical file system block size.</td>
+</tr>
+<tr>
+<td>Global Heap Object 1 ～ <em>N</em></td>
+<td>对象以任意顺序存储，中间没有未使用的空间。</td>
+</tr>
+<tr>
+<td>Global Heap Object 0</td>
+<td>当存在全局堆对象0(零)时，表示集合中的空闲空间</td>
+</tr>
+</tbody></table>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510104210652.png" alt="image-20230510104210652"></p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Heap Object ID</td>
+<td></td>
+</tr>
+<tr>
+<td>Reference Count</td>
+<td>所有堆对象都有一个引用计数字段。从文件的其他部分引用的对象将具有正引用计数</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td></td>
+</tr>
+<tr>
+<td>Object Size</td>
+<td>This is the size of the object data stored for the object.</td>
+</tr>
+<tr>
+<td>Object Data</td>
+<td>a one-dimensional array of bytes to be interpreted by the caller.</td>
+</tr>
+</tbody></table>
+<h4 id="Free-space-Index"><a href="#Free-space-Index" class="headerlink" title="Free-space Index"></a>Free-space Index</h4><p>自由空间索引是分散在整个文件中的数据块的集合，这些数据块目前没有被任何文件对象使用。超级块包含一个指向自由空间的指针;</p>
+<p>该格式还未定义</p>
+<h3 id="Level-2-数据对象"><a href="#Level-2-数据对象" class="headerlink" title="Level 2 - 数据对象"></a><a target="_blank" rel="noopener" href="http://web.mit.edu/fwtools_v3.1.0/www/H5.format.html#DataObject">Level 2 - 数据对象</a></h3><p>数据对象包含文件中的真实信息，这些对象组成了科学数据和其他通常被认为是”数据”的信息，文件中所有其他的的信息被提供作为这些数据对象的框架<br>数据对象由<strong>标头信息</strong>和<strong>数据信息</strong>组成。头信息包含解释数据对象的数据信息所需的信息，以及用于描述或注释每个数据对象的附加“元数据”或指向附加“元教据”的指针。</p>
+<h4 id="Data-Object-Headers"><a href="#Data-Object-Headers" class="headerlink" title="Data Object Headers"></a>Data Object Headers</h4><p>每个Object Header都由一个Header Message列表组成</p>
+<p>Header Message通常包含有关对象的信息，例如对象类型、对象大小、数据类型、数据存储位置、创建时间、创建者、修改时间等等。它们也可以包含其他类型的元数据，例如属性列表、共享消息等。</p>
+<p>Object Header的Header Message列表通常存储在Object Header的本地堆（Local Heap）中。当Object Header太大无法容纳在对象的头部时，Local Heap会被使用来存储额外的Header Message。在这种情况下，Object Header仍然包含必要的元数据（例如对象类型和大小），而附加的Header Message则存储在Local Heap中，并通过Heap ID来引用</p>
+<blockquote>
+<p>  将一个全是浮点数的CSV文件转换为HDF5文件时，该HDF5文件的结构中可能包含以下Header Message：</p>
+<ol>
+<li>Dataset Header Message：描述了CSV文件中的浮点数数据集，包括数据类型、维度大小等信息。</li>
+<li>Data Storage Header Message：描述了HDF5数据存储的位置和方式，包括压缩格式、压缩级别等信息。</li>
+<li>Filter Pipeline Header Message：描述了数据集上应用的压缩、过滤、加密等操作的管道信息。</li>
+<li>Attribute Header Message：描述了HDF5数据集的属性，例如创建时间、修改时间、作者等信息。</li>
+</ol>
+</blockquote>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230510110930776.png" alt="image-20230510110930776"></p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Header Message Type</td>
+<td>指定包含在以下报头消息数据中的信息类型</td>
+</tr>
+<tr>
+<td>Size of Header Message Data</td>
+<td>此值指定当前消息的头消息类型和长度信息之后的头消息数据的字节数</td>
+</tr>
+<tr>
+<td>Header Message Flags</td>
+<td>如果为’ 0 ‘，则消息数据为常量。这用于像数据集的数据类型消息这样的消息。                                                                   如果为’ 1 ‘，则消息存储在全局堆中。The Header Message Data field contains a Shared Object message and the Size of Header Message Data field contains the size of that Shared Object message</td>
+</tr>
+<tr>
+<td>Header Message Data</td>
+<td>有些报头消息类型不需要任何数据，可以通过将消息长度设置为零来消除这些信息</td>
+</tr>
+</tbody></table>
+<h4 id="Data-Object-Data-Storage"><a href="#Data-Object-Data-Storage" class="headerlink" title="Data Object Data Storage"></a>Data Object Data Storage</h4><p>对象的数据与文件中的头信息分开存储，如果头表明数据存储在外部，则可能实际上不在HDF5文件本身中。</p>
+<h2 id="2⃣️Data-Mode"><a href="#2⃣️Data-Mode" class="headerlink" title="2⃣️Data Mode"></a>2⃣️Data Mode</h2><p>HDF5文件(本身就是一个对象)可以被认为是一个容器(或组)，它保存了各种异构数据对象 (或数据集)。数据集几平可以是任何东西:图像、表格、图形，甚至是文档，如PDF或Excel</p>
+<p>HDF5数据模型中的两个主要object是组和数据集:</p>
+<blockquote>
+<p>  Group:包含零个或多个组或数据集实例以及支持元数据的分组结构。</p>
+<p>  数据集:数据元素的多维数组，以及支持的元数据。</p>
+</blockquote>
+<p>HDF5数据模型中还有各种各样的其他对象支持组和数据集，包括datatypes, dataspaces, properties and attributes.</p>
+<h3 id="Groups"><a href="#Groups" class="headerlink" title="Groups"></a>Groups</h3><p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512092948053.png" alt="image-20230512092948053"></p>
+<p>objects can be shared, so there can be multiple paths to the same objects. In the picture above &#x2F;A&#x2F;k and &#x2F;B&#x2F;m point to the same object.</p>
+<h3 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h3><p>HDF5数据集组织并包含raw数据值。数据集除了数据本身之外, 还有用来描述数据的元数据组成。</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512093552910.png" alt="image-20230512093552910"></p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512101325987.png" alt="image-20230512101325987"></p>
+<h3 id="Datatypes"><a href="#Datatypes" class="headerlink" title="Datatypes"></a>Datatypes</h3><p>The datatype describes the individual data elements in a dataset. It provides complete information for data conversion to or from that datatype. </p>
+<p>Datatypes有两大类：</p>
+<ul>
+<li><strong>Pre-Defined Datatypes</strong>: These are datatypes that are created by HDF5. They are actually opened (and closed) by HDF5 and can have different values from one HDF5 session to the next. <ul>
+<li><strong>Standard datatypes</strong>： are the same on all platforms and are what you see in an HDF5 file. </li>
+<li><strong>Native datatypes</strong>：are used to simplify memory operations (reading, writing) and are NOT the same on different platforms.</li>
+</ul>
+</li>
+<li><strong>Derived Datatype</strong>s:  These are datatypes that are created or derived from the predefined datatypes. 嵌套复合数据类型也是派生类型Nested compound datatypes are also derived types.</li>
+</ul>
+<h4 id="Pre-Defined-Datatypes"><a href="#Pre-Defined-Datatypes" class="headerlink" title="Pre-Defined Datatypes"></a>Pre-Defined Datatypes</h4><p>当从内存中读写时，HDF5库必须知道描述特定架构布局的适当数据类型。</p>
+<p>Pre-defined datatypes have standard symbolic names of the form <strong>H5T_ARCH_BASE</strong> where ARCH is an architecture name and BASE is a programming type name:</p>
+<p>如：</p>
+<p>H5T_IEEE_F32BE </p>
+<blockquote>
+<p>  IEEE indicates standard floating point types. </p>
+<p>  F32BE 表示32位大端浮点数</p>
+</blockquote>
+<p>H5T_STD_I8LE </p>
+<blockquote>
+<p>  STD 表示半标准数据类型</p>
+<p>  I8LE 表示8位小端整数</p>
+</blockquote>
+<p>H5T_C_S1</p>
+<blockquote>
+<p>  C 专门为C语言设计的格式</p>
+<p>  S1 只有一个字符的字符串</p>
+</blockquote>
+<p>HDF5支持多种数据类型：</p>
+<ul>
+<li>Integer</li>
+<li>Float</li>
+<li>Character</li>
+<li>Reference ：a reference to another object or dataset region within the HDF5 file</li>
+<li>Enumeration </li>
+<li>Opaque ：uninterpreted (by HDF5)</li>
+<li>Compound： similar to C structs</li>
+<li>User-defined ：eg, 13-bit integer or fixed&#x2F;variable length strings</li>
+</ul>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512102727250.png" alt="image-20230512102727250"></p>
+<h3 id="Dataspaces"><a href="#Dataspaces" class="headerlink" title="Dataspaces"></a>Dataspaces</h3><p>describes the layout of a dataset’s data elements</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512103054441.png" alt="image-20230512103054441"></p>
+<p>数据空间的维度可以是固定的(不变的)，也可以是无限的，可以扩大规模(即它们是可扩展的)。</p>
+<h4 id="数据空间的两种作用"><a href="#数据空间的两种作用" class="headerlink" title="数据空间的两种作用"></a>数据空间的两种作用</h4><ul>
+<li>dataset的元数据</li>
+<li>参与I&#x2F;O时可以用来选择dataset的一部分或子集</li>
+</ul>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512103750556.png" alt="image-20230512103750556"></p>
+<h3 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h3><p>A property is a characteristic or feature of an HDF5 object.</p>
+<p>默认情况下，数据集的数据存储布局属性是连续的。为了获得更好的性能，可以将布局修改为分块或分块压缩:</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512104227445.png" alt="image-20230512104227445"></p>
+<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><p>描述了HDF5数据集的属性，例如创建时间、修改时间、作者等信息。这部分do not support partial I&#x2F;O ，operations,cannot be compressed or extended.</p>
+<h2 id="3⃣️-HDF5-APIs-and-Libraries"><a href="#3⃣️-HDF5-APIs-and-Libraries" class="headerlink" title="3⃣️ HDF5 APIs and Libraries"></a>3⃣️ HDF5 APIs and Libraries</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">H5A Attribute Interface</span><br><span class="line">H5D Dataset Interface</span><br><span class="line">H5F File Interface</span><br><span class="line">H5G Group Interface</span><br><span class="line">H5L Link Interface</span><br><span class="line">H5O Object Interface</span><br><span class="line">H5P Property List Interface</span><br><span class="line">H5S DataSpace Interface</span><br><span class="line">H5T DataType Interface</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 高级api简化了创建和访问对象所需的许多步骤：</span></span><br><span class="line"><span class="function">HDF5 <span class="title">Lite</span> <span class="params">(H5LT)</span> – simplifies steps in creating datasets <span class="keyword">and</span> attributes</span></span><br><span class="line"><span class="function">HDF5 <span class="title">Image</span> <span class="params">(H5IM)</span> – defines a standard <span class="keyword">for</span> storing images in HDF5</span></span><br><span class="line"><span class="function">HDF5 <span class="title">Table</span> <span class="params">(H5TB)</span> – condenses the steps required to create tables</span></span><br><span class="line"><span class="function">HDF5 Dimension <span class="title">Scales</span> <span class="params">(H5DS)</span> – provides a standard <span class="keyword">for</span> dimension scale storage</span></span><br><span class="line"><span class="function">HDF5 Packet <span class="title">Table</span> <span class="params">(H5PT)</span> – provides a standard <span class="keyword">for</span> storing packet data    </span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512113931803.png" alt="image-20230512113931803"></p>
+<p>在其最高级别HDF5提供了用C、FORTRAN、C++和Java编译应用程序的工具和API。</p>
+<p>在其最低层次HDF5由虚拟文件层组成，其中包括I&#x2F;O驱动程序，用于与不同的文件类型进行接口。在这些层之间是HDF 5的内部。</p>
+<p>The most commonly used (and default) I&#x2F;O driver interfaces with a single file.</p>
+<p>The MPI I&#x2F;O driver allows different processors to interface with a given file in a parallel filesystem. </p>
+<p>The Split File I&#x2F;O driver enables HDF5 metadata to be stored in one file and the data in another.</p>
+<p>用户也可以使用HDF5创建自己的自定义I&#x2F;O驱动程序</p>
+<p>h5dump:	转储或显示HDF5文件的内容</p>
+<p>h5cc, h5c, h5fc:	编译应用程序的Unix脚本</p>
+<p>HDFView:	查看HDF (HDF4和HDF5)文件的java浏览器</p>
+<h2 id="4⃣️HDF5-Programming-Model-and-APIs"><a href="#4⃣️HDF5-Programming-Model-and-APIs" class="headerlink" title="4⃣️HDF5 Programming Model and APIs"></a>4⃣️HDF5 Programming Model and APIs</h2><p>HDF5应用程序编程接口是广泛的(包含数百个函数)。然而，有几个函数可以完成大部分工作。</p>
+<p>File Interface: <code>H5Fopen</code> (C) </p>
+<p>Dataset Interface: <code>H5Dopen</code> (C) </p>
+<p>Dataspace interface: <code>H5Sclose</code> (C) </p>
+<p>为了可移植性，HDF5库有自己定义的类型。</p>
+<p><code>hid_t</code> is used for object handles </p>
+<p><code>hsize_t</code> is used for dimensions </p>
+<p><code>herr_t</code> is used for many return values</p>
+<h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512131343706.png" alt="image-20230512131343706"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">H5Fcreate函数的作用是创建HDF5文件</span></span><br><span class="line"><span class="comment">H5F_ACC_TRUNC是文件访问标志:创建一个新文件并覆盖一个同名的现有文件</span></span><br><span class="line"><span class="comment">H5P_DEFAULT: 指定使用默认属性列表</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> “hdf5.h”</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"> <span class="type">hid_t</span> file_id; </span><br><span class="line"> <span class="type">herr_t</span> status;</span><br><span class="line"> file_id = H5Fcreate (<span class="string">&quot;file.h5&quot;</span>, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);</span><br><span class="line"> status = H5Fclose (file_id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建数据集"><a href="#创建数据集" class="headerlink" title="创建数据集"></a>创建数据集</h3><ol>
+<li><p>Define the dataset characteristics: </p>
+<p>a) Datatype </p>
+<p>b) Dataspace </p>
+<p>c) Properties (or use default) </p>
+</li>
+<li><p>Decide which group to attach the dataset to. </p>
+</li>
+<li><p>Create the dataset. </p>
+</li>
+<li><p>Close the dataset handle.</p>
+</li>
+</ol>
+<p>Example:</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512132219376.png" alt="image-20230512132219376"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Create the dataspace for the dataset. */</span></span><br><span class="line"> dims[<span class="number">0</span>] = <span class="number">4</span>;</span><br><span class="line"> dims[<span class="number">1</span>] = <span class="number">6</span>;</span><br><span class="line"> dataspace_id = H5Screate_simple(<span class="number">2</span>, dims, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">/* Create the dataset. */</span></span><br><span class="line"> dataset_id = H5Dcreate (file_id, <span class="string">&quot;/dset&quot;</span>, H5T_STD_I32BE, dataspace_id, </span><br><span class="line">                         H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);</span><br><span class="line"> <span class="comment">/* Close the dataset and dataspace */</span></span><br><span class="line"> status = H5Dclose(dataset_id);</span><br><span class="line"> status = H5Sclose(dataspace_id);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="从数据集中读写"><a href="#从数据集中读写" class="headerlink" title="从数据集中读写"></a>从数据集中读写</h3><p>传入H5S_ALL用于内存和文件数据空间参数，以指示整个指定数据集的数据空间。这两个参数可以修改为允许</p>
+<p>数据集的子集。本机预定义数据类型H5T_NATIVE_INT用于读取和写入，以便HDF5将做任何必要的整数转换:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">status = <span class="built_in">H5Dwrite</span>(dataset_id, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, dset_data);</span><br><span class="line">status = <span class="built_in">H5Dread</span>(dataset_id, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, dset_data);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建组"><a href="#创建组" class="headerlink" title="创建组"></a>创建组</h3><p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512142642350.png" alt="image-20230512142642350"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">group_id = <span class="built_in">H5Gcreate</span> (file_id, <span class="string">&quot;MyGroup&quot;</span>, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);</span><br><span class="line">status = <span class="built_in">H5Gclose</span> (group_id);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建并写入Attribute"><a href="#创建并写入Attribute" class="headerlink" title="创建并写入Attribute"></a>创建并写入Attribute</h3><p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512154516372.png" alt="image-20230512154516372"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Create the data space for the attribute. */</span></span><br><span class="line">dims = <span class="number">2</span>;</span><br><span class="line">dataspace_id = <span class="built_in">H5Screate_simple</span>(<span class="number">1</span>, &amp;dims, <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">/* Create a dataset attribute. */</span></span><br><span class="line">attribute_id = <span class="built_in">H5Acreate2</span> (dataset_id, <span class="string">&quot;Units&quot;</span>, H5T_STD_I32BE,</span><br><span class="line">dataspace_id, H5P_DEFAULT, H5P_DEFAULT);</span><br><span class="line"><span class="comment">/* Write the attribute data. */</span></span><br><span class="line">status = <span class="built_in">H5Awrite</span>(attribute_id, H5T_NATIVE_INT, attr_data);</span><br><span class="line"><span class="comment">/* Close the attribute. */</span></span><br><span class="line">status = <span class="built_in">H5Aclose</span>(attribute_id);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="分块细节"><a href="#分块细节" class="headerlink" title="分块细节"></a>分块细节</h2><p>连续布局的进阶版是分块布局。而连续的数据集存储在文件中的单个块中，分块数据集被分割成多个块，这些块都单独存储在文件中。块可以在HDF5文件中以任何顺序和任何位置存储。然后可以单独读写块，从而提高在数据集子集上操作时的性能。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span>  <span class="string">&quot;hdf5.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FILENAME <span class="string">&quot;file.h5&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATASET <span class="string">&quot;dataset&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">hid_t</span> file_id, dset_id, space_id, dcpl_id;</span><br><span class="line">    </span><br><span class="line">    <span class="type">hsize_t</span> chunk_dims[<span class="number">2</span>] = &#123;<span class="number">4</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">hsize_t</span> dset_dims[<span class="number">2</span>] = &#123;<span class="number">12</span>, <span class="number">12</span>&#125;;</span><br><span class="line">    <span class="type">herr_t</span> status;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> i, j;</span><br><span class="line">    <span class="type">int</span> buffer[<span class="number">12</span>][<span class="number">12</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create the file */</span></span><br><span class="line">    file_id = <span class="built_in">H5Fcreate</span>(FILENAME, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create a dataset creation property list and set it to use chunking */</span></span><br><span class="line">    dcpl_id = <span class="built_in">H5Pcreate</span>(H5P_DATASET_CREATE);</span><br><span class="line">    status = <span class="built_in">H5Pset_chunk</span>(dcpl_id, <span class="number">2</span>, chunk_dims);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create the dataspace and the chunked dataset */</span></span><br><span class="line">    space_id = <span class="built_in">H5Screate_simple</span>(<span class="number">2</span>, dset_dims, <span class="literal">NULL</span>);</span><br><span class="line">    dset_id = <span class="built_in">H5Dcreate</span>(file_id, DATASET, H5T_STD_I32BE, space_id, H5P_DEFAULT, dcpl_id, H5P_DEFAULT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Initialize dataset */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">12</span>; i++)</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">12</span>; j++)</span><br><span class="line">			buffer[i][j] = i  + j + <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Write to the dataset */</span></span><br><span class="line">    status = <span class="built_in">H5Dwrite</span>(dset_id, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, buffer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Close */</span></span><br><span class="line">    status = <span class="built_in">H5Dclose</span>(dset_id);</span><br><span class="line">    status = <span class="built_in">H5Sclose</span>(space_id);</span><br><span class="line">    status = <span class="built_in">H5Pclose</span>(dcpl_id);</span><br><span class="line">    status = <span class="built_in">H5Fclose</span>(file_id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Chunking-and-Partial-I-x2F-O"><a href="#Chunking-and-Partial-I-x2F-O" class="headerlink" title="Chunking and Partial I&#x2F;O"></a>Chunking and Partial I&#x2F;O</h3><p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512164353847.png" alt="image-20230512164353847"></p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512164222964.png" alt="image-20230512164222964"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;hdf5.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FILENAME <span class="string">&quot;file.h5&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATASET <span class="string">&quot;dataset&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">hid_t</span> file_id, dset_id, fspace_id, mspace_id, dcpl_id;</span><br><span class="line">    </span><br><span class="line">    <span class="type">hsize_t</span> chunk_dims[<span class="number">2</span>] = &#123;<span class="number">10</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="type">hsize_t</span> dset_dims[<span class="number">2</span>] = &#123;<span class="number">10</span>, <span class="number">10</span>&#125;;</span><br><span class="line">    <span class="type">hsize_t</span> mem_dims[<span class="number">1</span>] = &#123;<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="type">hsize_t</span> start[<span class="number">2</span>] = &#123;<span class="number">3</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="type">hsize_t</span> count[<span class="number">2</span>] = &#123;<span class="number">5</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="type">herr_t</span>  status;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> buffer[<span class="number">5</span>], i;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create the file */</span></span><br><span class="line">    file_id = <span class="built_in">H5Fcreate</span>(FILENAME, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create a dataset creation property list to use chunking with a chunk size of 10x1 */</span></span><br><span class="line">    dcpl_id = <span class="built_in">H5Pcreate</span>(H5P_DATASET_CREATE);</span><br><span class="line">    status = <span class="built_in">H5Pset_chunk</span>(dcpl_id, <span class="number">2</span>, chunk_dims);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create the dataspace and the chunked dataset */</span></span><br><span class="line">    fspace_id = <span class="built_in">H5Screate_simple</span>(<span class="number">2</span>, dset_dims, <span class="literal">NULL</span>);</span><br><span class="line">    dset_id = <span class="built_in">H5Dcreate</span>(file_id, DATASET, H5T_STD_I32BE, fspace_id, H5P_DEFAULT, dcpl_id, H5P_DEFAULT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Select the elements from 3, 2 to 7, 2 */</span></span><br><span class="line">    status = <span class="built_in">H5Sselect_hyperslab</span>(fspace_id, H5S_SELECT_SET, start, <span class="literal">NULL</span>, count, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create the memory dataspace */</span></span><br><span class="line">    mspace_id = <span class="built_in">H5Screate_simple</span>(<span class="number">1</span>, mem_dims, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Initialize dataset */</span></span><br><span class="line">     <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">         buffer[i] = i+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Write to the dataset */</span></span><br><span class="line">    status = <span class="built_in">H5Dwrite</span>(dset_id, H5T_NATIVE_INT, mspace_id, fspace_id, H5P_DEFAULT, buffer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Close */</span></span><br><span class="line">    status = <span class="built_in">H5Dclose</span>(dset_id);</span><br><span class="line">    status = <span class="built_in">H5Sclose</span>(fspace_id);</span><br><span class="line">    status = <span class="built_in">H5Sclose</span>(mspace_id);</span><br><span class="line">    status = <span class="built_in">H5Pclose</span>(dcpl_id);</span><br><span class="line">    status = <span class="built_in">H5Fclose</span>(file_id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Chunk-Caching"><a href="#Chunk-Caching" class="headerlink" title="Chunk Caching"></a>Chunk Caching</h3><p>是数据集块的缓存。可以防止库多次从磁盘读取和写入数据, 在多次读取或写入相同块时显著提高性能.但是块缓存的当前实现不会自动调整其参数，因此必须手动调整参数以实现最佳性能。在某些罕见情况下，最好完全禁用块缓存方案。每个打开的数据集都有自己的块缓存，与所有其他打开的数据集的缓存分开。</p>
+<p>从分块数据集中读取已选择的的区域时，首先将包含选择的块读入缓存，然后将那些块的选定部分复制到用户的缓冲区中。缓存的块一直保留在缓存中，直到它们被驱逐。这通常是因为需要在缓存中为新块腾出更多空间，但它们也可能被驱逐，如果哈希值冲突的话（稍后会有更多讲解）。一旦块被驱逐，如果必要的话，就会将其写入磁盘并从内存中释放。</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512170431178.png" alt="image-20230512170431178"></p>
+<p>FIg6	应用程序请求一行值，库会将包含该行的块加载到缓存中，并从缓存中检索值。</p>
+<p><img src="/2023/05/09/03-HDF5%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%AE%9E%E7%8E%B0/image-20230512170455196.png" alt="image-20230512170455196"></p>
+<p>Fig7	此时如果应用程序请求一个不同的行，库就直接从缓存中检索值而不接触磁盘。</p>
+<h3 id="Chunk-Flitering"><a href="#Chunk-Flitering" class="headerlink" title="Chunk Flitering"></a>Chunk Flitering</h3><p>由于每次将过滤器应用于整个块，所以在使用I&#x2F;O过滤器（包括压缩）时，数据集分块也可以派上用场。过滤器应用于每个块，整个块一次性处理。每次将块加载到缓存中和将块刷新到磁盘时都必须应用过滤器。所有这些事实都使得选择适当的块缓存和块大小对于过滤数据集的性能尤为关键。</p>
+<p>由于每次磁盘I&#x2F;O发生时都必须过滤整个块，因此在向许多不同的块写入少量数据时并不能禁用块缓存,所以这是HDF5的性能瓶颈</p>
+<p>为了实现可接受的性能，必须尽量减少在块被完全读取或写入之前将块从缓存中刷新的机会。这可以通过增加块缓存的大小、调整块的大小或调整I&#x2F;O模式来实现</p>
+<h2 id="🌟-Q-amp-A"><a href="#🌟-Q-amp-A" class="headerlink" title="🌟 Q&amp;A"></a>🌟 Q&amp;A</h2><h3 id="1-一个数据集中的数据可以有多种类型吗？使用过程中可以改变类型吗？"><a href="#1-一个数据集中的数据可以有多种类型吗？使用过程中可以改变类型吗？" class="headerlink" title="1. 一个数据集中的数据可以有多种类型吗？使用过程中可以改变类型吗？"></a>1. 一个数据集中的数据可以有多种类型吗？使用过程中可以改变类型吗？</h3><p>All elements of the dataset must have the same type</p>
+<p>The datatype of a dataset is immutable</p>
+<h3 id="2-数据集使用过程中可以改变其数据空间-dataspaces-吗？"><a href="#2-数据集使用过程中可以改变其数据空间-dataspaces-吗？" class="headerlink" title="2. 数据集使用过程中可以改变其数据空间(dataspaces)吗？"></a>2. 数据集使用过程中可以改变其数据空间(dataspaces)吗？</h3><p>可以</p>
+<h3 id="3-HDF5文件可以直接以二进制的形式写入其特定部分而不需要修改文件其余部分吗"><a href="#3-HDF5文件可以直接以二进制的形式写入其特定部分而不需要修改文件其余部分吗" class="headerlink" title="3.HDF5文件可以直接以二进制的形式写入其特定部分而不需要修改文件其余部分吗"></a>3.HDF5文件可以直接以二进制的形式写入其特定部分而不需要修改文件其余部分吗</h3><p>在HDF5中，数据可以以数据块（Data Chunk）的形式存储的。每个数据块是文件中的一个独立单元，可以单独读取或写入，而不需要修改文件的其他部分。因此，如果要写入的数据长度不超过文件中已有数据块的长度，则可以直接覆盖该数据块，而不需要修改文件的其他部分。这样可以提高数据写入的效率和速度，减少不必要的开销和资源消耗。</p>
+<h3 id="4-如果要写入的数据长度超过了文件中已有数据块的长度怎么办"><a href="#4-如果要写入的数据长度超过了文件中已有数据块的长度怎么办" class="headerlink" title="4.如果要写入的数据长度超过了文件中已有数据块的长度怎么办"></a>4.如果要写入的数据长度超过了文件中已有数据块的长度怎么办</h3><p>如果要写入的数据长度超过了文件中已有数据块的长度，就需要对文件进行扩展。在HDF5中，数据块的大小是预定义的，当需要存储的数据大小超过了某个数据块的大小时，需要将数据分成多个数据块来存储。</p>
+<ol>
+<li>获取当前文件中最后一个数据块的偏移量和长度信息。</li>
+<li>计算要写入数据的长度和偏移量，以确定需要扩展文件的大小和位置。</li>
+<li>使用HDF5库提供的API函数对文件进行扩展，并将要写入的数据写入新扩展的数据块中。</li>
+<li>更新文件中的元数据，以便下一次读取文件时能够正确地识别和读取新扩展的数据块。</li>
+</ol>
+<h3 id="5-在HDF5中，数据以数据块的形式存储，这些块之间的顺序和解压出来的源文件顺序一致吗"><a href="#5-在HDF5中，数据以数据块的形式存储，这些块之间的顺序和解压出来的源文件顺序一致吗" class="headerlink" title="5.在HDF5中，数据以数据块的形式存储，这些块之间的顺序和解压出来的源文件顺序一致吗"></a>5.在HDF5中，数据以数据块的形式存储，这些块之间的顺序和解压出来的源文件顺序一致吗</h3><p>不一定，这些数据块可以按照任意顺序存储在文件中，并且可以通过文件中的元数据来描述它们之间的关系。因此，这些块之间的顺序和解压出来的源文件顺序不一定一致。</p>
+<p>具体而言，在HDF5文件中，每个数据块都有一个唯一的地址（Address）和长度（Length），可以通过这些地址和长度来定位和读取数据块。这些地址和长度信息存储在文件的元数据中，而不是存储在数据块本身中。因此，如果数据块在文件中的顺序发生改变，其地址和长度信息也会相应地被更新。</p>
+<p>当读取HDF5文件时，HDF5库会根据文件中的元数据来识别数据块的地址和长度，从而将其按照正确的顺序解压出来。因此，即使数据块之间的存储顺序发生了改变，只要元数据正确，就可以保证读取的数据与源文件的顺序一致。</p>
+<h3 id="6-有一个a-csv-h5文件，该HDF5文件可以做到时间复杂度为O-1-的增删改查而不用先解压为a-csv再修改，重新生成HDF5文件吗"><a href="#6-有一个a-csv-h5文件，该HDF5文件可以做到时间复杂度为O-1-的增删改查而不用先解压为a-csv再修改，重新生成HDF5文件吗" class="headerlink" title="6.有一个a.csv.h5文件，该HDF5文件可以做到时间复杂度为O(1)的增删改查而不用先解压为a.csv再修改，重新生成HDF5文件吗"></a>6.有一个a.csv.h5文件，该HDF5文件可以做到时间复杂度为O(1)的增删改查而不用先解压为a.csv再修改，重新生成HDF5文件吗</h3><p>HDF5文件支持可变长度数据集（Variable-Length Data Sets）和扩展数据块（Extendible Data Sets）等特殊的数据类型，可以支持动态增删改查操作。如果将CSV文件转换为使用可变长度数据集或扩展数据块的HDF5格式，则可以实现O(1)的增删改查操作。这种方法可能会增加文件的大小，但可以提高文件的灵活性和可操作性。</p>
+<h3 id="7-一个全存浮点数的csv文件a-csv，其中浮点数长度各不相同，若将它存为a-csv-h5文件，该HDF5文件中所有浮点数的存储格式是怎么样的？"><a href="#7-一个全存浮点数的csv文件a-csv，其中浮点数长度各不相同，若将它存为a-csv-h5文件，该HDF5文件中所有浮点数的存储格式是怎么样的？" class="headerlink" title="7.一个全存浮点数的csv文件a.csv，其中浮点数长度各不相同，若将它存为a.csv.h5文件，该HDF5文件中所有浮点数的存储格式是怎么样的？"></a>7.一个全存浮点数的csv文件a.csv，其中浮点数长度各不相同，若将它存为a.csv.h5文件，该HDF5文件中所有浮点数的存储格式是怎么样的？</h3><p>对于包含浮点数的CSV文件，如果浮点数长度各不相同，可以将它们转换为可变长度数据集，并将每个浮点数存储为一个变长的数据类型，例如VLFloat，这样可以有效地节省存储空间。VLFloat类型可以表示任意长度的浮点数，而不需要指定固定的长度。具体的存储格式可能会根据数据类型和存储选项的不同而有所差异，可以通过HDF5库的API函数来读取和写入这些数据。</p>
+<p>但使用可变长度数据集存储浮点数可能会影响数据的访问效率，因为访问变长数据需要进行动态内存分配和释放操作。如果对数据的访问效率有较高的要求，可以考虑将浮点数按照一定的规则进行划分，或者使用固定长度的数据类型来存储数据。</p>
+<h3 id="8-如何在分块缓存中快速地找到已载入内存的块"><a href="#8-如何在分块缓存中快速地找到已载入内存的块" class="headerlink" title="8.如何在分块缓存中快速地找到已载入内存的块?"></a>8.如何在分块缓存中快速地找到已载入内存的块?</h3><p>为了允许在缓存中快速查找块，每个块被分配一个唯一的哈希值，用于查找块。缓存包含一个简单的指向块的指针数组，称为哈希表。块的哈希值就是指向该块的指针在哈希表中的索引。虽然这个位置的指针可能指向不同的块，或者根本不指向任何东西，但哈希表中没有其他位置可以包含指向有问题的块的指针。因此，库只需要检查哈希表中的这一个位置来判断块是否存在</p>
+<h3 id="9-什么是HDF5中的过滤器"><a href="#9-什么是HDF5中的过滤器" class="headerlink" title="9.什么是HDF5中的过滤器"></a>9.什么是HDF5中的过滤器</h3><p>在HDF5中，FIlter是一种可选的、可插拔的组件，它可以在读写数据时对数据进行压缩、加密、格式转换等处理。过滤器可以分为两类：本地过滤器和外部过滤器。本地过滤器是由HDF5库本身实现的过滤器，例如shuffle和deflate等过滤器，而外部过滤器是由第三方库实现的过滤器，例如LZF和BZIP2等过滤器。使用过滤器可以大大减少磁盘空间和I&#x2F;O带宽的消耗，同时也可以提高数据读写的速度。在HDF5中，过滤器可以通过数据集的属性列表进行配置。</p>
+<h3 id="10-HDF5的性能瓶颈"><a href="#10-HDF5的性能瓶颈" class="headerlink" title="10.HDF5的性能瓶颈"></a>10.HDF5的性能瓶颈</h3><ol>
+<li><p>由于每次磁盘I&#x2F;O发生时都必须过滤整个块，因此在向许多不同的块写入少量数据时并不能禁用块缓存,所以这是HDF5的性能瓶颈</p>
+</li>
+<li><p>过滤器：虽然过滤器可以通过压缩和优化数据来减少I&#x2F;O操作，但过多的过滤器可能会降低性能。因此，在选择过滤器时，应仔细考虑其对性能的影响</p>
+</li>
+<li><p>缓存：虽然缓存可以减少磁盘访问，但较小的缓存可能会导致频繁的磁盘I&#x2F;O操作，从而降低性能。因此，应根据数据集大小和访问模式等因素来选择适当的缓存大小</p>
+</li>
+</ol>
+<h3 id="11-有哪些第三方库支持简化版HDF5操作？"><a href="#11-有哪些第三方库支持简化版HDF5操作？" class="headerlink" title="11.有哪些第三方库支持简化版HDF5操作？"></a>11.有哪些第三方库支持简化版HDF5操作？</h3><ul>
+<li><p>PyTables是一个较高级别的库，提供了与HDF5文件交互的接口，包括高级索引和查询功能。</p>
+</li>
+<li><p>h5py是一个较低级别的库，提供了更直接的HDF5文件接口，使用户可以更高效地读写数据。</p>
+</li>
+</ul>
+<p>除此之外，还有一些插件可供常用可视化和分析工具使用，例如ParaView和VisIt。</p>
+<p>具有基于HDF的表示的社区标准示例包括NASA的HDF-EOS5、NeXus、CGNS、Energistics的RESQML和SEG的H5EM-TS。Unidata的netCDF-4软件使用HDF5作为数据管理层。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>链接：<a target="_blank" rel="noopener" href="https://github.com/HDFGroup/hdf5.git">https://github.com/HDFGroup/hdf5.git</a></p>
+<p>目录：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">bin: 该目录通常包含可执行文件或脚本。</span><br><span class="line">c++: 该目录通常包含用 C++ 语言编写的源代码。</span><br><span class="line">config: 该目录通常包含用于配置软件的文件，如默认配置文件。</span><br><span class="line">doc: 该目录通常包含项目的文档，如用户手册、API 文档等。</span><br><span class="line">doxygen: 该目录通常包含用于生成代码文档的 Doxygen 配置文件。</span><br><span class="line">examples: 该目录通常包含用于演示如何使用该项目的示例代码。</span><br><span class="line">fortran: 该目录通常包含用 Fortran 语言编写的源代码。</span><br><span class="line">hl: 该目录通常包含高级接口的源代码。</span><br><span class="line">java: 该目录通常包含用 Java 语言编写的源代码。</span><br><span class="line">m4: 该目录通常包含用于生成 configure 脚本的 M4 宏。</span><br><span class="line">release_docs: 该目录通常包含发布软件时所需要的文档。</span><br><span class="line">src: 该目录通常包含项目的源代码。</span><br><span class="line">test: 该目录通常包含单元测试代码。</span><br><span class="line">testpar: 该目录通常包含并行测试代码。</span><br><span class="line">tools: 该目录通常包含与该项目相关的一些工具。</span><br><span class="line">utils: 该目录通常包含一些实用工具。</span><br><span class="line">.autom4te.cfg: Autoconf 工具使用的配置文件。</span><br><span class="line">.clang-format: 用于格式化 C++ 代码的配置文件。</span><br><span class="line">.gitattributes: 用于 Git 版本控制的属性文件。</span><br><span class="line">.gitignore: 用于 Git 版本控制的忽略文件。</span><br><span class="line">.h5chkright.ini: 用于 HDF5 检查权限的配置文件。</span><br><span class="line">ACKNOWLEDGMENTS: 该文件通常包含致谢和贡献者列表。</span><br><span class="line">acsite.m4: Autoconf 工具使用的宏。</span><br><span class="line">autogen.sh: 用于生成 configure 脚本的脚本。</span><br><span class="line">CMakeFilters.cmake: CMake 工具使用的过滤器配置文件。</span><br><span class="line">CMakeInstallation.cmake: CMake 工具使用的安装配置文件。</span><br><span class="line">CMakeLists.txt: CMake 工具使用的构建配置文件。</span><br><span class="line">CMakePlugins.cmake: CMake 工具使用的插件配置文件。</span><br><span class="line">CMakePresets.json: CMake 工具使用的预设配置文件。</span><br><span class="line">CODE_OF_CONDUCT.md: 该文件通常包含行为准则和行为规范。</span><br><span class="line">configure.ac: Autoconf 工具使用的配置文件。</span><br><span class="line">CONTRIBUTING.md: 该文件通常包含关于如何贡献代码的指南。</span><br><span class="line">COPYING: 该文件通常包含该项目的版权声明。</span><br><span class="line">COPYING_LBNL_HDF5: HDF5 库的版权文件。</span><br><span class="line">CTestConfig.cmake: CMake 构建系统的测试配置文件。</span><br><span class="line">Makefile.am: Automake 工具的 Makefile 配置文件。</span><br><span class="line">Makefile.dist: Automake 工具的 Makefile 模板文件。</span><br><span class="line">README.md: 项目的说明文档。</span><br><span class="line">UserMacros.cmake: CMake 构建系统的用户自定义宏定义配置文件。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag"># 实习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/05/02-xz%E6%B5%8B%E8%AF%95/" rel="prev" title="02-xz测试">
+      <i class="fa fa-chevron-left"></i> 02-xz测试
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">总体文件组织结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E6%95%B0%E6%8D%AE%E5%88%87%E7%89%87"><span class="nav-number">1.2.</span> <span class="nav-text">允许数据切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDF4%E5%92%8CHDF5"><span class="nav-number">1.3.</span> <span class="nav-text">HDF4和HDF5</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E2%83%A3%EF%B8%8FDisk-File-Format"><span class="nav-number">2.</span> <span class="nav-text">1⃣️Disk File Format</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-0-%E6%96%87%E4%BB%B6%E5%85%83%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.</span> <span class="nav-text">Level 0 - 文件元数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E7%BA%A7%E5%9D%97"><span class="nav-number">2.2.1.</span> <span class="nav-text">超级块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E9%A9%B1%E5%8A%A8%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.2.</span> <span class="nav-text">文件驱动信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-1-%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">Level 1 - 文件基础结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#B-link-Tree-Node"><span class="nav-number">2.3.1.</span> <span class="nav-text">B-link Tree Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Group-Node"><span class="nav-number">2.3.2.</span> <span class="nav-text">Group Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Group-Entry"><span class="nav-number">2.3.3.</span> <span class="nav-text">Group Entry</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Format-of-the-Scratch-pad-Space"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">Format of the Scratch-pad Space</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Local-Heaps"><span class="nav-number">2.3.4.</span> <span class="nav-text">Local Heaps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Global-Heap"><span class="nav-number">2.3.5.</span> <span class="nav-text">Global Heap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Free-space-Index"><span class="nav-number">2.3.6.</span> <span class="nav-text">Free-space Index</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-2-%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.4.</span> <span class="nav-text">Level 2 - 数据对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Object-Headers"><span class="nav-number">2.4.1.</span> <span class="nav-text">Data Object Headers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Object-Data-Storage"><span class="nav-number">2.4.2.</span> <span class="nav-text">Data Object Data Storage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E2%83%A3%EF%B8%8FData-Mode"><span class="nav-number">3.</span> <span class="nav-text">2⃣️Data Mode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Groups"><span class="nav-number">3.1.</span> <span class="nav-text">Groups</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Datasets"><span class="nav-number">3.2.</span> <span class="nav-text">Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Datatypes"><span class="nav-number">3.3.</span> <span class="nav-text">Datatypes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pre-Defined-Datatypes"><span class="nav-number">3.3.1.</span> <span class="nav-text">Pre-Defined Datatypes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dataspaces"><span class="nav-number">3.4.</span> <span class="nav-text">Dataspaces</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%A9%BA%E9%97%B4%E7%9A%84%E4%B8%A4%E7%A7%8D%E4%BD%9C%E7%94%A8"><span class="nav-number">3.4.1.</span> <span class="nav-text">数据空间的两种作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Properties"><span class="nav-number">3.5.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attributes"><span class="nav-number">3.6.</span> <span class="nav-text">Attributes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E2%83%A3%EF%B8%8F-HDF5-APIs-and-Libraries"><span class="nav-number">4.</span> <span class="nav-text">3⃣️ HDF5 APIs and Libraries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E2%83%A3%EF%B8%8FHDF5-Programming-Model-and-APIs"><span class="nav-number">5.</span> <span class="nav-text">4⃣️HDF5 Programming Model and APIs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">创建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">5.2.</span> <span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%AD%E8%AF%BB%E5%86%99"><span class="nav-number">5.3.</span> <span class="nav-text">从数据集中读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BB%84"><span class="nav-number">5.4.</span> <span class="nav-text">创建组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%86%99%E5%85%A5Attribute"><span class="nav-number">5.5.</span> <span class="nav-text">创建并写入Attribute</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%9D%97%E7%BB%86%E8%8A%82"><span class="nav-number">6.</span> <span class="nav-text">分块细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chunking-and-Partial-I-x2F-O"><span class="nav-number">6.1.</span> <span class="nav-text">Chunking and Partial I&#x2F;O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chunk-Caching"><span class="nav-number">6.2.</span> <span class="nav-text">Chunk Caching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chunk-Flitering"><span class="nav-number">6.3.</span> <span class="nav-text">Chunk Flitering</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8C%9F-Q-amp-A"><span class="nav-number">7.</span> <span class="nav-text">🌟 Q&amp;A</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E7%A7%8D%E7%B1%BB%E5%9E%8B%E5%90%97%EF%BC%9F%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%8F%AF%E4%BB%A5%E6%94%B9%E5%8F%98%E7%B1%BB%E5%9E%8B%E5%90%97%EF%BC%9F"><span class="nav-number">7.1.</span> <span class="nav-text">1. 一个数据集中的数据可以有多种类型吗？使用过程中可以改变类型吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%8F%AF%E4%BB%A5%E6%94%B9%E5%8F%98%E5%85%B6%E6%95%B0%E6%8D%AE%E7%A9%BA%E9%97%B4-dataspaces-%E5%90%97%EF%BC%9F"><span class="nav-number">7.2.</span> <span class="nav-text">2. 数据集使用过程中可以改变其数据空间(dataspaces)吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-HDF5%E6%96%87%E4%BB%B6%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E4%BB%A5%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%86%99%E5%85%A5%E5%85%B6%E7%89%B9%E5%AE%9A%E9%83%A8%E5%88%86%E8%80%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%85%B6%E4%BD%99%E9%83%A8%E5%88%86%E5%90%97"><span class="nav-number">7.3.</span> <span class="nav-text">3.HDF5文件可以直接以二进制的形式写入其特定部分而不需要修改文件其余部分吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A6%82%E6%9E%9C%E8%A6%81%E5%86%99%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E9%95%BF%E5%BA%A6%E8%B6%85%E8%BF%87%E4%BA%86%E6%96%87%E4%BB%B6%E4%B8%AD%E5%B7%B2%E6%9C%89%E6%95%B0%E6%8D%AE%E5%9D%97%E7%9A%84%E9%95%BF%E5%BA%A6%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">7.4.</span> <span class="nav-text">4.如果要写入的数据长度超过了文件中已有数据块的长度怎么办</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%9C%A8HDF5%E4%B8%AD%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%BB%A5%E6%95%B0%E6%8D%AE%E5%9D%97%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%AD%98%E5%82%A8%EF%BC%8C%E8%BF%99%E4%BA%9B%E5%9D%97%E4%B9%8B%E9%97%B4%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%92%8C%E8%A7%A3%E5%8E%8B%E5%87%BA%E6%9D%A5%E7%9A%84%E6%BA%90%E6%96%87%E4%BB%B6%E9%A1%BA%E5%BA%8F%E4%B8%80%E8%87%B4%E5%90%97"><span class="nav-number">7.5.</span> <span class="nav-text">5.在HDF5中，数据以数据块的形式存储，这些块之间的顺序和解压出来的源文件顺序一致吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%9C%89%E4%B8%80%E4%B8%AAa-csv-h5%E6%96%87%E4%BB%B6%EF%BC%8C%E8%AF%A5HDF5%E6%96%87%E4%BB%B6%E5%8F%AF%E4%BB%A5%E5%81%9A%E5%88%B0%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO-1-%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E8%80%8C%E4%B8%8D%E7%94%A8%E5%85%88%E8%A7%A3%E5%8E%8B%E4%B8%BAa-csv%E5%86%8D%E4%BF%AE%E6%94%B9%EF%BC%8C%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90HDF5%E6%96%87%E4%BB%B6%E5%90%97"><span class="nav-number">7.6.</span> <span class="nav-text">6.有一个a.csv.h5文件，该HDF5文件可以做到时间复杂度为O(1)的增删改查而不用先解压为a.csv再修改，重新生成HDF5文件吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%B8%80%E4%B8%AA%E5%85%A8%E5%AD%98%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84csv%E6%96%87%E4%BB%B6a-csv%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%B5%AE%E7%82%B9%E6%95%B0%E9%95%BF%E5%BA%A6%E5%90%84%E4%B8%8D%E7%9B%B8%E5%90%8C%EF%BC%8C%E8%8B%A5%E5%B0%86%E5%AE%83%E5%AD%98%E4%B8%BAa-csv-h5%E6%96%87%E4%BB%B6%EF%BC%8C%E8%AF%A5HDF5%E6%96%87%E4%BB%B6%E4%B8%AD%E6%89%80%E6%9C%89%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">7.7.</span> <span class="nav-text">7.一个全存浮点数的csv文件a.csv，其中浮点数长度各不相同，若将它存为a.csv.h5文件，该HDF5文件中所有浮点数的存储格式是怎么样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%A6%82%E4%BD%95%E5%9C%A8%E5%88%86%E5%9D%97%E7%BC%93%E5%AD%98%E4%B8%AD%E5%BF%AB%E9%80%9F%E5%9C%B0%E6%89%BE%E5%88%B0%E5%B7%B2%E8%BD%BD%E5%85%A5%E5%86%85%E5%AD%98%E7%9A%84%E5%9D%97"><span class="nav-number">7.8.</span> <span class="nav-text">8.如何在分块缓存中快速地找到已载入内存的块?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E4%BB%80%E4%B9%88%E6%98%AFHDF5%E4%B8%AD%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">7.9.</span> <span class="nav-text">9.什么是HDF5中的过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-HDF5%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88"><span class="nav-number">7.10.</span> <span class="nav-text">10.HDF5的性能瓶颈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E6%9C%89%E5%93%AA%E4%BA%9B%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E6%94%AF%E6%8C%81%E7%AE%80%E5%8C%96%E7%89%88HDF5%E6%93%8D%E4%BD%9C%EF%BC%9F"><span class="nav-number">7.11.</span> <span class="nav-text">11.有哪些第三方库支持简化版HDF5操作？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81"><span class="nav-number">8.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-number">9.</span> <span class="nav-text">论文</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
