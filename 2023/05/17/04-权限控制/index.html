@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="04-权限控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04-权限控制">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/05/17/04-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="04-权限控制">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/05/17/04-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/image-20230518135825329.png">
+<meta property="article:published_time" content="2023-05-17T01:52:25.000Z">
+<meta property="article:modified_time" content="2023-05-19T02:18:15.284Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="实习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2023/05/17/04-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/image-20230518135825329.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2023/05/17/04-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>04-权限控制 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/05/17/04-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          04-权限控制
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-17 09:52:25" itemprop="dateCreated datePublished" datetime="2023-05-17T09:52:25+08:00">2023-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-19 10:18:15" itemprop="dateModified" datetime="2023-05-19T10:18:15+08:00">2023-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%9E%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">实习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">04-权限控制</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><h3 id="权限管理概述"><a href="#权限管理概述" class="headerlink" title="权限管理概述"></a>权限管理概述</h3><h4 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h4><p>ACL (Access Control List) 是权限控制中的一种常见机制，用于管理和控制对资源的访问权限。ACL 是一张表格或数据结构，它列出了用户或用户组对于特定资源的权限信息。通常，ACL 由以下两个要素组成：</p>
+<ol>
+<li>主体（Subject）：主体可以是用户、用户组或角色，它代表了一个实体或一组实体。</li>
+<li>权限（Permission）：权限定义了主体对资源可以执行的操作。常见的权限包括读取、写入、修改、删除等。</li>
+</ol>
+<p>ACL 可以在资源级别或对象级别进行配置。在资源级别 ACL 中，ACL 条目直接与资源关联，用于控制对整个资源的访问权限。而在对象级别 ACL 中，ACL 条目与资源内的特定对象关联，用于细粒度地控制对对象的访问权限。</p>
+<p>例如，假设一个文件系统使用 ACL 进行权限控制。以下是一个 ACL 的示例：</p>
+<figure class="highlight mathematica"><table><tr><td class="code"><pre><span class="line">文件名<span class="operator">:</span> <span class="type">my_file</span><span class="operator">.</span><span class="variable">txt</span></span><br><span class="line"></span><br><span class="line"><span class="variable">ACL</span><span class="operator">:</span></span><br><span class="line"><span class="operator">-</span> <span class="variable">User</span><span class="operator">:</span> <span class="variable">Alice</span> <span class="punctuation">(</span><span class="built_in">Permissions</span><span class="operator">:</span> <span class="built_in">Read</span><span class="operator">,</span> <span class="built_in">Write</span><span class="punctuation">)</span></span><br><span class="line"><span class="operator">-</span> <span class="variable">Group</span><span class="operator">:</span> <span class="variable">Admins</span> <span class="punctuation">(</span><span class="built_in">Permissions</span><span class="operator">:</span> <span class="built_in">Read</span><span class="operator">,</span> <span class="built_in">Write</span><span class="operator">,</span> <span class="variable">Execute</span><span class="punctuation">)</span></span><br><span class="line"><span class="operator">-</span> <span class="variable">User</span><span class="operator">:</span> <span class="variable">Bob</span> <span class="punctuation">(</span><span class="built_in">Permissions</span><span class="operator">:</span> <span class="built_in">Read</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>当有用户请求访问该文件时，文件系统会根据 ACL 检查用户的身份，并根据 ACL 条目决定是否允许该用户执行操作。ACL 提供了一种灵活且细粒度的权限控制机制，适用于各种应用场景，如操作系统、数据库、网络设备和 Web 应用程序等。</p>
+<h4 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h4><p>RBAC (Role-Based Access Control) 是权限控制中一种常用的模型。它是一种访问控制策略，用于管理系统中用户对资源的访问权限。RBAC 的核心思想是基于角色的授权，将权限分配给角色，而不是直接分配给个别用户。</p>
+<p>RBAC 模型中通常包含以下几个核心概念：</p>
+<ol>
+<li>角色（Role）：角色代表一组相似职责或行为的用户集合。例如，一个系统可能有管理员角色、编辑角色和读者角色等。</li>
+<li>权限（Permission）：权限是指可以执行的特定操作或访问的资源。权限通常以细粒度的方式定义，以便根据需要进行灵活的控制。</li>
+<li>用户（User）：用户是系统中的个体实体，可以与一个或多个角色相关联。用户通过与角色的关联而获得相应的权限。</li>
+<li>授权（Authorization）：授权是指将权限分配给角色或用户的过程。在 RBAC 中，管理员可以根据用户的职责和需求，将合适的角色和权限授权给用户。</li>
+</ol>
+<p>通过使用 RBAC，系统管理员可以更好地组织和管理用户的权限，提高系统的安全性和可管理性。RBAC 模型提供了一种灵活而又可扩展的方法，适用于各种不同规模和复杂度的系统。</p>
+<blockquote>
+<p>以一个简单的网上购物系统为例来说明 RBAC 的应用。在这个系统中，我们可以定义以下角色和权限：</p>
+<ol>
+<li>管理员角色（Admin Role）：</li>
+</ol>
+<ul>
+<li>创建和管理用户账户（Create&#x2F;Manage User Accounts）</li>
+<li>添加、编辑和删除商品信息（Add&#x2F;Edit&#x2F;Delete Product Information）</li>
+<li>处理订单和退款（Process Orders and Refunds）</li>
+<li>访问系统日志（Access System Logs）</li>
+</ul>
+<ol start="2">
+<li>销售员角色（Salesperson Role）：</li>
+</ol>
+<ul>
+<li>创建和管理用户账户（Create&#x2F;Manage User Accounts）</li>
+<li>添加、编辑和删除商品信息（Add&#x2F;Edit&#x2F;Delete Product Information）</li>
+<li>处理订单和退款（Process Orders and Refunds）</li>
+</ul>
+<ol start="3">
+<li>顾客角色（Customer Role）：</li>
+</ol>
+<ul>
+<li>浏览商品信息（View Product Information）</li>
+<li>下单购买商品（Place Orders）</li>
+<li>查看订单状态（View Order Status）</li>
+</ul>
+<p>通过 RBAC，管理员可以创建并分配角色给系统中的用户：</p>
+<ul>
+<li>用户 Alice 被分配了管理员角色，因此她具有创建和管理用户账户、添加、编辑和删除商品信息等权限。</li>
+<li>用户 Bob 被分配了销售员角色，因此他具有创建和管理用户账户、添加、编辑和删除商品信息的权限，但没有访问系统日志的权限。</li>
+<li>用户 Carol 被分配了顾客角色，因此她只能浏览商品信息、下单购买商品和查看订单状态，没有管理权限。</li>
+</ul>
+<p>通过 RBAC 模型，系统管理员可以轻松管理用户的权限，根据角色的职责和需求进行授权，确保系统的安全性和可管理性。此外，如果需要更多的角色或权限，可以根据系统需求进行灵活扩展。</p>
+</blockquote>
+<h3 id="Casbin"><a href="#Casbin" class="headerlink" title="Casbin"></a>Casbin</h3><h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><ol>
+<li>模型（Model）：模型定义了访问控制策略的结构和规则。它定义了角色（Role）、资源（Resource）、操作（Action）等概念，并规定了它们之间的关系和约束。模型使用一种类似自然语言的声明式语法来描述策略规则。</li>
+<li>策略（Policy）：策略定义了实际的访问控制规则。它包含了一组策略规则，每个规则指定了主体（Subject）、资源（Object）、操作（Action）和访问效果（Allow&#x2F;Deny）之间的关系。策略可以存储在文件、数据库或其他存储介质中。</li>
+<li>Enforcer：Enforcer是Casbin的核心组件，负责实际的访问控制验证和决策。Enforcer接受模型和策略作为输入，并提供了各种方法来执行授权检查，例如判断主体是否具有对资源执行特定操作的权限。Enforcer还可以对策略进行动态更新和管理。</li>
+<li>适配器（Adapter）：适配器用于将策略从持久化存储（如文件、数据库）中加载到Enforcer中，并将Enforcer中的变更持久化回存储介质。适配器可以根据需求选择不同的存储介质和格式，例如文件适配器、数据库适配器等。</li>
+<li>策略效果器（Effector）：策略效果器决定了如何计算多个策略规则的结果以确定最终的访问效果。例如，当一个规则允许访问而另一个规则拒绝访问时，策略效果器可以根据优先级或其他规则进行计算，以确定最终的访问效果。</li>
+<li>规则函数（Function）：规则函数是一些可自定义的函数，用于在策略规则中进行条件判断。开发者可以根据需要定义自己的规则函数，以便在访问控制过程中执行更复杂的条件判断逻辑。</li>
+</ol>
+<p>这些组件共同协作，使Casbin能够实现灵活而强大的访问控制功能。开发者可以根据具体需求配置和扩展这些组件，以构建适合自己应用场景的访问控制系统。</p>
+<h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><ol>
+<li>策略加载：接下来，Casbin的Enforcer通过适配器（Adapter）从 <code>basic_policy.csv</code> 中加载策略数据。适配器负责将策略数据转换为Enforcer能够理解的内部格式，并将其加载到Enforcer中。</li>
+<li>授权检查：当需要进行授权检查时，开发者可以调用Enforcer提供的方法，例如<code>Enforce()</code>。Enforcer会接受主体（Subject）、资源（Object）和操作（Action）作为输入，并根据已加载的策略和模型进行授权检查。</li>
+<li>规则匹配：Enforcer根据模型和策略进行规则匹配，找出与主体、资源和操作匹配的策略规则。</li>
+<li>策略效果计算：当存在多个匹配的策略规则时，策略效果器（Effector）会根据配置的规则计算方式来确定最终的访问效果。例如，根据规则优先级进行计算，或按照某些规则进行逻辑运算。</li>
+<li>授权决策：根据计算得到的访问效果，Enforcer会返回授权决策结果，即是否允许或拒绝访问请求。</li>
+<li>策略管理：开发者可以使用Enforcer提供的方法来进行动态的策略管理，例如添加、删除或修改策略规则。这些变更可以通过适配器持久化到存储介质中，以便下次加载时使用。</li>
+</ol>
+<p>整个工作流程中，Enforcer作为核心组件负责调度和协调各个组件的工作。它通过模型文件定义访问控制模型，使用适配器加载策略数据，并在授权检查时执行策略匹配和效果计算。最终，Enforcer返回授权决策结果给应用程序。开发者可以根据需要使用Enforcer提供的方法来管理和操作策略规则。</p>
+<h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;casbin/casbin.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 模型定义：模型文件定义了角色（Role）、资源（Resource）、操作（Action），并规定了它们之间的关系和约束</span></span><br><span class="line">    std::string modelFilePath = <span class="string">&quot;path/to/model.conf&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 策略的加载</span></span><br><span class="line">    std::string policyFilePath = <span class="string">&quot;path/to/basic_policy.csv&quot;</span>;</span><br><span class="line">    casbin::Adapter* adapter = casbin::<span class="built_in">NewAdapter</span>(policyFilePath);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 创建Enforcer实例</span></span><br><span class="line">    casbin::Enforcer* enforcer = casbin::<span class="built_in">NewEnforcer</span>(modelFilePath, adapter);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 授权检查</span></span><br><span class="line">    std::string subject = <span class="string">&quot;alice&quot;</span>;   <span class="comment">// 主体</span></span><br><span class="line">    std::string resource = <span class="string">&quot;data1&quot;</span>;  <span class="comment">// 资源</span></span><br><span class="line">    std::string action = <span class="string">&quot;read&quot;</span>;     <span class="comment">// 操作</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">bool</span> authorized = enforcer-&gt;<span class="built_in">Enforce</span>(&#123;subject, resource, action&#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (authorized) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Access granted&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Access denied&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 5. 策略管理</span></span><br><span class="line">    std::vector&lt;std::string&gt; newPolicy = &#123;<span class="string">&quot;bob&quot;</span>, <span class="string">&quot;data2&quot;</span>, <span class="string">&quot;write&quot;</span>&#125;;</span><br><span class="line">    enforcer-&gt;<span class="built_in">AddPolicy</span>(newPolicy);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 6. 保存策略更改</span></span><br><span class="line">    enforcer-&gt;<span class="built_in">SavePolicy</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 7. 清理资源</span></span><br><span class="line">    <span class="keyword">delete</span> enforcer;</span><br><span class="line">    <span class="keyword">delete</span> adapter;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="杂"><a href="#杂" class="headerlink" title="杂"></a>杂</h2><h3 id="SVN和Git的区别"><a href="#SVN和Git的区别" class="headerlink" title="SVN和Git的区别"></a>SVN和Git的区别</h3><p>SVN（Subversion）和Git是两种不同的版本控制系统，它们在设计和工作方式上有一些重要的区别：</p>
+<ol>
+<li>分布式 vs. 集中式：最重要的区别之一是Git是一种分布式版本控制系统，而SVN是集中式版本控制系统。在Git中，每个开发人员都拥有完整的代码仓库的副本，可以在本地进行提交、分支和合并等操作，而SVN需要连接到中央服务器来进行大多数操作。</li>
+<li>速度：Git在速度方面通常比SVN更快。因为Git是分布式的，大多数操作都是在本地完成，无需网络连接，因此操作速度更快。而SVN需要依赖于中央服务器，对网络连接的质量和服务器的负载有一定的依赖。</li>
+<li>分支和合并：Git在分支和合并方面更加强大和灵活。在Git中，创建、合并和切换分支非常快速和简便，开发人员可以轻松地在本地创建和管理多个分支。而SVN的分支和合并操作相对较慢和复杂，需要依赖于中央服务器，并且在合并时可能会出现冲突。</li>
+<li>完整性和安全性：Git比SVN更具完整性和安全性。Git使用哈希值来标识每个文件和提交，从而确保数据的完整性和一致性。每个提交都有一个唯一的哈希值，使得检测和修复损坏的数据更容易。而SVN没有这种内建的完整性检查机制。</li>
+<li>分布式开发和协作：由于Git是分布式的，开发人员可以在没有网络连接的情况下进行工作，每个人都可以拥有完整的历史记录和分支。这使得Git在分布式开发和远程协作方面更加灵活和强大。SVN在这方面相对较弱，需要依赖于中央服务器的连接。</li>
+</ol>
+<p>总的来说，Git在速度、分支和合并、完整性和安全性以及分布式开发方面具有优势，而SVN在集中式控制和特定环境中的简单性方面可能更适合一些项目。选择使用哪种版本控制系统取决于具体的项目需求和团队偏好。</p>
+<h3 id="仓库中的分支管理"><a href="#仓库中的分支管理" class="headerlink" title="仓库中的分支管理"></a>仓库中的分支管理</h3><p><img src="/2023/05/17/04-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/image-20230518135825329.png" alt="image-20230518135825329"></p>
+<blockquote>
+<p>  当你进行代码修改后，如果想要将这些修改提交到Git仓库，需要经过两个步骤：将修改的文件添加到暂存区 <code>git add .</code> </p>
+<p>  然后再将暂存区的内容提交到仓库 <code>git commit</code></p>
+</blockquote>
+<h3 id="fork-PullRequest"><a href="#fork-PullRequest" class="headerlink" title="fork + PullRequest"></a>fork + PullRequest</h3><p><strong>什么是fork？</strong></p>
+<p>fork 不是 Git 操作，而是一个 GitHub 操作，是服务端的代码仓库克隆。fork 后会在自己的github账户创建一个新仓库，它包含了原来的仓库 (即upstreamrepository，上游仓库)所有内容，如<strong>分支、提交历史</strong>等。你可以对 fork出的仓库 自由提交，并通过 PR(Pull Request) 贡献回 原仓库.由于fork出的新仓库是基于原仓库，但二者在后续开发中可能会大相径庭，所以被称为“分叉”</p>
+<p><strong>PullRequest</strong></p>
+<p>请求将修改应用到原仓库，需要原仓库主的批准</p>
+<h3 id="GIt-子模块"><a href="#GIt-子模块" class="headerlink" title="GIt 子模块"></a>GIt 子模块</h3><p>若项目根目录下有 <code>.gitmodules</code> 文件：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">[submodule <span class="string">&quot;ac/casbin-cpp&quot;</span>]</span><br><span class="line">	path = ac/casbin-cpp</span><br><span class="line">	url = https:<span class="regexp">//gi</span>thub.com<span class="regexp">/casbin/</span>casbin-cpp.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从 url 初始化子模块至 path</span></span><br><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查子模块状态</span></span><br><span class="line">git submodule status                   </span><br><span class="line"><span class="comment"># 827cc65f919a5620033294fe8fbb0d1c1a832074 ac/casbin-cpp (v1.52.3)</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="直接写-hpp与分别写-cpp-和-h-有何不同"><a href="#直接写-hpp与分别写-cpp-和-h-有何不同" class="headerlink" title="直接写.hpp与分别写 .cpp 和 .h 有何不同"></a>直接写.hpp与分别写 .cpp 和 .h 有何不同</h3><h3 id="防止头文件重复包含"><a href="#防止头文件重复包含" class="headerlink" title="防止头文件重复包含"></a>防止头文件重复包含</h3><p>#pragma once 和 #ifndef 是用于防止头文件重复包含的两种不同的机制。</p>
+<p>#pragma once 是一种简洁的预处理指令，用于确保头文件只被编译一次。当编译器遇到#pragma once时，它会记住该文件已经被包含，并且在后续的包含中会跳过该文件，从而避免了重复包含的问题。这种机制在大多数主流的编译器中都被支持，是一种简单、直观的头文件保护方法。</p>
+<p>#ifndef、#define 和 #endif 是传统的条件编译指令组合，也是防止头文件重复包含的一种常见做法。具体的使用方式是：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> H_FILE_NAME_H </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> H_FILE_NAME_H</span></span><br><span class="line"><span class="comment">// 头文件内容</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>首先，#ifndef 检查是否已经定义了名为 H_FILE_NAME_H 的宏。如果该宏未定义，说明该头文件尚未被包含过，代码会继续执行。然后，通过 #define H_FILE_NAME_H 定义该宏，表示该头文件已经被包含。接下来，写入头文件的内容。最后，通过 #endif 结束条件编译块。</p>
+<p>使用 #ifndef 的条件编译方式是一种传统、标准的头文件保护方法，广泛应用于各种编译器和项目。它的优点是兼容性好，可移植性强，但相对于 #pragma once，需要写更多的代码。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag"># 实习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/15/799-%E9%A6%99%E6%A7%9F%E5%A1%94/" rel="prev" title="799. 香槟塔">
+      <i class="fa fa-chevron-left"></i> 799. 香槟塔
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">权限管理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ACL"><span class="nav-number">1.1.1.</span> <span class="nav-text">ACL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RBAC"><span class="nav-number">1.1.2.</span> <span class="nav-text">RBAC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Casbin"><span class="nav-number">1.2.</span> <span class="nav-text">Casbin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Demo"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Demo</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%82"><span class="nav-number">2.</span> <span class="nav-text">杂</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SVN%E5%92%8CGit%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">SVN和Git的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%93%E5%BA%93%E4%B8%AD%E7%9A%84%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">仓库中的分支管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fork-PullRequest"><span class="nav-number">2.3.</span> <span class="nav-text">fork + PullRequest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GIt-%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-number">2.4.</span> <span class="nav-text">GIt 子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%99-hpp%E4%B8%8E%E5%88%86%E5%88%AB%E5%86%99-cpp-%E5%92%8C-h-%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="nav-number">2.5.</span> <span class="nav-text">直接写.hpp与分别写 .cpp 和 .h 有何不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E5%A4%B4%E6%96%87%E4%BB%B6%E9%87%8D%E5%A4%8D%E5%8C%85%E5%90%AB"><span class="nav-number">2.6.</span> <span class="nav-text">防止头文件重复包含</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">136</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
