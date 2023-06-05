@@ -28,8 +28,16 @@
 <meta property="og:description" content="JAVAWEB环境配置">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230519160154466.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230601154116639.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230602140543750.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603133831743.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603143019343.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603142733450.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603150017976.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230604142653644.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230604150750889.png">
 <meta property="article:published_time" content="2023-04-19T02:40:08.000Z">
-<meta property="article:modified_time" content="2023-05-19T09:48:26.028Z">
+<meta property="article:modified_time" content="2023-06-04T07:53:48.701Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="jAVAWEB">
 <meta name="twitter:card" content="summary">
@@ -221,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-19 17:48:26" itemprop="dateModified" datetime="2023-05-19T17:48:26+08:00">2023-05-19</time>
+                <time title="修改时间：2023-06-04 15:53:48" itemprop="dateModified" datetime="2023-06-04T15:53:48+08:00">2023-06-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,7 +275,7 @@
 <li>文档和API参考：包括Java编程语言规范、核心类库的文档、开发工具的使用指南等。</li>
 </ol>
 <p>总之，JDK提供了完整的Java开发环境，包括编译器、运行时环境、核心类库、开发工具和文档，使开发人员能够开发、调试和部署Java应用程序。</p>
-<h3 id="Apache-Maven"><a href="#Apache-Maven" class="headerlink" title="Apache Maven"></a><a target="_blank" rel="noopener" href="http://maven.apache.org/">Apache Maven</a></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置环境变量</span></span><br><span class="line">vim ~/.bash_profile</span><br><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
+<h3 id="Apache-Maven"><a href="#Apache-Maven" class="headerlink" title="Apache Maven"></a><a target="_blank" rel="noopener" href="http://maven.apache.org/">Apache Maven</a></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置环境变量</span></span><br><span class="line">vim ~/.bash_profile</span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置阿里云镜像仓库</span></span><br><span class="line">vim /Users/jiangangkong/devTools/apache-maven-3.9.2/conf/settings.xml</span><br><span class="line"><span class="comment"># 加入以下内容</span></span><br><span class="line">&lt;mirror&gt;</span><br><span class="line">    &lt;<span class="built_in">id</span>&gt;alimaven&lt;/id&gt;</span><br><span class="line">    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">    &lt;name&gt;aliyun maven&lt;/name&gt;</span><br><span class="line">    &lt;url&gt;https://maven.aliyun.com/repository/central&lt;/url&gt;</span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></table></figure>
 
@@ -285,8 +293,86 @@
 <li><p>示例:安装、配置、常用命令</p>
 </li>
 </ul>
-<h3 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h3><h4 id="配置maven"><a href="#配置maven" class="headerlink" title="配置maven"></a>配置maven</h4><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230519160154466.png" alt="image-20230519160154466"></p>
+<h4 id="IDEA配置maven"><a href="#IDEA配置maven" class="headerlink" title="IDEA配置maven"></a>IDEA配置maven</h4><p>如果在选择maven模板时出现问题不能生成项目，就选择Bundled Maven</p>
+<p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230519160154466.png" alt="image-20230519160154466"></p>
+<h3 id="Spring全家桶"><a href="#Spring全家桶" class="headerlink" title="Spring全家桶"></a><a target="_blank" rel="noopener" href="https://spring.io/">Spring全家桶</a></h3><h4 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h4><p>Spring Boot 核心作用:	起步依赖、自动配置、端点监控</p>
+<h5 id="Spring-Initializr"><a href="#Spring-Initializr" class="headerlink" title="Spring Initializr"></a><a href="start.spring.io">Spring Initializr</a></h5><blockquote>
+<p>  创建 Spring Boot 项目的引导工具</p>
+</blockquote>
+<p>底层还是Maven，只是一下子可以整合进来一批Maven依赖</p>
+<p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230601154116639.png" alt="image-20230601154116639"></p>
+<p>在pom.xml中加入</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">3.1</span><span class="number">.0</span>&lt;/version&gt;</span><br></pre></td></tr></table></figure>
 
+
+
+
+
+
+
+<h4 id="Spring-Frame"><a href="#Spring-Frame" class="headerlink" title="Spring Frame"></a>Spring Frame</h4><ul>
+<li><p>Spring Core</p>
+<ul>
+<li>IOC, AOP 	【由Spring管理的对象，通常称为bean】</li>
+</ul>
+</li>
+<li><p>Spring Data Access</p>
+<ul>
+<li>Transactions, Spring MyBatis</li>
+</ul>
+</li>
+<li><p>Web Servlet</p>
+<ul>
+<li>Spring MVC</li>
+</ul>
+</li>
+<li><p>Integration</p>
+<ul>
+<li>Email, Scheduling. AMQP. Security</li>
+</ul>
+</li>
+</ul>
+<h5 id="SpringCore-IOC"><a href="#SpringCore-IOC" class="headerlink" title="SpringCore - IOC"></a>SpringCore - IOC</h5><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230602140543750.png" alt="image-20230602140543750"></p>
+<h6 id="与Bean相关的注解"><a href="#与Bean相关的注解" class="headerlink" title="与Bean相关的注解"></a>与Bean相关的注解</h6><p>类（Bean）上需要有注解才能被扫描。在Spring中，常用的与Bean相关的注解有以下四种：</p>
+<ol>
+<li><code>@Component</code>: 是最通用的注解，用于将一个类声明为Spring容器中的一个组件。它是其他注解的基础，可以用于任何类。</li>
+<li><code>@Repository</code>: 用于标识一个类为数据访问组件，通常用于DAO(Data Access Object)层的类。</li>
+<li><code>@Service</code>: 用于标识一个类为服务层组件，通常用于封装业务逻辑的类。</li>
+<li><code>@Controller</code>: 用于标识一个类为控制器组件，通常用于处理用户请求的类。</li>
+</ol>
+<h5 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h5><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603133831743.png" alt="image-20230603133831743"></p>
+<p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603143019343.png" alt="image-20230603143019343"></p>
+<p>DispatcherServlet调度MVC, 共同解决表现层的问题</p>
+<blockquote>
+<p>  在Spring MVC中，请求首先由前端控制器（Front Controller）即<code>DispatcherServlet</code>接收，并将其转发给适当的Controller。Controller处理请求后，将模型数据存储在适当的数据结构中，然后选择合适的视图来呈现响应。最终，视图将模型的数据填充到模板中，并生成响应发送给客户端。</p>
+</blockquote>
+<p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603142733450.png" alt="image-20230603142733450"></p>
+<p>视图层我们要写 两部分代码, 如下图↓</p>
+<p>(Thymeleaf根据templates和Model生成View返回给用户, Model已经写好了不用我们写)</p>
+<p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230603150017976.png" alt="image-20230603150017976"></p>
+<h5 id="Spring-MyBatis"><a href="#Spring-MyBatis" class="headerlink" title="Spring MyBatis"></a><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/">Spring MyBatis</a></h5><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230604142653644.png" alt="image-20230604142653644"></p>
+<h6 id="整合"><a href="#整合" class="headerlink" title="整合"></a>整合</h6><p>在pom.xml中加入</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">8.0</span><span class="number">.32</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">3.0</span><span class="number">.1</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>创建entity包与mapper目录, dao目录下写对应的CRUD业务接口</p>
+<img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230604150750889.png" alt="image-20230604150750889" style="zoom:50%;">
+
+<p>src&#x2F;main&#x2F;resources&#x2F;application.properties</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"># Project</span><br><span class="line">server.port=8080</span><br><span class="line">server.servlet.context-path=/community</span><br><span class="line"></span><br><span class="line"># Thymeleaf</span><br><span class="line">spring.thymeleaf.cache=false</span><br><span class="line"></span><br><span class="line"># SpringMVC</span><br><span class="line">spring.mvc.hiddenmethod.filter.enabled=true</span><br><span class="line"></span><br><span class="line"># MySQL and Connection Pool</span><br><span class="line">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/community?characterEncoding=utf-8&amp;useSSL=false&amp;severTimezone=HongKong</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=00000000</span><br><span class="line">spring.datasource.type=com.zaxxer.hikari.HikariDataSource</span><br><span class="line">spring.datasource.hikari.maximum-pool-size=15</span><br><span class="line">spring.datasource.hikari.minimum-idle=5</span><br><span class="line">spring.datasource.hikari.idle-timeout=30000</span><br><span class="line"></span><br><span class="line"># MyBatis</span><br><span class="line">mybatis.mapper-locations=classpath:mapper/*.xml</span><br><span class="line">mybatis.type-aliases-package=com.example.community.entity</span><br><span class="line">mybatis.configuration.use-generated-keys=true</span><br><span class="line">mybatis.configuration.map-underscore-to-camel-case=true</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h4><h4 id="Spring-Cloud-Data-Flow"><a href="#Spring-Cloud-Data-Flow" class="headerlink" title="Spring Cloud Data Flow"></a>Spring Cloud Data Flow</h4>
     </div>
 
     
@@ -369,7 +455,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK"><span class="nav-number">1.</span> <span class="nav-text">JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Maven"><span class="nav-number">2.</span> <span class="nav-text">Apache Maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA"><span class="nav-number">3.</span> <span class="nav-text">IDEA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEmaven"><span class="nav-number">3.1.</span> <span class="nav-text">配置maven</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK"><span class="nav-number">1.</span> <span class="nav-text">JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Maven"><span class="nav-number">2.</span> <span class="nav-text">Apache Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDEA%E9%85%8D%E7%BD%AEmaven"><span class="nav-number">2.1.</span> <span class="nav-text">IDEA配置maven</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E5%85%A8%E5%AE%B6%E6%A1%B6"><span class="nav-number">3.</span> <span class="nav-text">Spring全家桶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Boot"><span class="nav-number">3.1.</span> <span class="nav-text">Spring Boot</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Initializr"><span class="nav-number">3.1.1.</span> <span class="nav-text">Spring Initializr</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Frame"><span class="nav-number">3.2.</span> <span class="nav-text">Spring Frame</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringCore-IOC"><span class="nav-number">3.2.1.</span> <span class="nav-text">SpringCore - IOC</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8EBean%E7%9B%B8%E5%85%B3%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">与Bean相关的注解</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringMVC"><span class="nav-number">3.2.2.</span> <span class="nav-text">SpringMVC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-MyBatis"><span class="nav-number">3.2.3.</span> <span class="nav-text">Spring MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%95%B4%E5%90%88"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">整合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud"><span class="nav-number">3.3.</span> <span class="nav-text">Spring Cloud</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud-Data-Flow"><span class="nav-number">3.4.</span> <span class="nav-text">Spring Cloud Data Flow</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -385,7 +471,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
