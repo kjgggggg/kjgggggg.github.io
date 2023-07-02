@@ -37,10 +37,13 @@
 <meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230604142653644.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230604150750889.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230607131846936.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230618000634351.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230619123921448.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230619163858518.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230606204810058.png">
 <meta property="og:image" content="https://kjgggggg.github.io/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230607105222056.png">
 <meta property="article:published_time" content="2023-04-19T02:40:08.000Z">
-<meta property="article:modified_time" content="2023-06-07T05:30:55.586Z">
+<meta property="article:modified_time" content="2023-06-19T11:48:58.885Z">
 <meta property="article:author" content="kjg">
 <meta property="article:tag" content="jAVAWEB">
 <meta name="twitter:card" content="summary">
@@ -232,7 +235,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-07 13:30:55" itemprop="dateModified" datetime="2023-06-07T13:30:55+08:00">2023-06-07</time>
+                <time title="修改时间：2023-06-19 19:48:58" itemprop="dateModified" datetime="2023-06-19T19:48:58+08:00">2023-06-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -375,10 +378,22 @@
 
 
 
-<h4 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h4><h4 id="Spring-Cloud-Data-Flow"><a href="#Spring-Cloud-Data-Flow" class="headerlink" title="Spring Cloud Data Flow"></a>Spring Cloud Data Flow</h4><h3 id="x3D-x3D-业务-x3D-x3D"><a href="#x3D-x3D-业务-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;业务&#x3D;&#x3D;"></a>&#x3D;&#x3D;业务&#x3D;&#x3D;</h3><h4 id="发邮件"><a href="#发邮件" class="headerlink" title="发邮件"></a>发邮件</h4><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230607131846936.png" alt="image-20230607131846936"></p>
+<h4 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h4><h4 id="Spring-Cloud-Data-Flow"><a href="#Spring-Cloud-Data-Flow" class="headerlink" title="Spring Cloud Data Flow"></a>Spring Cloud Data Flow</h4><h3 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h3><h4 id="发邮件"><a href="#发邮件" class="headerlink" title="发邮件"></a>发邮件</h4><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230607131846936.png" alt="image-20230607131846936"></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-mail&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">3.1</span><span class="number">.0</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
 
+
+
+
+<h4 id="注册功能"><a href="#注册功能" class="headerlink" title="注册功能"></a>注册功能</h4><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230618000634351.png" alt="image-20230618000634351"></p>
+<p>引入字符串判空的依赖</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/org.apache.commons/commons-lang3 --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">3.12</span><span class="number">.0</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h4><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230619123921448.png" alt="image-20230619123921448"></p>
+<h4 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h4><p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230619163858518.png" alt="image-20230619163858518"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.penggle&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.3</span><span class="number">.2</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.jhlabs&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;filters&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.0</span><span class="number">.235</span>-<span class="number">1</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -421,7 +436,12 @@
 <p>法二：</p>
 <p><img src="/2023/04/19/JAVAWEB%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/image-20230607105222056.png" alt="image-20230607105222056"></p>
 <p>​	</p>
-<h3 id="IDEA版本控制"><a href="#IDEA版本控制" class="headerlink" title="IDEA版本控制"></a>IDEA版本控制</h3>
+<h3 id="IDEA版本控制"><a href="#IDEA版本控制" class="headerlink" title="IDEA版本控制"></a>IDEA版本控制</h3><h3 id="BUG"><a href="#BUG" class="headerlink" title="BUG"></a>BUG</h3><h4 id="chrome打开不了网页"><a href="#chrome打开不了网页" class="headerlink" title="chrome打开不了网页"></a>chrome打开不了网页</h4><p>连vpn访问一次</p>
+<h4 id="Cannot-resolve-Failure-to-transfer-xxx-from-…"><a href="#Cannot-resolve-Failure-to-transfer-xxx-from-…" class="headerlink" title="Cannot resolve Failure to transfer xxx from …"></a>Cannot resolve Failure to transfer xxx from …</h4><blockquote>
+<p>  Cannot resolve Failure to transfer com.jhlabs:filters:pom:2.0.235-1 from <a target="_blank" rel="noopener" href="https://maven.aliyun.com/repository/central">https://maven.aliyun.com/repository/central</a> was cached in the local repository, resolution will not be reattempted until the update interval of alimaven has elapsed or updates …</p>
+</blockquote>
+<p>在 .m2本地仓库下把相应的*.LastUpdated 删掉</p>
+
     </div>
 
     
@@ -504,7 +524,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK"><span class="nav-number">1.</span> <span class="nav-text">JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Maven"><span class="nav-number">2.</span> <span class="nav-text">Apache Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDEA%E9%85%8D%E7%BD%AEmaven"><span class="nav-number">2.1.</span> <span class="nav-text">IDEA配置maven</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E5%85%A8%E5%AE%B6%E6%A1%B6"><span class="nav-number">3.</span> <span class="nav-text">Spring全家桶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Boot"><span class="nav-number">3.1.</span> <span class="nav-text">Spring Boot</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Initializr"><span class="nav-number">3.1.1.</span> <span class="nav-text">Spring Initializr</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Frame"><span class="nav-number">3.2.</span> <span class="nav-text">Spring Frame</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringCore-IOC"><span class="nav-number">3.2.1.</span> <span class="nav-text">SpringCore - IOC</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8EBean%E7%9B%B8%E5%85%B3%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">与Bean相关的注解</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringMVC"><span class="nav-number">3.2.2.</span> <span class="nav-text">SpringMVC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-MyBatis"><span class="nav-number">3.2.3.</span> <span class="nav-text">Spring MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%95%B4%E5%90%88"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">整合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud"><span class="nav-number">3.3.</span> <span class="nav-text">Spring Cloud</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud-Data-Flow"><span class="nav-number">3.4.</span> <span class="nav-text">Spring Cloud Data Flow</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x3D-x3D-%E4%B8%9A%E5%8A%A1-x3D-x3D"><span class="nav-number">4.</span> <span class="nav-text">&#x3D;&#x3D;业务&#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E9%82%AE%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">发邮件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA%E8%B0%83%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">IDEA调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">IDEA版本控制</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK"><span class="nav-number">1.</span> <span class="nav-text">JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Maven"><span class="nav-number">2.</span> <span class="nav-text">Apache Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDEA%E9%85%8D%E7%BD%AEmaven"><span class="nav-number">2.1.</span> <span class="nav-text">IDEA配置maven</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E5%85%A8%E5%AE%B6%E6%A1%B6"><span class="nav-number">3.</span> <span class="nav-text">Spring全家桶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Boot"><span class="nav-number">3.1.</span> <span class="nav-text">Spring Boot</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Initializr"><span class="nav-number">3.1.1.</span> <span class="nav-text">Spring Initializr</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Frame"><span class="nav-number">3.2.</span> <span class="nav-text">Spring Frame</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringCore-IOC"><span class="nav-number">3.2.1.</span> <span class="nav-text">SpringCore - IOC</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8EBean%E7%9B%B8%E5%85%B3%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">与Bean相关的注解</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringMVC"><span class="nav-number">3.2.2.</span> <span class="nav-text">SpringMVC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-MyBatis"><span class="nav-number">3.2.3.</span> <span class="nav-text">Spring MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%95%B4%E5%90%88"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">整合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud"><span class="nav-number">3.3.</span> <span class="nav-text">Spring Cloud</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud-Data-Flow"><span class="nav-number">3.4.</span> <span class="nav-text">Spring Cloud Data Flow</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">业务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E9%82%AE%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">发邮件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E5%8A%9F%E8%83%BD"><span class="nav-number">4.2.</span> <span class="nav-text">注册功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86"><span class="nav-number">4.3.</span> <span class="nav-text">会话管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">4.4.</span> <span class="nav-text">生成验证码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA%E8%B0%83%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">IDEA调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">IDEA版本控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BUG"><span class="nav-number">7.</span> <span class="nav-text">BUG</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#chrome%E6%89%93%E5%BC%80%E4%B8%8D%E4%BA%86%E7%BD%91%E9%A1%B5"><span class="nav-number">7.1.</span> <span class="nav-text">chrome打开不了网页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cannot-resolve-Failure-to-transfer-xxx-from-%E2%80%A6"><span class="nav-number">7.2.</span> <span class="nav-text">Cannot resolve Failure to transfer xxx from …</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -520,7 +540,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-count">151</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -533,7 +553,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

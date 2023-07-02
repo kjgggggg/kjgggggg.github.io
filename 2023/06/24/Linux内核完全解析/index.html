@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="Linux高性能服务器编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux内核完全解析">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="Linux高性能服务器编程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/SouthEast.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/4fdf0e888ad57173cf481e5e1baea6f8.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230628013256194.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626142646497.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626152343475.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626170727202.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626160359117.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626161936812.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626162008840.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230627185638445.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230627184155816.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230628170626993.png">
+<meta property="article:published_time" content="2023-06-24T05:22:56.000Z">
+<meta property="article:modified_time" content="2023-06-30T14:18:50.204Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/SouthEast.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux内核完全解析 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux内核完全解析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-24 13:22:56" itemprop="dateCreated datePublished" datetime="2023-06-24T13:22:56+08:00">2023-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-30 22:18:50" itemprop="dateModified" datetime="2023-06-30T22:18:50+08:00">2023-06-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">linux && 服务器</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Linux高性能服务器编程</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="LINUX内核概况"><a href="#LINUX内核概况" class="headerlink" title="LINUX内核概况"></a>LINUX内核概况</h3><p>从功能层面上	内核就是软件和硬件之间的一个中间层，可以连接软件和硬件。</p>
+<h4 id="内核实现策略"><a href="#内核实现策略" class="headerlink" title="内核实现策略"></a>内核实现策略</h4><p>1.微内核。最基本的功能由中央内核（微内核）实现。所有其他的功能都委托给一些独立进程，这些进程通过明确定义的通信接口与中心内核通信。</p>
+<p>2.宏内核。内核的所有代码，包括子系统（如内存管理、文件管理、设备驱动程序）都打包到一个文件中。内核中的每一个函数都可以访问到内核中所有其他部分。目前支持模块的动态装卸(裁剪)。Linux内核就是基于这个策略实现的。</p>
+<p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/SouthEast.png" alt="img"></p>
+<h3 id="X86寄存器"><a href="#X86寄存器" class="headerlink" title="X86寄存器"></a>X86寄存器</h3><ol>
+<li><p>通用寄存器：</p>
+<ul>
+<li>EAX（累加器寄存器）：主要用于算术和逻辑运算，并作为函数返回值的容器。</li>
+<li>EBX（基址寄存器）：通常被用作内存地址的基址。</li>
+<li>ECX（计数器寄存器）：通常用于循环计数和字符串操作。</li>
+<li>EDX（数据寄存器）：用于存放一般性数据。</li>
+<li>ESI（源变址寄存器）：通常用于字符串操作中的源地址。</li>
+<li>EDI（目的变址寄存器）：通常用于字符串操作中的目的地址。</li>
+<li>ESP（堆栈指针寄存器）：指向当前堆栈顶部。</li>
+<li>EBP（基址指针寄存器）：通常用于指向栈帧的基址。</li>
+</ul>
+</li>
+<li><p>段寄存器：</p>
+<ul>
+<li>CS（代码段寄存器）：存储当前执行指令的代码段。</li>
+<li>DS（数据段寄存器）：存储数据的段。</li>
+<li>SS（堆栈段寄存器）：存储堆栈的段。</li>
+<li>ES（附加段寄存器）：可用于存储其他数据段。</li>
+</ul>
+</li>
+<li><p>标志寄存器：</p>
+<ul>
+<li><p>EFLAGS（标志寄存器）：用于存储各种程序状态标志，如进位标志、零标志、溢出标志等。</p>
+</li>
+<li><p>(PSW)</p>
+<blockquote>
+<p>  在x86架构中，PSW是一个常见的缩写，它代表程序状态字（Program Status Word），也被称为标志寄存器或标志字。然而，在x86架构中，官方没有直接称之为PSW寄存器，而是使用了一系列标志位来表示程序的状态。</p>
+<p>  这些标志位通常存储在EFLAGS寄存器中</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>指令指针寄存器：</p>
+<ul>
+<li>EIP（指令指针寄存器）：存储下一条要执行的指令的内存地址。</li>
+</ul>
+</li>
+</ol>
+<p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/4fdf0e888ad57173cf481e5e1baea6f8.png" alt="4fdf0e888ad57173cf481e5e1baea6f8.png"></p>
+<h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230628013256194.png" alt="image-20230628013256194"></p>
+<h3 id="ROM-和RAM"><a href="#ROM-和RAM" class="headerlink" title="ROM 和RAM"></a>ROM 和RAM</h3><p>ROM是一种只读存储器，其中存储的数据在计算机关闭或重新启动时保持不变。ROM中的数据是由制造商预先编程的，用户无法修改其内容。它通常用于存储固件、引导程序和其他永久性的系统数据。ROM的优点是数据的持久性和稳定性，即使在断电情况下也能保留数据。常见的ROM类型包括ROM、PROM（Programmable ROM）、EPROM（Erasable Programmable ROM）和EEPROM（Electrically Erasable Programmable ROM）。</p>
+<p>RAM是一种随机访问存储器，用于临时存储计算机正在运行的数据和程序。RAM允许计算机以随机的顺序读取和写入数据，这使得存储器的访问速度非常快。RAM是易失性存储器，意味着当计算机断电时，存储在RAM中的数据将会丢失。RAM可以根据需要读取和写入数据，因此它对于计算机的实时操作非常重要。常见的RAM类型包括SRAM（Static RAM）和DRAM（Dynamic RAM）。</p>
+<p>RAM和ROM在功能和特性上有很大的差异。RAM用于临时存储和处理数据，具有快速的读写速度，但数据不持久保存。ROM用于存储永久性数据和程序，不可修改，但数据的持久性较高。在计算机系统中，通常会同时使用RAM和ROM来满足不同的存储需求。</p>
+<h3 id="GNU-AS和-AS86"><a href="#GNU-AS和-AS86" class="headerlink" title="GNU AS和 AS86"></a>GNU AS和 AS86</h3><p>GNU As（GNU汇编器）和 as86（GNU汇编器的一个特定版本）是两个不同的汇编器工具，它们具有以下区别：</p>
+<ol>
+<li>功能和用途：<ul>
+<li>GNU As：GNU As是GNU项目中的一部分，是一个通用的汇编器，支持多种处理器架构（如x86、ARM等）和不同的操作系统。</li>
+<li>as86：as86是GNU As的一个特定版本，专门用于处理x86架构的16位汇编语言。它主要用于早期的8086和80286处理器，并且适用于特定的操作系统，如DOS。</li>
+</ul>
+</li>
+<li>支持的架构：<ul>
+<li>GNU As：GNU As是一个通用的汇编器，支持多种处理器架构，包括x86、ARM、MIPS、PowerPC等。</li>
+<li>as86：as86是为x86架构的16位汇编语言而设计的，主要用于早期的8086和80286处理器。</li>
+</ul>
+</li>
+<li>语法和特性：<ul>
+<li>GNU As：GNU As使用AT&amp;T语法，具有丰富的指令集和功能，支持宏汇编、条件汇编、符号表等高级特性。</li>
+<li>as86：as86通常使用Intel语法，语法更接近机器语言，功能相对较为简单，不支持高级特性。</li>
+</ul>
+</li>
+<li>可移植性：<ul>
+<li>GNU As：GNU As具有广泛的可移植性，可在不同的操作系统和处理器架构上使用。</li>
+<li>as86：as86主要用于早期的x86架构和特定操作系统（如DOS），可移植性相对较低。</li>
+</ul>
+</li>
+</ol>
+<p>总的来说，GNU As是一个通用的汇编器，支持多种处理器架构和操作系统，而as86是GNU As的一个特定版本，专门用于处理早期的x86架构的16位汇编语言。</p>
+<h4 id="GNU-AS语法"><a href="#GNU-AS语法" class="headerlink" title="GNU AS语法"></a>GNU AS语法</h4><p>GNU As（GNU汇编器）使用AT&amp;T语法，它与Intel语法在一些语法规则和指令书写上存在一些区别。</p>
+<ol>
+<li>操作数顺序：AT&amp;T语法使用源操作数在目的操作数之前的顺序，与Intel语法相反。 示例：<ul>
+<li>AT&amp;T语法：<code>movl %eax, %ebx</code>（将eax的值移动到ebx）</li>
+<li>Intel语法：<code>mov ebx, eax</code>（将eax的值移动到ebx）</li>
+</ul>
+</li>
+<li>寄存器表示：在AT&amp;T语法中，寄存器名以<code>%</code>符号开头。 示例：<ul>
+<li>AT&amp;T语法：<code>movl $42, %eax</code>（将立即数42移动到eax寄存器）</li>
+<li>Intel语法：<code>mov eax, 42</code>（将立即数42移动到eax寄存器）</li>
+</ul>
+</li>
+<li>立即数表示：在AT&amp;T语法中，立即数以<code>$</code>符号开头。 示例：<ul>
+<li>AT&amp;T语法：<code>movl $123, %ebx</code>（将立即数123移动到ebx寄存器）</li>
+<li>Intel语法：<code>mov ebx, 123</code>（将立即数123移动到ebx寄存器）</li>
+</ul>
+</li>
+<li>内存引用：在AT&amp;T语法中，使用方括号<code>[]</code>表示内存引用，且地址放在括号内。 示例：<ul>
+<li>AT&amp;T语法：<code>movl (%eax), %ebx</code>（将eax寄存器指向的内存位置的值移动到ebx寄存器）</li>
+<li>Intel语法：<code>mov ebx, [eax]</code>（将eax寄存器指向的内存位置的值移动到ebx寄存器）</li>
+</ul>
+</li>
+<li>注释：在AT&amp;T语法中，使用分号<code>;</code>来表示注释。 示例：<ul>
+<li>AT&amp;T语法：<code>addl %eax, %ebx ; 这是一个加法指令</code>（将eax的值加到ebx，并带有注释）</li>
+</ul>
+</li>
+</ol>
+<p>这些是AT&amp;T语法在GNU As中的一些基本规则和示例。要编写符合GNU As语法的汇编代码，可以参考GNU As的相关文档或参考资料。</p>
+<h4 id="AS86语法"><a href="#AS86语法" class="headerlink" title="AS86语法"></a>AS86语法</h4><p>AS86是一个特定版本的GNU As汇编器，用于处理x86架构的16位汇编语言。AS86使用的是Intel语法，与AT&amp;T语法有所不同</p>
+<p>直接寄存器寻址</p>
+<p><code>mov bx, ax</code> 将<code>ax</code>的值直接复制到<code>bx</code>寄存器。</p>
+<p>间接寄存器寻址</p>
+<p><code>mov [bx], ax</code> 将<code>ax</code>的值存储到<code>bx</code>寄存器内容指定的内存位置上。</p>
+<p>把 立即数1234 放入ax中，把 立即数msgl 放入ax中</p>
+<p><code>mov ax, #1234</code></p>
+<p><code>mov ax, #msgl</code></p>
+<p>绝对寻址：将内存地址1234，内存地址msgl处的内容放入ax中</p>
+<p><code>mov ax, 1234</code></p>
+<p><code>mov ax, msgl</code>  &#x3D;  <code>mov ax, [msgl]</code></p>
+<p>索引寻址</p>
+<p><code>mov ax, msgl[bx]</code> 将内存中以 <code>msgl</code> 加上 <code>bx</code> 寄存器的内容作为地址的位置上的值，读取到 <code>ax</code> 寄存器中。</p>
+<blockquote>
+<ol>
+<li>计算内存地址：将 <code>msgl</code> 寄存器的内容与 <code>bx</code> 寄存器的内容相加，得到内存地址。</li>
+<li>从内存中读取数据：从上一步计算得到的内存地址处读取数据。</li>
+<li>将读取到的数据存储到 <code>ax</code> 寄存器：将读取到的数据移动到 <code>ax</code> 寄存器中。</li>
+</ol>
+</blockquote>
+<p><code>mov [msgl+17], ah</code></p>
+<blockquote>
+<p>  将寄存器AH的值写入到内存中<code>msgl</code>的地址加上17的位置上。</p>
+</blockquote>
+<h3 id="C程序编译过程"><a href="#C程序编译过程" class="headerlink" title="C程序编译过程"></a>C程序编译过程</h3><p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626142646497.png" alt="image-20230626142646497"></p>
+<h3 id="汇编程序如何调用执行C语言程序？"><a href="#汇编程序如何调用执行C语言程序？" class="headerlink" title="汇编程序如何调用执行C语言程序？"></a>汇编程序如何调用执行C语言程序？</h3><p>在x86汇编语言中，ESP（Extended Stack Pointer）和EBP（Extended Base Pointer）是两个寄存器，用于管理和访问程序运行时的堆栈（stack）。</p>
+<ol>
+<li>ESP（堆栈指针）：ESP寄存器指向当前堆栈的栈顶，即最后一个压入堆栈的数据的位置。堆栈的增长方向是<strong>从高地址向低地址</strong>，所以ESP的值会随着数据的压入而减小，随着数据的弹出而增加。</li>
+<li>EBP（基指针）：EBP寄存器用于建立一个指向当前函数堆栈帧（stack frame）的基准点。函数调用时，EBP通常会被设置为当前堆栈的值，然后用于在堆栈中访问函数参数和局部变量。通过使用EBP，可以在函数内部相对于堆栈帧的固定偏移量来访问变量，而不需要关心ESP的变化。</li>
+</ol>
+<img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626152343475.png" alt="image-20230626152343475">
+
+<p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626170727202.png" alt="image-20230626170727202"></p>
+<p>要在汇编程序中调用执行C语言程序，通常需要以下步骤：</p>
+<ol>
+<li><p>编写C语言程序：首先，您需要编写一个C语言程序，实现所需的功能。保存该程序并确保已生成可执行文件。</p>
+</li>
+<li><p>准备汇编程序：接下来，您需要准备一个汇编程序，该程序将用于调用执行C语言程序。</p>
+</li>
+<li><p><strong>设置堆栈</strong>：在汇编程序中，您需要设置堆栈指针(SP)和基指针(BP)以及其他必要的寄存器，以便在调用C语言程序时正确处理函数参数和返回值。</p>
+</li>
+<li><p><strong>调用C语言程序</strong>：使用汇编指令，您可以调用C语言程序。您可以使用CALL指令将程序控制权传递给C语言程序的入口点，并使用RET指令从C语言程序返回到汇编程序。</p>
+</li>
+<li><p>处理函数参数和返回值：在调用C语言程序之前，您需要将函数参数加载到正确的寄存器或堆栈位置中。执行CALL指令后，C语言程序将在执行完毕后返回结果。您需要使用适当的方法来访问返回的结果。</p>
+<blockquote>
+<p>  本书规定：</p>
+<ol>
+<li><p>若返回值是一个整数或一个指针，那么寄存器 eax 将被默认用来传递返回值</p>
+</li>
+<li><p>A调用B； </p>
+<p>A必须需要保存EAX，EDX，ECX的值</p>
+<p>B必须需要保存EBX， ESI， EDI的值</p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong>恢复堆栈</strong>：在从C语言程序返回到汇编程序后，您需要恢复堆栈指针(SP)和基指针(BP)以及其他寄存器的值。</p>
+</li>
+</ol>
+<h4 id="x86汇编语言调用执行C语言程序"><a href="#x86汇编语言调用执行C语言程序" class="headerlink" title="x86汇编语言调用执行C语言程序"></a>x86汇编语言调用执行C语言程序</h4><p>以下是一个使用x86汇编语言调用执行C语言程序的简单例子：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> result = <span class="built_in">add</span>(<span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Result: %d\n&quot;</span>, result);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>汇编程序（example.asm）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">section .data 	; 这是数据段的开始，用于定义数据段中的变量和常量。在这个例子中，定义了一个格式化字符串format，用于在printf中输出结果。</span><br><span class="line">    format db &quot;Result: %d&quot;, 10, 0</span><br><span class="line"></span><br><span class="line">section .text	; 这是代码段的开始，用于定义可执行代码。在这个例子中，定义了一系列指令来调用执行C语言程序。</span><br><span class="line">    extern printf	; 这是外部声明，告诉汇编器在链接时要在其他地方找到printf函数的定义。</span><br><span class="line">    extern add	; 同样是外部声明，告诉汇编器在链接时要在其他地方找到add函数的定义。</span><br><span class="line"></span><br><span class="line">global _start	; 这是指定程序入口点的全局声明，告诉链接器程序的入口点是_start标签。</span><br><span class="line"></span><br><span class="line">_start:	; 程序的入口点，代码从这里开始执行。</span><br><span class="line">    ; 这两条指令将堆栈指针(SP)和基指针(BP)设置为相同的值，以建立堆栈帧。</span><br><span class="line">    mov esp, ebp</span><br><span class="line">    mov ebp, esp</span><br><span class="line"></span><br><span class="line">    ; 这两条指令将函数参数依次压入堆栈。</span><br><span class="line">    push dword 3</span><br><span class="line">    push dword 5</span><br><span class="line"></span><br><span class="line">    ; 调用add函数，将程序控制权转移到该函数。</span><br><span class="line">    call add</span><br><span class="line"></span><br><span class="line">	; 将栈指针（Stack Pointer，SP）寄存器的值增加8个字节。</span><br><span class="line">    ; 清理堆栈上的函数参数</span><br><span class="line">    add esp, 8</span><br><span class="line"></span><br><span class="line">    ; 这条指令将add函数的返回值移动到通用寄存器EBX中，以便后续传递给printf函数。</span><br><span class="line">    mov ebx, eax</span><br><span class="line"></span><br><span class="line">    ; 这两条指令将printf函数的参数依次压入堆栈。</span><br><span class="line">    push ebx</span><br><span class="line">    push format</span><br><span class="line"></span><br><span class="line">    ; 调用printf函数，将结果输出到控制台。</span><br><span class="line">    call printf</span><br><span class="line"></span><br><span class="line">    ; 清理堆栈上的printf函数的参数。</span><br><span class="line">    add esp, 8</span><br><span class="line"></span><br><span class="line">    ; 这两条指令恢复堆栈指针和基指针的值，以便返回到程序的调用者。</span><br><span class="line">    mov esp, ebp</span><br><span class="line">    mov ebp, 0</span><br><span class="line"></span><br><span class="line">    mov eax, 1	; 这条指令将系统调用号1（代表程序退出）移动到通用寄存器EAX中。</span><br><span class="line">    xor ebx, ebx ; 将通用寄存器EBX与自身进行异或操作，将其值设置为0，表示退出状态码为0。</span><br><span class="line">    int 0x80	; 触发一个软中断，将控制权交给操作系统，以执行系统调用，这里是退出程序。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="GNU-AS语言调用执行C语言程序"><a href="#GNU-AS语言调用执行C语言程序" class="headerlink" title="GNU AS语言调用执行C语言程序"></a>GNU AS语言调用执行C语言程序</h4><p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626160359117.png" alt="image-20230626160359117"></p>
+<p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626161936812.png" alt="image-20230626161936812"></p>
+<p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230626162008840.png" alt="image-20230626162008840"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.text</span><br><span class="line">_swap:</span><br><span class="line">    pushl %ebp	; 将 %ebp 寄存器的值压入堆栈。通常在函数开始时执行此操作，以保存调用者的基指针。</span><br><span class="line">    movl %esp, %ebp	; 将 %esp 寄存器（当前堆栈指针）的值复制到 %ebp 寄存器中。这为当前函数设置基指针。</span><br><span class="line">    subl $4, %esp	; 从 %esp 寄存器中减去 4，为局部变量或其他用途在堆栈上分配 4 字节的空间。</span><br><span class="line">    movl 8(%ebp), %eax	; 将位于EBP寄存器指向的内存地址上偏移为8字节的值读取到EAX寄存器中。这可能是从堆栈中检索参数或变量。</span><br><span class="line">    movl (%eax), %ecx	; 将 %eax 寄存器中存储的地址处的值加载到 %ecx 寄存器中。这检索 %eax 寄存器指向的值。</span><br><span class="line">    movl %ecx, -4(%ebp)	; 将 %ecx 寄存器中的值存储在内存位置 -4(%ebp)。这可能是将检索到的值存储在堆栈上。</span><br><span class="line">    movl 8(%ebp), %eax	; 再次将地址 8(%ebp) 处的值加载到 %eax 寄存器中。</span><br><span class="line">    movl 12(%ebp), %edx	; 将地址 12(%ebp) 处的值加载到 %edx 寄存器中。这可能是从堆栈中检索另一个参数或变量。</span><br><span class="line">    movl (%edx), %ecx	; 将 %edx 寄存器中存储的地址处的值加载到 %ecx 寄存器中。这检索 %edx 寄存器指向的值。</span><br><span class="line">    movl %ecx, (%eax)	; 将 %ecx 寄存器中的值存储在内存位置 %eax 处。</span><br><span class="line">    movl 12(%ebp), %eax	; 再次将内存地址 12(%ebp) 处的值加载到 %eax 寄存器中。</span><br><span class="line">    movl -4(%ebp), %ecx	; 将内存位置 -4(%ebp) 处的值加载到 %ecx 寄存器中。</span><br><span class="line">    movl %ecx, (%eax)	; 将 %ecx 寄存器中的值存储在内存位置 %eax 处。</span><br><span class="line">    leave	; 撤销当前函数的堆栈帧。</span><br><span class="line">    ret	; 从当前函数返回。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">leave</span><br><span class="line"> = </span><br><span class="line">movl %ebp, %esp</span><br><span class="line">popl %ebp</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="LINUX源码分析"><a href="#LINUX源码分析" class="headerlink" title="LINUX源码分析"></a>LINUX源码分析</h3><h4 id="LINUX操作系统引导启动程序（boot-x2F-bootsect-s-amp-setup-s-amp-head-s）"><a href="#LINUX操作系统引导启动程序（boot-x2F-bootsect-s-amp-setup-s-amp-head-s）" class="headerlink" title="LINUX操作系统引导启动程序（boot&#x2F;bootsect.s &amp; setup.s &amp; head.s）"></a>LINUX操作系统引导启动程序（boot&#x2F;bootsect.s &amp; setup.s &amp; head.s）</h4><ol>
+<li><p>电源打开后，80x86结构的CPU会进入实模式。【实模式是一种最初用于早期x86处理器的模式，它提供对低级硬件的基本访问能力】</p>
+</li>
+<li><p>CPU会从固定地址0xFFFF0开始执行代码。该地址上存储着ROM-BIOS的跳转指令。</p>
+</li>
+<li><p>BIOS执行系统的初始化和自检过程。它会进行一系列的硬件检测和配置，包括检测内存、处理器、硬盘、显卡等，并建立基本的中断向量表。</p>
+</li>
+<li><p>BIOS会从可启动设备的第一个扇区（磁盘的引导扇区）读取512字节的代码，将其加载到内存的绝对地址0x7C00处。</p>
+</li>
+<li><p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230627185638445.png" alt="image-20230627185638445"></p>
+</li>
+<li><p>然后将整个系统从地址 0x10000 移至0x0000 处，进入保护模式并跳转至系统的余下部分（在0x0000处)。此时所有32 位运行方式的设置启动被完成：IDT、GDT 以及LDT 被加载，处理器和协处理器也己确认，分页工作也设置好了；</p>
+</li>
+<li><p>最终调用 init&#x2F;main.c 中的main()程序。上述操作的源代码是在 boot&#x2F;head.s中的。注意如果在前述任何一步中出了错，计算机就会死锁。</p>
+</li>
+</ol>
+<blockquote>
+<p>  另外，仅在内存中加载了上述内核代码模块并不能让Linux 系统运行起来。完整可运行的 Linux系统还需要有一个基本的根文件系统。Linux 0.11 内核仅支持 MINIX 的 1.0 文件系统。根文件系统通常是在另一个软盘上或者在一个硬盘分区中。为了通知内核所需要的根文件系统在什么地方，bootsect.s 程序的第 43 行上给出了根文件系统所在的默认块设备号。在内核初始化时会使用编译内校时放在引导扇区第 509、510 (0x1fc-0x1fd）字节中的指定设备号。</p>
+</blockquote>
+<p>总结：</p>
+<p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230627184155816.png" alt="image-20230627184155816"></p>
+<p><img src="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/image-20230628170626993.png" alt="image-20230628170626993"></p>
+<p>s</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/21/FPGA/" rel="prev" title="FPGA">
+      <i class="fa fa-chevron-left"></i> FPGA
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/07/01/TTS/" rel="next" title="TTS">
+      TTS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LINUX%E5%86%85%E6%A0%B8%E6%A6%82%E5%86%B5"><span class="nav-number">1.</span> <span class="nav-text">LINUX内核概况</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%AE%9E%E7%8E%B0%E7%AD%96%E7%95%A5"><span class="nav-number">1.1.</span> <span class="nav-text">内核实现策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#X86%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">X86寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">磁盘结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROM-%E5%92%8CRAM"><span class="nav-number">4.</span> <span class="nav-text">ROM 和RAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNU-AS%E5%92%8C-AS86"><span class="nav-number">5.</span> <span class="nav-text">GNU AS和 AS86</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GNU-AS%E8%AF%AD%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">GNU AS语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AS86%E8%AF%AD%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">AS86语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">C程序编译过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8%E6%89%A7%E8%A1%8CC%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">汇编程序如何调用执行C语言程序？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#x86%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E8%B0%83%E7%94%A8%E6%89%A7%E8%A1%8CC%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F"><span class="nav-number">7.1.</span> <span class="nav-text">x86汇编语言调用执行C语言程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GNU-AS%E8%AF%AD%E8%A8%80%E8%B0%83%E7%94%A8%E6%89%A7%E8%A1%8CC%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F"><span class="nav-number">7.2.</span> <span class="nav-text">GNU AS语言调用执行C语言程序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINUX%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">8.</span> <span class="nav-text">LINUX源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LINUX%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F%EF%BC%88boot-x2F-bootsect-s-amp-setup-s-amp-head-s%EF%BC%89"><span class="nav-number">8.1.</span> <span class="nav-text">LINUX操作系统引导启动程序（boot&#x2F;bootsect.s &amp; setup.s &amp; head.s）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>

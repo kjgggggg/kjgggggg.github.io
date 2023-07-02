@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="TTS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TTS">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/07/01/TTS/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="TTS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702011848180.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702115644197.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702120117484.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702130757439.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702120623594.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702131013567.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702150109057.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230701182932912.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230701184216117.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230701185128983.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230701232554189.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702003656103.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702003812789.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702003849325.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702004006876.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702013945715.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/eq.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702014354229.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702014443293.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzMxMzk4,size_16,color_FFFFFF,t_70-20230702022125233.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/eq-20230702015254133.png">
+<meta property="og:image" content="https://latex.csdn.net/eq?%5Clarge%20Q,%20K">
+<meta property="og:image" content="https://latex.csdn.net/eq?%5Clarge%20A%5ET%20=%20Q%5ETK">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/eq-20230702015431440.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/eq-20230702015450883.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/eq-20230702015440241.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/eq-20230702015450860.png">
+<meta property="og:image" content="https://latex.csdn.net/eq?%5Clarge%20A">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/eq-20230702015450813.png">
+<meta property="og:image" content="https://latex.csdn.net/eq?%5Clarge%20Softmax(A)">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702022049953.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzMxMzk4,size_16,color_FFFFFF,t_70.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzMxMzk4,size_16,color_FFFFFF,t_70-20230702022258178.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702131946888.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/7613b15f43674c298bd4b21fd372b140.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702142706773.png">
+<meta property="article:published_time" content="2023-07-01T05:17:25.000Z">
+<meta property="article:modified_time" content="2023-07-02T07:53:40.126Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="deeplearning">
+<meta property="article:tag" content="TTS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2023/07/01/TTS/image-20230702011848180.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2023/07/01/TTS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>TTS | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/07/01/TTS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TTS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-01 13:17:25" itemprop="dateCreated datePublished" datetime="2023-07-01T13:17:25+08:00">2023-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-02 15:53:40" itemprop="dateModified" datetime="2023-07-02T15:53:40+08:00">2023-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deeplearning/" itemprop="url" rel="index"><span itemprop="name">deeplearning</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">TTS</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="数学知识"><a href="#数学知识" class="headerlink" title="数学知识"></a>数学知识</h3><h4 id="向量内积"><a href="#向量内积" class="headerlink" title="向量内积"></a>向量内积</h4><p><img src="/2023/07/01/TTS/image-20230702011848180.png" alt="image-20230702011848180"></p>
+<h3 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h3><h4 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a><strong>MLP</strong></h4><p> MLP 是多层感知器（Multilayer Perceptron）的缩写，它是一种基本的人工神经网络模型。多层感知器是由一系列的神经元层组成，其中每个神经元层与前一层和后一层的神经元相连接。它是一种前馈神经网络，意味着数据在网络中从输入层向前传递，经过中间隐藏层的计算，并最终产生输出结果。</p>
+<h4 id="batchnorm"><a href="#batchnorm" class="headerlink" title="batchnorm"></a><strong>batchnorm</strong></h4><p><strong>二维输入</strong></p>
+<blockquote>
+<p>  如何将一个向量的均值都变为0,方差变为1? 	答:每一个元素减去向量均值,再除以它的方差</p>
+</blockquote>
+<img src="/2023/07/01/TTS/image-20230702115644197.png" alt="image-20230702115644197" style="zoom:67%;">
+
+<img src="/2023/07/01/TTS/image-20230702120117484.png" alt="image-20230702120117484" style="zoom: 33%;">
+
+<p>λ和β是为了使该列能够调整为任意指定的方差和均值的参数</p>
+<p><strong>三维输入:</strong></p>
+<p><img src="/2023/07/01/TTS/image-20230702130757439.png" alt="image-20230702130757439"></p>
+<h4 id="layernorm"><a href="#layernorm" class="headerlink" title="layernorm"></a><strong>layernorm</strong></h4><p><strong>二维输入:</strong></p>
+<p><img src="/2023/07/01/TTS/image-20230702120623594.png" alt="image-20230702120623594"></p>
+<p>但是在RNN和Transformer中, 输入是3维的, 每个词是一个向量(1), 一个batch(2), 还有时间序列(3)</p>
+<p><strong>三维输入:</strong></p>
+<p><img src="/2023/07/01/TTS/image-20230702131013567.png" alt="image-20230702131013567"></p>
+<h3 id="TTS过程"><a href="#TTS过程" class="headerlink" title="TTS过程"></a>TTS过程</h3><ol>
+<li><p>文本预处理：</p>
+<ul>
+<li>输入：待转换的文本。 <code>&quot;Hello, how are you?&quot;</code></li>
+<li>输出：经过清洗、分词和标注的文本数据。<code> &quot;Hello | comma | how | are | you | question_mark&quot;</code></li>
+</ul>
+</li>
+<li><p>语言模型生成：</p>
+</li>
+</ol>
+<pre><code>-   输入：经过预处理的文本数据。 
+
+-   输出：文本序列的概率分布，表示每个词语或音素的出现概率。
+
+    `&quot;Hello&quot;: 0.2 &quot;comma&quot;: 0.1 &quot;how&quot;: 0.3 &quot;are&quot;: 0.15 &quot;you&quot;: 0.2 &quot;question_mark&quot;: 0.05`
+</code></pre>
+<ol start="3">
+<li><p>声学模型生成声学特征：</p>
+<ul>
+<li>输入：文本序列的概率分布和其他相关信息（如音频采样率、说话人特征）。</li>
+<li>输出：声学特征，通常表示为梅尔频谱特征或其他表示形式。</li>
+</ul>
+</li>
+<li><p>声音生成：</p>
+<ul>
+<li>输入：声学特征和其他控制参数（如音高、音色、语速）。</li>
+<li>输出：合成的声音波形。</li>
+</ul>
+</li>
+<li><p>后处理：</p>
+<ul>
+<li>输入：合成的声音波形。</li>
+<li>输出：经过声音优化和增强处理后的最终声音结果。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h3><p>Word2Vec是一种广泛应用于自然语言处理任务的词嵌入模型，它通过将词语映射到一个高维向量空间中来表示词语的语义信息。Word2Vec模型有两种主要的架构：CBOW（Continuous Bag-of-Words）和Skip-gram。</p>
+<p>CBOW模型的思想是给定上下文窗口内的词语，预测中间目标词语。具体而言，CBOW模型通过将上下文窗口内的词向量求和或平均来获得上下文的表示，然后通过一个浅层神经网络（通常是一个单隐藏层的前馈神经网络）来进行目标词语的预测。CBOW模型更注重上下文的全局信息，适用于训练数据较多、词汇量较大的情况。</p>
+<p>与之相反，Skip-gram模型的思想是给定一个目标词语，预测上下文窗口内的词语。Skip-gram模型通过一个浅层神经网络来将目标词语映射到词向量，然后使用这些词向量来预测目标词语周围的上下文词语。Skip-gram模型更注重捕捉目标词语的局部信息，适用于训练数据较少、词汇量较小的情况。</p>
+<p>无论是CBOW还是Skip-gram，Word2Vec模型的训练过程都是通过最大化预测准确性来优化词向量的表示。具体来说，Word2Vec使用了负采样（negative sampling）或层级softmax（hierarchical softmax）等技术来加速训练过程。一旦训练完成，我们可以使用Word2Vec模型得到每个词语的词向量表示，这些向量可以应用于各种NLP任务，如词语相似度计算、文本分类、情感分析等。</p>
+<p>总结起来，CBOW和Skip-gram是Word2Vec模型的两种不同架构，分别侧重于全局上下文信息和局部上下文信息。它们是将词语映射到向量空间的有效方法，可以在各种自然语言处理任务中发挥作用。</p>
+<h4 id="Word2Vec中的负采样是什么"><a href="#Word2Vec中的负采样是什么" class="headerlink" title="Word2Vec中的负采样是什么"></a>Word2Vec中的负采样是什么</h4><p>在Word2Vec中，负采样（negative sampling）是一种训练技术，用于加速模型的训练过程。它通过减少计算上的复杂性来提高训练效率。</p>
+<p>负采样的核心思想是将词语的预测问题转化为一个二分类问题。具体而言，对于给定的一个中心词语，我们需要从语料库中随机选择一些与该中心词语无关的噪声词语作为负样本（negative samples）。然后，我们将中心词语作为正样本（positive sample），并与负样本一起输入到模型中进行训练，使得模型能够区分正样本和负样本。</p>
+<p>负采样的选择数量是一个超参数，通常在5到20之间。选择的负样本词语应该是根据其频率进行采样，频率越高的词语被选中为负样本的概率越大。这是因为Word2Vec的目标是学习到更好的词语表示，而高频词语在训练中出现的次数更多，因此它们的影响也更大。</p>
+<p>以下是一个负采样的示例：</p>
+<p>假设我们有一个句子：”I love to eat ice cream.”，我们的目标是预测中心词语”eat”。在负采样中，我们需要选择一些噪声词语作为负样本。</p>
+<p>首先，我们需要构建一个词汇表，并计算每个词语的频率。假设词汇表如下：</p>
+<ul>
+<li>I: 5</li>
+<li>love: 2</li>
+<li>to: 3</li>
+<li>eat: 4</li>
+<li>ice: 1</li>
+<li>cream: 1</li>
+</ul>
+<p>接下来，我们需要根据词语的频率进行采样。假设我们选择3个负样本。</p>
+<p>根据词频进行采样后，我们可能得到以下负样本：</p>
+<ul>
+<li>ice</li>
+<li>love</li>
+<li>cream</li>
+</ul>
+<p>然后，我们将中心词语”eat”作为正样本，与负样本一起输入到模型中进行训练，使得模型能够区分正样本和负样本。</p>
+<p>通过负采样，我们可以减少训练中需要计算的目标函数的规模，从而提高训练效率。同时，选择合适的负样本也有助于提高词向量的质量和模型的性能。</p>
+<h4 id="Word2Vec缺点"><a href="#Word2Vec缺点" class="headerlink" title="Word2Vec缺点"></a>Word2Vec缺点</h4><p>无记忆性，若要强行使其具有记忆性，权重参数的数量将会与上下文的大小成比例的增加，造成模型过度庞大。</p>
+<h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><p><img src="/2023/07/01/TTS/image-20230702150109057.png" alt="image-20230702150109057"></p>
+<ul>
+<li><p>现在明确的称之为 “简单RNN” 或者 “Elman”， “RNN”一般指LSTM</p>
+</li>
+<li><p>简单RNN中的BPTT会发生梯度消失或者梯度爆炸的问题，不擅长长期记忆</p>
+<p>梯度消失：y&#x3D;tanh(x)的导数介于0～1之间。这意味着当反向传播的梯度经过tanh节点时，它的值会越来越小</p>
+<p>梯度爆炸：假定从上游传来梯度dh，此时MatMul节点的反向传播通过矩阵乘积 <code>dh *（Wh）转置</code> 计算梯度，该计算会使得梯度的大小随时间步长呈指数级增加或减少。原因是 因为矩阵<code>Wh</code>被反复乘了T次。矩阵<code>Wh</code>的奇异值（更准确的说是多个奇异值中的最大值）是否大于1，可以预测梯度大小的变化</p>
+</li>
+</ul>
+<h3 id="Gated-RNN：LSTM和GRU等"><a href="#Gated-RNN：LSTM和GRU等" class="headerlink" title="Gated RNN：LSTM和GRU等"></a>Gated RNN：LSTM和GRU等</h3><ul>
+<li>简单RNN中的BPTT会发生梯度消失或者梯度爆炸的问题</li>
+<li><strong>梯度裁剪</strong>对解决梯度爆炸有效，<strong>LSTM、GRU</strong>等Gated RNN对解决梯度消失有效，这些层使用门这一机制，能够更好地控制数据和梯度的流动</li>
+<li>LSTM中有三个门：输入门，遗忘门和输出门</li>
+</ul>
+<p><img src="/2023/07/01/TTS/image-20230701182932912.png" alt="image-20230701182932912"></p>
+<img src="/2023/07/01/TTS/image-20230701184216117.png" alt="image-20230701184216117" style="zoom: 67%;">
+
+<img src="/2023/07/01/TTS/image-20230701185128983.png" alt="image-20230701185128983" style="zoom: 50%;">
+
+
+
+
+
+<h3 id="seq2seq"><a href="#seq2seq" class="headerlink" title="seq2seq"></a>seq2seq</h3><p>通过组合两个RNN,可以轻松实现 sequence to sequence, seq2seq可以应用于机器翻译, 聊天机器人和邮件自动回复等</p>
+<p><img src="/2023/07/01/TTS/image-20230701232554189.png" alt="image-20230701232554189"></p>
+<h3 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h3><p>如图 8-18 所示，编码器的输出 hs 被输入到各个时刻的 Attention 层。另外，这里将 LSTM 层的隐藏状态向量输入 Affine 层。根据上一章的解码器的改进，可以说这个扩展非常自然。如图 8-19 所示，我们将 Attention 信息 “添加” 到了上一章的解码器上。</p>
+<p><img src="/2023/07/01/TTS/image-20230702003656103.png" alt="image-20230702003656103"></p>
+<p>在图 8-19 中，上下文向量和隐藏状态向量这两个向量被输入 Affine 层。如前所述，这意味着将这两个向量拼接起来，将拼接后的向量输入 Affine 层。</p>
+<p><img src="/2023/07/01/TTS/image-20230702003812789.png" alt="image-20230702003812789"></p>
+<p>最后，我们将在图 8-18 的时序方向上扩展的多个 Attention 层整体实现为 Time Attention 层，如图 8-20 所示。</p>
+<p><img src="/2023/07/01/TTS/image-20230702003849325.png" alt="image-20230702003849325"></p>
+<p>使用了 Attention 的解码器的层结构如图 8-21 所示</p>
+<p><img src="/2023/07/01/TTS/image-20230702004006876.png" alt="image-20230702004006876"></p>
+<h4 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h4><p>Attention Function:</p>
+<p><img src="/2023/07/01/TTS/image-20230702013945715.png" alt="image-20230702013945715"></p>
+<p>先看以下什么意思</p>
+<p><img src="/2023/07/01/TTS/eq.png" alt="\large Softmax(XX^T)X"></p>
+<p><img src="/2023/07/01/TTS/image-20230702014354229.png" alt="image-20230702014354229"></p>
+<p><code>* X</code>: 这个新的行向量就是”早”字词向量经过注意力机制加权求和之后的表示。</p>
+<p><img src="/2023/07/01/TTS/image-20230702014443293.png" alt="image-20230702014443293"></p>
+<p>引入Q,K,V</p>
+<img src="/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzMxMzk4,size_16,color_FFFFFF,t_70-20230702022125233.png" alt="在这里插入图片描述" style="zoom:50%;">
+
+<p>QKV本质上本质上都是 <strong>X</strong> 的线性变换, 为了提升模型的拟合能力，</p>
+<p><img src="/2023/07/01/TTS/eq-20230702015254133.png" alt="\large \sqrt{d_k}">的意义</p>
+<p>假设 <img src="https://latex.csdn.net/eq?%5Clarge%20Q,%20K" alt="Q, K"> 都服从均值为0，方差为1的标准高斯分布，那么<img src="https://latex.csdn.net/eq?%5Clarge%20A%5ET%20=%20Q%5ETK" alt="A^T = Q^TK">中元素的均值为0，方差为d。当d变得很大时,<img src="/2023/07/01/TTS/eq-20230702015431440.png" alt="\large A">中的元素的方差也会变得很大，如果<img src="/2023/07/01/TTS/eq-20230702015450883.png" alt="\large A">中的元素方差很大. 那么<img src="/2023/07/01/TTS/eq-20230702015440241.png" alt="\large Softmax(A)">的分布会趋于陡峭（分布方差大，分布集中在绝对值大的区域）。总结一下就是<img src="/2023/07/01/TTS/eq-20230702015450860.png" alt="\large Softmax(A)">的分布会和d有关。因此<img src="https://latex.csdn.net/eq?%5Clarge%20A" alt="\large A">中每个元素除以<img src="/2023/07/01/TTS/eq-20230702015450813.png" alt="\large \sqrt{d_k}">后，方差又变为了1。这使得<img src="https://latex.csdn.net/eq?%5Clarge%20Softmax(A)" alt="\large Softmax(A)">的分布的陡峭程度和d成功解耦，从而使得Transformer在训练过程中的梯度值保持稳定。</p>
+<h4 id="Multihead-Attention"><a href="#Multihead-Attention" class="headerlink" title="Multihead-Attention"></a>Multihead-Attention</h4><p><img src="/2023/07/01/TTS/image-20230702022049953.png" alt="image-20230702022049953"></p>
+<img src="/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzMxMzk4,size_16,color_FFFFFF,t_70.png" alt="在这里插入图片描述" style="zoom:50%;">
+
+<p>在得到多个Z向量后，最后一步就是将多个Z需要映射成我们之前的大小 </p>
+<p><img src="/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzMxMzk4,size_16,color_FFFFFF,t_70-20230702022258178.png" alt="在这里插入图片描述"></p>
+<p><img src="/2023/07/01/TTS/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NjE0NjM2,size_16,color_FFFFFF,t_70-20220801020808429.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p>八个头相当于八个不同的表征子空间，类似于apple拥有水果的含义，同时也有商标的含义，不同的含义由不同的表征子空间学习。</p>
+</li>
+<li><p>X是一开始经过Embedding的词向量矩阵，R为之前层输出的，他俩都可以进行Multihead Self Attention</p>
+</li>
+</ul>
+<h3 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h3><h4 id="为何layernorm比batchnorm更好"><a href="#为何layernorm比batchnorm更好" class="headerlink" title="为何layernorm比batchnorm更好?"></a>为何layernorm比batchnorm更好?</h4><p><img src="/2023/07/01/TTS/image-20230702131946888.png" alt="image-20230702131946888"></p>
+<blockquote>
+<p>  为什么Layer不需要全局 ? 因为样本固定，那么norm的形式就是固定的，不会因为分batch不同而反复横跳,每个样本的norm方式就是自己跟自己玩</p>
+</blockquote>
+<p><img src="/2023/07/01/TTS/7613b15f43674c298bd4b21fd372b140.png" alt="img"></p>
+<p><img src="/2023/07/01/TTS/image-20230702142706773.png" alt="image-20230702142706773"></p>
+<h3 id="※-seq2seq-Attention-Transformer的区别和联系"><a href="#※-seq2seq-Attention-Transformer的区别和联系" class="headerlink" title="※ seq2seq,Attention,Transformer的区别和联系"></a>※ seq2seq,Attention,Transformer的区别和联系</h3><p>Seq2seq（Sequence-to-Sequence），Attention，和Transformer是自然语言处理中相关的概念，它们之间存在联系和区别。</p>
+<p>联系：</p>
+<ol>
+<li><p>Seq2seq是一种序列到序列模型，用于处理输入序列和输出序列之间的对应关系。它由编码器（Encoder）和解码器（Decoder）组成，通过将输入序列编码为固定长度的向量表示，然后将该向量解码为目标序列。Attention机制在Seq2seq模型中的应用，允许解码器在生成每个目标序列的位置时，对编码器的不同位置进行加权聚合，从而更好地捕捉输入序列中的重要信息。</p>
+</li>
+<li><p>Attention机制是一种用于加权聚合信息的机制，可以用于提取输入序列中的重要部分。在Seq2seq模型中，Attention机制用于解决长序列处理的问题，使得解码器能够更有效地关注与当前生成位置相关的输入信息。</p>
+</li>
+<li><p>Transformer是一种基于自注意力机制的神经网络模型，用于处理序列数据。Transformer模型的核心思想是通过多层的自注意力机制和前馈神经网络，直接对输入序列和输出序列进行建模，而无需使用传统的循环神经网络（RNN）或卷积神经网络（CNN）。Transformer模型引入了多头注意力机制，使得模型能够同时关注不同位置和不同层次的语义信息。</p>
+</li>
+</ol>
+<p>区别：</p>
+<ol>
+<li><p>Seq2seq是一种序列到序列模型，而Attention和Transformer是其中的组成部分或相关机制。Seq2seq模型可以使用不同的底层网络结构，如循环神经网络（RNN）或Transformer，而Attention和Transformer都可以用于增强Seq2seq模型的性能。</p>
+</li>
+<li><p>Attention机制是一种加权聚合信息的机制，可以用于多种模型和任务中。在Seq2seq模型中，Attention机制解决了长序列处理和对重要信息的关注问题。</p>
+</li>
+<li><p>Transformer是一种基于自注意力机制的模型，不仅仅适用于Seq2seq任务，还可以用于其他自然语言处理任务，如语言模型、文本分类等。Transformer通过引入多头注意力机制，允许模型并行地处理不同层次和不同类型的语义信息，提高了模型的表示能力和效果。</p>
+</li>
+</ol>
+<p>总结来说，Seq2seq是一种序列到序列模型，可以使用Attention机制来增强模型性能。Attention机制是一种加权聚合信息的机制，可以用于多种模型和任务中。Transformer是一种基于自注意力机制的模型，引入了多头注意力机制来提高模型的表示能力和效果。Transformer模型可以作为Seq2seq模型的一种</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/deeplearning/" rel="tag"># deeplearning</a>
+              <a href="/tags/TTS/" rel="tag"># TTS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/24/Linux%E5%86%85%E6%A0%B8%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/" rel="prev" title="Linux内核完全解析">
+      <i class="fa fa-chevron-left"></i> Linux内核完全解析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">数学知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%86%85%E7%A7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">向量内积</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD"><span class="nav-number">2.</span> <span class="nav-text">专业术语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MLP"><span class="nav-number">2.1.</span> <span class="nav-text">MLP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#batchnorm"><span class="nav-number">2.2.</span> <span class="nav-text">batchnorm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layernorm"><span class="nav-number">2.3.</span> <span class="nav-text">layernorm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TTS%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">TTS过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Word2Vec"><span class="nav-number">4.</span> <span class="nav-text">Word2Vec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Word2Vec%E4%B8%AD%E7%9A%84%E8%B4%9F%E9%87%87%E6%A0%B7%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.1.</span> <span class="nav-text">Word2Vec中的负采样是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Word2Vec%E7%BC%BA%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">Word2Vec缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN"><span class="nav-number">5.</span> <span class="nav-text">RNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gated-RNN%EF%BC%9ALSTM%E5%92%8CGRU%E7%AD%89"><span class="nav-number">6.</span> <span class="nav-text">Gated RNN：LSTM和GRU等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seq2seq"><span class="nav-number">7.</span> <span class="nav-text">seq2seq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attention"><span class="nav-number">8.</span> <span class="nav-text">Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Self-Attention"><span class="nav-number">8.1.</span> <span class="nav-text">Self-Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multihead-Attention"><span class="nav-number">8.2.</span> <span class="nav-text">Multihead-Attention</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer"><span class="nav-number">9.</span> <span class="nav-text">Transformer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95layernorm%E6%AF%94batchnorm%E6%9B%B4%E5%A5%BD"><span class="nav-number">9.1.</span> <span class="nav-text">为何layernorm比batchnorm更好?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%BB-seq2seq-Attention-Transformer%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB"><span class="nav-number">10.</span> <span class="nav-text">※ seq2seq,Attention,Transformer的区别和联系</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
