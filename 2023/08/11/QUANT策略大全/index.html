@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="QUANT策略大全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QUANT策略大全">
+<meta property="og:url" content="https://kjgggggg.github.io/2023/08/11/QUANT%E7%AD%96%E7%95%A5%E5%A4%A7%E5%85%A8/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="QUANT策略大全">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2023/08/11/QUANT%E7%AD%96%E7%95%A5%E5%A4%A7%E5%85%A8/image-20230811214453936.png">
+<meta property="article:published_time" content="2023-08-11T13:43:43.000Z">
+<meta property="article:modified_time" content="2023-08-11T14:24:53.266Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="QUANT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2023/08/11/QUANT%E7%AD%96%E7%95%A5%E5%A4%A7%E5%85%A8/image-20230811214453936.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2023/08/11/QUANT%E7%AD%96%E7%95%A5%E5%A4%A7%E5%85%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>QUANT策略大全 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2023/08/11/QUANT%E7%AD%96%E7%95%A5%E5%A4%A7%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QUANT策略大全
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-11 21:43:43 / 修改时间：22:24:53" itemprop="dateCreated datePublished" datetime="2023-08-11T21:43:43+08:00">2023-08-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/QUANT/" itemprop="url" rel="index"><span itemprop="name">QUANT</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">QUANT策略大全</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Overall"><a href="#Overall" class="headerlink" title="Overall"></a>Overall</h3><img src="/2023/08/11/QUANT%E7%AD%96%E7%95%A5%E5%A4%A7%E5%85%A8/image-20230811214453936.png" alt="image-20230811214453936" style="zoom:150%;">
+
+
+
+<h3 id="测度上"><a href="#测度上" class="headerlink" title="测度上"></a>测度上</h3><p><strong>P-Quant &amp; Q-Quant</strong></p>
+<p>对衍生品定价算不算量化？那么对冲基金里面用模型找到的交易策略算不算量化？</p>
+<p>如果都是量化的范畴，那么这两个方面看起来差别特别大。我们很多人在找量化相关的书籍和课程的时候，有些人推荐一定要看《期权期货及其他衍生品》，看过的人知道这本书更多的是讲应该怎样对衍生品定价的。而且很多人听过CQF考试（CQF是Paul Wilmott搞的一个培训课程和认证体系。），但是你搜一搜CQF的内容，会发现它主要讲的是金融衍生品和FICC产品（期权 互换 债券 结构化产品等）定价以及量化风险管理的内容，但是咱们国内听说的量化明明就是指用计算机生成的模型来进行投资交易啊。</p>
+<p>其实这就是P-Quant和Q-Quant之分。</p>
+<p><strong>金融市场的买方（buy-side）和卖方（sell-side）</strong></p>
+<p>要彻底理解两者的区别，我们先来看一个概念：金融市场中的买方和卖方。</p>
+<p>买方，就是金融产品的购买者。</p>
+<p>卖方，则是金融产品的出卖者（也就是销售）。</p>
+<p>比如最简单的股票，上市公司的股票往往是由投行和券商来帮他们吆喝的，他们口若悬河、舌灿莲花，详细介绍公司的业务和未来的成长，目的就是把股票以更高的价格卖出去。金融衍生品交易也是类似的，投资银行和券商主要从事设计开发原始产品以及负责原始产品的销售推广；而共同基金、对冲基金、养老基金、信托公司以及资产管理公司初步充当买方的角色，他们可以从投行或券商那里购买原始产品，然后根据自己对未来市场的预测，配合自己的投资策略，长线持有、或者不断地短线买卖，为投资者获利。</p>
+<p>在这个过程中，卖方有一个很重要的工作就是要为自己吆喝的产品定价，比如我们品职要准备上市了，投行要为品职的股票定价，然后卖出去，衍生品的交易是一样的道理，只不过衍生品的定价会更加复杂一些。</p>
+<p><strong>P-Quant和Q-Quant在买方卖方的应用</strong></p>
+<p>Q-Quant一般应用在卖方，主要就是利用数学模型对复杂的衍生产品进行定价。学过金融的人一定知道，衍生品定价的基本原则是风险中性的定价思路，定价机制还是主要应依据数学模型，比如随机过程、偏微方程，所以由此推导出的定价模型大多充满了学院派气质且理论性十足，显得高深晦涩，一般人好像做不了。</p>
+<p>所以Q-Quant有时候又被我们称为风险中性测度。在“风险中性”的理论假设下，衍生品被确定的价格是完美市场上、是在normal的状态下、是符合正态分布特点的价格。由于 Q-Quant主要背靠数学模型而不依赖历史数据，这意味着即便在数据相对匮乏的情况下，我们也依然可以依据理论凭空开发出一些新的产品，这对金融市场中的卖方而言，绝对是喜闻乐见的。所以以投行和券商为代表的卖方，大多从事衍生品定价，即通过开发和销售新的金融衍生品来实现获利，他们更倚重 Q-Quant所具备的可实现“从无到有”的制造特性。</p>
+<p>如果说 Q-Quant主要是卖方的心头好，那么 P-Quant则是可谓是买方的白月光。P-Quant主要就是根据历史数据去预测未来走势，然后确定交易策略。所以说白了，作为投资者，大家最想学的赚钱策略其实是P-Quant的内容。大家津津乐道的西蒙斯、长期资本管理公司（LTCM）、大本营基金都是P-Quant的高手。</p>
+<p>比如量化策略里最经典的统计套利，就是根据历史数据测算出来两种产品的相关系数，比如美国国债和公司债的收益率在正常市场状态下，相关系数是大于0，但是由于两者之间风险的差别，公司债风险更高，投资者会要求更高的回报，所以公司债相对于国债会有一个利差，比如根据历史数据，历史平均利差是10bp，但是现在市场上利差达到了12bp，那么量化投资者就可以根据这个情况判断目前公司债的收益率很高，那就意味着公司债目前的价格是被低估的，那么他就可以下达买入公司债、卖出国债的指令，而等到利差回复到10bp时，就把头寸平掉，赚取2bp的利差。</p>
+<p>所以P-Quant可以理解成真实概率测度，与“风险中性”不同，在“真实概率”的理论假设下，金融产品的价格预测是根据历史数据而估算出来，而不是仅仅依据数学模型演算出来，也就是说，P-Quant所预测出未来走势主要是以数据统计为基础的，因而是“真实”的，而且数据量越大，预测效果就越可能接近未来的实际效果，也就是所谓的“大数据”（Big Data）。当然历史的车轮越往前发展，累积的数据就越多，为了处理卷帙浩繁的历史数据，我们往往离不开计算机的辅助，所以与 P-Quant相关的产品技术也主要是时间序列、贝叶斯算法、机器学习等与计算机技术密切相关的建模方法。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/QUANT/" rel="tag"># QUANT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/26/2569-%E6%9B%B4%E6%96%B0%E6%95%B0%E7%BB%84%E5%90%8E%E5%A4%84%E7%90%86%E6%B1%82%E5%92%8C%E6%9F%A5%E8%AF%A2/" rel="prev" title="2569.更新数组后处理求和查询">
+      <i class="fa fa-chevron-left"></i> 2569.更新数组后处理求和查询
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overall"><span class="nav-number">1.</span> <span class="nav-text">Overall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E5%BA%A6%E4%B8%8A"><span class="nav-number">2.</span> <span class="nav-text">测度上</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
