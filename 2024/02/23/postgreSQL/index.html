@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="库表设计数据库：cryptoDB行情表：kline_1m 	分区一：日	分区二：[标的名哈希,10]# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; _date          			date_symbol            		varchar(30)_timestamp     			timestamp_open                 	float">
+<meta property="og:type" content="article">
+<meta property="og:title" content="postgreSQL">
+<meta property="og:url" content="https://kjgggggg.github.io/2024/02/23/postgreSQL/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="库表设计数据库：cryptoDB行情表：kline_1m 	分区一：日	分区二：[标的名哈希,10]# &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; _date          			date_symbol            		varchar(30)_timestamp     			timestamp_open                 	float">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-23T06:15:19.000Z">
+<meta property="article:modified_time" content="2024-06-03T03:32:35.427Z">
+<meta property="article:author" content="kjg">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2024/02/23/postgreSQL/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>postgreSQL | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2024/02/23/postgreSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          postgreSQL
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-02-23 14:15:19" itemprop="dateCreated datePublished" datetime="2024-02-23T14:15:19+08:00">2024-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-03 11:32:35" itemprop="dateModified" datetime="2024-06-03T11:32:35+08:00">2024-06-03</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="库表设计"><a href="#库表设计" class="headerlink" title="库表设计"></a>库表设计</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">数据库：cryptoDB</span><br><span class="line">行情表：kline_1m 	分区一：日	分区二：[标的名哈希,<span class="number">10</span>]</span><br><span class="line"><span class="comment"># ====================================== </span></span><br><span class="line">_date          			date</span><br><span class="line">_symbol            		varchar(<span class="number">30</span>)</span><br><span class="line">_timestamp     			timestamp</span><br><span class="line">_<span class="built_in">open</span>                 	float8</span><br><span class="line">_high                 	float8</span><br><span class="line">_low                  	float8</span><br><span class="line">_close                	float8</span><br><span class="line">_vol                  	float8</span><br><span class="line"><span class="comment"># ======================================</span></span><br><span class="line"></span><br><span class="line">数据库：factorDB</span><br><span class="line">日频因子表：fator_1d		分区一：年  分区二：[标的名哈希,<span class="number">10</span>]</span><br><span class="line">因子列表：[市值 marketcap]</span><br><span class="line"><span class="comment"># ======================================</span></span><br><span class="line">_year          			<span class="built_in">int</span></span><br><span class="line">_factor            		varchar(<span class="number">30</span>)</span><br><span class="line">_timestamp     			timestamp </span><br><span class="line">_symbol            		varchar(<span class="number">30</span>)</span><br><span class="line">_val                  	float8</span><br><span class="line"><span class="comment"># ======================================</span></span><br><span class="line"></span><br><span class="line">数据库：factorDB</span><br><span class="line"><span class="number">5</span>分钟频因子表：fator_5m	分区一：日	分区二：[标的名哈希,<span class="number">10</span>]</span><br><span class="line">因子列表：[全局多空比 global_lsr，大户多空比 top_lsr，大户多空持仓比 top_lsr_position，持仓量 open_interest 资费 fundingrate]</span><br><span class="line"><span class="comment"># ======================================</span></span><br><span class="line">_date          			date</span><br><span class="line">_factor            		varchar(<span class="number">30</span>)</span><br><span class="line">_timestamp     			timestamp</span><br><span class="line">_symbol            		varchar(<span class="number">30</span>)</span><br><span class="line">_val                  	float8</span><br><span class="line"><span class="comment"># ======================================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">数据库：optionDB</span><br><span class="line">表：option_data	分区一：日	分区二：[标的名哈希,<span class="number">25</span>]</span><br><span class="line"><span class="comment"># ======================================</span></span><br><span class="line">_date          			date</span><br><span class="line">_symbol            		varchar(<span class="number">30</span>)</span><br><span class="line">_timestamp     			timestamp</span><br><span class="line">_<span class="built_in">type</span>            		varchar(<span class="number">10</span>)</span><br><span class="line">_strike_price           float8</span><br><span class="line">_expiration				timestamp</span><br><span class="line">_open_interest			float8</span><br><span class="line">_last_price				float8</span><br><span class="line">_bid_price				float8</span><br><span class="line">_bid_amount				float8</span><br><span class="line">_bid_iv					float8</span><br><span class="line">_ask_price				float8</span><br><span class="line">_ask_amount				float8</span><br><span class="line">_ask_iv					float8</span><br><span class="line">_mark_price				float8</span><br><span class="line">_mark_iv				float8</span><br><span class="line">_underlying_index		varchar(<span class="number">30</span>)</span><br><span class="line">_underlying_price		float8</span><br><span class="line">_delta					float8</span><br><span class="line">_gamma					float8</span><br><span class="line">_vega					float8</span><br><span class="line">_theta					float8</span><br><span class="line">_rho					float8</span><br><span class="line"><span class="comment"># ======================================</span></span><br><span class="line">exchange,symbol,timestamp,local_timestamp,<span class="built_in">type</span>,strike_price,expiration,open_interest,last_price,bid_price,bid_amount,bid_iv,ask_price,ask_amount,ask_iv,mark_price,mark_iv,underlying_index,underlying_price,delta,gamma,vega,theta,rho</span><br><span class="line">deribit,BTC-27SEP24-<span class="number">160000</span>-P,<span class="number">1704067200027000</span>,<span class="number">1704067200029840</span>,put,<span class="number">160000</span>,<span class="number">1727424000000000</span>,<span class="number">0</span>,<span class="number">2.45</span>,,,,,,,<span class="number">2.4467</span>,<span class="number">75.18</span>,BTC-27SEP24,<span class="number">46593.7</span>,-<span class="number">0.94333</span>,<span class="number">0</span>,<span class="number">45.67483</span>,-<span class="number">6.35109</span>,-<span class="number">1169.77956</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h3><p>查询kline</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">_conn_pool <span class="operator">=</span> connector.init_conn_pool()</span><br><span class="line">_list <span class="operator">=</span> connector.execute_sql(_conn_pool, &quot;&quot;&quot;select * from kline_1m where _symbol=&#x27;BTC/USDT:USDT&#x27;&quot;&quot;&quot;)</span><br><span class="line">df <span class="operator">=</span> pd.DataFrame(_list, columns<span class="operator">=</span>[<span class="string">&#x27;_date&#x27;</span>, <span class="string">&#x27;_symbol&#x27;</span>, <span class="string">&#x27;_timestamp&#x27;</span>, <span class="string">&#x27;_open&#x27;</span>, <span class="string">&#x27;_high&#x27;</span>, <span class="string">&#x27;_low&#x27;</span>, <span class="string">&#x27;_close&#x27;</span>, <span class="string">&#x27;_vol&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>查询5分钟因子</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">_conn_pool <span class="operator">=</span> connector.init_conn_pool(&quot;factordb&quot;)</span><br><span class="line">_list <span class="operator">=</span> connector.execute_sql(_conn_pool, &quot;&quot;&quot;select * from factor_5m where _symbol=&#x27;BTC/USDT:USDT&#x27; order by _timestamp&quot;&quot;&quot;)</span><br><span class="line">df <span class="operator">=</span> pd.DataFrame(_list, columns<span class="operator">=</span>[<span class="string">&#x27;_date&#x27;</span>, <span class="string">&#x27;_factor&#x27;</span>, <span class="string">&#x27;_timestamp&#x27;</span>, <span class="string">&#x27;_symbol&#x27;</span>, <span class="string">&#x27;_val&#x27;</span>,])</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="PS命令行"><a href="#PS命令行" class="headerlink" title="PS命令行"></a>PS命令行</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">连接阿里云数据库：</span><br><span class="line">	ssh Administrator@<span class="number">47.74</span><span class="number">.5</span><span class="number">.152</span></span><br><span class="line">    </span><br><span class="line">拷贝文件至本地：</span><br><span class="line">    scp -r Administrator@<span class="number">47.74</span><span class="number">.5</span><span class="number">.152</span>:C:/Users/Administrator\Desktop\crypto_database\U PERP D:\BackUps\kLines</span><br><span class="line">	scp -r Administrator@<span class="number">47.74</span><span class="number">.5</span><span class="number">.152</span>:<span class="string">&quot;/C:/Users/Administrator/Desktop/crypto_database/U PERP/&quot;</span> <span class="string">&quot;D:/BackUps/kLines/&quot;</span></span><br><span class="line">登录：</span><br><span class="line">	psql -h &lt;主机名&gt; -p &lt;端口号&gt; -U &lt;用户名&gt; -d &lt;数据库名&gt;</span><br><span class="line">	psql -h localhost -p <span class="number">5432</span> -U postgres -d cryptoDB</span><br><span class="line">    </span><br><span class="line">一般性</span><br><span class="line">  \bind [PARAM]...       set query parameters</span><br><span class="line">  \copyright             显示PostgreSQL的使用和发行许可条款</span><br><span class="line">  \crosstabview [COLUMNS] execute query <span class="keyword">and</span> display result in crosstab</span><br><span class="line">  \errverbose            以最冗长的形式显示最近的错误消息</span><br><span class="line">  \g [(OPTIONS)] [FILE]  <span class="function">execute <span class="title">query</span> <span class="params">(<span class="keyword">and</span> send result to file <span class="keyword">or</span> |pipe)</span></span>;</span><br><span class="line">                         \g with no arguments is equivalent to a semicolon</span><br><span class="line">  \gdesc                 描述查询结果，而不执行它</span><br><span class="line">  \gexec                 执行策略，然后执行其结果中的每个值</span><br><span class="line">  \gset [PREFIX]         execute query <span class="keyword">and</span> store result in psql variables</span><br><span class="line">  \gx [(OPTIONS)] [FILE] 就像\g,但强制扩展输出模式</span><br><span class="line">  \q                     退出 psql</span><br><span class="line">  \watch [[i=]SEC] [c=N] execute query every SEC seconds, up to N times</span><br><span class="line"></span><br><span class="line">帮助</span><br><span class="line">  \? [commands]          显示反斜线命令的帮助</span><br><span class="line">  \? options             显示 psql 命令行选项的帮助</span><br><span class="line">  \? variables           显示特殊变量的帮助</span><br><span class="line">  \h [NAME]              SQL命令语法上的说明，用*显示全部命令的语法说明</span><br><span class="line"></span><br><span class="line">查询缓存区</span><br><span class="line">  \e [FILE] [LINE]       使用外部编辑器编辑查询缓存区(或文件)</span><br><span class="line">  \ef [FUNCNAME [LINE]]  使用外部编辑器编辑函数定义</span><br><span class="line">  \ev [VIEWNAME [LINE]]  用外部编辑器编辑视图定义</span><br><span class="line">  \p                     显示查询缓存区的内容</span><br><span class="line">  \r                     重置(清除)查询缓存区</span><br><span class="line">  \w 文件                将查询缓存区的内容写入文件</span><br><span class="line"></span><br><span class="line">输入/输出</span><br><span class="line">  \copy ...              执行 SQL COPY，将数据流发送到客户端主机</span><br><span class="line">  \echo [-n] [STRING]    将字符串写到标准输出(-n表示没有换行符)</span><br><span class="line">  \i 文件                从文件中执行命令</span><br><span class="line">  \ir FILE               与 \i类似, 但是相对于当前脚本的位置</span><br><span class="line">  \o [文件]              将全部查询结果写入文件或 |管道</span><br><span class="line">  \qecho [-n] [STRING]   将字符串写入\o输出流(-n表示无换行)</span><br><span class="line">  \warn [-n] [STRING]    将字符串写入标准错误(-n 表示无换行)</span><br><span class="line"></span><br><span class="line">条件</span><br><span class="line">  \<span class="keyword">if</span> EXPR               开始条件块</span><br><span class="line">  \elif EXPR             当前条件块内的备选方案</span><br><span class="line">  \<span class="keyword">else</span>                  当前条件块内的最终备选方案</span><br><span class="line">  \endif                 条件块的结尾</span><br><span class="line"></span><br><span class="line">资讯性</span><br><span class="line">  (选项: S = 显示系统对象, + = 其余的详细信息)</span><br><span class="line">  \d[S+]                 列出表,视图和序列</span><br><span class="line">  \d[S+]  名称           描述表，视图，序列，或索引</span><br><span class="line">  \da[S]  [模式]         列出聚合函数</span><br><span class="line">  \dA[+]  [模式]         列出访问方法</span><br><span class="line">  \dAc[+] [AMPTRN [TYPEPTRN]]  列出运算符</span><br><span class="line">  \dAf[+] [AMPTRN [TYPEPTRN]]  列出运算符集合</span><br><span class="line">  \dAo[+] [AMPTRN [OPFPTRN]]   列出运算符集合</span><br><span class="line">  \dAp[+] [AMPTRN [OPFPTRN]]   列出运算符集合所支持的功能</span><br><span class="line">  \db[+]  [模式]         列出表空间</span><br><span class="line">  \dc[S+] [模式]         列表转换</span><br><span class="line">  \dconfig[+] [PATTERN]  list configuration parameters</span><br><span class="line">  \dC[+]  [模式]         列出类型强制转换</span><br><span class="line">  \dd[S]  [模式]         显示没有在别处显示的对象描述</span><br><span class="line">  \dD[S+] [模式]         列出共同值域</span><br><span class="line">  \ddp    [模式]         列出默认权限</span><br><span class="line">  \dE[S+] [模式]         列出引用表</span><br><span class="line">  \des[+] [模式]         列出外部服务器</span><br><span class="line">  \det[+] [模式]         列出引用表</span><br><span class="line">  \deu[+] [模式]         列出用户映射</span><br><span class="line">  \dew[+] [模式]         列出外部数据封装器</span><br><span class="line">  \df[anptw][S+] [FUNCPTRN [TYPEPTRN ...]]</span><br><span class="line">                         列出 [only agg/normal/procedure/trigger/window] 函数</span><br><span class="line">  \dF[+]  [模式]         列出文本搜索配置</span><br><span class="line">  \dFd[+] [模式]         列出文本搜索字典</span><br><span class="line">  \dFp[+] [模式]         列出文本搜索解析器</span><br><span class="line">  \dFt[+] [模式]         列出文本搜索模版</span><br><span class="line">  \dg[S+] [模式]         列出角色</span><br><span class="line">  \di[S+] [模式]         列出索引</span><br><span class="line">  \dl[+]                 list large objects, same as \lo_list</span><br><span class="line">  \dL[S+] [模式]         列出所有过程语言</span><br><span class="line">  \dm[S+] [模式]         列出所有物化视图</span><br><span class="line">  \dn[S+] [模式]         列出所有模式</span><br><span class="line">  \<span class="keyword">do</span>[S+] [OPPTRN [TYPEPTRN [TYPEPTRN]]]</span><br><span class="line">                         列出运算符</span><br><span class="line">  \dO[S+] [模式]         列出所有校对规则</span><br><span class="line">  \dp[S]  [PATTERN]      list table, view, <span class="keyword">and</span> sequence access privileges</span><br><span class="line">  \dP[itn+] [PATTERN]    列出[仅表/索引]分区关系[n=nested]</span><br><span class="line">  \drds [ROLEPTRN [DBPTRN]] list per-database role settings</span><br><span class="line">  \drg[S] [PATTERN]      list role grants</span><br><span class="line">  \dRp[+] [模式]         列出复制发布</span><br><span class="line">  \dRs[+] [模式]         列出复制订阅</span><br><span class="line">  \ds[S+] [模式]         列出序列</span><br><span class="line">  \dt[S+] [模式]         列出表</span><br><span class="line">  \dT[S+] [模式]         列出数据类型</span><br><span class="line">  \du[S+] [模式]         列出角色</span><br><span class="line">  \dv[S+] [模式]         列出视图</span><br><span class="line">  \dx[+]  [模式]         列出扩展</span><br><span class="line">  \dX     [PATTERN]      列出扩展统计信息</span><br><span class="line">  \dy[+]  [PATTERN]      列出所有事件触发器</span><br><span class="line">  \l[+]   [模式]         列出所有数据库</span><br><span class="line">  \sf[+]  FUNCNAME       显示一个函数的定义</span><br><span class="line">  \sv[+]  VIEWNAME       显示一个视图的定义</span><br><span class="line">  \z[S]   [PATTERN]      same as \dp</span><br><span class="line"></span><br><span class="line">大对象</span><br><span class="line">  \lo_export LOBOID FILE write large object to file</span><br><span class="line">  \lo_import FILE [COMMENT]</span><br><span class="line">                         read large object from file</span><br><span class="line">  \lo_list[+]            list large objects</span><br><span class="line">  \lo_unlink LOBOID      <span class="keyword">delete</span> a large object</span><br><span class="line"></span><br><span class="line">格式化</span><br><span class="line">  \a                     在非对齐模式和对齐模式之间切换</span><br><span class="line">  \C [字符串]            设置表的标题，或如果没有的标题就取消</span><br><span class="line">  \f [字符串]            显示或设定非对齐模式查询输出的字段分隔符</span><br><span class="line">  \H                     切换HTML输出模式 (目前是 关闭)</span><br><span class="line">  \pset [NAME [VALUE]]   设置表输出选项</span><br><span class="line">                         (border|columns|csv_fieldsep|expanded|fieldsep|</span><br><span class="line">                         fieldsep_zero|footer|format|linestyle|null|</span><br><span class="line">                         numericlocale|pager|pager_min_lines|recordsep|</span><br><span class="line">                         recordsep_zero|tableattr|title|tuples_only|</span><br><span class="line">                         unicode_border_linestyle|unicode_column_linestyle|</span><br><span class="line">                         unicode_header_linestyle</span><br><span class="line">  \t [开|关]             只显示记录 (目前是关闭)</span><br><span class="line">  \T [字符串]            设置HTML &lt;表格&gt;标签属性, 或者如果没有的话取消设置</span><br><span class="line">  \x [on|off|<span class="keyword">auto</span>]       切换扩展输出模式(目前是 关闭)</span><br><span class="line"></span><br><span class="line">连接</span><br><span class="line">  \c[onnect] &#123;[DBNAME|- USER|- HOST|- PORT|-] | conninfo&#125;</span><br><span class="line">                         连接到新数据库（当前是<span class="string">&quot;postgres&quot;</span>）</span><br><span class="line">  \conninfo              显示当前连接的相关信息</span><br><span class="line">  \encoding [编码名称]   显示或设定客户端编码</span><br><span class="line">  \password [USERNAME]   安全地为用户更改口令</span><br><span class="line"></span><br><span class="line">操作系统</span><br><span class="line">  \cd [目录]             更改目前的工作目录</span><br><span class="line">  \getenv PSQLVAR ENVVAR fetch environment variable</span><br><span class="line">  \setenv NAME [VALUE]   设置或清空环境变量</span><br><span class="line">  \timing [开|关]        切换命令计时开关 (目前是关闭)</span><br><span class="line">  \! [命令]              在 shell中执行命令或启动一个交互式shell</span><br><span class="line"></span><br><span class="line">变量</span><br><span class="line">  \prompt [文本] 名称    提示用户设定内部变量</span><br><span class="line">  \set [名称 [值数]]     设定内部变量，若无参数则列出全部变量</span><br><span class="line">  \unset 名称            清空(删除)内部变量</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="批量写入"><a href="#批量写入" class="headerlink" title="批量写入"></a>批量写入</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> psycopg2</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 连接到 PostgreSQL 数据库</span></span><br><span class="line">conn = psycopg2.connect(database=<span class="string">&quot;your_db&quot;</span>, user=<span class="string">&quot;your_user&quot;</span>, password=<span class="string">&quot;your_password&quot;</span>, host=<span class="string">&quot;localhost&quot;</span>, port=<span class="string">&quot;5432&quot;</span>)</span><br><span class="line">cur = conn.cursor()</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 定义要插入的数据</span></span><br><span class="line">data = [(<span class="string">&#x27;value1&#x27;</span>, <span class="string">&#x27;value2&#x27;</span>), (<span class="string">&#x27;value3&#x27;</span>, <span class="string">&#x27;value4&#x27;</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 开始事务</span></span><br><span class="line">    cur.execute(<span class="string">&quot;BEGIN TRANSACTION;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 构建 INSERT INTO 语句并执行</span></span><br><span class="line">    query = <span class="string">&quot;INSERT INTO target_table (column1, column2) VALUES %s;&quot;</span></span><br><span class="line">    execute_values(query, data, page_size=<span class="number">1000</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 提交事务</span></span><br><span class="line">    cur.execute(<span class="string">&quot;COMMIT;&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Error occurred during batch insertion: &quot;</span>, <span class="built_in">str</span>(e))</span><br><span class="line">    <span class="comment"># 如果发生错误则回滚事务</span></span><br><span class="line">    cur.execute(<span class="string">&quot;ROLLBACK;&quot;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="comment"># 关闭数据库连接</span></span><br><span class="line">    cur.close()</span><br><span class="line">    conn.close()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="建库表备份"><a href="#建库表备份" class="headerlink" title="(建库表备份)"></a>(建库表备份)</h3><ul>
+<li>cryptodb  kline_1m</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> kline_1m (</span><br><span class="line">    _date <span class="type">DATE</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _symbol <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _timestamp <span class="type">timestamp</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _open float8,</span><br><span class="line">    _high float8,</span><br><span class="line">    _low float8,</span><br><span class="line">    _close float8,</span><br><span class="line">    _vol float8</span><br><span class="line">) <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (_date);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DO $$</span><br><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  start_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2019-01-01&#x27;</span>;</span><br><span class="line">  end_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2026-01-01&#x27;</span>;</span><br><span class="line">  cur_date <span class="type">DATE</span> :<span class="operator">=</span> start_date; <span class="comment">-- 将 current_date 改为 cur_date</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  WHILE cur_date <span class="operator">&lt;</span> end_date LOOP</span><br><span class="line">    <span class="comment">-- 创建每日的分区</span></span><br><span class="line">    <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE kline_1m_%s PARTITION OF kline_1m FOR VALUES FROM (%L) TO (%L) PARTITION BY HASH (_symbol);&#x27;</span>,</span><br><span class="line">                   to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>),</span><br><span class="line">                   cur_date,</span><br><span class="line">                   cur_date <span class="operator">+</span> <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">-- 为每日的分区创建哈希子分区</span></span><br><span class="line">    <span class="keyword">FOR</span> i <span class="keyword">IN</span> <span class="number">0.</span><span class="number">.9</span> LOOP</span><br><span class="line">      <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE kline_1m_%s_symbol_%s PARTITION OF kline_1m_%s FOR VALUES WITH (MODULUS 10, REMAINDER %s);&#x27;</span>,</span><br><span class="line">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i,</span><br><span class="line">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i);</span><br><span class="line">    <span class="keyword">END</span> LOOP;</span><br><span class="line">    </span><br><span class="line">    cur_date :<span class="operator">=</span> cur_date <span class="operator">+</span> <span class="number">1</span>; <span class="comment">-- 同样将 current_date 改为 cur_date</span></span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line"><span class="keyword">END</span> $$;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> relname, pg_get_expr(relpartbound, oid)</span><br><span class="line"><span class="keyword">FROM</span> pg_class</span><br><span class="line"><span class="keyword">WHERE</span> relpartbound <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>factordb factor_5m</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> factor_5m (</span><br><span class="line">    _date <span class="type">DATE</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _factor <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _timestamp <span class="type">timestamp</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _symbol <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _val float8,</span><br><span class="line">) <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (_date);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DO $$</span><br><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  start_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2023-01-01&#x27;</span>;</span><br><span class="line">  end_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2026-01-01&#x27;</span>;</span><br><span class="line">  cur_date <span class="type">DATE</span> :<span class="operator">=</span> start_date; </span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  WHILE cur_date <span class="operator">&lt;</span> end_date LOOP</span><br><span class="line">    <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE factor_5m_%s PARTITION OF factor_5m FOR VALUES FROM (%L) TO (%L) PARTITION BY HASH (_symbol);&#x27;</span>,</span><br><span class="line">                   to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>),</span><br><span class="line">                   cur_date,</span><br><span class="line">                   cur_date <span class="operator">+</span> <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">-- 为每日的分区创建哈希子分区</span></span><br><span class="line">    <span class="keyword">FOR</span> i <span class="keyword">IN</span> <span class="number">0.</span><span class="number">.9</span> LOOP</span><br><span class="line">      <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE factor_5m_%s_symbol_%s PARTITION OF factor_5m_%s FOR VALUES WITH (MODULUS 10, REMAINDER %s);&#x27;</span>,</span><br><span class="line">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i,</span><br><span class="line">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i);</span><br><span class="line">    <span class="keyword">END</span> LOOP;</span><br><span class="line">    </span><br><span class="line">    cur_date :<span class="operator">=</span> cur_date <span class="operator">+</span> <span class="number">1</span>; <span class="comment">-- 同样将 current_date 改为 cur_date</span></span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line"><span class="keyword">END</span> $$;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>factordb factor_1d</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> factor_1d (</span><br><span class="line">    _year int2 <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _factor <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _timestamp <span class="type">timestamp</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _symbol <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _val float8,</span><br><span class="line">) <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (_year);</span><br><span class="line"></span><br><span class="line">DO $$</span><br><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  start_year <span class="type">INT</span> :<span class="operator">=</span> <span class="number">2019</span>;</span><br><span class="line">  end_year <span class="type">INT</span> :<span class="operator">=</span> <span class="number">2026</span>;</span><br><span class="line">  cur_year <span class="type">INT</span> :<span class="operator">=</span> start_year;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  WHILE cur_year <span class="operator">&lt;=</span> end_year LOOP</span><br><span class="line">    <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE factor_1d_%s PARTITION OF factor_1d FOR VALUES FROM (%L) TO (%L) PARTITION BY HASH (_symbol);&#x27;</span>,</span><br><span class="line">                   cur_year, <span class="comment">-- 直接使用年份</span></span><br><span class="line">                   cur_year,</span><br><span class="line">                   cur_year <span class="operator">+</span> <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">-- 为每年的分区创建哈希子分区</span></span><br><span class="line">    <span class="keyword">FOR</span> i <span class="keyword">IN</span> <span class="number">0.</span><span class="number">.9</span> LOOP</span><br><span class="line">      <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE factor_1d_%s_symbol_%s PARTITION OF factor_1d_%s FOR VALUES WITH (MODULUS 10, REMAINDER %s);&#x27;</span>,</span><br><span class="line">                     cur_year, i, <span class="comment">-- 直接使用年份</span></span><br><span class="line">                     cur_year, i);</span><br><span class="line">    <span class="keyword">END</span> LOOP;</span><br><span class="line">    </span><br><span class="line">    cur_year :<span class="operator">=</span> cur_year <span class="operator">+</span> <span class="number">1</span>; <span class="comment">-- 将年份加1</span></span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line"><span class="keyword">END</span> $$;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>optiondb option_data</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> option_data (</span><br><span class="line">    _date <span class="type">date</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _symbol <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    _timestamp <span class="type">timestamp</span>,</span><br><span class="line">    _type <span class="type">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line">    _strike_price float8,</span><br><span class="line">	_expiration <span class="type">timestamp</span>,</span><br><span class="line">    _open_interest float8,</span><br><span class="line">    _last_price	float8,</span><br><span class="line">    _bid_price float8,</span><br><span class="line">    _bid_amount float8,</span><br><span class="line">    _bid_iv float8,</span><br><span class="line">    _ask_price float8,</span><br><span class="line">    _ask_amount float8,</span><br><span class="line">    _ask_iv	float8,</span><br><span class="line">    _mark_price	float8,</span><br><span class="line">    _mark_iv float8,</span><br><span class="line">    _underlying_index <span class="type">VARCHAR</span>(<span class="number">30</span>),</span><br><span class="line">    _underlying_price float8,</span><br><span class="line">    _delta float8,</span><br><span class="line">    _gamma float8,</span><br><span class="line">    _vega float8,</span><br><span class="line">    _theta float8,</span><br><span class="line">    _rho float8,</span><br><span class="line">) <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (_date);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DO $$</span><br><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  start_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2023-01-01&#x27;</span>;</span><br><span class="line">  end_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2026-01-01&#x27;</span>;</span><br><span class="line">  cur_date <span class="type">DATE</span> :<span class="operator">=</span> start_date; </span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  WHILE cur_date <span class="operator">&lt;</span> end_date LOOP</span><br><span class="line">    <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE option_data_%s PARTITION OF option_data FOR VALUES FROM (%L) TO (%L) PARTITION BY HASH (_symbol);&#x27;</span>,</span><br><span class="line">                   to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>),</span><br><span class="line">                   cur_date,</span><br><span class="line">                   cur_date <span class="operator">+</span> <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">-- 为每日的分区创建哈希子分区</span></span><br><span class="line">    <span class="keyword">FOR</span> i <span class="keyword">IN</span> <span class="number">0.</span><span class="number">.24</span> LOOP</span><br><span class="line">      <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;CREATE TABLE option_data_%s_symbol_%s PARTITION OF option_data_%s FOR VALUES WITH (MODULUS 25, REMAINDER %s);&#x27;</span>,</span><br><span class="line">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i,</span><br><span class="line">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i);</span><br><span class="line">    <span class="keyword">END</span> LOOP;</span><br><span class="line">    </span><br><span class="line">    cur_date :<span class="operator">=</span> cur_date <span class="operator">+</span> <span class="number">1</span>; <span class="comment">-- 同样将 current_date 改为 cur_date</span></span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line"><span class="keyword">END</span> $$;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>factordb factor_1m</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">CREATE TABLE <span class="title">factor_1m</span> <span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    _date DATE NOT <span class="literal">NULL</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    _factor VARCHAR(<span class="number">30</span>) NOT <span class="literal">NULL</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    _timestamp timestamp NOT <span class="literal">NULL</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    _symbol VARCHAR(<span class="number">30</span>) NOT <span class="literal">NULL</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    _val float8,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span> PARTITION BY <span class="title">RANGE</span> <span class="params">(_date)</span></span>;</span><br><span class="line"></span><br><span class="line">DO $$</span><br><span class="line">DECLARE</span><br><span class="line">  start_date DATE := <span class="string">&#x27;2023-01-01&#x27;</span>;</span><br><span class="line">  end_date DATE := <span class="string">&#x27;2026-01-01&#x27;</span>;</span><br><span class="line">  cur_date DATE := start_date; </span><br><span class="line">BEGIN</span><br><span class="line">  WHILE cur_date &lt; <span class="function">end_date LOOP</span></span><br><span class="line"><span class="function">    EXECUTE <span class="title">format</span><span class="params">(<span class="string">&#x27;CREATE TABLE factor_1m_%s PARTITION OF factor_1m FOR VALUES FROM (%L) TO (%L) PARTITION BY HASH (_symbol);&#x27;</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                   to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">                   cur_date,</span></span></span><br><span class="line"><span class="params"><span class="function">                   cur_date + <span class="number">1</span>)</span></span>;</span><br><span class="line">   </span><br><span class="line">    FOR i IN <span class="number">0.</span><span class="number">.9</span> <span class="function">LOOP</span></span><br><span class="line"><span class="function">      EXECUTE <span class="title">format</span><span class="params">(<span class="string">&#x27;CREATE TABLE factor_1m_%s_symbol_%s PARTITION OF factor_1m_%s FOR VALUES WITH (MODULUS 10, REMAINDER %s);&#x27;</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i,</span></span></span><br><span class="line"><span class="params"><span class="function">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i)</span></span>;</span><br><span class="line">    END LOOP;</span><br><span class="line">    </span><br><span class="line">    cur_date := cur_date + <span class="number">1</span>; </span><br><span class="line">  END LOOP;</span><br><span class="line">END $$;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> gplearn <span class="keyword">import</span> fitness</span><br><span class="line"><span class="comment"># 数据集</span></span><br><span class="line"><span class="keyword">from</span> gplearn.genetic <span class="keyword">import</span> SymbolicRegressor</span><br><span class="line"></span><br><span class="line">train_data = pd.read_csv(<span class="string">&#x27;../data/IC_train.csv&#x27;</span>, index_col=<span class="number">0</span>, parse_dates=[<span class="number">0</span>])</span><br><span class="line">test_data = pd.read_csv(<span class="string">&#x27;../data/IC_test.csv&#x27;</span>, index_col=<span class="number">0</span>, parse_dates=[<span class="number">0</span>])</span><br><span class="line">feature_names = <span class="built_in">list</span>(train_data.columns)</span><br><span class="line">train_data.loc[:, <span class="string">&#x27;y&#x27;</span>] = np.log(train_data[<span class="string">&#x27;Close&#x27;</span>].shift(-<span class="number">4</span>) / train_data[<span class="string">&#x27;Close&#x27;</span>])</span><br><span class="line">train_data.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> examples.backtest <span class="keyword">import</span> BackTester</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SymbolicTestor</span>(<span class="title class_ inherited__">BackTester</span>):  <span class="comment"># 回测的设定</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init</span>(<span class="params">self</span>):</span><br><span class="line">        self.params = &#123;<span class="string">&#x27;factor&#x27;</span>: pd.Series&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">    @BackTester.process_strategy</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run_</span>(<span class="params">self, *args, **kwargs</span>) -&gt; <span class="built_in">dict</span>[<span class="built_in">str</span>: <span class="built_in">int</span>]:</span><br><span class="line">        factor = np.array(self.params[<span class="string">&#x27;factor&#x27;</span>])</span><br><span class="line">        long_cond = factor &gt; <span class="number">0</span></span><br><span class="line">        short_cond = factor &lt; <span class="number">0</span></span><br><span class="line">        self.backtest_env[<span class="string">&#x27;signal&#x27;</span>] = np.where(long_cond, <span class="number">1</span>, np.where(short_cond, -<span class="number">1</span>, np.nan))</span><br><span class="line">        self.construct_position_(keep_raw=<span class="literal">True</span>, max_holding_period=<span class="number">1200</span>, take_profit=<span class="literal">None</span>, stop_loss=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回测环境（适应度函数）</span></span><br><span class="line">comm = [<span class="number">0</span> / <span class="number">10000</span>, <span class="number">0</span> / <span class="number">10000</span>]  <span class="comment"># 买卖费率</span></span><br><span class="line">bt = SymbolicTestor(train_data, transact_base=<span class="string">&#x27;PreClose&#x27;</span>, commissions=(comm[<span class="number">0</span>], comm[<span class="number">1</span>]))  <span class="comment"># 加载数据，根据Close成交,comm是买-卖</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">score_func_basic</span>(<span class="params">y, y_pred, sample_weight</span>):  <span class="comment"># 因子评价指标</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        _ = bt.run_(factor=y_pred)</span><br><span class="line">        factor_ret = _[<span class="string">&#x27;annualized_mean&#x27;</span>]/_[<span class="string">&#x27;max_drawdown&#x27;</span>] <span class="keyword">if</span> _[<span class="string">&#x27;max_drawdown&#x27;</span>] != <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span> <span class="comment"># 可以把max_drawdown换成annualized_std</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        factor_ret = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> factor_ret</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_gplearn</span>(<span class="params">function_set, my_fitness, pop_num=<span class="number">100</span>, gen_num=<span class="number">3</span>, tour_num=<span class="number">10</span>, random_state = <span class="number">42</span>, feature_names=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># pop_num, gen_num, tour_num的几个可选值：500, 5, 50; 1000, 3, 20; 1000, 15, 100</span></span><br><span class="line">    metric = fitness.make_fitness(function=my_fitness, <span class="comment"># function(y, y_pred, sample_weight) that returns a floating point number.</span></span><br><span class="line">                        greater_is_better=<span class="literal">True</span>,  <span class="comment"># 上述y是输入的目标y向量，y_pred是genetic program中的预测值，sample_weight是样本权重向量</span></span><br><span class="line">                        wrap=<span class="literal">False</span>)  <span class="comment"># 不保存，运行的更快 # gplearn.fitness.make_fitness(function, greater_is_better, wrap=True)</span></span><br><span class="line">    <span class="keyword">return</span> SymbolicRegressor(population_size=pop_num,  <span class="comment"># 每一代公式群体中的公式数量 500，100</span></span><br><span class="line">                              generations=gen_num,  <span class="comment"># 公式进化的世代数量 10，3</span></span><br><span class="line">                              metric=metric,  <span class="comment"># 适应度指标，这里是前述定义的通过 大于0做多，小于0做空的 累积净值/最大回撤 的评判函数</span></span><br><span class="line">                              tournament_size=tour_num,  <span class="comment"># 在每一代公式中选中tournament的规模，对适应度最高的公式进行变异或繁殖 50</span></span><br><span class="line">                              function_set=function_set,</span><br><span class="line">                              const_range=(-<span class="number">1.0</span>, <span class="number">1.0</span>),  <span class="comment"># 公式中包含的常数范围</span></span><br><span class="line">                              parsimony_coefficient=<span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">                              <span class="comment"># 对较大树的惩罚,默认0.001，auto则用c = Cov(l,f)/Var( l), where Cov(l,f) is the covariance between program size l and program fitness f in the population, and Var(l) is the variance of program sizes.</span></span><br><span class="line">                              stopping_criteria=<span class="number">100.0</span>,  <span class="comment"># 是对metric的限制（此处为收益/回撤）</span></span><br><span class="line">                              init_depth=(<span class="number">2</span>, <span class="number">3</span>),  <span class="comment"># 公式树的初始化深度，树深度最小2层，最大6层</span></span><br><span class="line">                              init_method=<span class="string">&#x27;half and half&#x27;</span>,  <span class="comment"># 树的形状，grow生分枝整的不对称，full长出浓密</span></span><br><span class="line">                              p_crossover=<span class="number">0.8</span>,  <span class="comment"># 交叉变异概率 0.8</span></span><br><span class="line">                              p_subtree_mutation=<span class="number">0.05</span>,  <span class="comment"># 子树变异概率</span></span><br><span class="line">                              p_hoist_mutation=<span class="number">0.05</span>,  <span class="comment"># hoist变异概率 0.15</span></span><br><span class="line">                              p_point_mutation=<span class="number">0.05</span>,  <span class="comment"># 点变异概率</span></span><br><span class="line">                              p_point_replace=<span class="number">0.05</span>,  <span class="comment"># 点变异中每个节点进行变异进化的概率</span></span><br><span class="line">                              max_samples=<span class="number">1.0</span>,  <span class="comment"># The fraction of samples to draw from X to evaluate each program on.</span></span><br><span class="line">                              feature_names=feature_names, warm_start=<span class="literal">False</span>, low_memory=<span class="literal">False</span>,</span><br><span class="line">                              n_jobs=<span class="number">1</span>,</span><br><span class="line">                              verbose=<span class="number">1</span>,</span><br><span class="line">                              random_state=random_state)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数集</span></span><br><span class="line">function_set=[<span class="string">&#x27;add&#x27;</span>, <span class="string">&#x27;sub&#x27;</span>, <span class="string">&#x27;mul&#x27;</span>, <span class="string">&#x27;div&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>, <span class="string">&#x27;log&#x27;</span>,  <span class="comment"># 用于构建和进化公式使用的函数集</span></span><br><span class="line">                    <span class="string">&#x27;abs&#x27;</span>, <span class="string">&#x27;neg&#x27;</span>, <span class="string">&#x27;inv&#x27;</span>, <span class="string">&#x27;sin&#x27;</span>, <span class="string">&#x27;cos&#x27;</span>, <span class="string">&#x27;tan&#x27;</span>, <span class="string">&#x27;max&#x27;</span>, <span class="string">&#x27;min&#x27;</span>,</span><br><span class="line">                    <span class="comment"># &#x27;if&#x27;, &#x27;gtpn&#x27;, &#x27;andpn&#x27;, &#x27;orpn&#x27;, &#x27;ltpn&#x27;, &#x27;gtp&#x27;, &#x27;andp&#x27;, &#x27;orp&#x27;, &#x27;ltp&#x27;, &#x27;gtn&#x27;, &#x27;andn&#x27;, &#x27;orn&#x27;, &#x27;ltn&#x27;, &#x27;delayy&#x27;, &#x27;delta&#x27;, &#x27;signedpower&#x27;, &#x27;decayl&#x27;, &#x27;stdd&#x27;, &#x27;rankk&#x27;</span></span><br><span class="line">                    ] <span class="comment"># 最后一行是自己的函数，目前不用自己函数效果更好</span></span><br><span class="line"></span><br><span class="line">my_cmodel_gp = my_gplearn(function_set, score_func_basic, random_state=<span class="number">0</span>,</span><br><span class="line">                          feature_names=feature_names)  <span class="comment"># 可以通过换random_state来生成不同因子</span></span><br><span class="line">my_cmodel_gp.fit(train_data.loc[:, :<span class="string">&#x27;rank_num&#x27;</span>].values, train_data.loc[:, <span class="string">&#x27;y&#x27;</span>].values)</span><br><span class="line"><span class="built_in">print</span>(my_cmodel_gp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 策略结果</span></span><br><span class="line">factor = my_cmodel_gp.predict(test_data.values)</span><br><span class="line">bt_test = SymbolicTestor(test_data, transact_base=<span class="string">&#x27;PreClose&#x27;</span>, commissions=(comm[<span class="number">0</span>], comm[<span class="number">1</span>]))  <span class="comment"># 加载数据，根据Close成交,comm是买-卖</span></span><br><span class="line">bt_test.run_(factor=factor)</span><br><span class="line">md = bt_test.summary()</span><br><span class="line"><span class="built_in">print</span>(md.out_stats)</span><br><span class="line"><span class="built_in">print</span>(bt.fees_factor)</span><br><span class="line">md.plot_(comm=comm, show_bool=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li>获取所有分区表</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    pg_class.relname <span class="keyword">AS</span> partition_table_name</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">    pg_inherits</span><br><span class="line"><span class="keyword">JOIN</span> </span><br><span class="line">    pg_class <span class="keyword">ON</span> pg_inherits.inhrelid <span class="operator">=</span> pg_class.oid</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    pg_inherits.inhparent <span class="operator">=</span> <span class="string">&#x27;option_data&#x27;</span>::regclass;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建表空间</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>space pg_2 owner postgres location <span class="string">&#x27;G:\DevTools\PostgreSQL\16\data&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>批量更换表空间</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">DO $$</span><br><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">  start_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2021-01-01&#x27;</span>;</span><br><span class="line">  end_date <span class="type">DATE</span> :<span class="operator">=</span> <span class="string">&#x27;2023-01-01&#x27;</span>;</span><br><span class="line">  cur_date <span class="type">DATE</span> :<span class="operator">=</span> start_date; </span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  WHILE cur_date <span class="operator">&lt;</span> end_date LOOP    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">FOR</span> i <span class="keyword">IN</span> <span class="number">0.</span><span class="number">.24</span> LOOP</span><br><span class="line">      <span class="keyword">EXECUTE</span> format(<span class="string">&#x27;ALTER TABLE option_data_%s_symbol_%s SET TABLESPACE database_2;&#x27;</span>,</span><br><span class="line">                     to_char(cur_date, <span class="string">&#x27;YYYYMMDD&#x27;</span>), i);</span><br><span class="line">    <span class="keyword">END</span> LOOP;</span><br><span class="line">    </span><br><span class="line">    cur_date :<span class="operator">=</span> cur_date <span class="operator">+</span> <span class="number">1</span>; </span><br><span class="line">  <span class="keyword">END</span> LOOP;</span><br><span class="line"><span class="keyword">END</span> $$;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加索引</li>
+</ul>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">navicat -&gt; 字段 -&gt; 索引 -&gt; 添加索引 -&gt;  名：idx_timestamp  字段：_timestamp  索引方法：B-Tree</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/03/%E6%9C%9F%E6%9D%83/" rel="prev" title="期权">
+      <i class="fa fa-chevron-left"></i> 期权
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/" rel="next" title="AI多因子框架">
+      AI多因子框架 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">库表设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">接口设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">PS命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5"><span class="nav-number">4.</span> <span class="nav-text">批量写入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E5%BA%93%E8%A1%A8%E5%A4%87%E4%BB%BD"><span class="nav-number">5.</span> <span class="nav-text">(建库表备份)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">函数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>

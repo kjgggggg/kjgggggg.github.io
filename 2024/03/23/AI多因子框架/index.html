@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="AI名词解释激活函数 训练方式 监督学习（Supervised Learning）：监督学习是一种机器学习方法，其中算法通过学习从输入数据到输出数据的映射关系，从而对给定的输入数据进行预测或分类。在监督学习中，训练数据集包含了输入和对应的输出标签，模型通过学习这些数据对输入进行预测。常见的监督学习任务包括分类和回归。 无监督学习（Unsupervised Learning）：无监督学习是一种机器学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI多因子框架">
+<meta property="og:url" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="AI名词解释激活函数 训练方式 监督学习（Supervised Learning）：监督学习是一种机器学习方法，其中算法通过学习从输入数据到输出数据的映射关系，从而对给定的输入数据进行预测或分类。在监督学习中，训练数据集包含了输入和对应的输出标签，模型通过学习这些数据对输入进行预测。常见的监督学习任务包括分类和回归。 无监督学习（Unsupervised Learning）：无监督学习是一种机器学">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324192957319.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324193143565.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324194951018.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324195914419.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324200229670.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324200359441.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324200623429.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240325154545403.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240402222104246.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240402222143935.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240403002246407.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240402222306745.png">
+<meta property="article:published_time" content="2024-03-23T08:36:38.000Z">
+<meta property="article:modified_time" content="2024-04-02T16:23:05.259Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="AI多因子框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324192957319.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>AI多因子框架 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI多因子框架
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-23 16:36:38" itemprop="dateCreated datePublished" datetime="2024-03-23T16:36:38+08:00">2024-03-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-03 00:23:05" itemprop="dateModified" datetime="2024-04-03T00:23:05+08:00">2024-04-03</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="AI名词解释"><a href="#AI名词解释" class="headerlink" title="AI名词解释"></a>AI名词解释</h3><h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h4><p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324192957319.png" alt="image-20240324192957319"></p>
+<h4 id="训练方式"><a href="#训练方式" class="headerlink" title="训练方式"></a>训练方式</h4><ul>
+<li><strong>监督学习（Supervised Learning）</strong>：监督学习是一种机器学习方法，其中算法通过学习从输入数据到输出数据的映射关系，从而对给定的输入数据进行预测或分类。在监督学习中，训练数据集包含了输入和对应的输出标签，模型通过学习这些数据对输入进行预测。常见的监督学习任务包括分类和回归。</li>
+<li><strong>无监督学习（Unsupervised Learning）</strong>：无监督学习是一种机器学习方法，其中算法从未标记的数据中学习数据的结构和模式，而无需提供标签或目标输出。在无监督学习中，算法试图发现数据中的隐藏结构或组织，以便对数据进行更深入的理解。常见的无监督学习任务包括聚类、降维和关联规则挖掘。</li>
+<li><strong>强化学习（Reinforcement Learning）</strong>：强化学习是一种机器学习方法，其中智能体通过与环境进行交互，学习如何采取行动以达到最大化累积奖励的目标。在强化学习中，智能体在与环境交互的过程中不断尝试并学习哪些行动能够获得更多的奖励，从而逐步改进其策略。与监督学习和无监督学习不同，强化学习的反馈通常是延迟的，并且通常是稀疏的。强化学习常用于解决需要决策制定的问题，如游戏、机器人控制和金融交易。</li>
+</ul>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324193143565.png" alt="image-20240324193143565"></p>
+<h4 id="梯度下降（让损失函数变小的算法）"><a href="#梯度下降（让损失函数变小的算法）" class="headerlink" title="梯度下降（让损失函数变小的算法）"></a>梯度下降（让损失函数变小的算法）</h4><p>*反向传播：解释梯度如何在隐藏层中传递的，反向传播法用来调整网络中的权重</p>
+<p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324194951018.png" alt="image-20240324194951018"></p>
+<h4 id="提高神经网络收敛性的技术"><a href="#提高神经网络收敛性的技术" class="headerlink" title="提高神经网络收敛性的技术"></a>提高神经网络收敛性的技术</h4><ul>
+<li>L1L2正则化</li>
+</ul>
+<p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324195914419.png" alt="image-20240324195914419"></p>
+<ul>
+<li>Elastic Net</li>
+</ul>
+<p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324200229670.png" alt="image-20240324200229670"></p>
+<ul>
+<li>Dropout</li>
+</ul>
+<img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324200359441.png" alt="image-20240324200359441" style="zoom:70%;">
+
+<ul>
+<li>Batch Normalization</li>
+</ul>
+<p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240324200623429.png" alt="image-20240324200623429"></p>
+<h3 id="多因子框架"><a href="#多因子框架" class="headerlink" title="多因子框架"></a>多因子框架</h3><h4 id="1-数据处理"><a href="#1-数据处理" class="headerlink" title="1.数据处理"></a>1.数据处理</h4><p>数据处理大致可以分为四步：极值处理、缺失值处理、标准化处理、中性化处理。</p>
+<h5 id="极值处理"><a href="#极值处理" class="headerlink" title="极值处理"></a>极值处理</h5><blockquote>
+<p>  大部分数据都集中在一个“大范围”之内，少量的数据偏离了大众，分布在这个“大范围”之外的两个极端，这些数据就被称做极端值。极值处理就是对这些极端值数据进行处理，通常分为两种方法：剔除和拉回。剔除就是直接删掉位于“大范围”之外的极端值；拉回则是把这些极端值拉回“大范围”之内，具体来说，就是替换极端值为“大范围”的边界值。</p>
+<p>  那这个“大范围”该怎么确定呢，目前比较常见的有三种方法：百分位法、均值标准差法、中位数法。三种方法不同在于确定“大范围”的方式，之后的极值处理方式是一样的：剔除或拉回。</p>
+</blockquote>
+<ul>
+<li><p>百分位法：用所有因子值的百分位区间来划分极值的范围，这个范围是可以自己确定的，一般情况下，百分位区间范围设为2.5%-97.5%、5%-95%等。</p>
+</li>
+<li><p>均值标准差法：基于正态分布假设，用均值正负3倍标准差来划分极值的范围。但样本均值和样本标准差本身易受极值大小的影响，并非稳健统计量。而且很多因子的分布存在厚尾现象，并不满足正态分布假设。</p>
+</li>
+<li><p>中位数法：用不受极值大小影响的样本中位数和绝对中位值MAD来划分极值的范围。其中，绝对中位值MAD为所有样本值与样本中位数绝对差值的中位数。中位数法可以说是对均值标准差法的改进，相比于均值，中位数相对来说是一个较为稳健的统计量。</p>
+</li>
+</ul>
+<p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240325154545403.png" alt="image-20240325154545403"></p>
+<h5 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h5><blockquote>
+<p>  缺失值即为缺失的数据，与极值处理类似，也分为两种方法：剔除和填充（赋值）</p>
+</blockquote>
+<p>填充通常可以分为均值填充和中位数填充，其中又分为行业均值&#x2F;中位数填充、样本均值&#x2F;中位数填充。样本均值&#x2F;中位数填充很好理解，而行业均值&#x2F;中位数填充就是用一个行业内所有股票对应因子值的均值&#x2F;中位数，来填充这个行业内股票因子值的缺失值。</p>
+<p>除此之外，还有一些其它的填充方法，比如向前填充、向后填充、插值填充等等，就是利用缺失值前后的值来进行填充。</p>
+<h5 id="标准化处理"><a href="#标准化处理" class="headerlink" title="标准化处理"></a>标准化处理</h5><blockquote>
+<p>  标准化处理即为消除数据的量纲，或者说是统一数据的量纲，使得不同量纲的数据具有可比性，也就是说，在统一的量纲之下对数据进行比较和分析。如“总市值”这个因子的值是很大的，而“过去一个月收益率”的因子值又是很小的数，两个因子的量纲不同，导致直接等权相加时，“过去一个月收益率”的因子值可以忽略不计。所以对因子值进行标准化处理消除量纲的影响，就显得十分重要。</p>
+</blockquote>
+<ul>
+<li><p>Z-score标准化：使用样本数据的均值（mean）和标准差（std）进行标准化，对原数据x进行(x-mean)&#x2F;std变换。Z-Score标准化实际上是一种中心化，将原数据变换为均值为0、方差为1的分布。</p>
+</li>
+<li><p>Min-Max标准化：使用样本数据的最小值（min）和最大值（max）进行标准化，对原数据x进行(x-min)&#x2F;(max-min)变换。Max-Min标准化实际上是一种归一化，将原数据变换为[0,1]区间内的分布。</p>
+</li>
+</ul>
+<p>这两种方法的本质其实都是线性变换，并不会改变数据原始的排列顺序，但也是存在一定区别的。Min-Max标准化输出的数据范围严格限制在[0,1]区间，而Z-score标准化则无范围限制；Min-Max标准化对数据的缩放比例仅与最大值、最小值有关，而Z-score标准化中的均值和标准差与所有数据值相关，会随着任意数据值的变化而变化。</p>
+<h5 id="中性化处理"><a href="#中性化处理" class="headerlink" title="中性化处理"></a>中性化处理</h5><blockquote>
+<p>  在多因子模型中，我们使用因子来筛选股票。但是不同行业的股票会呈现出不同的特征，同样的，不同市值规模的股票也会有其特点，不同风格的股票也是如此。</p>
+<p>  这些因素可能会对选股造成很大的影响：比如银行行业的股票特性通常是市盈率偏低、市值偏高；而科技行业的股票通常是市盈率偏高，市值偏小。如果用市盈率因子，或者一些与市值相关性较高的因子来选股，选股的结果就会十分集中，形成一定的偏向。</p>
+<p>  风格也是类似的。所以就需要进行市值中性化、行业中性化、风格中性化来消除这些影响，从而获得较为分散的选股结果。</p>
+</blockquote>
+<ul>
+<li>常用的就是市值中性化、行业中性化，而风格中性化多用于其它方面（组合优化等），涉及到风格因子等更为复杂</li>
+</ul>
+<h4 id="2-单因子检测"><a href="#2-单因子检测" class="headerlink" title="2.单因子检测"></a>2.单因子检测</h4><p>单因子检验可以用来判断因子有效性（包括显著性、稳定性），因子方向（以及因子方向的稳定性），还可以判断因子的单调性。</p>
+<p>目前常用的单因子检验主要有三种：ICIR、t值、分层回测。其中，ICIR常用于多因子打分模型；t值常用于多因子回归模型; 但是这两种方法都只能判断因子的有效性。分层回测法则可以判断因子的单调性，常与前两种方法结合起来使用。</p>
+<h5 id><a href="#" class="headerlink" title="*"></a>*</h5><p>相关系数和回归系数都是用来衡量变量之间关系的指标，但它们有不同的用途和含义。</p>
+<ol>
+<li>相关系数： 相关系数衡量的是两个变量之间的线性关系强度和方向。它的取值范围在-1到1之间，当相关系数为1时表示完全正相关，为-1时表示完全负相关，为0时表示无相关性。相关系数只描述两个变量之间的关系，不涉及因果关系。</li>
+<li>回归系数： 回归系数是用来衡量自变量对因变量的影响程度的指标。在线性回归模型中，回归系数表示因变量每单位变化时自变量变化的幅度。回归系数可以帮助我们理解自变量对因变量的影响方向和大小。在回归分析中，我们可以根据回归系数来预测因变量的取值。</li>
+</ol>
+<p>因此，相关系数用于衡量变量之间的关联程度，而回归系数用于描述自变量对因变量的影响。在实际应用中，相关系数和回归系数通常会一起使用，以全面了解变量之间的关系。</p>
+<h5 id="ICIR"><a href="#ICIR" class="headerlink" title="ICIR"></a>ICIR</h5><blockquote>
+<p>  IC代表因子对于收益的预测能力。计算方法为：因子值与下期收益率的截面相关系数。日频换仓的话便是指：选股日因子值与下期收益率的相关系数。IR代表因子稳定获取收益的能力。具体的计算方法为：IC均值&#x2F;IC标准差。</p>
+<p>  IC的计算方式有两种：normal IC和rank IC</p>
+</blockquote>
+<ul>
+<li>normalIC 	rankIC 主要是求rankIC</li>
+</ul>
+<p>其中，normal IC计算的是皮尔森相关系数（Pearson correlation），就是我们最常见的一种线性相关系数，为两个变量的协方差&#x2F;标准差乘积，Python中的corr()函数便可以直接求解。但是，皮尔森相关系数存在较多假设前提：连续数据，正态分布，线性关系等等。</p>
+<p>要计算IC的话，两个变量分别是因子值、下期收益率，但这两个变量通常情况下无法满足这些假设前提。所以大家一般会使用另一种适用范围更广的相关系数，即为斯皮尔曼秩相关系数（The Spearman’s rank coefficient of correlation）。</p>
+<p>其实就是比皮尔森相关系数多了一步：排序。斯皮尔曼秩相关系数计算的是两个变量排序值的相关系数，皮尔森相关系数计算的是两个变量原始值的相关系数。所以我们将其称为rank IC，“秩”即为rank。</p>
+<ul>
+<li>IR</li>
+</ul>
+<p>有了所有选股日的IC值，那便可以计算IC均值了，IC均值常用于判断因子的显著性。一般IC均值的绝对值&gt;0.03（标准高一些一般会是0.05），则认为该因子较为显著。（也有说法称有效性）</p>
+<p>接着，计算IC均值&#x2F;IC标准差就可以得到IR值，其中IC标准差反映了IC值的波动性（又称稳定性）。而IR同时考虑了因子的显著性和稳定性，常用于判断因子的有效性。一般IR值的绝对值&gt;0.3（标准高一些一般会是0.5），则认为该因子较为有效。</p>
+<ul>
+<li>数值</li>
+</ul>
+<p>其中，IC均值、IR的正负号反映了因子的方向，正号则说明因子为正向，与下期收益率呈正相关；负号则说明因子为负向，与下期收益率呈反相关。但是由于IC均值、IR是通过多期IC值计算得来的，所以我们并不能通过它们的正负号来武断地判断因子的正负方向。</p>
+<h5 id="t值"><a href="#t值" class="headerlink" title="t值"></a>t值</h5><blockquote>
+<p>  用因子值与下期收益率进行线性回归，因子值为自变量x，下期收益率为因变量y，然后对回归系数（即自变量x的系数）进行t检验，得到回归系数的显著性水平，即为t值。</p>
+</blockquote>
+<ul>
+<li>数值</li>
+</ul>
+<p>一般来说，t值的绝对值&gt;1.96（有的会是&gt;2），则说明其对应的回归系数（因子收益率）较为显著。当然，同ICIR一样，通过回归系数和t值也是可以判断因子方向的。</p>
+<h5 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h5><blockquote>
+<p>  分层回测，顾名思义，就是分层+回测。分层就是对股票分层，回测就是计算每层股票组合的收益率。</p>
+</blockquote>
+<p>首先需要获取股票池对应的因子值，通过因子值对股票进行排序（一般为升序排序，即因子值较小的排在前面）。然后根据这个排序将股票池等分为5层（通常为5层，也可以自定义层数，多的会有10层）。如果是升序排序，那么第1层股票的因子值最小，第5层股票的因子值最大。与此同时，注意这个“等分”是等分股票个数，即每层的股票个数相等，通常是通过分位数实现的。</p>
+<h4 id="3-因子合成"><a href="#3-因子合成" class="headerlink" title="3.因子合成"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/638779636?utm_campaign=shareopn&utm_medium=social&utm_oi=947948015193948160&utm_psn=1735667303797293056&utm_source=wechat_session">3.因子合成</a></h4><p>那么通过单因子检验挑选出有效因子之后，就需要进行“因子合成”，合成一个综合因子，通过这个综合因子值对股票进行打分。</p>
+<p>话不多说，直接来看看“因子合成”的方法。有以下方法：</p>
+<p>1.等权加权	2.历史IC加权	3.历史ICIR加权	</p>
+<p>4.历史IC半衰加权	5.历史ICIR半衰加权	6.最大化ICIR加权	</p>
+<p>7.最大化IC加权	8.主成分分析(PCA)</p>
+<h4 id="4-因子正交化"><a href="#4-因子正交化" class="headerlink" title="4.因子正交化"></a>4.因子正交化</h4><p>因子正交化通常与因子合成是一起进行的，还将介绍两种较为常用的“因子正交化”方法：</p>
+<p>1.施密特正交化	2.对称正交化</p>
+<h3 id="深度学习工程"><a href="#深度学习工程" class="headerlink" title="深度学习工程"></a>深度学习工程</h3><h4 id="AI相关"><a href="#AI相关" class="headerlink" title="AI相关"></a>AI相关</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<h5 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1. 初始化张量</span></span><br><span class="line"><span class="comment"># 直接用列表数据建立</span></span><br><span class="line">torch.tensor(data) </span><br><span class="line"><span class="comment"># numpy数组转tensor：用numpy数组建立是浅拷贝，如改变np_array，x_np随之改变</span></span><br><span class="line">x_np = torch.from_numpy(np_array) </span><br><span class="line"><span class="comment"># tensor转numpy数组</span></span><br><span class="line">t = torch.ones(<span class="number">3</span>)	n = t.numpy()</span><br><span class="line"><span class="comment"># 用另一个Tensor建立</span></span><br><span class="line">torch.ones_like(x_data)</span><br><span class="line">torch.rand_like(x_data, dtype=torch.<span class="built_in">float</span>)</span><br><span class="line"><span class="comment"># 使用随机变量或常量建立</span></span><br><span class="line">torch.rand(shape)</span><br><span class="line">torch.ones(shape)</span><br><span class="line">torch.zeros(shape)</span><br><span class="line"><span class="comment"># 在GPU上创建张量</span></span><br><span class="line">tensor.to(‘cuda’) </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2. 张量的属性</span></span><br><span class="line"><span class="comment"># 形状</span></span><br><span class="line">tensor.shape</span><br><span class="line"><span class="comment"># 数据类型</span></span><br><span class="line">tensor.dtype </span><br><span class="line"><span class="comment"># 存储设备</span></span><br><span class="line">tensor.device </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 3. 张量操作</span></span><br><span class="line"><span class="comment"># 索引和切片</span></span><br><span class="line">tensor = torch.ones(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;First row: &#x27;</span>,tensor[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;First column: &quot;</span>,tensor [:, <span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Last column: &#x27;</span>,tensor[: ,-<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 拼接 stack会多一个dimension</span></span><br><span class="line">torch.cat([tensor,tensor1,tensor2],dim=<span class="number">1</span>)</span><br><span class="line">torch.stack([tensor,tensor1,tensor2],dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 算数</span></span><br><span class="line"><span class="comment"># 矩阵乘法</span></span><br><span class="line">tensor @ tensor1 </span><br><span class="line">tensor.matmul(tensor1)</span><br><span class="line"><span class="comment"># 元素点乘</span></span><br><span class="line">tensor * tensor1</span><br><span class="line">tensor.mul(tensor1)</span><br><span class="line"><span class="comment"># 聚合 </span></span><br><span class="line"><span class="comment"># 聚合张量的所有值为一个值：tensor.sum()</span></span><br><span class="line">agg = tensor.<span class="built_in">sum</span>()</span><br><span class="line"><span class="comment"># 把张量转变为python常数值：agg.item()</span></span><br><span class="line">agg_item = agg.item()  </span><br></pre></td></tr></table></figure>
+
+<h5 id="数据集与数据导入"><a href="#数据集与数据导入" class="headerlink" title="数据集与数据导入"></a>数据集与数据导入</h5><p>pytorch提供两个数据库：<strong>torch.utils.data.Dataset</strong> 和 <strong>torch.utils.data.DataLoader</strong><br><code>Dataset 存储样本及其相应的标签，</code><br><code>DataLoader 围绕 Dataset 包装一个可迭代对象，以便轻松访问样本。</code></p>
+<h6 id="用自己的文件创建自定义数据集"><a href="#用自己的文件创建自定义数据集" class="headerlink" title="用自己的文件创建自定义数据集"></a>用自己的文件创建自定义数据集</h6><p>自定义 Dataset 类必须实现三个函数：<strong>init__、__len</strong> 和 __getitem__。以下示例图像存储在目录img_dir中，它们的标签单独存储在CSV文件annotations_file中。</p>
+<h3 id="遗传算法gplearn"><a href="#遗传算法gplearn" class="headerlink" title="遗传算法gplearn"></a>遗传算法gplearn</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li><p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240402222104246.png" alt="image-20240402222104246"></p>
+</li>
+<li><p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240402222143935.png" alt="image-20240402222143935"></p>
+</li>
+<li><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240403002246407.png" alt="image-20240403002246407"></li>
+<li><p><img src="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/image-20240402222306745.png" alt="image-20240402222306745"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/" rel="tag"># AI多因子框架</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/02/23/postgreSQL/" rel="prev" title="postgreSQL">
+      <i class="fa fa-chevron-left"></i> postgreSQL
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/09/13/pandas%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" rel="next" title="pandas常用操作">
+      pandas常用操作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AI%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.</span> <span class="nav-text">AI名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">训练方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%EF%BC%88%E8%AE%A9%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E5%8F%98%E5%B0%8F%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">梯度下降（让损失函数变小的算法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%94%B6%E6%95%9B%E6%80%A7%E7%9A%84%E6%8A%80%E6%9C%AF"><span class="nav-number">1.5.</span> <span class="nav-text">提高神经网络收敛性的技术</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">多因子框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%81%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">极值处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">2.1.2.</span> <span class="nav-text">缺失值处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%8C%96%E5%A4%84%E7%90%86"><span class="nav-number">2.1.3.</span> <span class="nav-text">标准化处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%AD%E6%80%A7%E5%8C%96%E5%A4%84%E7%90%86"><span class="nav-number">2.1.4.</span> <span class="nav-text">中性化处理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%8D%95%E5%9B%A0%E5%AD%90%E6%A3%80%E6%B5%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2.单因子检测</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.2.1.</span> <span class="nav-text">*</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ICIR"><span class="nav-number">2.2.2.</span> <span class="nav-text">ICIR</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#t%E5%80%BC"><span class="nav-number">2.2.3.</span> <span class="nav-text">t值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E5%B1%82"><span class="nav-number">2.2.4.</span> <span class="nav-text">分层</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9B%A0%E5%AD%90%E5%90%88%E6%88%90"><span class="nav-number">2.3.</span> <span class="nav-text">3.因子合成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%9B%A0%E5%AD%90%E6%AD%A3%E4%BA%A4%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">4.因子正交化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">深度学习工程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AI%E7%9B%B8%E5%85%B3"><span class="nav-number">3.1.</span> <span class="nav-text">AI相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Tensor"><span class="nav-number">3.1.1.</span> <span class="nav-text">Tensor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5"><span class="nav-number">3.1.2.</span> <span class="nav-text">数据集与数据导入</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">用自己的文件创建自定义数据集</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95gplearn"><span class="nav-number">4.</span> <span class="nav-text">遗传算法gplearn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
