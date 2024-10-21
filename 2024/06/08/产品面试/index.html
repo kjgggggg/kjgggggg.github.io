@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kjgggggg.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/public/search.xml"};
+  </script>
+
+  <meta name="description" content="产品面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产品面试">
+<meta property="og:url" content="https://kjgggggg.github.io/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="kjg&#39;s blog">
+<meta property="og:description" content="产品面试题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/image-20241015000919069.png">
+<meta property="og:image" content="https://kjgggggg.github.io/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/image-20241015004439716.png">
+<meta property="article:published_time" content="2024-06-08T13:52:00.000Z">
+<meta property="article:modified_time" content="2024-10-21T06:15:45.222Z">
+<meta property="article:author" content="kjg">
+<meta property="article:tag" content="产品">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kjgggggg.github.io/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/image-20241015000919069.png">
+
+<link rel="canonical" href="https://kjgggggg.github.io/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>产品面试 | kjg's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">kjg's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kjgggggg.github.io/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/WechatIMG84.jpeg">
+      <meta itemprop="name" content="kjg">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kjg's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          产品面试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-08 21:52:00" itemprop="dateCreated datePublished" datetime="2024-06-08T21:52:00+08:00">2024-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-10-21 14:15:45" itemprop="dateModified" datetime="2024-10-21T14:15:45+08:00">2024-10-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%A7%E5%93%81/" itemprop="url" rel="index"><span itemprop="name">产品</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">产品面试题</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Web3产品"><a href="#Web3产品" class="headerlink" title="Web3产品"></a>Web3产品</h3><h4 id="什么是Web3"><a href="#什么是Web3" class="headerlink" title="什么是Web3"></a>什么是Web3</h4><p><strong>Web3</strong>：以所有权为核心的价值网络 </p>
+<p>为了解决原始web网络无法支持普通人进行信息交流和分享的难题，一个“可读”的Web1时代伴随着万维网的发明而到来，各类搜索引擎和门户网站将信息大量搬上网，普通用户也能轻松访问各类资源。为了解决Web1下用户无法主动创建内容，不享有网络发言权的难题，一个“可读+可写”的Web2时代伴随着智能手机的普及、社交网络的兴起和云计算的发展而到来，所有用户都可以在社交媒体分享自己的所思所想并和他人交互，互联网世界的话语权从商业巨头转移到每一位终端用户手中。而现在，在经历了Web1和Web2时代后，互联网正在进行一场Web3革命。</p>
+<p><strong>Web3</strong>是用户拥有、用户控制的互联网。以太坊联合创始人加文·伍德（Gavin Wood）最初提出了Web3的概念，并将其描述为“一组保障人们在低壁垒市场中为自己行动”的兼容协议，认为其是“可执行的大宪章——个人反对暴力权威的自由的基础”；而知名区块链研究机构Messari的研究员江下（Eshita）及区块链技术公司BitFury CEO布里安·布鲁克斯（Brian Brooks），则分别将其定义为“可读+可写+拥有的互联网”、“用户可以拥有产权的互联网”。</p>
+<p><img src="/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/image-20241015000919069.png" alt="image-20241015000919069"></p>
+<h4 id="人类信任模型及信任范式"><a href="#人类信任模型及信任范式" class="headerlink" title="人类信任模型及信任范式"></a>人类信任模型及信任范式</h4><p>社会元素、数学和物理规则、激励结构是构成人类网络信任模型的三个要件。</p>
+<ul>
+<li>Web1时代是物理信任模型，由于开源的底层协议不受任何单一集体的控制，用户、开发者和企业都可以相信游戏规则将保持中立和公平。</li>
+<li>Web2时代则是机构信任模型，由于协议是封闭的，商业公司接力数学和物理规则成为新的信任守门人，用户被迫信任其编写的专有和不透明的代码。</li>
+<li>Web3的信任模型则是由数学和物理规则以及激励结构共同主导的可编程信任。开源协议以及区块链系统通过自动执行的智能合约、加密技术、共识机制、分布式技术等多种技术提供了可编程的信任；而代币发行和奖励则提供了基于激励结构的信任，用户无需再依赖信任中介。</li>
+</ul>
+<h4 id="Web3的革命性体现在哪"><a href="#Web3的革命性体现在哪" class="headerlink" title="Web3的革命性体现在哪"></a>Web3的革命性体现在哪</h4><p>Web3以区块链为核心，解决价值分配问题和信任问题：区块链贯彻Web3去中心化的核心理念。通过建立共识协议、开放源代码，保证价值分配的可靠执行。作为安全性和去中心化水平都较高的网络可以通过共享账本储存数据、交换价值并记录交易活动，不受任何中心化实体控制，为Web3 提供安全的执行层，让使用者可以在其中创建、发行并交易加密资产，并且开发可编程的智能合约。</p>
+<h4 id="Web3-风险事件梳理"><a href="#Web3-风险事件梳理" class="headerlink" title="Web3 风险事件梳理"></a><strong>Web3</strong> 风险事件梳理</h4><ul>
+<li>2022年5月，UST-Luna崩盘事件：UST币是Terra公链上发行的算法稳定币，通过“LUNA-UST双币套利机制”维持币值稳定。UST发行方承诺，恒定1美元LUNA &#x3D; 1个UST，当UST币的价格大于1美元，用户可以销毁价值1美元的LUNA币，来发行1枚UST币，反之亦然。Anchor的大规模提款和UST的大量抛售打破了表面稳定，将UST和Luna拖入下行螺旋。</li>
+<li>2022年6月，Celsius崩盘：2022年5月初，UST大幅下跌，大批资金撤离Celsius，储户挤兑加剧。Celsius的流动性管理无法满足兑付需求。当时Celsius持有的73%的ETH锁定在stETH或ETH2中，只有27%的ETH具备流动性。于是在2022年6月，Celsius宣布暂停提款，CEL代币一小时内大幅下跌70%。</li>
+<li>2022年11月，CoinDesk和CZ对于FTX业务稳定性的质疑引发了为期三天的约60 亿美元的挤兑，FTX 陷入流动性危机。随后，FTX申请破产保护，SBF被捕并面临多项欺诈指控。</li>
+</ul>
+<h4 id="Layer1，Layer2（以以太坊举例）"><a href="#Layer1，Layer2（以以太坊举例）" class="headerlink" title="Layer1，Layer2（以以太坊举例）"></a>Layer1，Layer2（以以太坊举例）</h4><p>为了提升可扩展性，以太坊通过链上与链下两条路径积极进行扩容。</p>
+<ul>
+<li><p>链上扩容通常被称为Layer1，通过直接修改区块链规则来加快数据处理速度，扩充区块链容量。比如以太坊2.0通过将共识机制由PoW转向PoS、分片链等方式来解决可扩展性问题。</p>
+</li>
+<li><p>而链下扩容则不改变区块链基础规则，转而通过架设外部通道，实现信息的传播与扩展，从而达到扩容效果。其中，Layer2解决方案的安全性直接建立在主网，主要包括状态通道、Plasma、Rollups、validiums等。其他解决方案包括各种形式的新链，其安全性独立于主网，如侧链等。</p>
+</li>
+</ul>
+<p><img src="/2024/06/08/%E4%BA%A7%E5%93%81%E9%9D%A2%E8%AF%95/image-20241015004439716.png" alt="image-20241015004439716"></p>
+<h4 id="Layer2-RollUp技术方案"><a href="#Layer2-RollUp技术方案" class="headerlink" title="Layer2 RollUp技术方案"></a>Layer2 RollUp技术方案</h4><p>目前以太坊已确立起以Rollup为中心的扩容路线图，主要包括ZK Rollup和Optimistic两种类型。</p>
+<p>1）交易速度：ZK Rollup理论上可以实现每秒数千笔的交易量，高于Optimism的每秒数百笔。</p>
+<p>2）交易费用：ZK Rollup需要高端昂贵的硬件和证明验证，交易费用更高。</p>
+<p>3）智能合约可执行性：ZK Rollup将智能合约逻辑转换为零知识证明，提高了智能合约的可执行性；Optimistic则需要更多的存储和计算资源来支持智能合约的执行。</p>
+<p>4）安全性：ZK Rollup建立在零知识证明和密码学算法的基础上，可以保证交易隐私和链上安全；Optimistic则存在一定的安全风险。</p>
+<p>5）去中心化程度：ZK Rollup需要更多的节点参与来确保去中心化程度。</p>
+<h4 id="钱包技术路径"><a href="#钱包技术路径" class="headerlink" title="钱包技术路径"></a>钱包技术路径</h4><p>多方计算、账户抽象和设备账户。 安全和易用性之间的平衡是钱包方案的发展关键。</p>
+<ul>
+<li><p>多方计算通过多个参与方共同计算，实现保护隐私数据的目的</p>
+</li>
+<li><p>账户抽象将智能合约功能从特定账户中抽象出来，使智能合约可以被任何账户调用</p>
+</li>
+<li><p>设备账户将设备作为账户，设备可以通过私钥签名的方式执行交易，并接收来自其他账户的交易。</p>
+</li>
+</ul>
+<h3 id="海外广告岗位面试"><a href="#海外广告岗位面试" class="headerlink" title="海外广告岗位面试"></a>海外广告岗位面试</h3><h4 id="海外广告投放专有名词"><a href="#海外广告投放专有名词" class="headerlink" title="海外广告投放专有名词"></a>海外广告投放专有名词</h4><ol>
+<li><p><strong>CPC (Cost Per Click)</strong>: 每次点击成本，广告主为每次广告点击支付的费用。</p>
+</li>
+<li><p><strong>CPM (Cost Per Mille)</strong>: 千次展示成本，广告主为每千次广告展示支付的费用。</p>
+</li>
+<li><p><strong>CPA (Cost Per Action)</strong>: 每次行动成本，广告主为每次用户完成特定行动（如注册、购买）支付的费用。</p>
+</li>
+<li><p><strong>CTR (Click-Through Rate)</strong>: 点击率，广告被点击的次数与展示次数的比率。</p>
+</li>
+<li><p><strong>ROI (Return On Investment)</strong>: 投资回报率，衡量广告投资的效益。</p>
+</li>
+<li><p><strong>KPI (Key Performance Indicator)</strong>: 关键绩效指标，用于评估广告活动的成功程度。</p>
+</li>
+<li><p><strong>Conversion Rate</strong>: 转化率，完成目标行动的用户数量与总访问量的比率。</p>
+</li>
+<li><p><strong>Impressions</strong>: 展示次数，广告被显示的总次数。</p>
+</li>
+<li><p><strong>Reach</strong>: 触达人数，看到广告的独立用户数量。</p>
+</li>
+<li><p><strong>Frequency</strong>: 频次，平均每个用户看到广告的次数。</p>
+</li>
+<li><p><strong>Retargeting&#x2F;Remarketing</strong>: 再营销，向之前与品牌互动过的用户投放广告。</p>
+</li>
+<li><p><strong>Lookalike Audience</strong>: 相似受众，与现有客户具有相似特征的新受众群体。</p>
+</li>
+<li><p><strong>A&#x2F;B Testing</strong>: A&#x2F;B测试，比较两个版本的广告以确定哪个效果更好。</p>
+</li>
+<li><p><strong>Landing Page</strong>: 着陆页，用户点击广告后到达的网页。</p>
+</li>
+<li><p><strong>Ad Rank</strong>: 广告排名，决定广告在搜索结果中的位置。</p>
+</li>
+<li><p><strong>Quality Score</strong>: 质量得分，衡量广告、关键词和着陆页的相关性和质量。</p>
+</li>
+<li><p><strong>PPC (Pay-Per-Click)</strong>: 按点击付费，一种只在用户点击广告时才收费的广告模式。</p>
+</li>
+<li><p><strong>CTA (Call-To-Action)</strong>: 行动号召，鼓励用户采取特定行动的文字或按钮。</p>
+</li>
+<li><p><strong>Ad Group</strong>: 广告组，包含一组相关广告和关键词的集合。</p>
+</li>
+<li><p><strong>Bid</strong>: 出价，广告主愿意为广告点击或展示支付的最高金额。</p>
+</li>
+<li><p><strong>Audience Targeting</strong>: 受众定位，根据用户特征选择广告受众的过程。</p>
+</li>
+<li><p><strong>Ad Extension</strong>: 广告扩展，为广告添加额外信息（如电话号码、地址）的功能。</p>
+</li>
+<li><p><strong>Negative Keywords</strong>: 否定关键词，防止广告在特定搜索查询中显示的关键词。</p>
+</li>
+<li><p><strong>ROAS (Return On Ad Spend)</strong>: 广告支出回报率，衡量广告支出的直接收益。</p>
+</li>
+<li><p><strong>Funnel</strong>: 漏斗，描述用户从认知到转化的journey。</p>
+</li>
+</ol>
+<h4 id="海外广告投放具体工作"><a href="#海外广告投放具体工作" class="headerlink" title="海外广告投放具体工作"></a>海外广告投放具体工作</h4><p>‌帮助企业将产品广告刊登在国外人常用的互联网、‌杂志、‌报纸、‌手机端以及户外流媒体等平台‌，使企业获得海外品牌及当地询盘。</p>
+<p>‌花钱在海外平台打广告，吸引用户&#x2F;购买&#x2F;流量&#x2F;下载量等‌，衡量广告投放效果。</p>
+<p>制定Facebook、Google、Tiktok等广告平台的投放策略‌，管理推广成本，并对广告效果负责。</p>
+<p>（设计广告文案和创意‌，积极拓展海外市场资源。）</p>
+<p>监控竞价广告效果，定期分析产出优化报告‌，获取广告数据后对优化listing提供依据，提升销售额。</p>
+<p>建立‌搜索引擎市场营销模型‌，通过逻辑分析对投放的关键词进行分析和优化，整理优化策略，并有效地对广告效果进行监控。</p>
+<p>分析竞品的广告投放策略‌，取其精华制定自己的投放策略。</p>
+<h3 id="简单自我介绍一下"><a href="#简单自我介绍一下" class="headerlink" title="简单自我介绍一下"></a>简单自我介绍一下</h3><p>面试官您好，我是孔剑刚，本科毕业于大连理工大学工业设计专业，研究生毕业于南京大学软件工程专业。在研究生期间我曾获得华为，荣耀等企业的实习及秋招offer，同时全程参与了某加密货币量化办公室的创业过程，负责搭建金融数据库，并主导核心策略开发。目前在中国电子科技集团某研究所担任研发工程师兼用户需求工程师，负责军用软件的需求对接，原型制作，工程实现与文档撰写。 </p>
+<p>在项目和学习中遇到问题后，我能够快速定位问题所在，并采取有效的解快方案，并且愿意向他人学习和分享自己的知识和经验。从去年8月份左右，我开始写个人博客，当然时至今日更多的是关于技术层面。回过头来在从工业设计到软件工程，由学习UI&#x2F;UX与产品的只是到深入软件实现再回到消费者这块。同时工作经历从消费电子到金融再到军品，我逐渐意识到了技术的局限性与人工智能对软件编码的影响，因此想要挑战自己，尝试更广阔的领域，XX是我非常喜欢的公司。非常希望能够加人贵公司，贡献自己的力量。</p>
+<p>Good evening, I am Kong Jiangang. I graduated from Dalian University of Technology with a bachelor’s degree in industrial design and from Nanjing University with a master’s degree in software engineering. During my graduate studies, I interned in the voice algorithm department of Honor MagicOS and received a full-time offer. At the same time, I participated in the entrepreneurial process of a cryptocurrency quantitative office and was responsible for building the database and leading the core strategy development. Currently, I work as a research and development engineer and user demand engineer in a research institute of China Electronics Technology Group, responsible for the demand docking, prototyping, engineering implementation and document writing of military software.</p>
+<p>After encountering problems in projects and studies, I can quickly locate the problem and take effective solutions, and I am willing to learn and share my knowledge and experience with others. Around August last year, I started writing my personal blog, and of course it is more about the technical level today. Looking back from industrial design to software engineering, from learning UI&#x2F;UX and product only to in-depth software implementation and then back to consumers. At the same time, my work experience has gone from consumer electronics to finance to military products. I gradually realized the limitations of technology and the impact of artificial intelligence on software coding, so I want to challenge myself and try a broader field. XX is a company I like very much. I really hope to join your company and contribute my strength.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%A7%E5%93%81/" rel="tag"># 产品</a>
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/23/AI%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A1%86%E6%9E%B6/" rel="prev" title="AI多因子框架">
+      <i class="fa fa-chevron-left"></i> AI多因子框架
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/09/13/pandas%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" rel="next" title="pandas常用操作">
+      pandas常用操作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web3%E4%BA%A7%E5%93%81"><span class="nav-number">1.</span> <span class="nav-text">Web3产品</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFWeb3"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Web3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%BA%E7%B1%BB%E4%BF%A1%E4%BB%BB%E6%A8%A1%E5%9E%8B%E5%8F%8A%E4%BF%A1%E4%BB%BB%E8%8C%83%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">人类信任模型及信任范式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web3%E7%9A%84%E9%9D%A9%E5%91%BD%E6%80%A7%E4%BD%93%E7%8E%B0%E5%9C%A8%E5%93%AA"><span class="nav-number">1.3.</span> <span class="nav-text">Web3的革命性体现在哪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web3-%E9%A3%8E%E9%99%A9%E4%BA%8B%E4%BB%B6%E6%A2%B3%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">Web3 风险事件梳理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Layer1%EF%BC%8CLayer2%EF%BC%88%E4%BB%A5%E4%BB%A5%E5%A4%AA%E5%9D%8A%E4%B8%BE%E4%BE%8B%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">Layer1，Layer2（以以太坊举例）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Layer2-RollUp%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88"><span class="nav-number">1.6.</span> <span class="nav-text">Layer2 RollUp技术方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%92%B1%E5%8C%85%E6%8A%80%E6%9C%AF%E8%B7%AF%E5%BE%84"><span class="nav-number">1.7.</span> <span class="nav-text">钱包技术路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%B7%E5%A4%96%E5%B9%BF%E5%91%8A%E5%B2%97%E4%BD%8D%E9%9D%A2%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">海外广告岗位面试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%B7%E5%A4%96%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D"><span class="nav-number">2.1.</span> <span class="nav-text">海外广告投放专有名词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%B7%E5%A4%96%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E5%85%B7%E4%BD%93%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">海外广告投放具体工作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B"><span class="nav-number">3.</span> <span class="nav-text">简单自我介绍一下</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="kjg"
+      src="/images/WechatIMG84.jpeg">
+  <p class="site-author-name" itemprop="name">kjg</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kjgggggg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kjgggggg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/651373472@qq.com" title="E-Mail → 651373472@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+</div>
+
+<span style="text-align:center;display:block;">
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span <div>wmr</div> </span>
+</span>
+
+        
+<span style="text-align:center;display:block;">
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问人数：
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        本站总访问量： 
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+</span>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '16px',
+  right: '28px',
+  left: 'unset',
+  time: '0.3s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
